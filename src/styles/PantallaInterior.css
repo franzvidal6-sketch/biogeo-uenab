@@ -1,12 +1,9 @@
-/* APP */
 .pi-app {
   min-height: 100vh;
   display: flex;
   flex-direction: column;
   background: #EEEDFE;
 }
-
-/* NAVBAR */
 .pi-navbar {
   background: #534AB7;
   padding: 0 1.25rem;
@@ -72,8 +69,6 @@
   justify-content: center;
   font-size: 16px;
 }
-
-/* HEADER */
 .pi-curso-header {
   position: relative;
   background: #26215C;
@@ -134,14 +129,10 @@
   color: #fff;
   font-family: 'Inter', sans-serif;
 }
-
-/* CONTENIDO */
 .pi-contenido {
   padding: 1.25rem;
   flex: 1;
 }
-
-/* SECCIÓN */
 .pi-seccion {
   margin-bottom: 1.5rem;
 }
@@ -182,8 +173,6 @@
   border-radius: 20px;
   box-shadow: 0 2px 6px rgba(83,74,183,0.10);
 }
-
-/* GRILLA */
 .pi-grilla {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -192,15 +181,11 @@
 @media (max-width: 500px) {
   .pi-grilla { grid-template-columns: 1fr; }
 }
-
-/* LISTA (anuncios) */
 .pi-lista {
   display: flex;
   flex-direction: column;
   gap: 8px;
 }
-
-/* TARJETA */
 .pi-tarjeta {
   background: #fff;
   border-radius: 16px;
@@ -211,11 +196,9 @@
   flex-direction: column;
 }
 .pi-tarjeta:hover { transform: translateY(-3px); }
-.pi-t-texto { box-shadow: 0 8px 24px rgba(29,158,117,0.18), 0 2px 8px rgba(29,158,117,0.08); }
-.pi-t-app   { box-shadow: 0 8px 24px rgba(216,90,48,0.18), 0 2px 8px rgba(216,90,48,0.08); }
+.pi-t-texto     { box-shadow: 0 8px 24px rgba(29,158,117,0.18), 0 2px 8px rgba(29,158,117,0.08); }
+.pi-t-app       { box-shadow: 0 8px 24px rgba(216,90,48,0.18), 0 2px 8px rgba(216,90,48,0.08); }
 .pi-t-simulacro { box-shadow: 0 8px 24px rgba(83,74,183,0.18), 0 2px 8px rgba(83,74,183,0.08); }
-
-/* ÍCONO */
 .pi-t-icon-wrap {
   width: 44px;
   height: 44px;
@@ -229,8 +212,6 @@
 .pi-iw-texto     { background: #E1F5EE; }
 .pi-iw-app       { background: #FAECE7; }
 .pi-iw-simulacro { background: #EEEDFE; }
-
-/* TEMA PILL */
 .pi-t-tema-pill {
   display: inline-block;
   font-size: 10px;
@@ -243,8 +224,6 @@
 .pi-tp-texto     { background: #E1F5EE; color: #0F6E56; }
 .pi-tp-app       { background: #FAECE7; color: #993C1D; }
 .pi-tp-simulacro { background: #EEEDFE; color: #534AB7; }
-
-/* TÍTULO Y DESCRIPCIÓN */
 .pi-t-titulo {
   font-family: 'Poppins', sans-serif;
   font-size: 13px;
@@ -260,8 +239,6 @@
   line-height: 1.5;
   flex: 1;
 }
-
-/* PIE DE TARJETA */
 .pi-t-footer {
   display: flex;
   align-items: center;
@@ -284,8 +261,6 @@
   font-size: 12px;
   color: #AFA9EC;
 }
-
-/* ANUNCIO */
 .pi-anuncio-card {
   background: #534AB7;
   border-radius: 14px;
@@ -322,8 +297,6 @@
   font-family: 'Inter', sans-serif;
   margin-top: 6px;
 }
-
-/* FOOTER */
 .pi-footer {
   background: #26215C;
   padding: 0.85rem 1.25rem;
