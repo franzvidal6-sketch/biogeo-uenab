@@ -1,0 +1,61 @@
+{
+  "plataforma": {
+    "nombre": "BioGeo · Prof. Franz",
+    "institucion": "UE Nuevo Amanecer Boliviano",
+    "gestion": "2026",
+    "area": "Biología - Geografía"
+  },
+  "cursos": [
+    {
+      "id": "segundo",
+      "grado": "2°",
+      "nombre": "Segundo de Secundaria",
+      "recursos": [
+        {
+          "id": "texto-biologia-geografia-2do",
+          "categoria": "texto",
+          "titulo": "Texto — Biología y Geografía 2°",
+          "tema": "Temas 1 al 9",
+          "descripcion": "Contenido oficial del año — 9 temas, 3 por trimestre.",
+          "fecha": "2026-07-29",
+          "estado": "disponible",
+          "link": "https://drive.google.com/file/d/1CULtU-lVeJ52Oa4Y3UugXV6QjCQ4sGA4/view?usp=sharing"
+        }
+      ]
+    },
+    {
+      "id": "quinto",
+      "grado": "5°",
+      "nombre": "Quinto de Secundaria",
+      "recursos": [
+        {
+          "id": "texto-biologia-geografia-5to",
+          "categoria": "texto",
+          "titulo": "Texto — Biología y Geografía 5°",
+          "tema": "Temas 1 al 9",
+          "descripcion": "Contenido oficial del año — 9 temas, 3 por trimestre.",
+          "fecha": "2026-07-29",
+          "estado": "disponible",
+          "link": "https://drive.google.com/file/d/1BY3zEHSciS7sx1JJyUmE9-phzw6TyV69/view?usp=sharing"
+        }
+      ]
+    },
+    {
+      "id": "sexto",
+      "grado": "6°",
+      "nombre": "Sexto de Secundaria",
+      "recursos": [
+        {
+          "id": "texto-biologia-geografia-6to",
+          "categoria": "texto",
+          "titulo": "Texto — Biología y Geografía 6°",
+          "tema": "Temas 1 al 9",
+          "descripcion": "Contenido oficial del año — 9 temas, 3 por trimestre.",
+          "fecha": "2026-07-29",
+          "estado": "disponible",
+          "link": "https://drive.google.com/file/d/1Q41MGdaohaJ8XfD2OEpV3wiAIHZolceT/view?usp=sharing"
+        }
+      ]
+    }
+  ]
+}
