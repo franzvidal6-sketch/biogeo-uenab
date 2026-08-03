@@ -1,0 +1,1054 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+<title>Tejidos Orgánicos de los Vegetales · Tema 6 · Biología-Geografía 5°</title>
+<meta name="description" content="Lección interactiva: Estudio de los Tejidos Orgánicos de los Vegetales - Biología-Geografía 5° de Secundaria">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+/* ============================================================
+   VARIABLES · Paleta Cosmos Violeta (plataforma Biología-Geografía)
+   ============================================================ */
+:root{
+  --violeta: #534AB7;
+  --violeta-oscuro: #26215C;
+  --violeta-suave: #EEEDFE;
+  --coral: #D85A30;
+  --verde: #1D9E75;
+  --verde-claro: #5DCAA5;
+  --rosa: #D4537E;
+  --rosa-suave: #F6C9D8;
+  --texto: #2B2750;
+  --texto-suave: #6B678E;
+  --blanco: #FFFFFF;
+  --borde: #DEDBF7;
+  --sombra: 0 4px 20px rgba(83,74,183,0.12);
+  --sombra-fuerte: 0 10px 34px rgba(38,33,92,0.22);
+  --radio: 18px;
+  --radio-chico: 12px;
+  --font-titulo: 'Poppins', sans-serif;
+  --font-texto: 'Inter', sans-serif;
+}
+
+*{box-sizing:border-box; margin:0; padding:0;}
+
+html{scroll-behavior:smooth;}
+
+body{
+  font-family: var(--font-texto);
+  background: var(--violeta-suave);
+  color: var(--texto);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  padding-bottom: 84px; /* espacio para nav fija */
+  overflow-x: hidden;
+}
+
+h1,h2,h3,h4{ font-family: var(--font-titulo); color: var(--violeta-oscuro); line-height:1.25; }
+
+img,svg{ max-width:100%; display:block; }
+
+button{ font-family: var(--font-texto); cursor:pointer; border:none; background:none; }
+
+.oculto{ display:none !important; }
+
+/* ============================================================
+   BARRA DE PROGRESO
+   ============================================================ */
+#barraProgreso{
+  position: fixed; top:0; left:0; right:0; height:5px;
+  background: rgba(83,74,183,0.12); z-index: 500;
+}
+#barraProgresoRelleno{
+  height:100%; width:0%; background: linear-gradient(90deg, var(--verde), var(--coral));
+  transition: width .5s cubic-bezier(.4,0,.2,1);
+}
+
+/* ============================================================
+   ENCABEZADO SUPERIOR (breadcrumb + menú de secciones)
+   ============================================================ */
+#encabezado{
+  position: sticky; top:5px; z-index: 400;
+  background: rgba(238,237,254,0.92); backdrop-filter: blur(6px);
+  padding: 10px 16px; display:flex; align-items:center; justify-content:space-between;
+  border-bottom: 1px solid var(--borde);
+}
+.migaja{
+  font-size:.72rem; font-weight:700; letter-spacing:.06em; text-transform:uppercase;
+  color: var(--violeta);
+}
+.migaja span{ color: var(--texto-suave); font-weight:600; text-transform:none; letter-spacing:0;}
+#selectorSeccion{
+  font-family: var(--font-texto); font-size:.78rem; font-weight:600; color: var(--violeta-oscuro);
+  background: var(--blanco); border:1px solid var(--borde); border-radius:100px;
+  padding: 6px 12px; max-width:150px;
+}
+
+/* ============================================================
+   PLANTA FLOTANTE (elemento distintivo/persistente)
+   ============================================================ */
+#plantaFlotante{
+  position: fixed; right:12px; bottom:96px; z-index: 350;
+  width: 92px; background: var(--blanco); border-radius: 16px;
+  box-shadow: var(--sombra-fuerte); padding: 8px 8px 6px; text-align:center;
+  border: 1px solid var(--borde); transition: transform .3s ease;
+}
+#plantaFlotante.contraida{ width:46px; padding:6px; }
+#plantaFlotante.contraida .planta-etiqueta, #plantaFlotante.contraida #plantaSvg{ display:none; }
+#botonPlanta{
+  position:absolute; top:-10px; left:-10px; width:24px; height:24px; border-radius:50%;
+  background: var(--rosa); color:#fff; font-size:.7rem; font-weight:700; display:flex;
+  align-items:center; justify-content:center; box-shadow: var(--sombra);
+}
+.planta-etiqueta{ font-size:.58rem; color:var(--texto-suave); margin-top:4px; font-weight:600; line-height:1.2;}
+.capa{ opacity:0; transition:opacity .7s ease; }
+.capa.visible{ opacity:1; }
+.brillo{ animation: pulso 1.8s ease-in-out infinite; }
+@keyframes pulso{ 0%,100%{opacity:1} 50%{opacity:.35} }
+
+/* ============================================================
+   PANTALLAS / SECCIONES
+   ============================================================ */
+.pantalla{ display:none; padding: 20px 18px 40px; max-width: 720px; margin:0 auto; }
+.pantalla.activa{ display:block; animation: entrar .45s ease; }
+@keyframes entrar{ from{opacity:0; transform:translateY(10px);} to{opacity:1; transform:translateY(0);} }
+
+.eyebrow{
+  display:inline-flex; align-items:center; gap:6px;
+  font-size:.72rem; font-weight:700; letter-spacing:.08em; text-transform:uppercase;
+  color: var(--blanco); background: var(--violeta); padding:5px 12px; border-radius:100px;
+  margin-bottom: 14px;
+}
+.pantalla h2{ font-size:1.5rem; font-weight:800; margin-bottom:14px; }
+
+/* Pregunta detonante */
+.detonante{
+  background: var(--violeta-oscuro); color:#fff; border-radius: var(--radio);
+  padding: 18px 18px; margin: 16px 0 22px; position:relative; overflow:hidden;
+}
+.detonante::before{
+  content:"?"; position:absolute; right:-6px; bottom:-24px; font-size:7rem; font-weight:800;
+  font-family: var(--font-titulo); color: rgba(255,255,255,0.06);
+}
+.detonante .etiqueta-mini{ font-size:.68rem; font-weight:700; letter-spacing:.08em; text-transform:uppercase; color: var(--verde-claro); display:block; margin-bottom:6px;}
+.detonante p{ font-size:.95rem; position:relative; z-index:1; }
+
+/* Bloques de concepto */
+.concepto{ font-size:.96rem; margin-bottom:18px; }
+.concepto strong{ color: var(--violeta-oscuro); }
+
+/* Términos con tooltip */
+.termino{
+  color: var(--verde); font-weight:700; border-bottom:2px dotted var(--verde);
+  cursor:pointer; white-space:nowrap;
+}
+.termino:active{ color: var(--rosa); border-color: var(--rosa); }
+#burbujaTooltip{
+  position: fixed; max-width: 260px; background: var(--violeta-oscuro); color:#fff;
+  padding: 10px 14px; border-radius: 12px; font-size:.82rem; box-shadow: var(--sombra-fuerte);
+  z-index: 600; display:none; line-height:1.45;
+}
+#burbujaTooltip::after{
+  content:""; position:absolute; bottom:-6px; left:20px; width:12px; height:12px;
+  background: var(--violeta-oscuro); transform: rotate(45deg);
+}
+
+/* Tarjetas de órganos (Sección 1) */
+.grid-organos{ display:grid; grid-template-columns: 1fr 1fr; gap:10px; margin: 18px 0; }
+.tarjeta-organo{
+  background: var(--blanco); border-radius: var(--radio-chico); padding: 14px 12px;
+  box-shadow: var(--sombra); border:1px solid var(--borde); text-align:left;
+  transition: transform .2s ease;
+}
+.tarjeta-organo:active{ transform: scale(.97); }
+.tarjeta-organo .icono{ font-size:1.5rem; margin-bottom:6px; }
+.tarjeta-organo h4{ font-size:.88rem; margin-bottom:3px; }
+.tarjeta-organo p{ font-size:.76rem; color: var(--texto-suave); }
+.tarjeta-organo.reproductivo{ border-left: 4px solid var(--rosa); }
+.tarjeta-organo.vegetativo{ border-left: 4px solid var(--verde); }
+
+/* Comparación lado a lado */
+.comparacion{
+  display:grid; grid-template-columns: 1fr; gap:0; margin: 20px 0;
+  border-radius: var(--radio); overflow:hidden; box-shadow: var(--sombra);
+}
+.comp-item{ background: var(--blanco); padding:16px; }
+.comp-item.comp-a{ border-bottom:1px solid var(--borde); }
+.comp-item h4{ font-size:1rem; display:flex; align-items:center; gap:8px; margin-bottom:8px;}
+.comp-item .comp-icono{ font-size:1.3rem; }
+.comp-item p{ font-size:.85rem; margin-bottom:6px; }
+.comp-item .analogia-mini{
+  font-size:.78rem; background: var(--violeta-suave); border-radius:10px; padding:8px 10px;
+  color: var(--violeta-oscuro); font-style:italic; margin-top:8px;
+}
+.comp-vs{
+  text-align:center; font-family: var(--font-titulo); font-weight:800; font-size:.72rem;
+  color: var(--blanco); background: var(--coral); padding:4px;
+}
+@media(min-width:600px){
+  .comparacion{ grid-template-columns: 1fr auto 1fr; align-items:stretch; }
+  .comp-item.comp-a{ border-bottom:none; border-right:1px solid var(--borde);}
+  .comp-vs{ writing-mode: vertical-rl; padding:14px 6px; }
+}
+
+/* Demo "intenta doblar" */
+.doblar-demo{ display:flex; gap:12px; justify-content:center; margin:16px 0 10px; flex-wrap:wrap; }
+.barra-boton{
+  flex:1; min-width:130px; padding:16px 10px; border-radius: var(--radio-chico);
+  font-weight:700; font-size:.82rem; color:#fff; box-shadow: var(--sombra); text-align:center;
+}
+.barra-boton .barra-visual{ width:60%; height:34px; margin:0 auto 8px; border-radius:6px; transform-origin: bottom center; transition: transform .15s ease;}
+.btn-colenquima{ background: var(--verde); }
+.btn-colenquima .barra-visual{ background: rgba(255,255,255,0.85); }
+.btn-colenquima.animar .barra-visual{ animation: doblarFlex .5s ease; }
+@keyframes doblarFlex{ 0%{transform:rotate(0)} 40%{transform:rotate(22deg)} 70%{transform:rotate(-8deg)} 100%{transform:rotate(0)} }
+.btn-esclerenquima{ background: var(--texto); }
+.btn-esclerenquima .barra-visual{ background: rgba(255,255,255,0.85); }
+.btn-esclerenquima.animar .barra-visual{ animation: quebrar .4s ease; }
+.btn-esclerenquima.animar{ animation: sacudir .4s ease; }
+@keyframes quebrar{ 0%{transform:rotate(0)} 30%{transform:rotate(8deg)} 100%{transform:rotate(11deg)} }
+@keyframes sacudir{ 0%,100%{transform:translateX(0)} 25%{transform:translateX(-3px)} 75%{transform:translateX(3px)} }
+#resultadoDoblar{
+  min-height: 40px; font-size:.85rem; text-align:center; padding:10px 14px;
+  background: var(--blanco); border-radius: var(--radio-chico); border:1px dashed var(--borde);
+  color: var(--texto-suave); font-style:italic;
+}
+
+/* Animación cohesión-tensión */
+.escena-xilema{
+  display:flex; align-items:flex-end; justify-content:center; gap:24px;
+  background: linear-gradient(180deg, #FFF7E8 0%, var(--blanco) 40%, #EAF6F1 100%);
+  border-radius: var(--radio); padding: 18px 16px 10px; margin: 18px 0; border:1px solid var(--borde);
+}
+.escena-xilema .col-sol{ font-size:1.8rem; animation: brillar 2.4s ease-in-out infinite; }
+@keyframes brillar{ 0%,100%{transform:scale(1)} 50%{transform:scale(1.15)} }
+.tubo-xilema{ position:relative; width:18px; height:150px; background: rgba(83,74,183,0.08); border-radius:10px; overflow:hidden; border:1px solid var(--borde);}
+.gota{
+  position:absolute; left:3px; width:12px; height:12px; border-radius:50%;
+  background: radial-gradient(circle at 30% 30%, #9fd6ff, var(--violeta));
+  bottom:-14px; opacity:0; animation: subirGota 3s linear infinite;
+}
+.g1{animation-delay:0s;} .g2{animation-delay:1s;} .g3{animation-delay:2s;}
+@keyframes subirGota{ 0%{bottom:-14px; opacity:0;} 8%{opacity:1;} 88%{opacity:1;} 100%{bottom:100%; opacity:0;} }
+.escena-xilema .col-hoja{ font-size:1.8rem; }
+.escena-xilema .col-texto{ font-size:.72rem; text-align:center; color: var(--texto-suave); max-width:70px; margin-top:6px;}
+
+/* Micro-chequeo reflexivo */
+.chequeo{
+  background: var(--blanco); border:1px dashed var(--verde); border-radius: var(--radio);
+  padding:14px 16px; margin:18px 0;
+}
+.chequeo .pregunta-reflexiva{ font-weight:700; font-size:.85rem; color: var(--violeta-oscuro); margin-bottom:8px; }
+.chequeo button{
+  font-size:.76rem; font-weight:700; color: var(--verde); text-decoration:underline;
+}
+.chequeo .respuesta-reflexiva{ display:none; font-size:.82rem; margin-top:8px; color: var(--texto-suave); }
+.chequeo .respuesta-reflexiva.mostrar{ display:block; animation: entrar .3s ease; }
+
+/* Dato extra verificado */
+.dato-extra{
+  background: linear-gradient(135deg, var(--rosa), #B8447A); color:#fff; border-radius: var(--radio);
+  padding:16px 18px; margin: 20px 0; position:relative;
+}
+.dato-extra .etiqueta-mini{ font-size:.66rem; font-weight:700; letter-spacing:.08em; text-transform:uppercase; opacity:.85; display:block; margin-bottom:6px;}
+.dato-extra p{ font-size:.86rem; }
+.dato-extra .fuente{ font-size:.66rem; opacity:.75; margin-top:8px; display:block; }
+
+/* Recuadro "sabías que" boliviano/andino */
+.sabias-que{
+  background: var(--blanco); border-left: 5px solid var(--coral); border-radius: 0 var(--radio) var(--radio) 0;
+  padding: 14px 16px; margin: 20px 0; box-shadow: var(--sombra);
+}
+.sabias-que .etiqueta-mini{ font-size:.66rem; font-weight:700; letter-spacing:.06em; text-transform:uppercase; color: var(--coral); display:block; margin-bottom:6px;}
+.sabias-que p{ font-size:.86rem; }
+
+/* Diagramas SVG genéricos */
+.caja-diagrama{
+  background: var(--blanco); border-radius: var(--radio); padding: 16px; margin: 16px 0;
+  box-shadow: var(--sombra); border:1px solid var(--borde);
+}
+.caja-diagrama .titulo-diagrama{ font-size:.72rem; font-weight:700; text-transform:uppercase; letter-spacing:.05em; color: var(--texto-suave); margin-bottom:10px; text-align:center;}
+
+/* Botones de siguiente parte dentro de portada */
+.btn-primario{
+  display:inline-flex; align-items:center; gap:8px; background: var(--coral); color:#fff;
+  font-weight:700; font-size:.9rem; padding: 13px 26px; border-radius:100px; box-shadow: var(--sombra);
+}
+.btn-primario:active{ transform: scale(.97); }
+
+/* ============================================================
+   PORTADA
+   ============================================================ */
+.hero-portada{
+  background: var(--violeta-oscuro); border-radius: var(--radio); padding: 26px 20px;
+  color:#fff; text-align:center; position:relative; overflow:hidden; margin-bottom:18px;
+}
+.hero-portada::before{
+  content:""; position:absolute; inset:0; opacity:.1;
+  background-image: radial-gradient(circle at 20% 20%, #fff 1px, transparent 1px),
+                     radial-gradient(circle at 70% 60%, #fff 1px, transparent 1px),
+                     radial-gradient(circle at 40% 80%, #fff 1px, transparent 1px);
+  background-size: 60px 60px, 90px 90px, 70px 70px;
+}
+.hero-portada .tema-tag{
+  position:relative; z-index:1; font-size:.7rem; font-weight:700; letter-spacing:.1em;
+  text-transform:uppercase; color: var(--verde-claro); display:block; margin-bottom:10px;
+}
+.hero-portada h1{ position:relative; z-index:1; color:#fff; font-size:1.5rem; font-weight:800; margin-bottom:10px; }
+.hero-portada .gancho{ position:relative; z-index:1; font-size:.9rem; color:#DAD8F5; max-width:480px; margin:0 auto; }
+
+.mapa-caption{ text-align:center; font-size:.78rem; color: var(--texto-suave); margin: 10px 0 20px; font-style:italic;}
+
+/* ============================================================
+   NAVEGACIÓN INFERIOR FIJA
+   ============================================================ */
+#navInferior{
+  position: fixed; bottom:0; left:0; right:0; background: var(--blanco);
+  border-top: 1px solid var(--borde); box-shadow: 0 -4px 18px rgba(38,33,92,0.10);
+  display:flex; align-items:center; justify-content:space-between; padding: 10px 14px;
+  z-index: 450;
+}
+.nav-btn{
+  display:flex; align-items:center; gap:6px; font-weight:700; font-size:.82rem;
+  padding:10px 16px; border-radius:100px; color: var(--violeta);
+}
+.nav-btn.siguiente{ background: var(--violeta); color:#fff; }
+.nav-btn:disabled{ opacity:.3; }
+#indicadorSeccion{ font-size:.72rem; font-weight:700; color: var(--texto-suave); text-align:center; }
+#puntosProgreso{ display:flex; gap:4px; justify-content:center; margin-top:3px;}
+.punto{ width:6px; height:6px; border-radius:50%; background: var(--borde); }
+.punto.activo{ background: var(--coral); width:16px; border-radius:4px; transition: all .3s ease;}
+.punto.completado{ background: var(--verde-claro); }
+
+/* ============================================================
+   PANTALLA DE CIERRE
+   ============================================================ */
+.cierre-titulo{ text-align:center; }
+.cierre-titulo .icono-final{ font-size:2.4rem; }
+.mensaje-cierre{ text-align:center; font-size:.92rem; color: var(--texto-suave); max-width:480px; margin: 10px auto 22px;}
+.aviso-siguiente{
+  background: var(--verde-claro); color: var(--violeta-oscuro); border-radius: var(--radio);
+  padding:14px 16px; text-align:center; font-size:.84rem; font-weight:600; margin-top:20px;
+}
+
+footer.credito{ text-align:center; font-size:.66rem; color: var(--texto-suave); padding: 24px 10px 10px; }
+
+/* Responsive extra para tablet/desktop */
+@media(min-width:640px){
+  .grid-organos{ grid-template-columns: repeat(3, 1fr); }
+  .pantalla{ padding-top:34px; }
+  .hero-portada h1{ font-size:1.9rem; }
+}
+
+
+/* ============================================================
+   REDISEÑO VISUAL 2026 · propuesta de interfaz
+   ============================================================ */
+:root{
+  --fondo-app:#F7F8FC;
+  --superficie:rgba(255,255,255,.82);
+  --texto:#292742;
+  --texto-suave:#72708A;
+  --sombra:0 12px 34px rgba(38,33,92,.09);
+  --sombra-fuerte:0 20px 50px rgba(38,33,92,.18);
+  --radio:24px;
+  --radio-chico:16px;
+}
+body{
+  background:
+    radial-gradient(circle at 12% 8%, rgba(93,202,165,.20), transparent 27%),
+    radial-gradient(circle at 92% 18%, rgba(212,83,126,.14), transparent 22%),
+    radial-gradient(circle at 50% 105%, rgba(83,74,183,.13), transparent 28%),
+    var(--fondo-app);
+  background-attachment:fixed;
+}
+body::before{
+  content:""; position:fixed; inset:0; pointer-events:none; z-index:-1; opacity:.38;
+  background-image:radial-gradient(rgba(83,74,183,.13) 1px, transparent 1px);
+  background-size:28px 28px;
+  mask-image:linear-gradient(to bottom, #000, transparent 72%);
+}
+#barraProgreso{height:4px;background:rgba(255,255,255,.5)}
+#barraProgresoRelleno{background:linear-gradient(90deg,#1D9E75 0%,#5DCAA5 38%,#D4537E 72%,#D85A30 100%);box-shadow:0 0 16px rgba(93,202,165,.5)}
+#encabezado{
+  max-width:980px; margin:12px auto 0; top:12px; border:1px solid rgba(222,219,247,.8);
+  border-radius:20px; padding:10px 12px; background:rgba(255,255,255,.92);
+  box-shadow:0 10px 30px rgba(38,33,92,.08);
+}
+.marca-app,.encabezado-acciones{display:flex;align-items:center;gap:10px}
+.marca-icono{width:38px;height:38px;border-radius:13px;display:grid;place-items:center;background:linear-gradient(135deg,#DFF8EF,#C8F0DF);box-shadow:inset 0 0 0 1px rgba(29,158,117,.12)}
+.marca-subtitulo{font-size:.69rem;color:var(--texto-suave);font-weight:600;margin-top:1px}
+.progreso-mini{width:46px;height:30px;border-radius:999px;background:var(--violeta-suave);display:grid;place-items:center;font-size:.68rem;font-weight:800;color:var(--violeta)}
+#selectorSeccion{border:none;background:#F3F2FB;max-width:170px;padding:8px 13px}
+.pantalla{max-width:900px;padding:30px 22px 54px}
+.pantalla h2{font-size:clamp(1.65rem,4vw,2.35rem);letter-spacing:-.035em;max-width:720px}
+.hero-portada{
+  min-height:430px; display:grid; grid-template-columns:1.15fr .85fr; align-items:center; gap:12px;
+  padding:42px; text-align:left; background:
+  radial-gradient(circle at 82% 20%,rgba(93,202,165,.22),transparent 30%),
+  radial-gradient(circle at 15% 90%,rgba(212,83,126,.16),transparent 26%),
+  linear-gradient(135deg,#211D55 0%,#342D78 52%,#473F96 100%);
+  box-shadow:0 28px 70px rgba(38,33,92,.24); border:1px solid rgba(255,255,255,.08)
+}
+.hero-portada::before{opacity:.16;background-size:45px 45px,78px 78px,60px 60px}
+.hero-contenido,.hero-ilustracion{position:relative;z-index:1}
+.hero-portada h1{font-size:clamp(2rem,5vw,3.4rem);letter-spacing:-.05em;line-height:1.05;max-width:620px}
+.hero-portada .gancho{font-size:1rem;line-height:1.65;margin:0;max-width:620px}
+.hero-ilustracion{filter:drop-shadow(0 20px 30px rgba(0,0,0,.18));animation:flotarHero 5s ease-in-out infinite}
+@keyframes flotarHero{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
+.hero-datos{display:flex;gap:8px;flex-wrap:wrap;margin-top:22px}
+.hero-datos span{font-size:.72rem;font-weight:700;color:#EAE8FF;background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.18);padding:7px 10px;border-radius:999px}
+.caja-diagrama,.tarjeta-organo,.comp-item,.chequeo,.sabias-que{
+  background:var(--blanco);border:1px solid rgba(222,219,247,.72)
+}
+.caja-diagrama{padding:22px;box-shadow:var(--sombra)}
+.grid-organos{gap:14px}
+.tarjeta-organo{padding:18px 16px;box-shadow:none;position:relative;overflow:hidden;transition:transform .25s ease,box-shadow .25s ease,border-color .25s ease}
+.tarjeta-organo:hover{transform:translateY(-4px);box-shadow:var(--sombra);border-color:rgba(83,74,183,.24)}
+.tarjeta-organo .icono{font-size:1.85rem}
+.tarjeta-organo h4{font-size:1rem}
+.tarjeta-organo p{font-size:.8rem;line-height:1.5}
+.comparacion{gap:12px;box-shadow:none;overflow:visible;align-items:stretch}
+.comp-item{border-radius:20px;padding:20px;box-shadow:var(--sombra)}
+.comp-item.comp-a{border-bottom:1px solid rgba(222,219,247,.72)}
+.comp-vs{align-self:center;border-radius:999px;padding:8px 10px;box-shadow:0 7px 16px rgba(216,90,48,.24);z-index:2}
+.detonante{padding:22px 22px 22px 24px;background:linear-gradient(135deg,#27225F,#363080);box-shadow:0 18px 38px rgba(38,33,92,.18)}
+.detonante p{font-size:1rem;line-height:1.68}
+.concepto{font-size:1rem;line-height:1.78;color:#3B385A}
+.eyebrow{box-shadow:0 8px 20px rgba(83,74,183,.18)}
+.chequeo{border-style:solid;border-left:5px solid var(--verde);padding:18px 20px;box-shadow:0 10px 28px rgba(29,158,117,.08)}
+.sabias-que{border-radius:20px;border-left:5px solid var(--coral);box-shadow:var(--sombra)}
+.dato-extra{box-shadow:0 18px 40px rgba(212,83,126,.18)}
+#plantaFlotante{right:max(14px,calc((100vw - 1040px)/2));bottom:92px;width:104px;border-radius:22px;background:var(--blanco)}
+#navInferior{
+  left:50%;right:auto;bottom:16px;transform:translateX(-50%);width:min(94%,620px);
+  border:1px solid rgba(222,219,247,.85);border-radius:22px;padding:9px 10px;background:var(--blanco);box-shadow:0 18px 46px rgba(38,33,92,.16)
+}
+.nav-btn{padding:11px 17px;transition:transform .2s ease,box-shadow .2s ease}
+.nav-btn:not(:disabled):hover{transform:translateY(-2px)}
+.nav-btn.siguiente{background:linear-gradient(135deg,#534AB7,#665CCB);box-shadow:0 10px 20px rgba(83,74,183,.24)}
+.nav-icono{font-size:1rem}
+.punto{width:7px;height:7px}.punto.activo{width:22px}
+.tema-epidermico{--acento-seccion:#1D9E75}.tema-fundamental{--acento-seccion:#5DCAA5}.tema-vascular{--acento-seccion:#D85A30}.tema-meristemos{--acento-seccion:#D4537E}.tema-angiosperma{--acento-seccion:#26215C}.tema-organizacion{--acento-seccion:#534AB7}
+.pantalla[class*="tema-"] .eyebrow{background:var(--acento-seccion)}
+.pantalla[class*="tema-"] h2::after{content:"";display:block;width:54px;height:5px;border-radius:99px;background:var(--acento-seccion);margin-top:12px}
+@media(min-width:600px){.comp-item.comp-a{border-right:none}.comp-vs{writing-mode:horizontal-tb;padding:9px}}
+@media(max-width:760px){
+  #encabezado{margin:8px 10px 0;border-radius:16px}.marca-subtitulo,.progreso-mini{display:none}
+  .hero-portada{grid-template-columns:1fr;padding:30px 24px;min-height:auto}.hero-ilustracion{max-width:240px;margin:-10px auto -18px}.hero-portada h1{font-size:2.15rem}
+  .pantalla{padding:24px 16px 54px}.grid-organos{grid-template-columns:1fr 1fr}
+}
+@media(max-width:480px){
+  #selectorSeccion{max-width:118px;font-size:.7rem}.marca-icono{width:34px;height:34px}.migaja{font-size:.65rem}
+  .hero-portada{padding:26px 20px}.hero-ilustracion{max-width:205px}.hero-datos span:nth-child(3){display:none}
+  #plantaFlotante{bottom:88px;right:10px;width:88px}.nav-btn{padding:10px 13px}.nav-btn span:not(.nav-icono){display:none}
+  #indicadorSeccion{font-size:.66rem}
+}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;scroll-behavior:auto!important}}
+
+</style>
+</head>
+<body>
+
+<div id="barraProgreso"><div id="barraProgresoRelleno"></div></div>
+
+<header id="encabezado">
+  <div class="marca-app">
+    <div class="marca-icono">🌿</div>
+    <div>
+      <div class="migaja">BioGeo 5° <span>· Tema 6</span></div>
+      <div class="marca-subtitulo">Tejidos vegetales</div>
+    </div>
+  </div>
+  <div class="encabezado-acciones">
+    <div class="progreso-mini"><span id="progresoMiniTexto">0%</span></div>
+    <select id="selectorSeccion" aria-label="Ir a sección"></select>
+  </div>
+</header>
+
+<div id="plantaFlotante">
+  <button id="botonPlanta" aria-label="Mostrar/ocultar planta">🌱</button>
+  <svg id="plantaSvg" viewBox="0 0 140 190" xmlns="http://www.w3.org/2000/svg">
+    <line x1="10" y1="150" x2="130" y2="150" stroke="#c9a877" stroke-width="3"/>
+    <g class="capa capa-organizacion">
+      <path d="M70 150 Q55 172 42 186 M70 150 Q85 172 98 186 M70 150 L70 186" stroke="#8a6a4a" stroke-width="3" fill="none" stroke-linecap="round"/>
+      <line x1="70" y1="150" x2="70" y2="55" stroke="#4d7c4d" stroke-width="6" stroke-linecap="round"/>
+      <path d="M70 95 Q42 84 30 62" stroke="#4d7c4d" stroke-width="4" fill="none" stroke-linecap="round"/>
+      <path d="M70 108 Q100 96 112 74" stroke="#4d7c4d" stroke-width="4" fill="none" stroke-linecap="round"/>
+    </g>
+    <g class="capa capa-epidermis">
+      <line x1="70" y1="150" x2="70" y2="55" stroke="#1D9E75" stroke-width="9" stroke-linecap="round" opacity="0.35"/>
+      <circle cx="30" cy="62" r="2.2" fill="#1D9E75"/>
+      <circle cx="112" cy="74" r="2.2" fill="#1D9E75"/>
+    </g>
+    <g class="capa capa-fundamental">
+      <circle cx="70" cy="128" r="9" fill="#5DCAA5" opacity="0.55"/>
+      <circle cx="70" cy="100" r="7" fill="#5DCAA5" opacity="0.55"/>
+      <circle cx="70" cy="75" r="6" fill="#5DCAA5" opacity="0.55"/>
+    </g>
+    <g class="capa capa-vascular">
+      <line x1="66" y1="150" x2="66" y2="58" stroke="#534AB7" stroke-width="2" stroke-dasharray="2 2"/>
+      <line x1="74" y1="150" x2="74" y2="58" stroke="#D85A30" stroke-width="2" stroke-dasharray="2 2"/>
+    </g>
+    <g class="capa capa-meristemos">
+      <circle cx="70" cy="53" r="4.5" fill="#D4537E" class="brillo"/>
+      <circle cx="70" cy="149" r="4.5" fill="#D4537E" class="brillo"/>
+    </g>
+    <g class="capa capa-flor">
+      <circle cx="70" cy="50" r="9" fill="#D4537E"/>
+      <circle cx="60" cy="46" r="5.5" fill="#F6C9D8"/>
+      <circle cx="80" cy="46" r="5.5" fill="#F6C9D8"/>
+      <circle cx="70" cy="37" r="5.5" fill="#F6C9D8"/>
+      <circle cx="70" cy="50" r="3" fill="#FFD24C"/>
+    </g>
+  </svg>
+  <p class="planta-etiqueta" id="plantaEtiqueta">Tu planta va a crecer con cada sección</p>
+</div>
+
+<div id="burbujaTooltip"></div>
+
+<main id="app">
+
+<section class="pantalla" id="s0" data-index="0">
+  <div class="hero-portada">
+    <div class="hero-contenido">
+      <span class="tema-tag">Tema 6 · Biología-Geografía · 5° de Secundaria</span>
+      <h1>Estudio de los Tejidos Orgánicos de los Vegetales</h1>
+      <p class="gancho">¿Cómo puede un árbol de 50 metros sostenerse sin huesos, subir agua sin bombear y seguir creciendo por siglos? La respuesta está en sus tejidos.</p>
+      <div class="hero-datos">
+        <span>🧠 6 secciones</span><span>🌱 progreso visual</span><span>⚡ experiencias interactivas</span>
+      </div>
+    </div>
+    <div class="hero-ilustracion" aria-hidden="true">
+      <svg viewBox="0 0 300 300" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <linearGradient id="hojaGrad" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#73E2B7"/><stop offset="1" stop-color="#1D9E75"/></linearGradient>
+          <linearGradient id="talloGrad" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#9AE6C7"/><stop offset="1" stop-color="#16785A"/></linearGradient>
+          <filter id="glow"><feGaussianBlur stdDeviation="6" result="blur"/><feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+        </defs>
+        <circle cx="150" cy="150" r="126" fill="rgba(255,255,255,.06)" stroke="rgba(255,255,255,.16)"/>
+        <circle cx="150" cy="150" r="92" fill="rgba(255,255,255,.04)" stroke="rgba(255,255,255,.10)" stroke-dasharray="5 8"/>
+        <path d="M150 250 C146 210 150 170 149 105" stroke="url(#talloGrad)" stroke-width="18" stroke-linecap="round" fill="none"/>
+        <path d="M150 173 C114 164 93 141 82 108 C116 110 143 128 150 159Z" fill="url(#hojaGrad)"/>
+        <path d="M151 145 C182 138 209 113 218 82 C181 83 156 104 151 134Z" fill="url(#hojaGrad)"/>
+        <path d="M150 116 C128 94 125 62 141 40 C165 58 169 88 150 116Z" fill="#D4537E"/>
+        <path d="M150 252 C126 268 105 277 82 282 M150 252 C169 268 193 277 218 282 M150 252 L150 289" stroke="#D8B28B" stroke-width="8" stroke-linecap="round" fill="none"/>
+        <circle cx="150" cy="155" r="11" fill="#FFD24C" filter="url(#glow)"/>
+        <g fill="#fff" opacity=".85"><circle cx="58" cy="72" r="4"/><circle cx="238" cy="57" r="3"/><circle cx="248" cy="200" r="5"/><circle cx="55" cy="220" r="3"/></g>
+      </svg>
+    </div>
+  </div>
+
+  <div class="caja-diagrama">
+    <div class="titulo-diagrama">Mapa del tema — a dónde vamos a llegar</div>
+    <svg viewBox="0 0 320 200" xmlns="http://www.w3.org/2000/svg">
+      <g stroke="#C9C6EE" stroke-width="2" fill="none">
+        <line x1="160" y1="34" x2="43" y2="80"/>
+        <line x1="160" y1="34" x2="121" y2="80"/>
+        <line x1="160" y1="34" x2="199" y2="80"/>
+        <line x1="160" y1="34" x2="277" y2="80"/>
+        <line x1="43" y1="104" x2="160" y2="166"/>
+        <line x1="121" y1="104" x2="160" y2="166"/>
+        <line x1="199" y1="104" x2="160" y2="166"/>
+        <line x1="277" y1="104" x2="160" y2="166"/>
+      </g>
+      <rect x="105" y="10" width="110" height="26" rx="13" fill="#534AB7"/>
+      <text x="160" y="27" text-anchor="middle" fill="#fff" font-size="10" font-weight="700" font-family="Poppins, sans-serif">TEJIDOS VEGETALES</text>
+
+      <rect x="8" y="80" width="70" height="24" rx="12" fill="#EEEDFE" stroke="#C9C6EE" stroke-dasharray="3 3"/>
+      <text x="43" y="96" text-anchor="middle" fill="#6B678E" font-size="8" font-family="Inter, sans-serif">Epidérmico</text>
+
+      <rect x="86" y="80" width="70" height="24" rx="12" fill="#EEEDFE" stroke="#C9C6EE" stroke-dasharray="3 3"/>
+      <text x="121" y="96" text-anchor="middle" fill="#6B678E" font-size="8" font-family="Inter, sans-serif">Fundamental</text>
+
+      <rect x="164" y="80" width="70" height="24" rx="12" fill="#EEEDFE" stroke="#C9C6EE" stroke-dasharray="3 3"/>
+      <text x="199" y="96" text-anchor="middle" fill="#6B678E" font-size="8" font-family="Inter, sans-serif">Vascular</text>
+
+      <rect x="242" y="80" width="70" height="24" rx="12" fill="#EEEDFE" stroke="#C9C6EE" stroke-dasharray="3 3"/>
+      <text x="277" y="96" text-anchor="middle" fill="#6B678E" font-size="8" font-family="Inter, sans-serif">Meristemos</text>
+
+      <rect x="85" y="166" width="150" height="26" rx="13" fill="#EEEDFE" stroke="#D85A30" stroke-dasharray="3 3"/>
+      <text x="160" y="183" text-anchor="middle" fill="#D85A30" font-size="9.5" font-weight="700" font-family="Poppins, sans-serif">ANGIOSPERMA</text>
+    </svg>
+  </div>
+  <p class="mapa-caption">Todavía está en gris. Al terminar el tema vas a completar este mismo mapa — y tu planta, en la esquina, va a estar totalmente formada.</p>
+
+  <div style="text-align:center; margin-top:22px;">
+    <button class="btn-primario" id="btnComenzar">Comenzar el tema →</button>
+  </div>
+</section>
+
+<section class="pantalla tema-organizacion" id="s1" data-index="1">
+  <div class="eyebrow">1 · Organización del cuerpo de la planta</div>
+  <h2>Un cuerpo sin huesos, pero perfectamente organizado</h2>
+
+  <div class="detonante">
+    <span class="etiqueta-mini">Pregunta detonante</span>
+    <p>Un rascacielos necesita vigas de acero y hormigón para no caerse. Un árbol de la Amazonía boliviana puede medir 50 metros de altura sin tener huesos ni metal. ¿De qué material "biológico" están hechas sus células para soportar toneladas de peso ante la gravedad?</p>
+  </div>
+
+  <p class="concepto">La respuesta empieza en la <strong>diferenciación celular</strong>: grupos de células genéticamente idénticas se especializan para cumplir funciones distintas — protección, sostén, conducción y crecimiento. A este estudio se le llama <span class="termino" data-def="Disciplina botánica que estudia la arquitectura microscópica y funcional de las plantas.">Histología Vegetal</span>.</p>
+
+  <p class="concepto">A diferencia de los animales, las plantas son organismos <span class="termino" data-def="Que no pueden moverse de un lugar a otro durante su vida.">sésiles</span>: no pueden huir del estrés ambiental ni de los depredadores, así que su evolución apostó por tejidos capaces de resistir en el mismo lugar durante años, décadas o siglos.</p>
+
+  <p class="concepto">Las plantas superiores (<span class="termino" data-def="Plantas con cuerpo diferenciado en raíz, tallo y hojas, con sistema vascular.">Cormófitas</span>) organizan su cuerpo en dos grandes grupos de órganos:</p>
+
+  <div class="grid-organos">
+    <div class="tarjeta-organo vegetativo"><div class="icono">🌱</div><h4>Raíz</h4><p>Órgano vegetativo. Ancla la planta y absorbe agua y minerales.</p></div>
+    <div class="tarjeta-organo vegetativo"><div class="icono">🌾</div><h4>Tallo</h4><p>Órgano vegetativo. Sostiene y conduce entre raíz y hojas.</p></div>
+    <div class="tarjeta-organo vegetativo"><div class="icono">🍃</div><h4>Hoja</h4><p>Órgano vegetativo. Capta luz y realiza la fotosíntesis.</p></div>
+    <div class="tarjeta-organo reproductivo"><div class="icono">🌸</div><h4>Flor</h4><p>Órgano reproductivo. Facilita la polinización.</p></div>
+    <div class="tarjeta-organo reproductivo"><div class="icono">🍎</div><h4>Fruto</h4><p>Órgano reproductivo. Protege y dispersa las semillas.</p></div>
+    <div class="tarjeta-organo reproductivo"><div class="icono">🌰</div><h4>Semilla</h4><p>Contiene el embrión y sus reservas para germinar.</p></div>
+  </div>
+
+  <p class="concepto">Estas estructuras no funcionan de forma aislada: están conectadas por <strong>sistemas de tejidos continuos</strong> que recorren toda la planta, integrándola como una sola unidad fisiológica — igual que las instalaciones de un edificio conectan cada piso entre sí.</p>
+
+  <div class="chequeo">
+    <p class="pregunta-reflexiva">💭 ¿Por qué crees que estos órganos necesitan estar conectados por sistemas continuos, en vez de funcionar como piezas aisladas?</p>
+    <button class="verRespuesta" data-target="r1">Ver una posible respuesta</button>
+    <p class="respuesta-reflexiva" id="r1">Porque ningún órgano sobrevive solo: la raíz necesita el azúcar que fabrica la hoja, y la hoja necesita el agua que absorbe la raíz. Los sistemas continuos que vas a conocer en las siguientes secciones son, literalmente, lo que mantiene viva esa comunicación entre ellos.</p>
+  </div>
+</section>
+
+<section class="pantalla tema-epidermico" id="s2" data-index="2">
+  <div class="eyebrow">2 · Sistema Epidérmico — Protección</div>
+  <h2>La frontera entre la planta y el mundo</h2>
+
+  <div class="detonante">
+    <span class="etiqueta-mini">Para pensar</span>
+    <p>Bajo el sol fuerte del Altiplano, una hoja delgada podría secarse en minutos. Sin embargo, sobrevive días enteros expuesta al aire seco. ¿Qué barrera se lo permite?</p>
+  </div>
+
+  <p class="concepto">El <strong>Sistema Epidérmico</strong> es la capa más externa de la planta: la barrera límitrofe entre sus tejidos internos y el medio ambiente. Existen dos versiones de esta barrera, según la edad de la estructura que protegen.</p>
+
+  <div class="comparacion">
+    <div class="comp-item comp-a">
+      <h4><span class="comp-icono">🍃</span>Epidermis</h4>
+      <p><strong>Tejido primario.</strong> Capa externa de células vivas, aplanadas y sin cloroplastos, que recubre hojas, flores y tallos jóvenes.</p>
+      <p>Está cubierta por la <span class="termino" data-def="Capa cerosa de cutina que recubre la epidermis y evita la pérdida de agua por evaporación.">cutícula</span>, y posee <span class="termino" data-def="Poros microscópicos regulables en la epidermis, formados por células oclusivas, que permiten el intercambio de gases: entrada de CO2, salida de O2 y vapor de agua.">estomas</span> para el intercambio gaseoso y <span class="termino" data-def="Pelos glandulares o protectores presentes en la epidermis de tallos y hojas.">tricomas</span> como protección extra.</p>
+    </div>
+    <div class="comp-vs">VS</div>
+    <div class="comp-item comp-b">
+      <h4><span class="comp-icono">🪵</span>Peridermis</h4>
+      <p><strong>Tejido secundario.</strong> Reemplaza a la epidermis en tallos y raíces leñosos, con crecimiento en grosor.</p>
+      <p>Está formada por el <span class="termino" data-def="Súber o corcho: capas de células muertas impregnadas de suberina, una sustancia impermeable. Es la corteza que ves en un árbol adulto.">súber (corcho)</span>, generado por el <span class="termino" data-def="Meristemo lateral que produce la peridermis (corteza protectora) hacia afuera.">felógeno</span>.</p>
+    </div>
+  </div>
+
+  <div class="sabias-que">
+    <span class="etiqueta-mini">Detalle clave</span>
+    <p>La epidermis está viva, pero el súber de la peridermis está formado por células <strong>muertas</strong>. La planta "sacrifica" esas células y las impregna de <span class="termino" data-def="Sustancia cerosa impermeable que se deposita en las paredes del súber, evitando la pérdida de agua y la entrada de patógenos.">suberina</span> para que actúen como una armadura impermeable — el mismo principio del corcho que tapa una botella.</p>
+  </div>
+
+  <div class="chequeo">
+    <p class="pregunta-reflexiva">💭 Los estomas dejan entrar CO2, pero también dejan escapar agua. ¿Por qué la planta no los mantiene cerrados todo el tiempo, si eso evitaría perder agua?</p>
+    <button class="verRespuesta" data-target="r2">Ver una posible respuesta</button>
+    <p class="respuesta-reflexiva" id="r2">Porque sin CO2 no hay fotosíntesis, y sin fotosíntesis no hay alimento. La planta enfrenta un compromiso constante entre "respirar y fabricar comida" y "no deshidratarse" — por eso los estomas se abren y cierran según la necesidad, en vez de quedar fijos.</p>
+  </div>
+</section>
+
+<section class="pantalla tema-fundamental" id="s3" data-index="3">
+  <div class="eyebrow">3 · Sistema Fundamental — Parénquima y Sostén</div>
+  <h2>La masa principal del cuerpo vegetal</h2>
+
+  <div class="detonante">
+    <span class="etiqueta-mini">Para pensar</span>
+    <p>La pulpa jugosa de una fruta y las fibras duras de una cáscara de nuez provienen del mismo sistema de tejidos. ¿Cómo puede un solo sistema producir texturas tan distintas?</p>
+  </div>
+
+  <p class="concepto">El <strong>Sistema Fundamental</strong> constituye la masa principal del cuerpo vegetal, y se divide en dos grandes funciones: metabolismo (parénquima) y <strong>sostén mecánico</strong> (colénquima y esclerénquima).</p>
+
+  <p class="concepto"><strong>Parénquima:</strong> tejido vivo y metabólicamente activo, de paredes delgadas. El <em>clorofílico</em> realiza la fotosíntesis (mesófilo de las hojas); el <em>de reserva</em> almacena almidón, agua o aceites — como en los tubérculos, frutos y tallos suculentos.</p>
+
+  <p class="concepto">Los <strong>Tejidos de Sostén</strong> dan resistencia mecánica, pero de dos maneras opuestas:</p>
+
+  <div class="comparacion">
+    <div class="comp-item comp-a">
+      <h4><span class="comp-icono">🌿</span>Colénquima</h4>
+      <p>Células <strong>vivas</strong>, con paredes engrosadas de forma irregular. Da soporte flexible a órganos en crecimiento (pecíolos, tallos verdes).</p>
+      <div class="analogia-mini">Como el cartílago animal: sostiene, pero permite flexibilidad y movimiento sin romperse.</div>
+    </div>
+    <div class="comp-vs">VS</div>
+    <div class="comp-item comp-b">
+      <h4><span class="comp-icono">🦴</span>Esclerénquima</h4>
+      <p>Células <strong>muertas</strong>, con paredes secundarias muy gruesas e impregnadas de <span class="termino" data-def="Polímero orgánico complejo que se deposita en las paredes celulares secundarias, otorgando extrema dureza, rigidez e impermeabilidad. Es el componente principal de la madera.">lignina</span>. Da soporte rígido y duro (fibras textiles, cáscaras de nueces).</p>
+      <div class="analogia-mini">Como el hueso: rígido y duro. Si intentas doblarlo, se quiebra.</div>
+    </div>
+  </div>
+
+  <div class="caja-diagrama">
+    <div class="titulo-diagrama">Pruébalo tú mismo</div>
+    <div class="doblar-demo">
+      <button class="barra-boton btn-colenquima" id="btnColenquima">
+        <div class="barra-visual"></div>
+        Doblar Colénquima
+      </button>
+      <button class="barra-boton btn-esclerenquima" id="btnEsclerenquima">
+        <div class="barra-visual"></div>
+        Doblar Esclerénquima
+      </button>
+    </div>
+    <p id="resultadoDoblar">Toca una de las dos barras para ver qué pasa.</p>
+  </div>
+
+  <div class="sabias-que">
+    <span class="etiqueta-mini">Ejemplo andino verificado</span>
+    <p>La <strong>cabuya</strong> (<em>Furcraea andina</em>, "chawar" en quechua), planta típica de los valles y yungas andinos, tiene hojas ricas en fibras esclerenquimáticas tan resistentes que los pueblos andinos las usaban para construir puentes colgantes sobre ríos torrentosos. Algunas casas amarradas con sogas de esta fibra siguen en pie más de cien años después.</p>
+  </div>
+</section>
+
+<section class="pantalla tema-vascular" id="s4" data-index="4">
+  <div class="eyebrow">4 · Sistema Vascular — Conducción</div>
+  <h2>El sistema circulatorio de la planta</h2>
+
+  <div class="detonante">
+    <span class="etiqueta-mini">Pregunta detonante</span>
+    <p>Si tienes una manguera vertical, necesitas una bomba potente para subir agua. ¿Cómo logra una planta transportar agua desde las raíces subterráneas hasta la hoja más alta en la copa, en contra de la gravedad, sin tener un corazón que bombee sangre?</p>
+  </div>
+
+  <p class="concepto">El <strong>Sistema Vascular</strong> es el sistema circulatorio vegetal, vital para el transporte de larga distancia. Está formado por dos tejidos que se mueven en direcciones y con propósitos opuestos:</p>
+
+  <div class="comparacion">
+    <div class="comp-item comp-a">
+      <h4><span class="comp-icono">⬆️</span>Xilema (Leño)</h4>
+      <p>Tejido complejo formado por células <strong>muertas</strong> (traqueidas y vasos). Transporta la <span class="termino" data-def="Agua e iones inorgánicos absorbidos por la raíz, transportados por el xilema hacia las hojas.">Savia Bruta</span> (agua y minerales) desde la raíz hacia las hojas.</p>
+      <p>Flujo <strong>unidireccional y ascendente.</strong></p>
+    </div>
+    <div class="comp-vs">VS</div>
+    <div class="comp-item comp-b">
+      <h4><span class="comp-icono">🔄</span>Floema (Líber)</h4>
+      <p>Formado por células <strong>vivas</strong> (elementos del tubo criboso). Transporta la <span class="termino" data-def="Sacarosa, aminoácidos y hormonas producidos en la fotosíntesis, que circulan por el floema desde las hojas hacia el resto de la planta.">Savia Elaborada</span> (azúcares) desde las hojas hacia raíces, frutos y meristemos.</p>
+      <p>Flujo <strong>multidireccional.</strong></p>
+    </div>
+  </div>
+
+  <p class="concepto">¿Cómo sube el agua sin una bomba? Se explica con la <strong>Teoría de la Cohesión-Tensión</strong>: el agua no es empujada desde la raíz, es <em>jalada</em> desde arriba. La evaporación en las hojas (transpiración) crea una tensión negativa que succiona toda la columna de agua dentro del xilema, gracias a que las moléculas de agua se pegan entre sí (cohesión).</p>
+
+  <div class="caja-diagrama">
+    <div class="titulo-diagrama">Cohesión-Tensión en acción</div>
+    <div class="escena-xilema">
+      <div class="col-sol">☀️</div>
+      <div style="display:flex; flex-direction:column; align-items:center;">
+        <div class="tubo-xilema">
+          <div class="gota g1"></div>
+          <div class="gota g2"></div>
+          <div class="gota g3"></div>
+        </div>
+        <div class="col-texto">Xilema (la "pajilla")</div>
+      </div>
+      <div style="display:flex; flex-direction:column; align-items:center;">
+        <div class="col-hoja">🍃</div>
+        <div class="col-texto">Evaporación = succión</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="dato-extra">
+    <span class="etiqueta-mini">Dato verificado — el límite físico</span>
+    <p>Las secuoyas gigantes, para subir agua hasta unos 109 metros de altura, necesitan generar una tensión de aproximadamente <strong>1.9 megapascales</strong> — un valor que se acerca al límite físico que el xilema puede soportar antes de que la columna de agua se rompa (cavitación). Esas alturas casi tocan el techo de lo que la cohesión-tensión permite en la naturaleza.</p>
+    <span class="fuente">Fuente: LibreTexts Botánica — Teoría de Cohesión-Tensión</span>
+  </div>
+</section>
+
+<section class="pantalla tema-meristemos" id="s5" data-index="5">
+  <div class="eyebrow">5 · Meristemos — Los tejidos que nunca dejan de crecer</div>
+  <h2>Juventud eterna</h2>
+
+  <div class="detonante">
+    <span class="etiqueta-mini">Pregunta detonante</span>
+    <p>Los animales tenemos una etapa de crecimiento y luego paramos. Las plantas, sin embargo, pueden seguir creciendo y sacando ramas nuevas por siglos. ¿Qué tipo de células "inmortales" poseen que les permite regenerarse indefinidamente?</p>
+  </div>
+
+  <p class="concepto">Los <strong>Meristemos</strong> son tejidos embrionarios que conservan la capacidad de división celular (mitosis) durante toda la vida de la planta. Sus células son <span class="termino" data-def="Capacidad biológica de una célula vegetal viva, como la del meristemo, para regenerar una planta completa si se le dan las condiciones adecuadas.">totipotentes</span>, pequeñas y con núcleos grandes.</p>
+
+  <div class="comparacion">
+    <div class="comp-item comp-a">
+      <h4><span class="comp-icono">⬆️</span>Apicales (Primarios)</h4>
+      <p>Ubicados en los ápices (puntas) de tallos y raíces.</p>
+      <p>Responsables del <strong>Crecimiento Primario</strong>: la elongación. Hacen que la planta crezca hacia arriba (buscando luz) y hacia abajo (buscando agua).</p>
+    </div>
+    <div class="comp-vs">VS</div>
+    <div class="comp-item comp-b">
+      <h4><span class="comp-icono">↔️</span>Laterales (Secundarios)</h4>
+      <p>Forman cilindros a lo largo del tallo y raíz en plantas leñosas.</p>
+      <p>Responsables del <strong>Crecimiento Secundario</strong>: el grosor. El <span class="termino" data-def="Capa de células meristemáticas ubicada entre el xilema y el floema; genera madera nueva y aumenta el grosor del tronco cada año.">cambium vascular</span> genera xilema y floema nuevos (anillos de la madera); el felógeno genera la corteza.</p>
+    </div>
+  </div>
+
+  <div class="sabias-que">
+    <span class="etiqueta-mini">La Yareta boliviana</span>
+    <p>La <strong>Yareta</strong> (<em>Azorella compacta</em>), nativa del Altiplano, parece una roca verde cubierta de musgo, pero es un arbusto leñoso extremadamente denso. Sus meristemos crecen apenas <strong>1 milímetro al año</strong> por el frío extremo. Algunas yaretas en Potosí superan los 3.000 años: germinaron antes de la caída del Imperio Tiwanaku.</p>
+  </div>
+
+  <div class="dato-extra">
+    <span class="etiqueta-mini">Comparación verificada</span>
+    <p>El árbol más alto conocido del mundo, la secuoya roja <strong>Hyperion</strong> (115,85 m, en California), crece a un ritmo de unos <strong>4 centímetros al año</strong> — 40 veces más rápido que la Yareta. Mismo tejido meristemático apical, condiciones climáticas radicalmente distintas: el meristemo no fija una velocidad, el ambiente la modula.</p>
+    <span class="fuente">Fuente: Parque Nacional Redwood, California</span>
+  </div>
+</section>
+
+<section class="pantalla tema-angiosperma" id="s6" data-index="6">
+  <div class="eyebrow">6 · Estructura de una Angiosperma</div>
+  <h2>Todo integrado en un solo organismo</h2>
+
+  <div class="sabias-que">
+    <span class="etiqueta-mini">La Puya Raimondi</span>
+    <p>En la zona altoandina de Bolivia crece la <strong>Puya Raimondi</strong>, pariente de la piña y conocida como "Reina de los Andes". Crece lentamente durante 80 a 100 años sin reproducirse. Al final de su vida, lanza una inflorescencia gigante de hasta 10 metros con miles de flores, produce millones de semillas... y muere. Una estrategia reproductiva extrema (monocárpica) para asegurar descendencia en un clima hostil.</p>
+  </div>
+
+  <p class="concepto">Las <strong>Angiospermas</strong> (plantas con flores) representan el nivel más alto de organización vegetal: aquí se integran los tres sistemas de tejidos que ya conoces (Epidérmico, Fundamental y Vascular) en órganos especializados.</p>
+
+  <div class="grid-organos">
+    <div class="tarjeta-organo vegetativo"><div class="icono">🌱</div><h4>Sistema Radicular</h4><p>Anclaje y absorción de agua y sales minerales.</p></div>
+    <div class="tarjeta-organo vegetativo"><div class="icono">🌾</div><h4>Tallo</h4><p>Sostiene hojas y flores; conduce entre raíz y hojas.</p></div>
+    <div class="tarjeta-organo vegetativo"><div class="icono">🍃</div><h4>Hojas</h4><p>Órganos laminares fotosintéticos, gran superficie para captar luz.</p></div>
+    <div class="tarjeta-organo reproductivo"><div class="icono">🌸</div><h4>Flor</h4><p><span class="termino" data-def="Verticilo masculino de la flor: conjunto de estambres, que producen el polen.">Androceo</span> (masculino) + <span class="termino" data-def="Verticilo femenino de la flor: pistilo, que contiene los óvulos.">Gineceo</span> (femenino). Facilita la polinización.</p></div>
+    <div class="tarjeta-organo reproductivo"><div class="icono">🍎</div><h4>Fruto</h4><p>Ovario maduro. Protege y dispersa las semillas.</p></div>
+    <div class="tarjeta-organo reproductivo"><div class="icono">🌰</div><h4>Semilla</h4><p>Contiene el embrión en latencia y sus reservas nutritivas.</p></div>
+  </div>
+
+  <p class="concepto">Cada uno de estos órganos existe gracias a lo que ya viste: la <strong>epidermis</strong> los protege, el <strong>parénquima y los tejidos de sostén</strong> les dan forma y resistencia, el <strong>xilema y el floema</strong> los conectan, y los <strong>meristemos</strong> permitieron que crecieran hasta aquí.</p>
+
+  <div class="chequeo">
+    <p class="pregunta-reflexiva">💭 La Puya Raimondi invierte 80-100 años en crecer y solo se reproduce una vez. ¿Qué tejido crees que fue el más importante durante todas esas décadas de espera, antes de que apareciera la primera flor?</p>
+    <button class="verRespuesta" data-target="r6">Ver una posible respuesta</button>
+    <p class="respuesta-reflexiva" id="r6">Los meristemos apicales y laterales: son los que permitieron ese crecimiento lento y sostenido durante casi un siglo, acumulando reservas en el parénquima, antes de que la planta "decidiera" invertir todo en una sola inflorescencia gigante.</p>
+  </div>
+</section>
+
+<section class="pantalla" id="s7" data-index="7">
+  <div class="cierre-titulo">
+    <div class="icono-final">🌳</div>
+    <h2>Tu planta ya está completa</h2>
+  </div>
+  <p class="mensaje-cierre">Recorriste los tres sistemas de tejidos, los meristemos y la estructura de una angiosperma. Cada capa que se fue formando en la planta de la esquina representa un concepto que ya manejas.</p>
+
+  <div class="caja-diagrama">
+    <div class="titulo-diagrama">Mapa del tema — completo</div>
+    <svg viewBox="0 0 320 200" xmlns="http://www.w3.org/2000/svg">
+      <g stroke="#B8B4E8" stroke-width="2" fill="none">
+        <line x1="160" y1="34" x2="43" y2="80"/>
+        <line x1="160" y1="34" x2="121" y2="80"/>
+        <line x1="160" y1="34" x2="199" y2="80"/>
+        <line x1="160" y1="34" x2="277" y2="80"/>
+        <line x1="43" y1="104" x2="160" y2="166"/>
+        <line x1="121" y1="104" x2="160" y2="166"/>
+        <line x1="199" y1="104" x2="160" y2="166"/>
+        <line x1="277" y1="104" x2="160" y2="166"/>
+      </g>
+      <rect x="105" y="10" width="110" height="26" rx="13" fill="#534AB7"/>
+      <text x="160" y="27" text-anchor="middle" fill="#fff" font-size="10" font-weight="700" font-family="Poppins, sans-serif">TEJIDOS VEGETALES</text>
+
+      <rect x="8" y="80" width="70" height="24" rx="12" fill="#1D9E75"/>
+      <text x="43" y="96" text-anchor="middle" fill="#fff" font-size="8" font-family="Inter, sans-serif">Epidérmico</text>
+
+      <rect x="86" y="80" width="70" height="24" rx="12" fill="#5DCAA5"/>
+      <text x="121" y="96" text-anchor="middle" fill="#26215C" font-size="8" font-family="Inter, sans-serif">Fundamental</text>
+
+      <rect x="164" y="80" width="70" height="24" rx="12" fill="#534AB7"/>
+      <text x="199" y="96" text-anchor="middle" fill="#fff" font-size="8" font-family="Inter, sans-serif">Vascular</text>
+
+      <rect x="242" y="80" width="70" height="24" rx="12" fill="#D4537E"/>
+      <text x="277" y="96" text-anchor="middle" fill="#fff" font-size="8" font-family="Inter, sans-serif">Meristemos</text>
+
+      <rect x="85" y="166" width="150" height="26" rx="13" fill="#D85A30"/>
+      <text x="160" y="183" text-anchor="middle" fill="#fff" font-size="9.5" font-weight="700" font-family="Poppins, sans-serif">✓ ANGIOSPERMA</text>
+    </svg>
+  </div>
+
+  <div class="aviso-siguiente">
+    📋 Las actividades para poner a prueba lo aprendido (quiz y ejercicios) llegarán como el siguiente recurso del curso.
+  </div>
+
+  <footer class="credito">
+    Biología-Geografía · 5° de Secundaria · UE Nuevo Amanecer Boliviano<br>
+    Prof. Franz Vidal Condori M.
+  </footer>
+</section>
+
+</main>
+
+<nav id="navInferior">
+  <button class="nav-btn anterior" id="btnAnterior"><span class="nav-icono">←</span><span>Atrás</span></button>
+  <div>
+    <div id="indicadorSeccion">Sección 1 de 8</div>
+    <div id="puntosProgreso"></div>
+  </div>
+  <button class="nav-btn siguiente" id="btnSiguiente"><span>Siguiente</span><span class="nav-icono">→</span></button>
+</nav>
+
+<script>
+(function(){
+  var secciones = [
+    {id:'s0', label:'Portada'},
+    {id:'s1', label:'1. Organización'},
+    {id:'s2', label:'2. Sist. Epidérmico'},
+    {id:'s3', label:'3. Sist. Fundamental'},
+    {id:'s4', label:'4. Sist. Vascular'},
+    {id:'s5', label:'5. Meristemos'},
+    {id:'s6', label:'6. Angiosperma'},
+    {id:'s7', label:'Cierre'}
+  ];
+  var indice = 0;
+
+  var barraRelleno = document.getElementById('barraProgresoRelleno');
+  var indicador = document.getElementById('indicadorSeccion');
+  var puntosCont = document.getElementById('puntosProgreso');
+  var selector = document.getElementById('selectorSeccion');
+  var btnAnterior = document.getElementById('btnAnterior');
+  var btnSiguiente = document.getElementById('btnSiguiente');
+  var plantaEtiqueta = document.getElementById('plantaEtiqueta');
+  var progresoMiniTexto = document.getElementById('progresoMiniTexto');
+
+  secciones.forEach(function(s, i){
+    var punto = document.createElement('div');
+    punto.className = 'punto';
+    punto.dataset.i = i;
+    puntosCont.appendChild(punto);
+
+    var opt = document.createElement('option');
+    opt.value = i;
+    opt.textContent = s.label;
+    selector.appendChild(opt);
+  });
+
+  var capasPorEtapa = {
+    0: [],
+    1: ['capa-organizacion'],
+    2: ['capa-organizacion','capa-epidermis'],
+    3: ['capa-organizacion','capa-epidermis','capa-fundamental'],
+    4: ['capa-organizacion','capa-epidermis','capa-fundamental','capa-vascular'],
+    5: ['capa-organizacion','capa-epidermis','capa-fundamental','capa-vascular','capa-meristemos'],
+    6: ['capa-organizacion','capa-epidermis','capa-fundamental','capa-vascular','capa-meristemos','capa-flor'],
+    7: ['capa-organizacion','capa-epidermis','capa-fundamental','capa-vascular','capa-meristemos','capa-flor']
+  };
+  var etiquetasPlanta = {
+    0: 'Tu planta va a crecer con cada sección',
+    1: 'Raíz, tallo y hojas — los órganos básicos',
+    2: 'Piel protectora añadida (epidermis)',
+    3: 'Relleno interno — sostén y metabolismo',
+    4: 'Tuberías internas — xilema y floema',
+    5: 'Puntos de crecimiento activos',
+    6: '¡Floreció! Angiosperma completa',
+    7: 'Planta completa 🌳'
+  };
+
+  function actualizarPlanta(i){
+    var activas = capasPorEtapa[i] || [];
+    var grupos = document.querySelectorAll('#plantaSvg .capa');
+    for(var g=0; g<grupos.length; g++){
+      var elemento = grupos[g];
+      var esActiva = false;
+      for(var c=0; c<activas.length; c++){
+        if(elemento.classList.contains(activas[c])){ esActiva = true; break; }
+      }
+      elemento.classList.toggle('visible', esActiva);
+    }
+    plantaEtiqueta.textContent = etiquetasPlanta[i] || '';
+  }
+
+  function mostrarSeccion(i){
+    indice = Math.max(0, Math.min(secciones.length - 1, i));
+    var pantallas = document.querySelectorAll('.pantalla');
+    for(var p=0; p<pantallas.length; p++){ pantallas[p].classList.remove('activa'); }
+    document.getElementById(secciones[indice].id).classList.add('activa');
+
+    var porcentaje = Math.round(indice / (secciones.length - 1) * 100);
+    barraRelleno.style.width = porcentaje + '%';
+    if(progresoMiniTexto){ progresoMiniTexto.textContent = porcentaje + '%'; }
+    indicador.textContent = 'Sección ' + (indice + 1) + ' de ' + secciones.length;
+
+    var puntos = puntosCont.querySelectorAll('.punto');
+    for(var d=0; d<puntos.length; d++){
+      puntos[d].classList.toggle('activo', d === indice);
+      puntos[d].classList.toggle('completado', d < indice);
+    }
+
+    selector.value = indice;
+    btnAnterior.disabled = (indice === 0);
+    if(indice === secciones.length - 1){
+      btnSiguiente.innerHTML = '<span>Fin</span><span class="nav-icono">✓</span>'; 
+      btnSiguiente.disabled = true;
+    } else {
+      btnSiguiente.innerHTML = '<span>Siguiente</span><span class="nav-icono">→</span>'; 
+      btnSiguiente.disabled = false;
+    }
+
+    actualizarPlanta(indice);
+    window.scrollTo({top:0, behavior:'smooth'});
+  }
+
+  btnAnterior.addEventListener('click', function(){ mostrarSeccion(indice - 1); });
+  btnSiguiente.addEventListener('click', function(){ mostrarSeccion(indice + 1); });
+  selector.addEventListener('change', function(e){ mostrarSeccion(parseInt(e.target.value, 10)); });
+
+  var btnComenzar = document.getElementById('btnComenzar');
+  if(btnComenzar){
+    btnComenzar.addEventListener('click', function(){ mostrarSeccion(1); });
+  }
+
+  /* Tooltip de vocabulario */
+  var burbuja = document.getElementById('burbujaTooltip');
+  var terminos = document.querySelectorAll('.termino');
+  for(var t=0; t<terminos.length; t++){
+    terminos[t].addEventListener('click', function(e){
+      e.stopPropagation();
+      var def = this.dataset.def;
+      burbuja.textContent = def;
+      burbuja.style.display = 'block';
+      var r = this.getBoundingClientRect();
+      var left = r.left;
+      if(left + 270 > window.innerWidth){ left = window.innerWidth - 280; }
+      if(left < 10){ left = 10; }
+      burbuja.style.left = left + 'px';
+      burbuja.style.top = (r.top - burbuja.offsetHeight - 14 + window.scrollY) + 'px';
+    });
+  }
+  document.addEventListener('click', function(){ burbuja.style.display = 'none'; });
+
+  /* Chequeos reflexivos */
+  var botonesRespuesta = document.querySelectorAll('.verRespuesta');
+  for(var b=0; b<botonesRespuesta.length; b++){
+    botonesRespuesta[b].addEventListener('click', function(){
+      var target = document.getElementById(this.dataset.target);
+      target.classList.toggle('mostrar');
+      this.textContent = target.classList.contains('mostrar') ? 'Ocultar respuesta' : 'Ver una posible respuesta';
+    });
+  }
+
+  /* Demo "intenta doblar" */
+  var btnCol = document.getElementById('btnColenquima');
+  var btnEscl = document.getElementById('btnEsclerenquima');
+  var resultado = document.getElementById('resultadoDoblar');
+  if(btnCol){
+    btnCol.addEventListener('click', function(){
+      btnCol.classList.remove('animar');
+      void btnCol.offsetWidth;
+      btnCol.classList.add('animar');
+      resultado.textContent = 'Se dobla y vuelve a su forma — es un tejido vivo y flexible, como el cartílago.';
+    });
+  }
+  if(btnEscl){
+    btnEscl.addEventListener('click', function(){
+      btnEscl.classList.remove('animar');
+      void btnEscl.offsetWidth;
+      btnEscl.classList.add('animar');
+      resultado.textContent = 'Se quiebra con un chasquido — es un tejido muerto y rígido, como el hueso.';
+    });
+  }
+
+  /* Planta flotante colapsable */
+  document.getElementById('botonPlanta').addEventListener('click', function(e){
+    e.stopPropagation();
+    document.getElementById('plantaFlotante').classList.toggle('contraida');
+  });
+
+  mostrarSeccion(0);
+})();
+</script>
+</body>
+</html>
