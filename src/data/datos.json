@@ -67,6 +67,16 @@
           "fecha": "2026-08-03",
           "estado": "nuevo",
           "link": "https://biogeo-uenab.pages.dev/tejidos-vegetales-5sec.html"
+        },
+        {
+          "id": "juego-diario-botanico-5to",
+          "categoria": "app",
+          "titulo": "Diario de un Botánico Explorador",
+          "tema": "Tema 6 — Sistemas de tejidos vegetales",
+          "descripcion": "Juego de memoria para repasar jugando los conceptos del Tema 6.",
+          "fecha": "2026-08-03",
+          "estado": "nuevo",
+          "link": "https://biogeo-uenab.pages.dev/diario-botanico-tema6.html"
         }
       ]
     },
