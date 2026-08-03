@@ -30,6 +30,16 @@
           "fecha": "2026-08-02",
           "estado": "nuevo",
           "link": "https://biogeo-uenab.pages.dev/tabla-valencias-2sec-v3.html"
+        },
+        {
+          "id": "app-nomenclatura-oxidos-2do",
+          "categoria": "app",
+          "titulo": "Nomenclatura de Óxidos Metálicos",
+          "tema": "Tradicional, Stock e IUPAC",
+          "descripcion": "Construye la fórmula paso a paso, aprende a nombrarla y practica con el quiz.",
+          "fecha": "2026-08-02",
+          "estado": "nuevo",
+          "link": "https://biogeo-uenab.pages.dev/nomenclatura-oxidos-2sec.html"
         }
       ]
     },
