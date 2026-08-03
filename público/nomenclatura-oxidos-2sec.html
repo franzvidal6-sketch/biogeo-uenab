@@ -1,0 +1,1259 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Nomenclatura de Óxidos Metálicos · 2° Secundaria · BioGeo UENAB</title>
+<meta name="description" content="Aprende paso a paso a formular y nombrar óxidos metálicos en las tres nomenclaturas: tradicional, Stock e IUPAC. Área Biología–Geografía, UE Nuevo Amanecer Boliviano.">
+<meta name="author" content="Prof. Franz Vidal Condori Mamani">
+<meta name="theme-color" content="#26215C">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Nomenclatura de Óxidos Metálicos · 2° Secundaria">
+<meta property="og:description" content="Construye la fórmula, nómbrala en las tres nomenclaturas y practica con el quiz.">
+<meta property="og:locale" content="es_BO">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='22' fill='%2326215C'/><text x='50' y='71' font-size='58' text-anchor='middle' fill='%235DCAA5' font-family='Georgia,serif' font-weight='bold'>O</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --violeta:#534AB7; --violeta-osc:#26215C; --violeta-claro:#EEEDFE;
+  --coral:#D85A30; --verde:#1D9E75; --ambar:#B5701A; --rosa:#D4537E;
+  --oxigeno:#1D9E75;
+  --tinta:#1E1B3A; --gris:#6B6890; --borde:#DAD7F5; --blanco:#FFFFFF;
+  --display:'Poppins','Segoe UI',system-ui,-apple-system,sans-serif;
+  --texto:'Inter','Segoe UI',system-ui,-apple-system,sans-serif;
+  --r:16px; --sombra:0 2px 0 #C9C4EE, 0 6px 18px rgba(38,33,92,.10);
+}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html{-webkit-text-size-adjust:100%}
+html,body{margin:0;padding:0}
+body{font-family:var(--texto);background:var(--violeta-claro);color:var(--tinta);
+  font-size:15px;line-height:1.55;padding-bottom:40px;overflow-x:hidden;
+  -webkit-font-smoothing:antialiased}
+button{font-family:inherit;cursor:pointer;border:none;background:none;color:inherit;font-size:inherit}
+:focus-visible{outline:3px solid var(--coral);outline-offset:2px;border-radius:6px}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important;scroll-behavior:auto!important}}
+
+/* ---------- CABECERA ---------- */
+.hero{background:var(--violeta-osc);position:relative;overflow:hidden;padding:20px 18px 22px;color:#fff}
+.hero svg.malla{position:absolute;inset:0;width:100%;height:100%;opacity:.14}
+.hero-inner{position:relative;z-index:2}
+.eyebrow{display:inline-block;background:var(--verde);color:#fff;font-size:10.5px;font-weight:700;
+  letter-spacing:.10em;text-transform:uppercase;padding:5px 11px;border-radius:999px;margin-bottom:11px}
+.hero h1{font-family:var(--display);font-weight:800;font-size:26px;line-height:1.18;margin:0 0 7px;
+  text-shadow:0 2px 10px rgba(0,0,0,.35);letter-spacing:-.01em}
+.hero h1 span{color:#5DCAA5}
+.hero p{margin:0;font-size:13px;font-weight:500;color:var(--violeta-claro);
+  text-shadow:0 1px 6px rgba(0,0,0,.3);max-width:36em}
+.hero-pie{margin-top:13px;font-size:10.5px;letter-spacing:.06em;text-transform:uppercase;
+  color:rgba(255,255,255,.62);font-weight:600}
+
+/* ---------- PESTAÑAS ---------- */
+.tabs{position:sticky;top:0;z-index:60;background:rgba(238,237,254,.95);backdrop-filter:blur(8px);
+  border-bottom:1px solid var(--borde);display:flex;gap:6px;padding:9px 12px;overflow-x:auto;scrollbar-width:none}
+.tabs::-webkit-scrollbar{display:none}
+.tab{flex:0 0 auto;padding:9px 15px;border-radius:999px;font-weight:700;font-size:13px;color:var(--gris);
+  border:1.5px solid transparent;white-space:nowrap;transition:.15s}
+.tab[aria-selected="true"]{background:var(--violeta);color:#fff;box-shadow:0 2px 8px rgba(83,74,183,.35)}
+.tab:not([aria-selected="true"]):hover{border-color:var(--borde);color:var(--violeta)}
+
+.wrap{max-width:840px;margin:0 auto;padding:16px 14px 0}
+.panel[hidden]{display:none}
+.pista{font-size:12.5px;color:var(--gris);margin:0 2px 14px;line-height:1.5}
+.pista b{color:var(--tinta)}
+
+/* ---------- SELECTOR DE METALES ---------- */
+.selector{background:var(--blanco);border:1px solid var(--borde);border-radius:var(--r);
+  padding:13px;margin-bottom:14px;box-shadow:var(--sombra)}
+.sel-titulo{font-family:var(--display);font-weight:700;font-size:14.5px;color:var(--violeta-osc);margin:0 0 11px}
+.sel-fam{margin-bottom:11px}
+.sel-fam:last-child{margin-bottom:0}
+.sel-fam-nom{font-size:10px;font-weight:700;letter-spacing:.07em;text-transform:uppercase;
+  color:var(--fc);margin-bottom:6px;display:flex;align-items:center;gap:7px}
+.sel-fam-nom i{flex:0 0 auto;width:7px;height:7px;border-radius:50%;background:var(--fc)}
+.sel-fam-val{font-family:var(--display);font-weight:700;color:var(--gris);letter-spacing:0;text-transform:none;font-size:10.5px}
+.sel-chips{display:flex;flex-wrap:wrap;gap:6px}
+.chip-el{padding:8px 13px;border-radius:9px;font-family:var(--display);font-weight:700;font-size:14.5px;
+  background:var(--fc-bg);color:var(--fc);border:1.5px solid transparent;transition:.13s}
+.chip-el:hover{border-color:var(--fc);transform:translateY(-1px)}
+.chip-el[aria-pressed="true"]{background:var(--fc);color:#fff;box-shadow:0 2px 8px rgba(0,0,0,.18)}
+
+/* ---------- MESA DE TRABAJO ---------- */
+.mesa{background:var(--blanco);border:1px solid var(--borde);border-radius:var(--r);
+  padding:16px 14px;box-shadow:var(--sombra);margin-bottom:14px;border-top:5px solid var(--fc,var(--borde))}
+.mesa-vacia{text-align:center;padding:34px 16px;color:var(--gris)}
+.mesa-vacia .ico{font-size:44px;line-height:1;margin-bottom:12px;opacity:.55}
+.mesa-vacia .t{font-family:var(--display);font-weight:700;font-size:17px;color:var(--tinta);margin-bottom:6px}
+.mesa-vacia .s{font-size:13px;max-width:30em;margin:0 auto;line-height:1.5}
+
+.mesa-cab{display:flex;align-items:center;gap:11px;padding-bottom:13px;margin-bottom:14px;
+  border-bottom:1px solid var(--borde);flex-wrap:wrap}
+.mesa-sim{font-family:var(--display);font-weight:800;font-size:30px;line-height:1;color:var(--fc)}
+.mesa-nom{font-family:var(--display);font-weight:700;font-size:18px;flex:1;min-width:100px}
+.mesa-val{background:var(--fc-bg);color:var(--fc);font-family:var(--display);font-weight:700;
+  font-size:12px;padding:4px 10px;border-radius:7px}
+.btn-reinicia{font-size:11.5px;font-weight:700;color:var(--gris);background:var(--violeta-claro);
+  padding:6px 11px;border-radius:8px}
+.btn-reinicia:hover{color:var(--violeta)}
+
+/* ---------- PASOS ---------- */
+.paso{border:1.5px solid var(--borde);border-radius:13px;padding:13px;margin-bottom:10px;
+  background:#FCFBFF;opacity:.42;transition:opacity .3s,border-color .3s,background .3s}
+.paso.viva{opacity:1;border-color:var(--fc);background:var(--fc-bg)}
+.paso.hecho{opacity:1;background:var(--blanco)}
+.paso-t{display:flex;align-items:center;gap:9px;font-family:var(--display);font-weight:700;
+  font-size:12.5px;color:var(--fc);margin-bottom:9px}
+.paso-n{flex:0 0 auto;width:22px;height:22px;border-radius:50%;background:var(--fc);color:#fff;
+  font-size:11.5px;display:flex;align-items:center;justify-content:center}
+.paso-cuerpo{font-size:13.5px;line-height:1.6;color:#3B3760}
+.paso-cuerpo b{color:var(--tinta)}
+.paso-expl{font-size:12px;color:var(--gris);margin-top:7px;line-height:1.5}
+
+/* Pizarra de fórmula */
+.pizarra{background:var(--violeta-osc);border-radius:11px;padding:16px 12px;margin-top:10px;
+  text-align:center;color:#fff;overflow-x:auto}
+.form-q{font-family:var(--display);font-weight:800;font-size:30px;line-height:1.15;
+  display:inline-flex;align-items:baseline;justify-content:center;gap:2px;white-space:nowrap}
+.form-q .met{color:#FF9A6E}
+.form-q .oxi{color:#5DCAA5}
+.form-q .sb{font-size:19px;vertical-align:sub;position:relative;top:.28em}
+.form-q .sp{font-size:15px;position:relative;top:-.62em;margin-left:1px;font-weight:700}
+.form-q .op{color:#B9B3EE;margin:0 9px;font-weight:600;font-size:22px}
+.pizarra-et{font-size:10px;letter-spacing:.09em;text-transform:uppercase;color:#9C95D9;
+  font-weight:700;margin-bottom:9px}
+
+/* Cruce animado — elemento firma */
+.cruce{margin:12px auto 4px;display:block;max-width:260px;width:100%;height:auto}
+.cruce path{stroke-dasharray:120;stroke-dashoffset:120;animation:traza .75s ease-out forwards}
+.cruce path.b{animation-delay:.28s}
+@keyframes traza{to{stroke-dashoffset:0}}
+
+.eleccion{display:flex;gap:8px;flex-wrap:wrap;justify-content:center;margin-top:11px}
+.btn-val{background:var(--fc);color:#fff;font-family:var(--display);font-weight:700;font-size:14px;
+  padding:11px 20px;border-radius:11px;box-shadow:0 3px 0 rgba(0,0,0,.22);transition:.12s}
+.btn-val:active{transform:translateY(2px);box-shadow:0 1px 0 rgba(0,0,0,.22)}
+
+.btn-paso{display:block;width:100%;margin-top:12px;padding:13px;border-radius:12px;
+  background:var(--fc);color:#fff;font-family:var(--display);font-weight:700;font-size:14.5px;
+  box-shadow:0 3px 0 rgba(0,0,0,.22);transition:.12s}
+.btn-paso:active{transform:translateY(2px);box-shadow:0 1px 0 rgba(0,0,0,.22)}
+.btn-paso.suave{background:var(--violeta-claro);color:var(--violeta);box-shadow:0 3px 0 #C9C4EE}
+.btn-paso.suave:active{box-shadow:0 1px 0 #C9C4EE}
+
+/* Panel de las 3 nomenclaturas */
+.tres{background:var(--violeta-claro);border:1.5px solid var(--borde);border-radius:13px;
+  padding:13px;margin-top:11px}
+.tres-t{font-size:10px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;
+  color:var(--violeta);margin-bottom:9px}
+.tres-fila{display:grid;grid-template-columns:78px 1fr;gap:9px;padding:7px 0;align-items:baseline;
+  border-bottom:1px solid #DFDCF7}
+.tres-fila:last-child{border-bottom:none}
+.tres-fila .k{font-size:10.5px;font-weight:700;letter-spacing:.04em;text-transform:uppercase;color:var(--gris)}
+.tres-fila .v{font-family:var(--display);font-weight:700;font-size:14.5px;color:var(--violeta-osc)}
+.tres-fila .v.pend{font-family:var(--texto);font-weight:500;font-size:13px;color:#A9A3CC;font-style:italic}
+
+/* ---------- REFERENCIA ---------- */
+.tarjeta{background:var(--blanco);border:1px solid var(--borde);border-radius:var(--r);
+  padding:16px 14px;box-shadow:var(--sombra);margin-bottom:14px}
+.tarjeta h2{font-family:var(--display);font-weight:700;font-size:17.5px;margin:0 0 4px;color:var(--violeta-osc)}
+.tarjeta .sub{font-size:12.5px;color:var(--gris);margin:0 0 14px}
+.tarjeta p{margin:0 0 11px;font-size:13.5px;color:#3B3760;line-height:1.6}
+
+.prefijos{display:grid;grid-template-columns:repeat(2,1fr);gap:8px}
+@media(min-width:480px){.prefijos{grid-template-columns:repeat(3,1fr)}}
+@media(min-width:700px){.prefijos{grid-template-columns:repeat(5,1fr)}}
+.pref{background:var(--violeta-claro);border:1.5px solid var(--borde);border-radius:11px;
+  padding:11px 7px;text-align:center;transition:.13s}
+.pref:hover{border-color:var(--violeta)}
+.pref .n{font-family:var(--display);font-weight:800;font-size:22px;color:var(--violeta);line-height:1}
+.pref .p{font-family:var(--display);font-weight:700;font-size:13.5px;color:var(--tinta);margin-top:4px}
+.pref.usa{background:#E4F6EF;border-color:#A9E2CE}
+.pref.usa .n{color:var(--verde)}
+
+.tabla-scroll{overflow-x:auto;-webkit-overflow-scrolling:touch;margin-top:4px;
+  border-radius:10px;border:1px solid var(--borde)}
+.tabla-scroll table.ref{margin-top:0}
+table.ref{width:100%;min-width:430px;border-collapse:collapse;margin-top:4px}
+table.ref th:first-child,table.ref td:first-child{padding-left:11px}
+table.ref th:last-child,table.ref td:last-child{padding-right:11px}
+table.ref th{font-size:9.5px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;
+  color:var(--gris);padding:7px 5px;border-bottom:1.5px solid var(--borde);text-align:left}
+table.ref th.c{text-align:center}
+table.ref td{font-size:13px;padding:9px 5px;border-bottom:1px solid #F0EEFB;vertical-align:middle}
+table.ref tr:last-child td{border-bottom:none}
+td.tsim{font-family:var(--display);font-weight:800;font-size:16px;width:14%}
+td.tnom{font-family:var(--display);font-weight:600;font-size:13.5px;color:var(--tinta)}
+td.toso{color:var(--coral);font-weight:600;text-align:center}
+td.tico{color:var(--violeta);font-weight:600;text-align:center}
+
+.aviso{border-radius:12px;padding:12px 14px;font-size:13px;line-height:1.6;margin-top:12px}
+.aviso.verde{background:#E4F6EF;border:1px solid #B9E4D5;border-left:4px solid var(--verde);color:#12603F}
+.aviso.coral{background:#FDEDE7;border:1px solid #F3CDBC;border-left:4px solid var(--coral);color:#7A3417}
+.aviso.ambar{background:#FCF1DE;border:1px solid #EBD4A8;border-left:4px solid var(--ambar);color:#7A4A08}
+.aviso b{font-family:var(--display)}
+
+/* ---------- QUIZ ---------- */
+.marcador{display:flex;justify-content:space-between;align-items:center;margin-bottom:9px;
+  font-size:12px;font-weight:700;color:var(--gris);gap:10px}
+.racha{color:var(--coral);font-family:var(--display)}
+.puntos{font-family:var(--display);font-weight:800;font-size:14px;color:var(--verde)}
+.barra{height:8px;background:var(--borde);border-radius:99px;overflow:hidden;margin-bottom:16px}
+.barra i{display:block;height:100%;background:linear-gradient(90deg,var(--verde),#5DCAA5);
+  border-radius:99px;transition:width .35s}
+.q-tipo{display:inline-block;font-size:10px;font-weight:700;letter-spacing:.07em;text-transform:uppercase;
+  padding:4px 11px;border-radius:999px;margin-bottom:11px;background:var(--violeta-claro);color:var(--violeta)}
+.pregunta{font-family:var(--display);font-weight:700;font-size:17px;line-height:1.35;margin:0 0 6px;
+  color:var(--violeta-osc)}
+.q-formula{background:var(--violeta-osc);border-radius:11px;padding:14px;margin:11px 0 13px;text-align:center}
+.contexto{font-size:12.5px;color:var(--gris);margin:0 0 14px}
+.opciones{display:flex;flex-direction:column;gap:9px}
+.opcion{text-align:left;padding:13px 14px;border-radius:12px;background:var(--blanco);
+  border:2px solid var(--borde);font-size:14.5px;font-weight:600;color:var(--tinta);transition:.13s;
+  display:flex;align-items:center;gap:11px;line-height:1.4}
+.opcion:hover:not(:disabled){border-color:var(--violeta);background:var(--violeta-claro)}
+.opcion:disabled{cursor:default}
+.opcion .letra{flex:0 0 27px;height:27px;border-radius:8px;background:var(--violeta-claro);
+  color:var(--violeta);font-family:var(--display);font-weight:800;font-size:13px;
+  display:flex;align-items:center;justify-content:center}
+.opcion.ok{border-color:var(--verde);background:#E4F6EF;animation:pop .32s}
+.opcion.ok .letra{background:var(--verde);color:#fff}
+.opcion.mal{border-color:var(--rosa);background:#FDECF2;animation:tiembla .32s}
+.opcion.mal .letra{background:var(--rosa);color:#fff}
+@keyframes pop{0%{transform:scale(1)}45%{transform:scale(1.035)}100%{transform:scale(1)}}
+@keyframes tiembla{0%,100%{transform:translateX(0)}25%{transform:translateX(-5px)}75%{transform:translateX(5px)}}
+
+.feedback{margin-top:15px;padding:13px;border-radius:12px;font-size:13.5px;line-height:1.6;animation:sube .28s}
+@keyframes sube{from{opacity:0;transform:translateY(7px)}to{opacity:1;transform:none}}
+.feedback.ok{background:#E4F6EF;border:1px solid #A9E2CE;color:#12603F}
+.feedback.mal{background:#FDECF2;border:1px solid #F2BFD1;color:#8E2549}
+.feedback b{font-family:var(--display)}
+.feedback .mini{margin-top:9px;padding-top:9px;border-top:1px solid rgba(0,0,0,.10);font-size:12.5px}
+.feedback .mini span{display:block;padding:1px 0}
+
+.btn{display:block;width:100%;padding:14px;border-radius:12px;background:var(--coral);color:#fff;
+  font-family:var(--display);font-weight:700;font-size:15px;box-shadow:0 3px 0 #A8401E;transition:.12s}
+.btn:active{transform:translateY(2px);box-shadow:0 1px 0 #A8401E}
+.btn.sec{background:var(--violeta);box-shadow:0 3px 0 #372F86}
+.btn.sec:active{box-shadow:0 1px 0 #372F86}
+.btn.wa{background:var(--verde);box-shadow:0 3px 0 #127554}
+.btn.wa:active{box-shadow:0 1px 0 #127554}
+.btn.gris{background:var(--gris);box-shadow:0 3px 0 #4A486A}
+.btn.gris:active{box-shadow:0 1px 0 #4A486A}
+
+.resultado{text-align:center}
+.puntaje{font-family:var(--display);font-weight:800;font-size:54px;line-height:1;color:var(--violeta);margin:6px 0 2px}
+.puntaje small{font-size:21px;color:var(--gris);font-weight:700}
+.nivel{font-family:var(--display);font-weight:700;font-size:17.5px;margin:10px 0 6px}
+.record{font-size:12.5px;font-weight:700;color:var(--ambar);background:#FCF1DE;
+  border-radius:999px;padding:5px 13px;display:inline-block;margin-bottom:6px}
+.codigo{margin:16px 0;padding:13px;background:var(--violeta-claro);border:1.5px dashed var(--violeta);
+  border-radius:12px;font-family:var(--display);font-weight:800;font-size:19px;color:var(--violeta-osc);
+  letter-spacing:.09em}
+.codigo small{display:block;font-family:var(--texto);font-size:10.5px;font-weight:600;letter-spacing:.06em;
+  text-transform:uppercase;color:var(--gris);margin-bottom:4px}
+.acciones{display:flex;flex-direction:column;gap:9px;margin-top:14px}
+.repaso{margin-top:20px;text-align:left}
+.repaso h3{font-family:var(--display);font-size:14px;margin:0 0 9px;color:var(--violeta-osc)}
+.item{border-left:3px solid var(--rosa);padding:9px 11px;background:#FDF7F9;border-radius:0 9px 9px 0;
+  margin-bottom:8px;font-size:12.5px;line-height:1.55}
+.item b{display:block;color:var(--violeta-osc);margin-bottom:3px;font-family:var(--display)}
+.item.ok{border-color:var(--verde);background:#F3FBF8}
+
+/* Enlace a la app hermana */
+.puente{display:block;background:var(--violeta-osc);color:#fff;border-radius:var(--r);
+  padding:15px 16px;margin-bottom:16px;text-decoration:none;transition:.15s;border:none;width:100%;text-align:left}
+.puente:hover{transform:translateY(-2px);box-shadow:0 8px 22px rgba(38,33,92,.28)}
+.puente .et{font-size:10px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:#5DCAA5}
+.puente .ti{font-family:var(--display);font-weight:700;font-size:15.5px;margin-top:4px}
+.puente .de{font-size:12.5px;color:#B9B3EE;margin-top:3px;line-height:1.45}
+
+.pie{text-align:center;font-size:11px;color:var(--gris);padding:22px 14px 8px;line-height:1.7}
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <svg class="malla" viewBox="0 0 400 200" preserveAspectRatio="xMidYMid slice" aria-hidden="true" focusable="false">
+    <g stroke="#9E97F0" stroke-width="1" fill="none">
+      <path d="M30 40 L90 20 L150 55 L210 30 L270 60 L330 35 L390 65"/>
+      <path d="M20 120 L80 95 L140 130 L200 105 L260 140 L320 110 L380 145"/>
+      <path d="M90 20 L80 95 M150 55 L140 130 M210 30 L200 105 M270 60 L260 140 M330 35 L320 110"/>
+      <path d="M60 175 L120 150 L180 180 L240 155 L300 185 L360 160"/>
+      <path d="M80 95 L120 150 M140 130 L180 180 M200 105 L240 155 M260 140 L300 185"/>
+    </g>
+    <g fill="#C8C3FA">
+      <circle cx="90" cy="20" r="4"/><circle cx="150" cy="55" r="4"/><circle cx="210" cy="30" r="4"/>
+      <circle cx="270" cy="60" r="4"/><circle cx="330" cy="35" r="4"/><circle cx="80" cy="95" r="4"/>
+      <circle cx="140" cy="130" r="4"/><circle cx="200" cy="105" r="4"/><circle cx="260" cy="140" r="4"/>
+      <circle cx="320" cy="110" r="4"/><circle cx="120" cy="150" r="4"/><circle cx="180" cy="180" r="4"/>
+      <circle cx="240" cy="155" r="4"/><circle cx="300" cy="185" r="4"/>
+    </g>
+  </svg>
+  <div class="hero-inner">
+    <span class="eyebrow">Química · 2° de Secundaria</span>
+    <h1>Nomenclatura de <span>Óxidos Metálicos</span></h1>
+    <p>Construye la fórmula paso a paso y aprende a nombrarla en las tres nomenclaturas: tradicional, Stock e IUPAC.</p>
+    <div class="hero-pie">Área Biología–Geografía · UE Nuevo Amanecer Boliviano</div>
+  </div>
+</header>
+
+<nav class="tabs" role="tablist" aria-label="Secciones de la aplicación">
+  <button class="tab" role="tab" id="t-con" aria-selected="true"  aria-controls="p-con">1 · Construir</button>
+  <button class="tab" role="tab" id="t-nom" aria-selected="false" aria-controls="p-nom">2 · Nombrar</button>
+  <button class="tab" role="tab" id="t-ref" aria-selected="false" aria-controls="p-ref">Referencia</button>
+  <button class="tab" role="tab" id="t-qui" aria-selected="false" aria-controls="p-qui">Quiz</button>
+</nav>
+
+<main class="wrap">
+
+  <!-- ============ 1 · CONSTRUIR ============ -->
+  <section class="panel" id="p-con" role="tabpanel" aria-labelledby="t-con">
+    <p class="pista">Un óxido metálico se forma cuando un <b>metal</b> se une al <b>oxígeno</b>. Elige un metal y arma su fórmula paso a paso.</p>
+    <div class="selector" id="sel-con"></div>
+    <div class="mesa" id="mesa-con"></div>
+  </section>
+
+  <!-- ============ 2 · NOMBRAR ============ -->
+  <section class="panel" id="p-nom" role="tabpanel" aria-labelledby="t-nom" hidden>
+    <p class="pista">Ya tienes la fórmula. Ahora aprende a leerla en voz alta: una nomenclatura a la vez, con su regla antes de la respuesta.</p>
+    <div class="selector" id="sel-nom"></div>
+    <div class="mesa" id="mesa-nom"></div>
+  </section>
+
+  <!-- ============ REFERENCIA ============ -->
+  <section class="panel" id="p-ref" role="tabpanel" aria-labelledby="t-ref" hidden>
+
+    <div class="tarjeta">
+      <h2>Prefijos numerales</h2>
+      <p class="sub">Se usan en la nomenclatura IUPAC para indicar cuántos átomos hay de cada elemento.</p>
+      <div class="prefijos" id="lista-pref"></div>
+      <div class="aviso verde">
+        <b>En óxidos metálicos solo aparecen los tres primeros.</b> Como el oxígeno trabaja con −2 y los metales llegan hasta +4, las fórmulas nunca pasan de tres átomos de oxígeno. Los demás prefijos te servirán con los no metales.
+      </div>
+      <div class="aviso coral">
+        <b>El prefijo del metal se omite cuando es uno solo.</b> CaO es <i>monóxido de calcio</i>, no <i>monóxido de monocalcio</i>. El del oxígeno, en cambio, siempre se escribe.
+      </div>
+    </div>
+
+    <div class="tarjeta">
+      <h2>Cuándo se usa –oso y cuándo –ico</h2>
+      <p class="sub">Solo en la nomenclatura tradicional, y solo cuando el metal tiene más de una valencia.</p>
+      <p>Si un metal puede actuar con dos valencias distintas, hay que diferenciar de cuál se está hablando. La <b>menor</b> lleva <b>–oso</b> y la <b>mayor</b> lleva <b>–ico</b>.</p>
+      <div class="tabla-scroll">
+        <table class="ref" id="tabla-osico">
+          <thead>
+            <tr><th colspan="2">Metal</th><th class="c">Valencia menor · –oso</th><th class="c">Valencia mayor · –ico</th></tr>
+          </thead>
+          <tbody></tbody>
+        </table>
+      </div>
+      <div class="aviso ambar">
+        <b>Si el metal tiene una sola valencia, no lleva sufijo.</b> No hay nada que diferenciar, así que se dice directamente <i>óxido de sodio</i>, <i>óxido de calcio</i>, <i>óxido de aluminio</i>. En esos casos la nomenclatura tradicional y la de Stock son idénticas.
+      </div>
+      <div class="aviso coral">
+        <b>El amonio (NH₄⁺) queda fuera.</b> Actúa como un metal de valencia +1 en muchas sales, pero no forma óxido, así que no aparece en esta aplicación.
+      </div>
+    </div>
+
+    <div class="tarjeta">
+      <h2>Las tres nomenclaturas de un vistazo</h2>
+      <p class="sub">El mismo compuesto, Fe₂O₃, dicho de tres maneras.</p>
+      <div class="tres">
+        <div class="tres-t">Fe₂O₃ · hierro con valencia +3</div>
+        <div class="tres-fila"><span class="k">Tradicional</span><span class="v">óxido férrico</span></div>
+        <div class="tres-fila"><span class="k">Stock</span><span class="v">óxido de hierro (III)</span></div>
+        <div class="tres-fila"><span class="k">IUPAC</span><span class="v">trióxido de dihierro</span></div>
+      </div>
+      <div class="aviso verde">
+        <b>Las tres son correctas.</b> La tradicional se apoya en el sufijo, la de Stock escribe la valencia en números romanos, y la IUPAC cuenta los átomos con prefijos. En el examen te pueden pedir cualquiera de ellas.
+      </div>
+    </div>
+
+  </section>
+
+  <!-- ============ QUIZ ============ -->
+  <section class="panel" id="p-qui" role="tabpanel" aria-labelledby="t-qui" hidden>
+
+    <div id="q-inicio">
+      <div class="tarjeta">
+        <h2>Quiz de nomenclatura</h2>
+        <p class="sub">Doce preguntas al azar sobre óxidos metálicos.</p>
+        <p>La mayoría te dará la fórmula para que la nombres; algunas irán al revés, del nombre a la fórmula. Puedes repetirlo las veces que quieras.</p>
+        <div id="mejor-marca"></div>
+        <button class="btn" id="btn-empezar">Empezar el quiz</button>
+      </div>
+      <button class="puente" id="puente-1" type="button">
+        <div class="et">¿Aún no te sabes las valencias?</div>
+        <div class="ti">Tabla de Valencias →</div>
+        <div class="de">Metales, no metales y anfóteros, con modo memoria para practicarlos.</div>
+      </button>
+    </div>
+
+    <div id="q-juego" hidden>
+      <div class="tarjeta">
+        <span class="q-tipo" id="q-etq"></span>
+        <div class="marcador">
+          <span id="m-progreso">Pregunta 1</span>
+          <span class="racha" id="m-racha"></span>
+          <span class="puntos" id="m-puntos">0 pts</span>
+        </div>
+        <div class="barra"><i id="m-barra" style="width:0%"></i></div>
+        <h2 class="pregunta" id="q-texto"></h2>
+        <div id="q-visual"></div>
+        <p class="contexto" id="q-contexto"></p>
+        <div class="opciones" id="q-opciones"></div>
+        <div id="q-feedback"></div>
+        <div id="q-siguiente"></div>
+      </div>
+    </div>
+
+    <div id="q-fin" hidden>
+      <div class="tarjeta resultado">
+        <div class="puntaje" id="r-puntaje">0<small>/12</small></div>
+        <div id="r-record"></div>
+        <div class="nivel" id="r-nivel"></div>
+        <p id="r-mensaje"></p>
+        <div class="codigo" id="r-codigo"><small>Código de verificación</small><span></span></div>
+        <div class="acciones">
+          <button class="btn wa" id="btn-wa">Enviar resultado por WhatsApp</button>
+          <button class="btn sec" id="btn-otra">Jugar otra vez</button>
+          <button class="btn gris" id="btn-practicar">Volver a practicar paso a paso</button>
+        </div>
+        <div class="repaso" id="r-repaso"></div>
+      </div>
+    </div>
+
+  </section>
+
+</main>
+
+<footer class="pie">
+  Prof. Franz Vidal Condori Mamani · Área Biología–Geografía<br>
+  Unidad Educativa Nuevo Amanecer Boliviano · Gestión 2026
+</footer>
+
+<script>
+"use strict";
+
+/* ==========================================================
+   1 · DATOS — metales de la Tabla de Valencias (7 familias)
+   `comun` marca los que realmente se trabajan en 2° de secundaria
+   ========================================================== */
+
+const FAMILIAS = [
+  {fam:"Monovalentes", val:"+1", c:"#D85A30", bg:"#FDEDE7", e:[
+    {s:"Li",n:"Litio",v:[1],comun:true},
+    {s:"Na",n:"Sodio",v:[1],comun:true},
+    {s:"K", n:"Potasio",v:[1],comun:true},
+    {s:"Ag",n:"Plata",v:[1],comun:true},
+    {s:"Rb",n:"Rubidio",v:[1]},
+    {s:"Cs",n:"Cesio",v:[1]},
+    {s:"Fr",n:"Francio",v:[1]}
+  ]},
+  {fam:"Bivalentes", val:"+2", c:"#C43F6B", bg:"#FCEAF1", e:[
+    {s:"Ca",n:"Calcio",v:[2],comun:true},
+    {s:"Mg",n:"Magnesio",v:[2],comun:true},
+    {s:"Ba",n:"Bario",v:[2],comun:true},
+    {s:"Zn",n:"Zinc",v:[2],comun:true},
+    {s:"Be",n:"Berilio",v:[2]},
+    {s:"Sr",n:"Estroncio",v:[2]},
+    {s:"Ra",n:"Radio",v:[2]},
+    {s:"Cd",n:"Cadmio",v:[2]}
+  ]},
+  {fam:"Trivalentes", val:"+3", c:"#7B3FB5", bg:"#F2EAFB", e:[
+    {s:"Al",n:"Aluminio",v:[3],comun:true},
+    {s:"Ga",n:"Galio",v:[3]},
+    {s:"In",n:"Indio",v:[3]},
+    {s:"Sc",n:"Escandio",v:[3]},
+    {s:"Y", n:"Itrio",v:[3]},
+    {s:"La",n:"Lantano",v:[3]},
+    {s:"Ac",n:"Actinio",v:[3]},
+    {s:"Cm",n:"Curio",v:[3]}
+  ]},
+  {fam:"Monobivalentes", val:"+1, +2", c:"#2563C9", bg:"#E7EFFC", e:[
+    {s:"Cu",n:"Cobre",v:[1,2],t:["cuproso","cúprico"],comun:true},
+    {s:"Hg",n:"Mercurio",v:[1,2],t:["mercurioso","mercúrico"],comun:true}
+  ]},
+  {fam:"Monotrivalentes", val:"+1, +3", c:"#0E8A9E", bg:"#E1F4F7", e:[
+    {s:"Au",n:"Oro",v:[1,3],t:["auroso","áurico"],comun:true},
+    {s:"Tl",n:"Talio",v:[1,3],t:["taloso","tálico"]}
+  ]},
+  {fam:"Bitrivalentes", val:"+2, +3", c:"#1D8A3E", bg:"#E4F5E9", e:[
+    {s:"Fe",n:"Hierro",v:[2,3],t:["ferroso","férrico"],comun:true},
+    {s:"Ni",n:"Níquel",v:[2,3],t:["niqueloso","niquélico"],comun:true},
+    {s:"Co",n:"Cobalto",v:[2,3],t:["cobaltoso","cobáltico"],comun:true},
+    {s:"Sm",n:"Samario",v:[2,3],t:["samarioso","samárico"]},
+    {s:"Eu",n:"Europio",v:[2,3],t:["europioso","európico"]}
+  ]},
+  {fam:"Bitetravalentes", val:"+2, +4", c:"#B5701A", bg:"#FCF1DE", e:[
+    {s:"Sn",n:"Estaño",v:[2,4],t:["estannoso","estánnico"],comun:true},
+    {s:"Pb",n:"Plomo",v:[2,4],t:["plumboso","plúmbico"],comun:true},
+    {s:"Pt",n:"Platino",v:[2,4],t:["platinoso","platínico"]},
+    {s:"Pd",n:"Paladio",v:[2,4],t:["paladioso","paládico"]},
+    {s:"Po",n:"Polonio",v:[2,4],t:["polonioso","polónico"]}
+  ]}
+];
+
+const PREFIJOS = ["mono","di","tri","tetra","penta","hexa","hepta","octa","nona","deca"];
+const ROMANOS  = {1:"I",2:"II",3:"III",4:"IV"};
+
+// lista plana
+const METALES = [];
+FAMILIAS.forEach(f => f.e.forEach(el => METALES.push({...el, fam:f.fam, famVal:f.val, c:f.c, bg:f.bg})));
+const COMUNES = METALES.filter(m => m.comun);
+const POLIVALENTES = METALES.filter(m => m.v.length > 1);
+
+/* ==========================================================
+   2 · QUÍMICA
+   ========================================================== */
+
+const $  = s => document.querySelector(s);
+const $$ = s => Array.from(document.querySelectorAll(s));
+
+const mcd = (a,b) => b === 0 ? a : mcd(b, a % b);
+
+/** Cruce de valencias: metal con +v, oxígeno con −2 → M(2) O(v), luego se simplifica */
+function cruzar(v){
+  const bruto = {a:2, b:v};
+  const g = mcd(2, v);
+  return {bruto, simple:{a:2/g, b:v/g}, divisor:g};
+}
+
+const SUBS = "₀₁₂₃₄₅₆₇₈₉";
+const sub  = n => String(n).split("").map(d => SUBS[+d]).join("");
+
+/** Fórmula en texto plano con subíndices Unicode: Fe₂O₃ */
+function formula(sim, v){
+  const {simple} = cruzar(v);
+  return sim + (simple.a > 1 ? sub(simple.a) : "") + "O" + (simple.b > 1 ? sub(simple.b) : "");
+}
+const formulaSinReducir = (sim,v) => sim + sub(2) + "O" + (v > 1 ? sub(v) : "");
+const formulaInvertida  = (sim,v) => sim + (v > 1 ? sub(v) : "") + "O" + sub(2);
+
+/** Fórmula en HTML para la pizarra, con colores por elemento */
+function formulaHTML(sim, v, opts){
+  const o = opts || {};
+  const f = o.bruto ? {a:2, b:v} : cruzar(v).simple;
+  const sA = f.a > 1 ? '<span class="sb">'+f.a+'</span>' : "";
+  const sB = f.b > 1 ? '<span class="sb">'+f.b+'</span>' : "";
+  return '<span class="met">'+sim+'</span>'+sA+'<span class="oxi">O</span>'+sB;
+}
+
+function nombreTradicional(el, v){
+  if(el.v.length === 1) return "óxido de " + el.n.toLowerCase();
+  return "óxido " + (v === Math.min(...el.v) ? el.t[0] : el.t[1]);
+}
+function nombreStock(el, v){
+  if(el.v.length === 1) return "óxido de " + el.n.toLowerCase();
+  return "óxido de " + el.n.toLowerCase() + " (" + ROMANOS[v] + ")";
+}
+function nombreIUPAC(el, v){
+  const {simple} = cruzar(v);
+  const prefO = simple.b === 1 ? "monóxido" : PREFIJOS[simple.b - 1] + "óxido";
+  const prefM = simple.a === 1 ? "" : PREFIJOS[simple.a - 1];
+  return prefO + " de " + prefM + el.n.toLowerCase();
+}
+const NOMBRAR = {
+  trad:  {et:"Tradicional", f:nombreTradicional},
+  stock: {et:"Stock",       f:nombreStock},
+  iupac: {et:"IUPAC",       f:nombreIUPAC}
+};
+
+/* ==========================================================
+   3 · UTILIDADES
+   ========================================================== */
+
+function mezclar(a){
+  const r = a.slice();
+  for(let i=r.length-1;i>0;i--){ const j=Math.floor(Math.random()*(i+1)); [r[i],r[j]]=[r[j],r[i]]; }
+  return r;
+}
+const alAzar = a => a[Math.floor(Math.random()*a.length)];
+
+/** Metal al azar dando mucho más peso a los que se enseñan en clase */
+function metalDeQuiz(){
+  return Math.random() < 0.88 ? alAzar(COMUNES) : alAzar(METALES);
+}
+
+function pintarPizarra(html, etiqueta){
+  return '<div class="pizarra">' +
+         (etiqueta ? '<div class="pizarra-et">'+etiqueta+'</div>' : '') +
+         '<div class="form-q">'+html+'</div></div>';
+}
+
+/* ==========================================================
+   4 · SELECTOR DE METALES (compartido)
+   ========================================================== */
+
+function construirSelector(contId, titulo, alElegir, estado){
+  const cont = $(contId);
+  cont.innerHTML = '<h2 class="sel-titulo">'+titulo+'</h2>';
+  FAMILIAS.forEach(fam => {
+    const bloque = document.createElement("div");
+    bloque.className = "sel-fam";
+    bloque.style.setProperty("--fc", fam.c);
+    bloque.style.setProperty("--fc-bg", fam.bg);
+    bloque.innerHTML = '<div class="sel-fam-nom"><i></i>'+fam.fam+
+                       ' <span class="sel-fam-val">'+fam.val+'</span></div>';
+    const chips = document.createElement("div");
+    chips.className = "sel-chips";
+    fam.e.forEach(el => {
+      const b = document.createElement("button");
+      b.className = "chip-el"; b.type = "button";
+      b.textContent = el.s;
+      b.setAttribute("aria-label", el.n + ", valencia " + fam.val);
+      b.setAttribute("aria-pressed", String(estado.el && estado.el.s === el.s));
+      b.addEventListener("click", () => alElegir(el.s));
+      chips.appendChild(b);
+    });
+    bloque.appendChild(chips);
+    cont.appendChild(bloque);
+  });
+}
+
+/* ==========================================================
+   5 · PANEL 1 — CONSTRUIR
+   ========================================================== */
+
+const con = {el:null, v:null, paso:0};
+
+/** Tras redibujar, devuelve el foco al control que continúa el flujo (accesibilidad por teclado) */
+function enfocar(sel){
+  const e = $(sel);
+  if(e && typeof e.focus === "function") e.focus({preventScroll:true});
+}
+
+function elegirCon(sim){
+  con.el = METALES.find(m => m.s === sim);
+  con.v = con.el.v.length === 1 ? con.el.v[0] : null;
+  con.paso = 1;
+  render(); enfocar("#mesa-con .btn-val, #sig");
+}
+function valCon(v){ con.v = v; con.paso = 2; render(); enfocar("#sig"); }
+function avanzaCon(){ con.paso++; render(); enfocar("#sig, #ir-nombrar"); }
+function reiniciaCon(){ con.el = null; con.v = null; con.paso = 0; render(); }
+
+function pintarConstruir(){
+  construirSelector("#sel-con", "Elige un metal", elegirCon, con);
+  const mesa = $("#mesa-con");
+
+  if(!con.el){
+    mesa.style.removeProperty("--fc");
+    mesa.innerHTML = '<div class="mesa-vacia"><div class="ico" aria-hidden="true">⚗</div>'+
+      '<div class="t">Elige un metal para empezar</div>'+
+      '<div class="s">Toca cualquier símbolo de la lista de arriba y armaremos juntos la fórmula de su óxido.</div></div>';
+    return;
+  }
+
+  const el = con.el;
+  mesa.style.setProperty("--fc", el.c);
+  mesa.style.setProperty("--fc-bg", el.bg);
+  let h = "";
+
+  h += '<div class="mesa-cab">'+
+       '<span class="mesa-sim">'+el.s+'</span>'+
+       '<span class="mesa-nom">'+el.n+'</span>'+
+       '<span class="mesa-val">'+el.v.map(x=>"+"+x).join(", ")+'</span>'+
+       '<button class="btn-reinicia" type="button" id="rc">↺ Cambiar</button></div>';
+
+  // PASO 1 — identificar valencia
+  const c1 = con.paso >= 1 ? (con.paso === 1 ? "viva" : "hecho") : "";
+  h += '<div class="paso '+c1+'"><div class="paso-t"><span class="paso-n">1</span>Identificar la valencia del metal</div>';
+  if(con.paso >= 1){
+    h += '<div class="paso-cuerpo">';
+    if(el.v.length === 1){
+      h += 'El <b>'+el.n+'</b> tiene una sola valencia: <b>+'+el.v[0]+'</b>. No hay nada que elegir.';
+      h += '</div>';
+    } else {
+      if(con.v){
+        h += 'Vas a trabajar con el <b>'+el.n+'</b> usando la valencia <b>+'+con.v+'</b>.';
+        h += '</div>';
+      } else {
+        h += 'El <b>'+el.n+'</b> puede actuar con <b>'+el.v.map(x=>"+"+x).join(" o ")+'</b>. Elige una para continuar:';
+        h += '</div><div class="eleccion">';
+        el.v.forEach(v => { h += '<button class="btn-val" type="button" data-v="'+v+'">Usar +'+v+'</button>'; });
+        h += '</div>';
+      }
+    }
+  }
+  h += '</div>';
+
+  const v = con.v;
+
+  // PASO 2 — escribir con el oxígeno
+  const c2 = con.paso >= 2 ? (con.paso === 2 ? "viva" : "hecho") : "";
+  h += '<div class="paso '+c2+'"><div class="paso-t"><span class="paso-n">2</span>Escribir el metal junto al oxígeno</div>';
+  if(con.paso >= 2 && v){
+    h += '<div class="paso-cuerpo">El metal va primero con su valencia positiva y el oxígeno después. '+
+         'El <b>oxígeno siempre trabaja con −2</b> en los óxidos.</div>';
+    h += pintarPizarra(
+      '<span class="met">'+el.s+'</span><span class="sp met">+'+v+'</span>'+
+      '<span class="op">+</span>'+
+      '<span class="oxi">O</span><span class="sp oxi">−2</span>', "Valencias en su sitio");
+  }
+  h += '</div>';
+
+  // PASO 3 — cruzar
+  const c3 = con.paso >= 3 ? (con.paso === 3 ? "viva" : "hecho") : "";
+  h += '<div class="paso '+c3+'"><div class="paso-t"><span class="paso-n">3</span>Cruzar las valencias</div>';
+  if(con.paso >= 3 && v){
+    h += '<div class="paso-cuerpo">Cada valencia baja como subíndice del <b>otro</b> elemento, y se escribe '+
+         '<b>sin el signo</b>. El 2 del oxígeno pasa al metal, y el +'+v+' del metal pasa al oxígeno.</div>';
+    h += '<svg class="cruce" viewBox="0 0 220 62" aria-hidden="true" focusable="false">'+
+         '<path d="M42 16 C 70 6, 150 44, 178 50" stroke="'+el.c+'" stroke-width="2.5" fill="none" stroke-linecap="round"/>'+
+         '<path class="b" d="M178 16 C 150 6, 70 44, 42 50" stroke="#1D9E75" stroke-width="2.5" fill="none" stroke-linecap="round"/>'+
+         '<circle cx="42" cy="16" r="4" fill="'+el.c+'"/><circle cx="178" cy="50" r="4" fill="'+el.c+'"/>'+
+         '<circle cx="178" cy="16" r="4" fill="#1D9E75"/><circle cx="42" cy="50" r="4" fill="#1D9E75"/>'+
+         '</svg>';
+    h += pintarPizarra(formulaHTML(el.s, v, {bruto:true}), "Resultado del cruce");
+  }
+  h += '</div>';
+
+  // PASO 4 — simplificar
+  const cr = v ? cruzar(v) : null;
+  const c4 = con.paso >= 4 ? (con.paso === 4 ? "viva" : "hecho") : "";
+  h += '<div class="paso '+c4+'"><div class="paso-t"><span class="paso-n">4</span>Simplificar los subíndices</div>';
+  if(con.paso >= 4 && v){
+    if(cr.divisor > 1){
+      h += '<div class="paso-cuerpo">Los subíndices <b>2</b> y <b>'+v+'</b> se pueden dividir entre <b>'+cr.divisor+'</b>. '+
+           'Cuando eso ocurre, hay que simplificar.</div>';
+      h += pintarPizarra(formulaHTML(el.s, v), "Fórmula simplificada");
+      h += '<div class="paso-expl">Un subíndice 1 nunca se escribe: se sobreentiende.</div>';
+    } else {
+      h += '<div class="paso-cuerpo">Los subíndices <b>2</b> y <b>'+v+'</b> no tienen ningún divisor común mayor que 1, '+
+           'así que la fórmula <b>ya está simplificada</b>.</div>';
+      h += pintarPizarra(formulaHTML(el.s, v), "Fórmula final");
+    }
+  }
+  h += '</div>';
+
+  // PASO 5 — compuesto listo
+  const c5 = con.paso >= 5 ? "viva hecho" : "";
+  h += '<div class="paso '+c5+'"><div class="paso-t"><span class="paso-n">5</span>Compuesto formado</div>';
+  if(con.paso >= 5 && v){
+    h += '<div class="paso-cuerpo">Ya tienes el óxido de <b>'+el.n.toLowerCase()+'</b> con valencia <b>+'+v+'</b>. '+
+         'El siguiente paso es aprender a nombrarlo.</div>';
+    h += pintarPizarra(formulaHTML(el.s, v), "Tu compuesto");
+    h += '<button class="btn-paso" type="button" id="ir-nombrar">Nombrar este compuesto →</button>';
+    h += '<button class="btn-paso suave" type="button" id="otro-metal">Construir otro óxido</button>';
+  }
+  h += '</div>';
+
+  if(con.paso < 5){
+    const esperandoValencia = (el.v.length > 1 && !con.v);
+    if(!esperandoValencia) h += '<button class="btn-paso" type="button" id="sig">Siguiente paso →</button>';
+  }
+
+  mesa.innerHTML = h;
+
+  const rc = $("#rc"); if(rc) rc.addEventListener("click", reiniciaCon);
+  const sg = $("#sig"); if(sg) sg.addEventListener("click", avanzaCon);
+  const om = $("#otro-metal"); if(om) om.addEventListener("click", reiniciaCon);
+  $$("#mesa-con .btn-val").forEach(b =>
+    b.addEventListener("click", () => valCon(parseInt(b.dataset.v, 10))));
+  const inb = $("#ir-nombrar");
+  if(inb) inb.addEventListener("click", () => {
+    nom.el = con.el; nom.v = con.v; nom.paso = 1;
+    irA("t-nom");
+  });
+}
+
+/* ==========================================================
+   6 · PANEL 2 — NOMBRAR
+   ========================================================== */
+
+const nom = {el:null, v:null, paso:0};
+
+function elegirNom(sim){
+  nom.el = METALES.find(m => m.s === sim);
+  nom.v = nom.el.v.length === 1 ? nom.el.v[0] : null;
+  nom.paso = 1;
+  render(); enfocar("#mesa-nom .btn-val, #sig-n");
+}
+function valNom(v){ nom.v = v; nom.paso = 2; render(); enfocar("#sig-n"); }
+function avanzaNom(){ nom.paso++; render(); enfocar("#sig-n, #ir-quiz"); }
+function reiniciaNom(){ nom.el = null; nom.v = null; nom.paso = 0; render(); }
+
+function pintarNombrar(){
+  construirSelector("#sel-nom", "Elige un metal para nombrar su óxido", elegirNom, nom);
+  const mesa = $("#mesa-nom");
+
+  if(!nom.el){
+    mesa.style.removeProperty("--fc");
+    mesa.innerHTML = '<div class="mesa-vacia"><div class="ico" aria-hidden="true">🔤</div>'+
+      '<div class="t">Elige un metal para nombrar</div>'+
+      '<div class="s">También puedes venir desde la pestaña <b>Construir</b> y seguir con el compuesto que armaste ahí.</div></div>';
+    return;
+  }
+
+  const el = nom.el;
+  mesa.style.setProperty("--fc", el.c);
+  mesa.style.setProperty("--fc-bg", el.bg);
+  const v = nom.v;
+  const unica = el.v.length === 1;
+  let h = "";
+
+  h += '<div class="mesa-cab">'+
+       '<span class="mesa-sim">'+el.s+'</span>'+
+       '<span class="mesa-nom">'+el.n+'</span>'+
+       '<span class="mesa-val">'+el.v.map(x=>"+"+x).join(", ")+'</span>'+
+       '<button class="btn-reinicia" type="button" id="rn">↺ Cambiar</button></div>';
+
+  if(v) h += pintarPizarra(formulaHTML(el.s, v), "Compuesto a nombrar");
+
+  // PASO 1 — ¿lleva sufijo?
+  const c1 = nom.paso >= 1 ? (nom.paso === 1 ? "viva" : "hecho") : "";
+  h += '<div class="paso '+c1+'"><div class="paso-t"><span class="paso-n">1</span>¿Cuántas valencias tiene el metal?</div>';
+  if(nom.paso >= 1){
+    if(unica){
+      h += '<div class="paso-cuerpo">El <b>'+el.n+'</b> tiene <b>una sola valencia</b> (+'+el.v[0]+'). '+
+           'Como no hay otra con la que confundirla, <b>no lleva sufijo</b>: se dice simplemente '+
+           '<i>óxido de '+el.n.toLowerCase()+'</i>.</div>'+
+           '<div class="paso-expl">Por eso, en metales de valencia única, la nomenclatura tradicional y la de Stock son idénticas.</div>';
+    } else if(v){
+      const menor = v === Math.min(...el.v);
+      h += '<div class="paso-cuerpo">El <b>'+el.n+'</b> tiene <b>dos valencias</b> ('+el.v.map(x=>"+"+x).join(" y ")+'). '+
+           'Estás usando <b>+'+v+'</b>, que es la <b>'+(menor?"menor":"mayor")+'</b>, así que el sufijo será '+
+           '<b>–'+(menor?"oso":"ico")+'</b>.</div>';
+    } else {
+      h += '<div class="paso-cuerpo">El <b>'+el.n+'</b> puede actuar con <b>'+el.v.map(x=>"+"+x).join(" o ")+'</b>. '+
+           'Elige con cuál quieres trabajar:</div><div class="eleccion">';
+      el.v.forEach(x => { h += '<button class="btn-val" type="button" data-v="'+x+'">Usar +'+x+'</button>'; });
+      h += '</div>';
+    }
+  }
+  h += '</div>';
+
+  // PASO 2 — tradicional
+  const c2 = nom.paso >= 2 ? (nom.paso === 2 ? "viva" : "hecho") : "";
+  h += '<div class="paso '+c2+'"><div class="paso-t"><span class="paso-n">2</span>Nomenclatura tradicional</div>';
+  if(nom.paso >= 2 && v){
+    h += '<div class="paso-cuerpo"><b>La regla:</b> se escribe «óxido» seguido del nombre del metal. '+
+         (unica ? 'Si el metal tiene una sola valencia, se usa «de» y el nombre tal cual.'
+                : 'Si tiene dos valencias, se usa la raíz del metal con <b>–oso</b> para la menor y <b>–ico</b> para la mayor.')+
+         '</div>';
+    h += pintarPizarra('<span style="color:#fff">'+nombreTradicional(el, v)+'</span>', "Tradicional");
+  }
+  h += '</div>';
+
+  // PASO 3 — Stock
+  const c3 = nom.paso >= 3 ? (nom.paso === 3 ? "viva" : "hecho") : "";
+  h += '<div class="paso '+c3+'"><div class="paso-t"><span class="paso-n">3</span>Nomenclatura de Stock</div>';
+  if(nom.paso >= 3 && v){
+    h += '<div class="paso-cuerpo"><b>La regla:</b> se escribe «óxido de» y el nombre del metal, '+
+         'con su valencia en <b>números romanos entre paréntesis</b>. '+
+         (unica ? 'Cuando el metal tiene una sola valencia, el paréntesis se omite: no aporta información nueva.'
+                : 'Aquí la valencia es +'+v+', que en romanos es <b>'+ROMANOS[v]+'</b>.')+
+         '</div>';
+    h += pintarPizarra('<span style="color:#fff">'+nombreStock(el, v)+'</span>', "Stock");
+  }
+  h += '</div>';
+
+  // PASO 4 — IUPAC
+  const c4 = nom.paso >= 4 ? (nom.paso === 4 ? "viva" : "hecho") : "";
+  h += '<div class="paso '+c4+'"><div class="paso-t"><span class="paso-n">4</span>Nomenclatura IUPAC</div>';
+  if(nom.paso >= 4 && v){
+    const sp = cruzar(v).simple;
+    h += '<div class="paso-cuerpo"><b>La regla:</b> se cuentan los átomos de la fórmula y se usan prefijos. '+
+         'Aquí hay <b>'+sp.b+'</b> de oxígeno y <b>'+sp.a+'</b> de '+el.n.toLowerCase()+'. '+
+         'El prefijo del oxígeno siempre se escribe; el del metal se omite si es uno solo.</div>';
+    h += pintarPizarra('<span style="color:#fff">'+nombreIUPAC(el, v)+'</span>', "IUPAC");
+    h += '<div class="paso-expl">Fíjate que esta nomenclatura no menciona la valencia: la deduces contando los átomos.</div>';
+  }
+  h += '</div>';
+
+  // PASO 5 — las tres juntas
+  const c5 = nom.paso >= 5 ? "viva hecho" : "";
+  h += '<div class="paso '+c5+'"><div class="paso-t"><span class="paso-n">5</span>Las tres juntas</div>';
+  if(nom.paso >= 5 && v){
+    h += '<div class="tres"><div class="tres-t">'+formula(el.s, v)+' · '+el.n.toLowerCase()+' con valencia +'+v+'</div>'+
+         '<div class="tres-fila"><span class="k">Tradicional</span><span class="v">'+nombreTradicional(el,v)+'</span></div>'+
+         '<div class="tres-fila"><span class="k">Stock</span><span class="v">'+nombreStock(el,v)+'</span></div>'+
+         '<div class="tres-fila"><span class="k">IUPAC</span><span class="v">'+nombreIUPAC(el,v)+'</span></div></div>';
+    if(unica){
+      h += '<div class="aviso verde" style="margin-top:11px"><b>Tradicional y Stock coinciden.</b> '+
+           'Pasa siempre que el metal tiene una sola valencia: no hay nada que diferenciar.</div>';
+    }
+    h += '<button class="btn-paso" type="button" id="ir-quiz">Ponerme a prueba en el quiz →</button>';
+    h += '<button class="btn-paso suave" type="button" id="otro-nom">Nombrar otro óxido</button>';
+  }
+  h += '</div>';
+
+  if(nom.paso < 5){
+    const esperandoValencia = (!unica && !nom.v);
+    if(!esperandoValencia) h += '<button class="btn-paso" type="button" id="sig-n">Siguiente paso →</button>';
+  }
+  h += '<button class="btn-paso suave" type="button" id="ver-ref">Repasar prefijos y sufijos</button>';
+
+  mesa.innerHTML = h;
+
+  const rn = $("#rn"); if(rn) rn.addEventListener("click", reiniciaNom);
+  const sg = $("#sig-n"); if(sg) sg.addEventListener("click", avanzaNom);
+  const on = $("#otro-nom"); if(on) on.addEventListener("click", reiniciaNom);
+  const vr = $("#ver-ref"); if(vr) vr.addEventListener("click", () => irA("t-ref"));
+  const iq = $("#ir-quiz"); if(iq) iq.addEventListener("click", () => irA("t-qui"));
+  $$("#mesa-nom .btn-val").forEach(b =>
+    b.addEventListener("click", () => valNom(parseInt(b.dataset.v, 10))));
+}
+
+/* ==========================================================
+   7 · REFERENCIA
+   ========================================================== */
+
+function pintarReferencia(){
+  const cont = $("#lista-pref");
+  if(!cont.dataset.listo){
+    PREFIJOS.forEach((p,i) => {
+      const d = document.createElement("div");
+      d.className = "pref" + (i < 3 ? " usa" : "");
+      d.innerHTML = '<div class="n">'+(i+1)+'</div><div class="p">'+p+'</div>';
+      cont.appendChild(d);
+    });
+    cont.dataset.listo = "1";
+  }
+
+  const tb = $("#tabla-osico tbody");
+  if(!tb.dataset.listo){
+    POLIVALENTES.filter(m => m.t).forEach(m => {
+      const menor = Math.min(...m.v), mayor = Math.max(...m.v);
+      const tr = document.createElement("tr");
+      tr.innerHTML =
+        '<td class="tsim" style="color:'+m.c+'">'+m.s+'</td>'+
+        '<td class="tnom">'+m.n+'</td>'+
+        '<td class="toso">+'+menor+' · óxido '+m.t[0]+'</td>'+
+        '<td class="tico">+'+mayor+' · óxido '+m.t[1]+'</td>';
+      tb.appendChild(tr);
+    });
+    tb.dataset.listo = "1";
+  }
+}
+
+/* ==========================================================
+   8 · QUIZ
+   ========================================================== */
+
+const TOTAL = 12;
+let banco = [], indice = 0, aciertos = 0, racha = 0, mejorRacha = 0, historial = [];
+
+function opcionesDe(correcta, generador, cantidad){
+  const set = new Set([correcta]);
+  let i = 0;
+  while(set.size < cantidad && i < 500){
+    const c = generador();
+    if(c) set.add(c);
+    i++;
+  }
+  return mezclar(Array.from(set));
+}
+
+/** Nombre IUPAC con un conteo de átomos arbitrario — sirve para fabricar errores creíbles */
+function iupacCon(el, nO, nM){
+  const prefO = nO === 1 ? "monóxido" : PREFIJOS[nO - 1] + "óxido";
+  const prefM = nM === 1 ? "" : PREFIJOS[nM - 1];
+  return prefO + " de " + prefM + el.n.toLowerCase();
+}
+
+/**
+ * Distractores que corresponden a errores reales de los estudiantes:
+ * confundir una nomenclatura con otra, equivocar el sufijo, contar mal los átomos.
+ */
+function distractoresNombre(el, v, clave){
+  const out = [];
+  // 1 · las otras dos nomenclaturas del mismo compuesto (¿sabe cuál es cuál?)
+  ["trad","stock","iupac"].forEach(k => { if(k !== clave) out.push(NOMBRAR[k].f(el, v)); });
+
+  if(el.v.length > 1){
+    // 2 · el mismo metal con su otra valencia (¿–oso o –ico? ¿II o III?)
+    el.v.filter(x => x !== v).forEach(x => out.push(NOMBRAR[clave].f(el, x)));
+  } else if(clave !== "iupac"){
+    // 2b · añadir un número romano que no corresponde: error típico en metales de una sola valencia
+    out.push("óxido de " + el.n.toLowerCase() + " (" + ROMANOS[v] + ")");
+  }
+
+  if(clave === "iupac"){
+    // 3 · contar mal los átomos
+    const s = cruzar(v).simple;
+    out.push(iupacCon(el, s.b + 1, s.a));
+    out.push(iupacCon(el, s.b, s.a === 1 ? 2 : 1));
+    if(s.b > 1) out.push(iupacCon(el, s.b - 1, s.a));
+  }
+  return out;
+}
+
+/** Pregunta: fórmula → nombre en una nomenclatura concreta */
+function genFormulaANombre(clave){
+  const el = metalDeQuiz();
+  const v = alAzar(el.v);
+  const cfg = NOMBRAR[clave];
+  const correcta = cfg.f(el, v);
+
+  // primero los distractores por error conceptual, después relleno con otros metales
+  const set = new Set();
+  mezclar(distractoresNombre(el, v, clave)).forEach(x => { if(x !== correcta) set.add(x); });
+  let i = 0;
+  while(set.size < 3 && i < 400){
+    const o = metalDeQuiz();
+    const c = cfg.f(o, alAzar(o.v));
+    if(c !== correcta) set.add(c);
+    i++;
+  }
+
+  return {
+    etiqueta: "De la fórmula al nombre",
+    texto: "¿Cómo se nombra este óxido en nomenclatura " + cfg.et + "?",
+    visual: pintarPizarra(formulaHTML(el.s, v), "Nombra este óxido"),
+    contexto: "📋 El metal es " + el.n.toLowerCase() + " y actúa con valencia +" + v + ".",
+    opciones: mezclar([correcta].concat(Array.from(set).slice(0,3))),
+    correcta,
+    explicacion: explicacionCompleta(el, v)
+  };
+}
+
+/** Pregunta: nombre → fórmula */
+function genNombreAFormula(){
+  const el = metalDeQuiz();
+  const v = alAzar(el.v);
+  const clave = alAzar(["trad","stock","iupac"]);
+  const cfg = NOMBRAR[clave];
+  const correcta = formula(el.s, v);
+
+  const cand = new Set([correcta, formulaInvertida(el.s, v), formulaSinReducir(el.s, v)]);
+  [1,2,3,4].forEach(o => { if(o !== v) cand.add(formula(el.s, o)); });
+  const otros = Array.from(cand).filter(x => x !== correcta).slice(0,3);
+
+  return {
+    etiqueta: "Del nombre a la fórmula",
+    texto: "¿Cuál es la fórmula del " + cfg.f(el, v) + "?",
+    visual: "",
+    contexto: "📋 Recuerda: el oxígeno trabaja con −2 y las valencias se cruzan como subíndices.",
+    opciones: mezclar([correcta].concat(otros)), correcta,
+    explicacion: explicacionCompleta(el, v)
+  };
+}
+
+/** Pregunta: fórmula → valencia usada. Prioriza metales con varias valencias,
+    donde la respuesta solo puede salir de leer la fórmula y no de memorizar el metal. */
+function genValencia(){
+  const poli = POLIVALENTES.filter(m => m.comun);
+  const el = Math.random() < 0.8 && poli.length ? alAzar(poli) : metalDeQuiz();
+  const v = alAzar(el.v);
+  return {
+    etiqueta: "Leer la fórmula",
+    texto: "¿Con qué valencia está actuando el " + el.n.toLowerCase() + " en este óxido?",
+    visual: pintarPizarra(formulaHTML(el.s, v), "Deduce la valencia"),
+    contexto: "📋 Pista: el subíndice del oxígeno viene de la valencia del metal, salvo que se haya simplificado.",
+    opciones: mezclar(["+1","+2","+3","+4"]), correcta: "+" + v,
+    explicacion: explicacionCompleta(el, v)
+  };
+}
+
+function explicacionCompleta(el, v){
+  return el.n + " con valencia +" + v + " forma " + formula(el.s, v) + ".|" +
+         nombreTradicional(el, v) + "|" + nombreStock(el, v) + "|" + nombreIUPAC(el, v);
+}
+
+function armarBanco(){
+  const plan = mezclar([
+    "trad","stock","iupac","trad","stock","iupac","trad","stock",   // 8 · fórmula → nombre
+    "inv","inv",                                                     // 2 · nombre → fórmula
+    "val","val"                                                      // 2 · leer la fórmula
+  ]);
+  const preguntas = [], vistas = new Set();
+  let i = 0;
+  while(preguntas.length < TOTAL && i < 900){
+    i++;
+    const tipo = plan[preguntas.length % plan.length];
+    const q = tipo === "inv" ? genNombreAFormula()
+            : tipo === "val" ? genValencia()
+            : genFormulaANombre(tipo);
+    if(q.opciones.length < 2) continue;
+    const huella = q.texto + "|" + q.correcta;
+    if(vistas.has(huella)) continue;
+    vistas.add(huella);
+    preguntas.push(q);
+  }
+  return preguntas;
+}
+
+function leerRecord(){
+  try{ return parseInt(localStorage.getItem("nomenclatura2sec_mejor") || "0", 10) || 0; }
+  catch(e){ return 0; }
+}
+function guardarRecord(p){
+  try{ if(p > leerRecord()) localStorage.setItem("nomenclatura2sec_mejor", String(p)); }catch(e){}
+}
+function pintarMejorMarca(){
+  const b = leerRecord();
+  $("#mejor-marca").innerHTML = b
+    ? '<div class="aviso ambar" style="margin:0 0 13px"><b>Tu mejor marca: '+b+'/'+TOTAL+'</b> · a ver si la superas.</div>'
+    : "";
+}
+
+function iniciarQuiz(){
+  banco = armarBanco();
+  indice = 0; aciertos = 0; racha = 0; mejorRacha = 0; historial = [];
+  $("#q-inicio").hidden = true;
+  $("#q-fin").hidden = true;
+  $("#q-juego").hidden = false;
+  mostrarPregunta();
+  window.scrollTo({top:0, behavior:"smooth"});
+}
+
+function mostrarPregunta(){
+  const q = banco[indice];
+  $("#q-etq").textContent = q.etiqueta;
+  $("#m-progreso").textContent = "Pregunta " + (indice+1) + " de " + banco.length;
+  $("#m-racha").textContent = racha >= 2 ? "🔥 " + racha + " seguidas" : "";
+  $("#m-puntos").textContent = aciertos + " pts";
+  $("#m-barra").style.width = (indice/banco.length*100) + "%";
+  $("#q-texto").textContent = q.texto;
+  $("#q-visual").innerHTML = q.visual;
+  $("#q-contexto").textContent = q.contexto;
+  $("#q-feedback").innerHTML = "";
+  $("#q-siguiente").innerHTML = "";
+
+  const cont = $("#q-opciones");
+  cont.innerHTML = "";
+  const letras = ["A","B","C","D"];
+  q.opciones.forEach((op,i) => {
+    const b = document.createElement("button");
+    b.className = "opcion"; b.type = "button";
+    b.innerHTML = '<span class="letra">'+letras[i]+'</span><span class="txt">'+op+'</span>';
+    b.addEventListener("click", () => responder(op, b));
+    cont.appendChild(b);
+  });
+}
+
+function responder(elegida, boton){
+  const q = banco[indice];
+  const ok = elegida === q.correcta;
+
+  $$("#q-opciones .opcion").forEach(b => {
+    b.disabled = true;
+    if(b.querySelector(".txt").textContent === q.correcta) b.classList.add("ok");
+  });
+  if(!ok) boton.classList.add("mal");
+
+  if(ok){ aciertos++; racha++; mejorRacha = Math.max(mejorRacha, racha); } else { racha = 0; }
+  $("#m-puntos").textContent = aciertos + " pts";
+  $("#m-racha").textContent = racha >= 2 ? "🔥 " + racha + " seguidas" : "";
+
+  const partes = q.explicacion.split("|");
+  historial.push({texto:q.texto, ok, exp:partes[0]});
+
+  const bonus = ok && racha >= 3 ? ' <b>¡'+racha+' seguidas!</b>' : "";
+  $("#q-feedback").innerHTML =
+    '<div class="feedback '+(ok?"ok":"mal")+'"><b>'+
+    (ok ? "¡Correcto!" : "Respuesta correcta: " + q.correcta) + '</b>'+bonus+'<br>'+partes[0]+
+    '<div class="mini"><span><b>Tradicional:</b> '+partes[1]+'</span>'+
+    '<span><b>Stock:</b> '+partes[2]+'</span>'+
+    '<span><b>IUPAC:</b> '+partes[3]+'</span></div></div>';
+
+  const b = document.createElement("button");
+  b.className = "btn"; b.style.marginTop = "13px";
+  b.textContent = indice === banco.length-1 ? "Ver mi resultado" : "Siguiente pregunta";
+  b.addEventListener("click", () => { indice++; indice >= banco.length ? terminarQuiz() : mostrarPregunta(); });
+  $("#q-siguiente").appendChild(b);
+  b.focus();
+}
+
+function codigoVerificacion(){
+  const base = "NOM" + aciertos + banco.length + mejorRacha + Date.now();
+  let suma = 0;
+  for(let i=0;i<base.length;i++) suma = (suma*31 + base.charCodeAt(i)) % 99991;
+  const letras = "ABCDEFGHJKLMNPQRSTUVWXYZ";
+  let cod = "", n = suma;
+  for(let i=0;i<3;i++){ cod += letras[n % letras.length]; n = Math.floor(n/letras.length); }
+  return "NOM-" + aciertos + banco.length + "-" + cod + (suma % 97).toString().padStart(2,"0");
+}
+
+function terminarQuiz(){
+  const previo = leerRecord();
+  const esRecord = aciertos > previo;
+  guardarRecord(aciertos);
+
+  $("#q-juego").hidden = true;
+  $("#q-fin").hidden = false;
+  $("#m-barra").style.width = "100%";
+  $("#r-puntaje").innerHTML = aciertos + '<small>/' + banco.length + '</small>';
+  $("#r-record").innerHTML = esRecord && aciertos > 0
+    ? '<div class="record">★ ¡Nuevo récord personal!</div>'
+    : (previo ? '<div class="record" style="background:#EEEDFE;color:var(--violeta)">Tu mejor marca: '+previo+'/'+banco.length+'</div>' : '');
+
+  const pct = aciertos / banco.length;
+  let nivel, mensaje, color;
+  if(pct === 1){
+    nivel = "🏆 ¡Nomenclatura dominada!"; color = "var(--verde)";
+    mensaje = "Respondiste todo correctamente. Ya puedes nombrar cualquier óxido metálico en las tres nomenclaturas.";
+  } else if(pct >= .75){
+    nivel = "💪 Muy bien encaminado"; color = "var(--violeta)";
+    mensaje = "Te falta muy poco. Repasa los que fallaste y vuelve a intentarlo para llegar al 12/12.";
+  } else if(pct >= .5){
+    nivel = "📚 Vas por buen camino"; color = "var(--coral)";
+    mensaje = "Ya reconoces varias reglas. Vuelve a la pestaña Nombrar y practica paso a paso los metales que te cuestan.";
+  } else {
+    nivel = "🔁 Toca repasar"; color = "var(--rosa)";
+    mensaje = "Empieza por Construir para dominar la fórmula, sigue con Nombrar y después regresa aquí.";
+  }
+  $("#r-nivel").textContent = nivel;
+  $("#r-nivel").style.color = color;
+  $("#r-mensaje").textContent = mensaje;
+
+  const cod = codigoVerificacion();
+  $("#r-codigo").querySelector("span").textContent = cod;
+
+  const fallos = historial.filter(h => !h.ok);
+  $("#r-repaso").innerHTML = fallos.length
+    ? '<h3>Para repasar (' + fallos.length + ')</h3>' +
+      fallos.map(h => '<div class="item"><b>'+h.texto+'</b>'+h.exp+'</div>').join("")
+    : '<h3>Repaso</h3><div class="item ok"><b>Sin errores</b>Respondiste correctamente las '+banco.length+' preguntas.</div>';
+
+  $("#btn-wa").onclick = () => {
+    const txt = "Quiz Nomenclatura de Oxidos Metalicos - 2do de Secundaria\n" +
+                "Puntaje: " + aciertos + "/" + banco.length + "\n" +
+                "Mejor racha: " + mejorRacha + "\n" +
+                "Codigo: " + cod + "\n" +
+                "Area Biologia-Geografia - UE Nuevo Amanecer Boliviano";
+    window.open("https://wa.me/?text=" + encodeURIComponent(txt), "_blank", "noopener");
+  };
+}
+
+/* ==========================================================
+   9 · NAVEGACIÓN Y ARRANQUE
+   ========================================================== */
+
+function irA(idTab){
+  $$(".tab").forEach(t => {
+    const activo = t.id === idTab;
+    t.setAttribute("aria-selected", String(activo));
+    $("#"+t.getAttribute("aria-controls")).hidden = !activo;
+  });
+  render();
+  window.scrollTo({top:0, behavior:"smooth"});
+}
+
+$$(".tab").forEach(tab => tab.addEventListener("click", () => irA(tab.id)));
+
+function render(){
+  pintarConstruir();
+  pintarNombrar();
+  pintarReferencia();
+  pintarMejorMarca();
+}
+
+$("#btn-empezar").addEventListener("click", iniciarQuiz);
+$("#btn-otra").addEventListener("click", iniciarQuiz);
+$("#btn-practicar").addEventListener("click", () => {
+  $("#q-fin").hidden = true;
+  $("#q-inicio").hidden = false;
+  irA("t-nom");
+});
+$("#puente-1").addEventListener("click", () => {
+  window.open("https://biogeo-uenab.pages.dev/tabla-valencias-2sec-v3", "_blank", "noopener");
+});
+
+render();
+</script>
+</body>
+</html>
