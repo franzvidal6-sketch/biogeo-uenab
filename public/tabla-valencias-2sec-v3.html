@@ -1,0 +1,1223 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Tabla de Valencias · 2° Secundaria · BioGeo UENAB</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --violeta:#534AB7; --violeta-osc:#26215C; --violeta-claro:#EEEDFE;
+  --coral:#D85A30; --verde:#1D9E75; --ambar:#B5701A; --rosa:#D4537E;
+  --tinta:#1E1B3A; --gris:#6B6890; --borde:#DAD7F5; --blanco:#FFFFFF;
+  --display:'Poppins','Segoe UI',system-ui,sans-serif;
+  --texto:'Inter','Segoe UI',system-ui,sans-serif;
+  --r:16px; --sombra:0 2px 0 #C9C4EE, 0 6px 18px rgba(38,33,92,.10);
+}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{margin:0;padding:0}
+body{font-family:var(--texto);background:var(--violeta-claro);color:var(--tinta);
+  font-size:15px;line-height:1.5;padding-bottom:40px;overflow-x:hidden}
+button{font-family:inherit;cursor:pointer;border:none;background:none;color:inherit}
+:focus-visible{outline:3px solid var(--coral);outline-offset:2px;border-radius:6px}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+
+/* HERO */
+.hero{background:var(--violeta-osc);position:relative;overflow:hidden;padding:20px 18px 22px;color:#fff}
+.hero svg.malla{position:absolute;inset:0;width:100%;height:100%;opacity:.14}
+.hero-inner{position:relative;z-index:2}
+.eyebrow{display:inline-block;background:var(--verde);color:#fff;font-size:10.5px;font-weight:700;
+  letter-spacing:.10em;text-transform:uppercase;padding:5px 11px;border-radius:999px;margin-bottom:11px}
+.hero h1{font-family:var(--display);font-weight:800;font-size:27px;line-height:1.15;margin:0 0 7px;
+  text-shadow:0 2px 10px rgba(0,0,0,.35)}
+.hero h1 span{color:#5DCAA5}
+.hero p{margin:0;font-size:13px;font-weight:500;color:var(--violeta-claro);
+  text-shadow:0 1px 6px rgba(0,0,0,.3);max-width:34em}
+.hero-pie{margin-top:13px;font-size:10.5px;letter-spacing:.06em;text-transform:uppercase;
+  color:rgba(255,255,255,.62);font-weight:600}
+
+/* TABS */
+.tabs{position:sticky;top:0;z-index:50;background:rgba(238,237,254,.94);backdrop-filter:blur(8px);
+  border-bottom:1px solid var(--borde);display:flex;gap:6px;padding:9px 12px;overflow-x:auto;scrollbar-width:none}
+.tabs::-webkit-scrollbar{display:none}
+.tab{flex:0 0 auto;padding:9px 15px;border-radius:999px;font-weight:700;font-size:13px;color:var(--gris);
+  border:1.5px solid transparent;white-space:nowrap;transition:.15s}
+.tab[aria-selected="true"]{background:var(--violeta);color:#fff;box-shadow:0 2px 8px rgba(83,74,183,.35)}
+.tab:not([aria-selected="true"]):hover{border-color:var(--borde);color:var(--violeta)}
+
+.wrap{max-width:860px;margin:0 auto;padding:16px 14px 0}
+.panel[hidden]{display:none}
+
+/* BARRA DE HERRAMIENTAS */
+.herramientas{background:var(--blanco);border:1px solid var(--borde);border-radius:var(--r);
+  padding:11px;margin-bottom:12px;box-shadow:var(--sombra)}
+.buscador{display:flex;align-items:center;gap:7px;background:var(--violeta-claro);
+  border-radius:10px;padding:9px 11px;margin-bottom:10px}
+.buscador input{border:none;background:none;outline:none;width:100%;font-family:inherit;
+  font-size:14px;color:var(--tinta);font-weight:500}
+.mem-titulo{font-size:11px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;
+  color:var(--gris);margin-bottom:7px}
+.mem-fila{display:flex;gap:7px;flex-wrap:wrap}
+.mem-btn{flex:1 1 auto;min-width:96px;padding:10px 8px;border-radius:10px;font-size:12.5px;
+  font-weight:700;background:var(--violeta-claro);color:var(--violeta);border:1.5px solid var(--borde);
+  transition:.15s;text-align:center}
+.mem-btn[aria-pressed="true"]{background:var(--coral);color:#fff;border-color:var(--coral);
+  box-shadow:0 2px 8px rgba(216,90,48,.3)}
+.mem-btn:disabled{opacity:.4;cursor:not-allowed}
+.mem-nota{font-size:11.5px;color:var(--gris);margin-top:8px;line-height:1.4}
+
+.pista{font-size:12.5px;color:var(--gris);margin:0 2px 14px;line-height:1.5}
+.pista b{color:var(--tinta)}
+
+.aislado{display:flex;align-items:center;justify-content:space-between;gap:10px;
+  background:#FFF3EE;border:1px solid #F3CDBC;border-radius:11px;padding:9px 12px;margin-bottom:13px;
+  font-size:12.5px;font-weight:600;color:#7A3417}
+.aislado button{background:var(--coral);color:#fff;font-weight:700;font-size:11.5px;
+  padding:6px 12px;border-radius:8px}
+
+/* FAMILIAS */
+.familia{margin-bottom:22px}
+.familia-cab{display:flex;align-items:center;gap:9px;margin-bottom:10px;width:100%;
+  padding:9px 12px;border-radius:12px;background:var(--fc-bg);border-left:5px solid var(--fc);
+  text-align:left;transition:.15s}
+.familia-cab:hover{filter:brightness(.97)}
+.familia-nom{font-family:var(--display);font-weight:700;font-size:15.5px;color:var(--fc);flex:1}
+.familia-val{font-family:var(--display);font-weight:800;font-size:13px;color:#fff;
+  background:var(--fc);padding:3px 11px;border-radius:7px;white-space:nowrap}
+.familia-lupa{font-size:13px;color:var(--fc);opacity:.7}
+
+.grilla{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
+@media(min-width:560px){.grilla{grid-template-columns:repeat(3,1fr)}}
+@media(min-width:780px){.grilla{grid-template-columns:repeat(4,1fr)}}
+
+.ficha{background:var(--blanco);border:1px solid var(--borde);border-left:5px solid var(--fc);
+  border-radius:13px;padding:13px 10px 11px;text-align:center;box-shadow:var(--sombra);
+  transition:transform .14s;position:relative;width:100%}
+.ficha:hover{transform:translateY(-2px)}
+.ficha .simbolo{font-family:var(--display);font-weight:800;font-size:29px;line-height:1;
+  color:var(--fc);letter-spacing:-.02em;display:block}
+.ficha .nombre{font-family:var(--display);font-size:15px;font-weight:600;color:var(--tinta);
+  margin-top:6px;line-height:1.25;display:block;min-height:2.5em}
+.ficha .vals{display:flex;flex-wrap:wrap;gap:4px;justify-content:center;margin-top:9px;min-height:22px}
+.chip{font-size:12px;font-weight:700;padding:3px 8px;border-radius:7px;background:var(--fc-bg);
+  color:var(--fc);font-family:var(--display)}
+.tapado{background:#EDEBF8!important;color:transparent!important;position:relative}
+.tapado::after{content:'?';position:absolute;inset:0;display:flex;align-items:center;
+  justify-content:center;color:#A9A3CC;font-family:var(--display);font-weight:800}
+.simbolo.tapado,.nombre.tapado{background:#F3F1FB!important;border-radius:9px}
+.ficha.revelada{box-shadow:0 0 0 2px var(--fc),var(--sombra)}
+.ficha .radical{position:absolute;top:7px;right:7px;font-size:9px;font-weight:700;color:var(--rosa);
+  background:#FBE7EE;padding:2px 6px;border-radius:5px}
+
+/* TARJETAS NO METALES */
+.fam-card{background:var(--blanco);border:1px solid var(--borde);border-left:5px solid var(--fc);
+  border-radius:var(--r);padding:13px;margin-bottom:14px;box-shadow:var(--sombra)}
+.sufijos{display:grid;grid-template-columns:repeat(4,1fr);gap:5px;margin-bottom:12px;
+  background:var(--fc-bg);border-radius:10px;padding:9px 7px}
+.suf{text-align:center}
+.suf .et{font-size:9px;font-weight:700;letter-spacing:.04em;text-transform:uppercase;color:var(--fc);opacity:.85}
+.suf .nu{font-family:var(--display);font-weight:800;font-size:16px;color:var(--fc);margin-top:1px}
+.suf .nu.no{opacity:.3}
+
+table.tab{width:100%;border-collapse:collapse}
+table.tab th{font-size:9.5px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;
+  color:var(--gris);padding:6px 4px;border-bottom:1.5px solid var(--borde);text-align:center}
+table.tab th.izq{text-align:left;padding-left:8px}
+table.tab td{font-size:13px;padding:10px 4px;border-bottom:1px solid #F0EEFB;text-align:center}
+table.tab tr:last-child td{border-bottom:none}
+td.sim{font-family:var(--display);font-weight:800;font-size:18px;color:var(--fc);width:16%}
+td.nom{text-align:left;font-family:var(--display);font-size:14.5px;color:var(--tinta);
+  font-weight:600;padding-left:8px;min-width:105px}
+td.neg{color:var(--verde);font-weight:700;font-family:var(--display);font-size:14px}
+td.pos{color:var(--coral);font-weight:700;font-family:var(--display);font-size:13px}
+td.anfo{color:var(--ambar);font-weight:700;font-family:var(--display);font-size:14px}
+tr.fila{cursor:pointer}
+tr.fila:hover{background:#FAF9FF}
+tr.fila.revelada{box-shadow:inset 3px 0 0 var(--fc)}
+.nota-fam{font-size:11.5px;color:var(--ambar);font-style:italic;margin-top:9px;font-weight:600}
+
+.leyenda{display:flex;gap:14px;flex-wrap:wrap;margin-bottom:13px;font-size:11.5px;font-weight:600}
+.leyenda span{display:flex;align-items:center;gap:5px;color:var(--gris)}
+.leyenda i{width:10px;height:10px;border-radius:50%;display:inline-block}
+
+.nota{background:#FDEDE7;border:1px solid #F3CDBC;border-left:4px solid var(--coral);
+  border-radius:11px;padding:12px 14px;font-size:13px;margin-bottom:18px;color:#7A3417}
+.nota b{font-family:var(--display)}
+.nota.verde{background:#E4F6EF;border-color:#B9E4D5;border-left-color:var(--verde);color:#12603F}
+.nota.ambar{background:#FCF1DE;border-color:#EBD4A8;border-left-color:var(--ambar);color:#7A4A08}
+.vacio{text-align:center;color:var(--gris);font-size:13px;padding:26px 10px}
+
+/* DETALLE */
+.overlay{position:fixed;inset:0;background:rgba(30,27,58,.55);backdrop-filter:blur(3px);
+  z-index:200;display:flex;align-items:center;justify-content:center;padding:18px}
+.overlay[hidden]{display:none}
+.detalle{background:var(--blanco);border-radius:20px;max-width:380px;width:100%;
+  padding:22px 20px;box-shadow:0 20px 50px rgba(0,0,0,.3);max-height:86vh;overflow-y:auto;
+  border-top:6px solid var(--fc)}
+.det-sim{font-family:var(--display);font-weight:800;font-size:52px;line-height:1;color:var(--fc);text-align:center}
+.det-nom{font-family:var(--display);font-weight:700;font-size:21px;text-align:center;margin-top:4px;color:var(--tinta)}
+.det-fam{text-align:center;font-size:12px;font-weight:700;color:var(--fc);background:var(--fc-bg);
+  display:inline-block;padding:4px 12px;border-radius:999px;margin:9px auto 0}
+.det-centro{text-align:center}
+.det-bloque{margin-top:16px;border-top:1px solid var(--borde);padding-top:13px}
+.det-et{font-size:10px;font-weight:700;letter-spacing:.07em;text-transform:uppercase;color:var(--gris);margin-bottom:6px}
+.det-fila{display:flex;justify-content:space-between;gap:10px;font-size:13.5px;padding:5px 0;align-items:baseline}
+.det-fila .k{color:var(--gris);font-weight:600}
+.det-fila .v{font-family:var(--display);font-weight:700;color:var(--tinta);text-align:right}
+.det-cerrar{width:100%;margin-top:18px;padding:12px;border-radius:12px;background:var(--violeta);
+  color:#fff;font-family:var(--display);font-weight:700;font-size:14.5px}
+
+/* QUIZ */
+.tarjeta{background:var(--blanco);border:1px solid var(--borde);border-radius:var(--r);
+  padding:18px 16px;box-shadow:var(--sombra);margin-bottom:14px}
+.tarjeta h2{font-family:var(--display);font-weight:700;font-size:18px;margin:0 0 9px;color:var(--violeta-osc)}
+.tarjeta p{margin:0 0 11px;font-size:13.5px;color:#3B3760}
+
+.modos{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin-top:4px}
+.modo{background:var(--blanco);border:2px solid var(--borde);border-radius:14px;padding:15px 11px;
+  text-align:center;transition:.15s;position:relative;overflow:hidden}
+.modo:hover{transform:translateY(-2px);border-color:var(--mc)}
+.modo .ic{font-size:26px;line-height:1}
+.modo .ti{font-family:var(--display);font-weight:700;font-size:15px;margin-top:7px;color:var(--mc)}
+.modo .su{font-size:11px;color:var(--gris);margin-top:3px;font-weight:600}
+.modo .best{margin-top:8px;font-size:10.5px;font-weight:700;color:var(--mc);
+  background:var(--mc-bg);border-radius:999px;padding:3px 9px;display:inline-block}
+
+.marcador{display:flex;justify-content:space-between;align-items:center;margin-bottom:9px;
+  font-size:12px;font-weight:700;color:var(--gris)}
+.racha{color:var(--coral);font-family:var(--display)}
+.puntos{font-family:var(--display);font-weight:800;font-size:14px;color:var(--verde)}
+.barra{height:8px;background:var(--borde);border-radius:99px;overflow:hidden;margin-bottom:16px}
+.barra i{display:block;height:100%;background:linear-gradient(90deg,var(--verde),#5DCAA5);
+  border-radius:99px;transition:width .35s}
+.etq-modo{display:inline-block;font-size:10.5px;font-weight:700;letter-spacing:.05em;
+  text-transform:uppercase;padding:4px 11px;border-radius:999px;margin-bottom:11px;
+  background:var(--mc-bg);color:var(--mc)}
+
+.pregunta{font-family:var(--display);font-weight:700;font-size:17.5px;line-height:1.35;margin:0 0 6px;
+  color:var(--violeta-osc)}
+.contexto{font-size:12.5px;color:var(--gris);margin:0 0 15px}
+.opciones{display:flex;flex-direction:column;gap:9px}
+.opcion{text-align:left;padding:14px;border-radius:12px;background:var(--blanco);
+  border:2px solid var(--borde);font-size:15px;font-weight:600;color:var(--tinta);transition:.13s;
+  display:flex;align-items:center;gap:11px}
+.opcion:hover:not(:disabled){border-color:var(--violeta);background:var(--violeta-claro)}
+.opcion:disabled{cursor:default}
+.opcion .letra{flex:0 0 27px;height:27px;border-radius:8px;background:var(--violeta-claro);
+  color:var(--violeta);font-family:var(--display);font-weight:800;font-size:13px;
+  display:flex;align-items:center;justify-content:center}
+.opcion.ok{border-color:var(--verde);background:#E4F6EF;animation:pop .32s}
+.opcion.ok .letra{background:var(--verde);color:#fff}
+.opcion.mal{border-color:var(--rosa);background:#FDECF2;animation:tiembla .32s}
+.opcion.mal .letra{background:var(--rosa);color:#fff}
+@keyframes pop{0%{transform:scale(1)}45%{transform:scale(1.035)}100%{transform:scale(1)}}
+@keyframes tiembla{0%,100%{transform:translateX(0)}25%{transform:translateX(-5px)}75%{transform:translateX(5px)}}
+
+.feedback{margin-top:15px;padding:13px;border-radius:12px;font-size:13.5px;line-height:1.55;animation:sube .28s}
+@keyframes sube{from{opacity:0;transform:translateY(7px)}to{opacity:1;transform:none}}
+.feedback.ok{background:#E4F6EF;border:1px solid #A9E2CE;color:#12603F}
+.feedback.mal{background:#FDECF2;border:1px solid #F2BFD1;color:#8E2549}
+.feedback b{font-family:var(--display)}
+
+.resultado{text-align:center}
+.puntaje{font-family:var(--display);font-weight:800;font-size:54px;line-height:1;color:var(--violeta);margin:6px 0 2px}
+.puntaje small{font-size:21px;color:var(--gris);font-weight:700}
+.nivel{font-family:var(--display);font-weight:700;font-size:17.5px;margin:10px 0 6px}
+.record{font-size:12.5px;font-weight:700;color:var(--ambar);background:#FCF1DE;
+  border-radius:999px;padding:5px 13px;display:inline-block;margin-bottom:6px}
+.codigo{margin:16px 0;padding:13px;background:var(--violeta-claro);border:1.5px dashed var(--violeta);
+  border-radius:12px;font-family:var(--display);font-weight:800;font-size:19px;color:var(--violeta-osc);
+  letter-spacing:.09em}
+.codigo small{display:block;font-family:var(--texto);font-size:10.5px;font-weight:600;letter-spacing:.06em;
+  text-transform:uppercase;color:var(--gris);margin-bottom:4px}
+.btn{display:block;width:100%;padding:14px;border-radius:12px;background:var(--coral);color:#fff;
+  font-family:var(--display);font-weight:700;font-size:15px;box-shadow:0 3px 0 #A8401E;transition:.12s}
+.btn:active{transform:translateY(2px);box-shadow:0 1px 0 #A8401E}
+.btn.sec{background:var(--violeta);box-shadow:0 3px 0 #372F86}
+.btn.sec:active{box-shadow:0 1px 0 #372F86}
+.btn.wa{background:var(--verde);box-shadow:0 3px 0 #127554}
+.btn.wa:active{box-shadow:0 1px 0 #127554}
+.acciones{display:flex;flex-direction:column;gap:9px;margin-top:14px}
+.repaso{margin-top:20px;text-align:left}
+.repaso h3{font-family:var(--display);font-size:14px;margin:0 0 9px;color:var(--violeta-osc)}
+.item{border-left:3px solid var(--rosa);padding:9px 11px;background:#FDF7F9;border-radius:0 9px 9px 0;
+  margin-bottom:8px;font-size:12.5px}
+.item b{display:block;color:var(--violeta-osc);margin-bottom:3px;font-family:var(--display)}
+.item.ok{border-color:var(--verde);background:#F3FBF8}
+.pie{text-align:center;font-size:11px;color:var(--gris);padding:22px 14px 8px;line-height:1.6}
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <svg class="malla" viewBox="0 0 400 200" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+    <g stroke="#9E97F0" stroke-width="1" fill="none">
+      <path d="M30 40 L90 20 L150 55 L210 30 L270 60 L330 35 L390 65"/>
+      <path d="M20 120 L80 95 L140 130 L200 105 L260 140 L320 110 L380 145"/>
+      <path d="M90 20 L80 95 M150 55 L140 130 M210 30 L200 105 M270 60 L260 140 M330 35 L320 110"/>
+      <path d="M60 175 L120 150 L180 180 L240 155 L300 185 L360 160"/>
+      <path d="M80 95 L120 150 M140 130 L180 180 M200 105 L240 155 M260 140 L300 185"/>
+    </g>
+    <g fill="#C8C3FA">
+      <circle cx="90" cy="20" r="4"/><circle cx="150" cy="55" r="4"/><circle cx="210" cy="30" r="4"/>
+      <circle cx="270" cy="60" r="4"/><circle cx="330" cy="35" r="4"/><circle cx="80" cy="95" r="4"/>
+      <circle cx="140" cy="130" r="4"/><circle cx="200" cy="105" r="4"/><circle cx="260" cy="140" r="4"/>
+      <circle cx="320" cy="110" r="4"/><circle cx="120" cy="150" r="4"/><circle cx="180" cy="180" r="4"/>
+      <circle cx="240" cy="155" r="4"/><circle cx="300" cy="185" r="4"/>
+    </g>
+  </svg>
+  <div class="hero-inner">
+    <span class="eyebrow">Química · 2° de Secundaria</span>
+    <h1>Tabla de <span>Valencias</span></h1>
+    <p>Metales, no metales y anfóteros con sus números de oxidación. Tapa lo que quieras practicar y ponte a prueba con el quiz.</p>
+    <div class="hero-pie">Área Biología–Geografía · UE Nuevo Amanecer Boliviano</div>
+  </div>
+</header>
+
+<nav class="tabs" role="tablist" aria-label="Secciones">
+  <button class="tab" role="tab" id="t-met" aria-selected="true" aria-controls="p-met">Metales</button>
+  <button class="tab" role="tab" id="t-nom" aria-selected="false" aria-controls="p-nom">No metales</button>
+  <button class="tab" role="tab" id="t-anf" aria-selected="false" aria-controls="p-anf">Anfóteros</button>
+  <button class="tab" role="tab" id="t-qui" aria-selected="false" aria-controls="p-qui">Quiz</button>
+</nav>
+
+<main class="wrap">
+
+  <section class="panel" id="p-met" role="tabpanel" aria-labelledby="t-met">
+    <div class="herramientas">
+      <label class="buscador"><span aria-hidden="true">🔍</span>
+        <input type="search" id="busca-met" placeholder="Buscar metal, símbolo o familia..." aria-label="Buscar metal"></label>
+      <div class="mem-titulo">Modo memoria · ¿qué quieres tapar?</div>
+      <div class="mem-fila" id="mem-met"></div>
+      <div class="mem-nota" id="nota-met">Sin nada tapado, toca un elemento para ver su ficha completa.</div>
+    </div>
+    <p class="pista">Los metales se agrupan en <b>7 familias</b> y siempre actúan con números de oxidación <b>positivos</b>. Toca el título de una familia para practicar solo esa.</p>
+    <div id="aislado-met"></div>
+    <div id="lista-met"></div>
+    <div class="nota">
+      <b>Nomenclatura tradicional:</b> cuando un metal tiene dos valencias, la <b>menor</b> lleva el sufijo <b>–oso</b> y la <b>mayor</b> el sufijo <b>–ico</b>. Ejemplo: Fe (+2) → ferr<b>oso</b> · Fe (+3) → férr<b>ico</b>.
+    </div>
+  </section>
+
+  <section class="panel" id="p-nom" role="tabpanel" aria-labelledby="t-nom" hidden>
+    <div class="herramientas">
+      <label class="buscador"><span aria-hidden="true">🔍</span>
+        <input type="search" id="busca-nom" placeholder="Buscar no metal, símbolo o familia..." aria-label="Buscar no metal"></label>
+      <div class="mem-titulo">Modo memoria · ¿qué quieres tapar?</div>
+      <div class="mem-fila" id="mem-nom"></div>
+      <div class="mem-nota" id="nota-nom">Sin nada tapado, toca una fila para ver la ficha del elemento.</div>
+    </div>
+    <p class="pista">Cada familia tiene una <b>valencia fija negativa</b> (con metales e hidrógeno) y <b>valencias variables positivas</b> (con oxígeno). La franja de arriba muestra qué sufijo corresponde a cada valencia.</p>
+    <div class="leyenda">
+      <span><i style="background:var(--verde)"></i>Valencia fija negativa</span>
+      <span><i style="background:var(--coral)"></i>Valencias variables positivas</span>
+    </div>
+    <div id="aislado-nom"></div>
+    <div id="lista-nom"></div>
+    <div class="nota verde">
+      <b>Ojo con estos tres:</b> el <b>flúor</b> solo actúa con –1 y no forma óxidos, el <b>oxígeno</b> es el que da las valencias negativas a los demás, y el <b>boro</b> usa únicamente +3 con sufijo –ico.
+    </div>
+  </section>
+
+  <section class="panel" id="p-anf" role="tabpanel" aria-labelledby="t-anf" hidden>
+    <div class="herramientas">
+      <div class="mem-titulo">Modo memoria · ¿qué quieres tapar?</div>
+      <div class="mem-fila" id="mem-anf"></div>
+      <div class="mem-nota" id="nota-anf">Sin nada tapado, toca una fila para ver la ficha del elemento.</div>
+    </div>
+    <p class="pista">Estos elementos tienen <b>doble cara</b>: con valencias bajas se comportan como metal y forman óxidos básicos; con valencias altas se comportan como no metal y forman anhídridos.</p>
+    <div class="leyenda">
+      <span><i style="background:var(--coral)"></i>Como metal</span>
+      <span><i style="background:var(--ambar)"></i>Anfótero</span>
+      <span><i style="background:var(--verde)"></i>Como no metal</span>
+    </div>
+    <div class="fam-card" id="lista-anf" style="--fc:#B5701A;--fc-bg:#FCF1DE"></div>
+    <div class="nota ambar">
+      <b>Ejemplo clave, el cromo:</b> con +3 forma Cr₂O₃, un óxido básico (óxido crómico). Con +6 forma CrO₃, un anhídrido (anhídrido crómico). Mismo elemento, dos comportamientos distintos.
+    </div>
+  </section>
+
+  <section class="panel" id="p-qui" role="tabpanel" aria-labelledby="t-qui" hidden>
+    <div id="q-inicio">
+      <div class="tarjeta">
+        <h2>Quiz de valencias</h2>
+        <p>Elige qué quieres practicar. Las preguntas se arman al azar, así que cada partida es distinta.</p>
+        <div class="modos" id="modos"></div>
+      </div>
+    </div>
+
+    <div id="q-juego" hidden>
+      <div class="tarjeta">
+        <span class="etq-modo" id="q-etq"></span>
+        <div class="marcador">
+          <span id="m-progreso">Pregunta 1</span>
+          <span class="racha" id="m-racha"></span>
+          <span class="puntos" id="m-puntos">0 pts</span>
+        </div>
+        <div class="barra"><i id="m-barra" style="width:0%"></i></div>
+        <h2 class="pregunta" id="q-texto"></h2>
+        <p class="contexto" id="q-contexto"></p>
+        <div class="opciones" id="q-opciones"></div>
+        <div id="q-feedback"></div>
+        <div id="q-siguiente"></div>
+      </div>
+    </div>
+
+    <div id="q-fin" hidden>
+      <div class="tarjeta resultado">
+        <span class="etq-modo" id="r-etq"></span>
+        <div class="puntaje" id="r-puntaje">0<small>/10</small></div>
+        <div id="r-record"></div>
+        <div class="nivel" id="r-nivel"></div>
+        <p id="r-mensaje"></p>
+        <div class="codigo" id="r-codigo"><small>Código de verificación</small><span></span></div>
+        <div class="acciones">
+          <button class="btn wa" id="btn-wa">Enviar resultado por WhatsApp</button>
+          <button class="btn sec" id="btn-otra">Jugar otra vez</button>
+          <button class="btn sec" id="btn-modos" style="background:var(--gris);box-shadow:0 3px 0 #4A486A">Cambiar de modo</button>
+        </div>
+        <div class="repaso" id="r-repaso"></div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<div class="overlay" id="overlay" hidden><div class="detalle" id="detalle"></div></div>
+
+<footer class="pie">
+  Prof. Franz Vidal Condori Mamani · Área Biología–Geografía<br>
+  Unidad Educativa Nuevo Amanecer Boliviano · Gestión 2026
+</footer>
+
+<script>
+"use strict";
+
+/* ==========================================================
+   1 · DATOS (tablas de la Pizarra Digital de Óxidos V8)
+   ========================================================== */
+
+const METALES = [
+  {fam:"Monovalentes", val:"+1", c:"#D85A30", bg:"#FDEDE7", e:[
+    {s:"Li",n:"Litio",v:[1]},{s:"Na",n:"Sodio",v:[1]},{s:"K",n:"Potasio",v:[1]},
+    {s:"Rb",n:"Rubidio",v:[1]},{s:"Cs",n:"Cesio",v:[1]},{s:"Fr",n:"Francio",v:[1]},
+    {s:"Ag",n:"Plata",v:[1],t:["argéntico"]},{s:"NH₄",n:"Amonio",v:[1],radical:true}
+  ]},
+  {fam:"Bivalentes", val:"+2", c:"#C43F6B", bg:"#FCEAF1", e:[
+    {s:"Be",n:"Berilio",v:[2]},{s:"Ca",n:"Calcio",v:[2]},{s:"Mg",n:"Magnesio",v:[2]},
+    {s:"Sr",n:"Estroncio",v:[2]},{s:"Ba",n:"Bario",v:[2]},{s:"Ra",n:"Radio",v:[2]},
+    {s:"Zn",n:"Zinc",v:[2]},{s:"Cd",n:"Cadmio",v:[2]}
+  ]},
+  {fam:"Trivalentes", val:"+3", c:"#7B3FB5", bg:"#F2EAFB", e:[
+    {s:"Al",n:"Aluminio",v:[3]},{s:"Ga",n:"Galio",v:[3]},{s:"In",n:"Indio",v:[3]},
+    {s:"Sc",n:"Escandio",v:[3]},{s:"Y",n:"Itrio",v:[3]},{s:"La",n:"Lantano",v:[3]},
+    {s:"Ac",n:"Actinio",v:[3]},{s:"Cm",n:"Curio",v:[3]}
+  ]},
+  {fam:"Monobivalentes", val:"+1, +2", c:"#2563C9", bg:"#E7EFFC", e:[
+    {s:"Hg",n:"Mercurio",v:[1,2],t:["mercurioso","mercúrico"]},
+    {s:"Cu",n:"Cobre",v:[1,2],t:["cuproso","cúprico"]}
+  ]},
+  {fam:"Monotrivalentes", val:"+1, +3", c:"#0E8A9E", bg:"#E1F4F7", e:[
+    {s:"Au",n:"Oro",v:[1,3],t:["auroso","áurico"]},
+    {s:"Tl",n:"Talio",v:[1,3],t:["taloso","tálico"]}
+  ]},
+  {fam:"Bitrivalentes", val:"+2, +3", c:"#1D8A3E", bg:"#E4F5E9", e:[
+    {s:"Fe",n:"Hierro",v:[2,3],t:["ferroso","férrico"]},
+    {s:"Ni",n:"Níquel",v:[2,3],t:["niqueloso","niquélico"]},
+    {s:"Co",n:"Cobalto",v:[2,3],t:["cobaltoso","cobáltico"]},
+    {s:"Sm",n:"Samario",v:[2,3]},{s:"Eu",n:"Europio",v:[2,3]}
+  ]},
+  {fam:"Bitetravalentes", val:"+2, +4", c:"#B5701A", bg:"#FCF1DE", e:[
+    {s:"Sn",n:"Estaño",v:[2,4],t:["estannoso","estánnico"]},
+    {s:"Pb",n:"Plomo",v:[2,4],t:["plumboso","plúmbico"]},
+    {s:"Pd",n:"Paladio",v:[2,4]},
+    {s:"Pt",n:"Platino",v:[2,4],t:["platinoso","platínico"]},
+    {s:"Po",n:"Polonio",v:[2,4]}
+  ]}
+];
+
+const NOMETALES = [
+  {fam:"Halógenos", c:"#1D9E75", bg:"#E4F6EF", suf:{hipo:1,oso:3,ico:5,per:7}, e:[
+    {s:"F", n:"Flúor",  fija:-1, var:[]},
+    {s:"Cl",n:"Cloro",  fija:-1, var:[1,3,5,7]},
+    {s:"Br",n:"Bromo",  fija:-1, var:[1,3,5,7]},
+    {s:"I", n:"Yodo",   fija:-1, var:[1,3,5,7]},
+    {s:"At",n:"Astato", fija:-1, var:[1,5]}
+  ], nota:"El flúor es el único que no forma óxidos: solo actúa con −1."},
+  {fam:"Anfígenos", c:"#2563C9", bg:"#E7EFFC", suf:{hipo:2,oso:4,ico:6,per:null}, e:[
+    {s:"O", n:"Oxígeno", fija:-2, var:[2]},
+    {s:"S", n:"Azufre",  fija:-2, var:[2,4,6]},
+    {s:"Se",n:"Selenio", fija:-2, var:[2,4,6]},
+    {s:"Te",n:"Telurio", fija:-2, var:[2,4,6]}
+  ]},
+  {fam:"Nitrogenoides", c:"#7B3FB5", bg:"#F2EAFB", suf:{hipo:null,oso:3,ico:5,per:null}, e:[
+    {s:"N", n:"Nitrógeno", fija:-3, var:[1,2,3,4,5]},
+    {s:"P", n:"Fósforo",   fija:-3, var:[3,5]},
+    {s:"As",n:"Arsénico",  fija:-3, var:[3,5]},
+    {s:"Sb",n:"Antimonio", fija:-3, var:[3,5]},
+    {s:"B", n:"Boro",      fija:null, var:[3], soloIco:true}
+  ], nota:"El boro solo usa +3, con sufijo –ico."},
+  {fam:"Carbonoides", c:"#B5701A", bg:"#FCF1DE", suf:{hipo:null,oso:2,ico:4,per:null}, e:[
+    {s:"C", n:"Carbono", fija:-4, var:[2,4]},
+    {s:"Si",n:"Silicio", fija:-4, var:[4]}
+  ]}
+];
+
+const ANFOTEROS = [
+  {s:"Ti",n:"Titanio",   metal:[2,3], anf:4,    nm:[5]},
+  {s:"V", n:"Vanadio",   metal:[2,3], anf:4,    nm:[5,6]},
+  {s:"Cr",n:"Cromo",     metal:[2,3], anf:4,    nm:[6]},
+  {s:"Mn",n:"Manganeso", metal:[2,3], anf:4,    nm:[6,7]},
+  {s:"Mo",n:"Molibdeno", metal:[2,3], anf:4,    nm:[5,6]},
+  {s:"W", n:"Wolframio", metal:[2,3], anf:4,    nm:[5,6]},
+  {s:"U", n:"Uranio",    metal:[3],   anf:4,    nm:[6]},
+  {s:"Ir",n:"Iridio",    metal:[2,3], anf:4,    nm:[5,6]},
+  {s:"Am",n:"Americio",  metal:[3],   anf:4,    nm:[6]},
+  {s:"Os",n:"Osmio",     metal:[2,3], anf:4,    nm:[6]},
+  {s:"Bi",n:"Bismuto",   metal:[3],   anf:null, nm:[5]}
+];
+
+/* ==========================================================
+   2 · UTILIDADES
+   ========================================================== */
+
+const $  = s => document.querySelector(s);
+const $$ = s => Array.from(document.querySelectorAll(s));
+
+function mezclar(a){
+  const r = a.slice();
+  for(let i=r.length-1;i>0;i--){ const j=Math.floor(Math.random()*(i+1)); [r[i],r[j]]=[r[j],r[i]]; }
+  return r;
+}
+const alAzar = a => a[Math.floor(Math.random()*a.length)];
+const signo  = v => v>0 ? "+"+v : String(v).replace("-","−");
+const listar = a => a.length ? a.map(signo).join(", ") : "—";
+
+const SUBS = "₀₁₂₃₄₅₆₇₈₉";
+const sub = n => String(n).split("").map(d => SUBS[+d]).join("");
+const mcd = (a,b) => b === 0 ? a : mcd(b, a % b);
+
+function formulaOxido(sim, v){
+  const g = mcd(2, v);
+  const a = 2/g, b = v/g;
+  return sim + (a>1 ? sub(a) : "") + "O" + (b>1 ? sub(b) : "");
+}
+const formulaInvertida  = (sim,v) => sim + (v>1?sub(v):"") + "O" + sub(2);
+const formulaSinReducir = (sim,v) => sim + sub(2) + "O" + sub(v);
+
+// listas planas para el quiz (sin radicales)
+const MET_PLANO = [];
+METALES.forEach(f => f.e.forEach(el => {
+  if(!el.radical) MET_PLANO.push({...el, fam:f.fam, famVal:f.val, c:f.c, bg:f.bg, tipo:"met"});
+}));
+const NOM_PLANO = [];
+NOMETALES.forEach(f => f.e.forEach(el =>
+  NOM_PLANO.push({...el, fam:f.fam, suf:f.suf, c:f.c, bg:f.bg, tipo:"nom"})));
+const ANF_PLANO = ANFOTEROS.map(el => ({...el, fam:"Anfóteros", c:"#B5701A", bg:"#FCF1DE", tipo:"anf"}));
+
+const poolDe = m => m==="met" ? MET_PLANO : m==="nom" ? NOM_PLANO : m==="anf" ? ANF_PLANO
+                  : MET_PLANO.concat(NOM_PLANO, ANF_PLANO);
+
+function sufijoDe(el, v){
+  if(el.soloIco) return "–ico";
+  const s = el.suf;
+  if(v === s.hipo) return "hipo–oso";
+  if(v === s.oso)  return "–oso";
+  if(v === s.ico)  return "–ico";
+  if(v === s.per)  return "per–ico";
+  return "–ico";
+}
+
+/* ==========================================================
+   3 · MODO MEMORIA (estado compartido por tabla)
+   ========================================================== */
+
+const OPC_MEM = [
+  {k:"simbolo",  et:"Símbolo"},
+  {k:"nombre",   et:"Nombre"},
+  {k:"valencias",et:"Valencias"}
+];
+
+function crearEstado(pintar, contenedorBtns, notaId){
+  const st = {filtro:"", tapa:{simbolo:false, nombre:false, valencias:false},
+              rev:new Set(), aislada:null, pintar:null};
+  st.pintar = () => pintar(st);
+
+  const cont = $(contenedorBtns);
+  OPC_MEM.forEach(o => {
+    const b = document.createElement("button");
+    b.className = "mem-btn"; b.type = "button";
+    b.dataset.k = o.k;
+    b.setAttribute("aria-pressed","false");
+    b.textContent = "Tapar " + o.et.toLowerCase();
+    b.addEventListener("click", () => {
+      st.tapa[o.k] = !st.tapa[o.k];
+      // símbolo y nombre nunca a la vez: la ficha quedaría vacía
+      if(o.k === "simbolo" && st.tapa.simbolo) st.tapa.nombre = false;
+      if(o.k === "nombre"  && st.tapa.nombre)  st.tapa.simbolo = false;
+      st.rev.clear();
+      actualizarBotones(st, cont, notaId);
+      st.pintar();
+    });
+    cont.appendChild(b);
+  });
+  actualizarBotones(st, cont, notaId);
+  return st;
+}
+
+function actualizarBotones(st, cont, notaId){
+  Array.from(cont.children).forEach(b => {
+    const k = b.dataset.k;
+    b.setAttribute("aria-pressed", String(st.tapa[k]));
+    b.disabled = (k === "simbolo" && st.tapa.nombre) || (k === "nombre" && st.tapa.simbolo);
+  });
+  const activos = OPC_MEM.filter(o => st.tapa[o.k]).map(o => o.et.toLowerCase());
+  $(notaId).textContent = activos.length
+    ? "Estás practicando: " + activos.join(" y ") + ". Toca un elemento para revelar."
+    : "Sin nada tapado, toca un elemento para ver su ficha completa.";
+}
+
+const hayTapa = st => st.tapa.simbolo || st.tapa.nombre || st.tapa.valencias;
+const oculto  = (st, s) => hayTapa(st) && !st.rev.has(s);
+
+function alTocar(st, el, extra){
+  if(hayTapa(st)){
+    st.rev.has(el.s) ? st.rev.delete(el.s) : st.rev.add(el.s);
+    st.pintar();
+  } else {
+    abrirDetalle(el, extra);
+  }
+}
+
+function barraAislada(id, st, nombre){
+  const c = $(id);
+  if(!st.aislada){ c.innerHTML = ""; return; }
+  c.innerHTML = '<div class="aislado"><span>Practicando solo: <b>'+nombre+
+                '</b></span><button type="button">Ver todas</button></div>';
+  c.querySelector("button").addEventListener("click", () => {
+    st.aislada = null; st.rev.clear(); st.pintar();
+  });
+}
+
+/* ==========================================================
+   4 · TABLA DE METALES
+   ========================================================== */
+
+function pintarMetales(st){
+  const cont = $("#lista-met");
+  const q = st.filtro.trim().toLowerCase();
+  cont.innerHTML = "";
+  barraAislada("#aislado-met", st, st.aislada);
+  let total = 0;
+
+  METALES.forEach(fam => {
+    if(st.aislada && st.aislada !== fam.fam) return;
+    const elems = fam.e.filter(el => !q ||
+      el.n.toLowerCase().includes(q) || el.s.toLowerCase().includes(q) ||
+      fam.fam.toLowerCase().includes(q) || fam.val.includes(q));
+    if(!elems.length) return;
+    total += elems.length;
+
+    const bloque = document.createElement("div");
+    bloque.className = "familia";
+    bloque.style.setProperty("--fc", fam.c);
+    bloque.style.setProperty("--fc-bg", fam.bg);
+
+    const cab = document.createElement("button");
+    cab.className = "familia-cab"; cab.type = "button";
+    cab.innerHTML = '<span class="familia-nom">'+fam.fam+'</span>'+
+                    '<span class="familia-val">'+fam.val+'</span>'+
+                    '<span class="familia-lupa">'+(st.aislada?"✕":"⌖")+'</span>';
+    cab.addEventListener("click", () => {
+      st.aislada = st.aislada === fam.fam ? null : fam.fam;
+      st.rev.clear(); st.pintar();
+      window.scrollTo({top:0, behavior:"smooth"});
+    });
+    bloque.appendChild(cab);
+
+    const g = document.createElement("div");
+    g.className = "grilla";
+    elems.forEach(el => {
+      const oc = oculto(st, el.s);
+      const b = document.createElement("button");
+      b.className = "ficha" + (hayTapa(st) && st.rev.has(el.s) ? " revelada" : "");
+      b.type = "button";
+      b.setAttribute("aria-label", oc ? el.s + ", elemento tapado, toca para revelar"
+                                      : el.n + ", valencias " + listar(el.v));
+      b.innerHTML =
+        (el.radical ? '<span class="radical">radical</span>' : '') +
+        '<span class="simbolo'+(oc&&st.tapa.simbolo?" tapado":"")+'">'+el.s+'</span>' +
+        '<span class="nombre'+(oc&&st.tapa.nombre?" tapado":"")+'">'+el.n+'</span>' +
+        '<span class="vals">'+ el.v.map(v =>
+          '<span class="chip'+(oc&&st.tapa.valencias?" tapado":"")+'">'+signo(v)+'</span>').join("") +'</span>';
+      b.addEventListener("click", () => alTocar(st, {...el, c:fam.c, bg:fam.bg, fam:fam.fam, famVal:fam.val}, "met"));
+      g.appendChild(b);
+    });
+    bloque.appendChild(g);
+    cont.appendChild(bloque);
+  });
+
+  if(!total) cont.innerHTML = '<p class="vacio">No se encontró ningún metal con ese nombre, símbolo o familia.</p>';
+}
+
+/* ==========================================================
+   5 · TABLA DE NO METALES
+   ========================================================== */
+
+function pintarNoMetales(st){
+  const cont = $("#lista-nom");
+  const q = st.filtro.trim().toLowerCase();
+  cont.innerHTML = "";
+  barraAislada("#aislado-nom", st, st.aislada);
+  let total = 0;
+
+  NOMETALES.forEach(fam => {
+    if(st.aislada && st.aislada !== fam.fam) return;
+    const elems = fam.e.filter(el => !q ||
+      el.n.toLowerCase().includes(q) || el.s.toLowerCase().includes(q) ||
+      fam.fam.toLowerCase().includes(q));
+    if(!elems.length) return;
+    total += elems.length;
+
+    const card = document.createElement("div");
+    card.className = "fam-card";
+    card.style.setProperty("--fc", fam.c);
+    card.style.setProperty("--fc-bg", fam.bg);
+
+    const s = fam.suf;
+    const celda = (et,nu) => '<div class="suf"><div class="et">'+et+'</div><div class="nu'+
+                             (nu===null?' no':'')+'">'+(nu===null?'—':'+'+nu)+'</div></div>';
+
+    const cab = document.createElement("button");
+    cab.className = "familia-cab"; cab.type = "button";
+    cab.style.marginBottom = "11px";
+    cab.innerHTML = '<span class="familia-nom">'+fam.fam+'</span>'+
+                    '<span class="familia-lupa">'+(st.aislada?"✕":"⌖")+'</span>';
+    cab.addEventListener("click", () => {
+      st.aislada = st.aislada === fam.fam ? null : fam.fam;
+      st.rev.clear(); st.pintar();
+      window.scrollTo({top:0, behavior:"smooth"});
+    });
+    card.appendChild(cab);
+
+    const suf = document.createElement("div");
+    suf.className = "sufijos";
+    suf.innerHTML = celda("hipo–oso",s.hipo)+celda("–oso",s.oso)+celda("–ico",s.ico)+celda("per–ico",s.per);
+    card.appendChild(suf);
+
+    const tabla = document.createElement("table");
+    tabla.className = "tab";
+    tabla.innerHTML = '<tr><th>Sím.</th><th class="izq">Nombre</th><th>Val. fija</th><th>Valencias variables</th></tr>';
+    elems.forEach(el => {
+      const oc = oculto(st, el.s);
+      const tr = document.createElement("tr");
+      tr.className = "fila" + (hayTapa(st) && st.rev.has(el.s) ? " revelada" : "");
+      tr.innerHTML =
+        '<td class="sim'+(oc&&st.tapa.simbolo?" tapado":"")+'">'+el.s+'</td>' +
+        '<td class="nom'+(oc&&st.tapa.nombre?" tapado":"")+'">'+el.n+'</td>' +
+        '<td class="neg'+(oc&&st.tapa.valencias?" tapado":"")+'">'+(el.fija===null?"—":signo(el.fija))+'</td>' +
+        '<td class="pos'+(oc&&st.tapa.valencias?" tapado":"")+'">'+listar(el.var)+'</td>';
+      tr.addEventListener("click", () => alTocar(st, {...el, c:fam.c, bg:fam.bg, fam:fam.fam, suf:fam.suf}, "nom"));
+      tabla.appendChild(tr);
+    });
+    card.appendChild(tabla);
+
+    if(fam.nota){
+      const n = document.createElement("div");
+      n.className = "nota-fam";
+      n.textContent = "★ " + fam.nota;
+      card.appendChild(n);
+    }
+    cont.appendChild(card);
+  });
+
+  if(!total) cont.innerHTML = '<p class="vacio">No se encontró ningún no metal con ese nombre, símbolo o familia.</p>';
+}
+
+/* ==========================================================
+   6 · TABLA DE ANFÓTEROS
+   ========================================================== */
+
+function pintarAnfoteros(st){
+  const cont = $("#lista-anf");
+  const tabla = document.createElement("table");
+  tabla.className = "tab";
+  tabla.innerHTML = '<tr><th>Sím.</th><th class="izq">Nombre</th><th>Como metal</th>'+
+                    '<th>Anfótero</th><th>Como no metal</th></tr>';
+
+  ANFOTEROS.forEach(el => {
+    const oc = oculto(st, el.s);
+    const tr = document.createElement("tr");
+    tr.className = "fila" + (hayTapa(st) && st.rev.has(el.s) ? " revelada" : "");
+    tr.innerHTML =
+      '<td class="sim'+(oc&&st.tapa.simbolo?" tapado":"")+'">'+el.s+'</td>' +
+      '<td class="nom'+(oc&&st.tapa.nombre?" tapado":"")+'">'+el.n+'</td>' +
+      '<td class="pos'+(oc&&st.tapa.valencias?" tapado":"")+'">'+listar(el.metal)+'</td>' +
+      '<td class="anfo'+(oc&&st.tapa.valencias?" tapado":"")+'">'+(el.anf?signo(el.anf):"—")+'</td>' +
+      '<td class="neg'+(oc&&st.tapa.valencias?" tapado":"")+'">'+listar(el.nm)+'</td>';
+    tr.addEventListener("click", () => alTocar(st, {...el, c:"#B5701A", bg:"#FCF1DE", fam:"Anfóteros"}, "anf"));
+    tabla.appendChild(tr);
+  });
+
+  cont.innerHTML = "";
+  cont.appendChild(tabla);
+}
+
+/* ==========================================================
+   7 · FICHA DE DETALLE
+   ========================================================== */
+
+function abrirDetalle(el, tipo){
+  const d = $("#detalle");
+  d.style.setProperty("--fc", el.c);
+  d.style.setProperty("--fc-bg", el.bg);
+
+  let cuerpo = "";
+
+  if(tipo === "met"){
+    cuerpo += '<div class="det-bloque"><div class="det-et">Números de oxidación</div>';
+    el.v.forEach(v => {
+      cuerpo += '<div class="det-fila"><span class="k">Valencia '+signo(v)+'</span>'+
+                '<span class="v">'+formulaOxido(el.s, v)+'</span></div>';
+    });
+    cuerpo += '</div>';
+    if(el.t){
+      cuerpo += '<div class="det-bloque"><div class="det-et">Nomenclatura tradicional</div>';
+      if(el.t.length === 1){
+        cuerpo += '<div class="det-fila"><span class="k">Valencia '+signo(el.v[0])+
+                  '</span><span class="v">óxido '+el.t[0]+'</span></div>';
+      } else {
+        cuerpo += '<div class="det-fila"><span class="k">Valencia '+signo(el.v[0])+' (menor)</span>'+
+                  '<span class="v">óxido '+el.t[0]+'</span></div>'+
+                  '<div class="det-fila"><span class="k">Valencia '+signo(el.v[1])+' (mayor)</span>'+
+                  '<span class="v">óxido '+el.t[1]+'</span></div>';
+      }
+      cuerpo += '</div>';
+    }
+    if(el.radical){
+      cuerpo += '<div class="det-bloque"><div class="det-et">Atención</div>'+
+                '<p style="font-size:13px;color:var(--gris);margin:0">El amonio no es un elemento, es un '+
+                '<b>radical</b>: un grupo de átomos que actúa como si fuera un metal de valencia +1.</p></div>';
+    }
+  }
+
+  if(tipo === "nom"){
+    cuerpo += '<div class="det-bloque"><div class="det-et">Valencia fija (con metales)</div>'+
+              '<div class="det-fila"><span class="k">Valencia negativa</span><span class="v">'+
+              (el.fija===null?"—":signo(el.fija))+'</span></div></div>';
+    if(el.var.length){
+      cuerpo += '<div class="det-bloque"><div class="det-et">Valencias con oxígeno</div>';
+      el.var.forEach(v => {
+        cuerpo += '<div class="det-fila"><span class="k">'+signo(v)+' · sufijo '+sufijoDe(el,v)+
+                  '</span><span class="v">'+formulaOxido(el.s, v)+'</span></div>';
+      });
+      cuerpo += '</div>';
+    } else {
+      cuerpo += '<div class="det-bloque"><div class="det-et">Atención</div>'+
+                '<p style="font-size:13px;color:var(--gris);margin:0">El flúor no forma óxidos: '+
+                'es el elemento más electronegativo y siempre actúa con −1.</p></div>';
+    }
+  }
+
+  if(tipo === "anf"){
+    cuerpo += '<div class="det-bloque"><div class="det-et">Como metal · óxido básico</div>';
+    el.metal.forEach(v => {
+      cuerpo += '<div class="det-fila"><span class="k">Valencia '+signo(v)+'</span>'+
+                '<span class="v">'+formulaOxido(el.s, v)+'</span></div>';
+    });
+    cuerpo += '</div><div class="det-bloque"><div class="det-et">Como no metal · anhídrido</div>';
+    el.nm.forEach(v => {
+      cuerpo += '<div class="det-fila"><span class="k">Valencia '+signo(v)+'</span>'+
+                '<span class="v">'+formulaOxido(el.s, v)+'</span></div>';
+    });
+    cuerpo += '</div>';
+    if(el.anf){
+      cuerpo += '<div class="det-bloque"><div class="det-et">Valencia anfótera</div>'+
+                '<div class="det-fila"><span class="k">Valencia '+signo(el.anf)+'</span>'+
+                '<span class="v">'+formulaOxido(el.s, el.anf)+'</span></div></div>';
+    }
+  }
+
+  d.innerHTML =
+    '<div class="det-sim">'+el.s+'</div>'+
+    '<div class="det-nom">'+el.n+'</div>'+
+    '<div class="det-centro"><span class="det-fam">'+el.fam+'</span></div>'+
+    cuerpo +
+    '<button class="det-cerrar" type="button">Cerrar</button>';
+  d.querySelector(".det-cerrar").addEventListener("click", cerrarDetalle);
+  $("#overlay").hidden = false;
+}
+
+function cerrarDetalle(){ $("#overlay").hidden = true; }
+$("#overlay").addEventListener("click", e => { if(e.target.id === "overlay") cerrarDetalle(); });
+document.addEventListener("keydown", e => { if(e.key === "Escape") cerrarDetalle(); });
+
+/* ==========================================================
+   8 · CONEXIÓN DE TABLAS
+   ========================================================== */
+
+const stMet = crearEstado(pintarMetales,   "#mem-met", "#nota-met");
+const stNom = crearEstado(pintarNoMetales, "#mem-nom", "#nota-nom");
+const stAnf = crearEstado(pintarAnfoteros, "#mem-anf", "#nota-anf");
+
+$("#busca-met").addEventListener("input", e => { stMet.filtro = e.target.value; stMet.pintar(); });
+$("#busca-nom").addEventListener("input", e => { stNom.filtro = e.target.value; stNom.pintar(); });
+
+stMet.pintar(); stNom.pintar(); stAnf.pintar();
+
+$$(".tab").forEach(tab => {
+  tab.addEventListener("click", () => {
+    $$(".tab").forEach(t => {
+      const activo = t === tab;
+      t.setAttribute("aria-selected", String(activo));
+      $("#"+t.getAttribute("aria-controls")).hidden = !activo;
+    });
+    window.scrollTo({top:0, behavior:"smooth"});
+  });
+});
+
+/* ==========================================================
+   9 · GENERADORES DE PREGUNTAS
+   ========================================================== */
+
+function opcionesDe(correcta, gen, cant){
+  const set = new Set([correcta]);
+  let i = 0;
+  while(set.size < cant && i < 400){ set.add(gen()); i++; }
+  return mezclar(Array.from(set));
+}
+
+const GEN = [
+
+  // 1 · valencias de un metal
+  {modos:["met","todos"], f: () => {
+    const el = alAzar(MET_PLANO);
+    const c = listar(el.v);
+    return {texto:"¿Con qué número(s) de oxidación actúa el "+el.n+" ("+el.s+")?",
+      contexto:"📋 Vas a escribir la fórmula de su óxido y necesitas la valencia.",
+      opciones:opcionesDe(c, () => listar(alAzar(MET_PLANO).v), 4), correcta:c,
+      explicacion:"El "+el.n+" pertenece a los "+el.fam.toLowerCase()+", así que actúa con "+c+"."};
+  }},
+
+  // 2 · familia de un metal
+  {modos:["met","todos"], f: () => {
+    const el = alAzar(MET_PLANO);
+    return {texto:"¿A qué familia pertenece el "+el.n+" ("+el.s+")?",
+      contexto:"📋 Estás clasificando los metales de la tabla por familias.",
+      opciones:opcionesDe(el.fam, () => alAzar(METALES).fam, 4), correcta:el.fam,
+      explicacion:"El "+el.n+" es de los "+el.fam.toLowerCase()+", con valencia "+el.famVal+"."};
+  }},
+
+  // 3 · símbolo → nombre
+  {modos:["met","nom","anf","todos"], f: m => {
+    const pool = poolDe(m);
+    const el = alAzar(pool);
+    return {texto:"El símbolo "+el.s+" corresponde al elemento:",
+      contexto:"📋 Lees una fórmula química y necesitas identificar el elemento.",
+      opciones:opcionesDe(el.n, () => alAzar(pool).n, 4), correcta:el.n,
+      explicacion:"El símbolo "+el.s+" representa al "+el.n+", de la familia de los "+el.fam.toLowerCase()+"."};
+  }},
+
+  // 4 · nombre → símbolo
+  {modos:["met","nom","anf","todos"], f: m => {
+    const pool = poolDe(m);
+    const el = alAzar(pool);
+    return {texto:"¿Cuál es el símbolo químico del "+el.n+"?",
+      contexto:"📋 Vas a escribir la fórmula y necesitas el símbolo correcto.",
+      opciones:opcionesDe(el.s, () => alAzar(pool).s, 4), correcta:el.s,
+      explicacion:"El "+el.n+" se escribe "+el.s+". La primera letra va en mayúscula y la segunda en minúscula."};
+  }},
+
+  // 5 · metal, no metal o anfótero (solo modo completo)
+  {modos:["todos"], f: () => {
+    const r = Math.random();
+    let el, c;
+    if(r < .4){ el = alAzar(MET_PLANO); c = "Metal"; }
+    else if(r < .78){ el = alAzar(NOM_PLANO); c = "No metal"; }
+    else { el = alAzar(ANF_PLANO); c = "Anfótero"; }
+    return {texto:"El "+el.n+" ("+el.s+") se clasifica como:",
+      contexto:"📋 Debes ubicarlo antes de decidir qué tipo de óxido forma.",
+      opciones:mezclar(["Metal","No metal","Anfótero"]), correcta:c,
+      explicacion: c==="Metal"
+        ? "Es un metal: solo actúa con valencias positivas ("+listar(el.v)+") y forma óxidos básicos."
+        : c==="No metal"
+          ? "Es un no metal de la familia de los "+el.fam.toLowerCase()+": forma anhídridos."
+          : "Es un anfótero: como metal usa "+listar(el.metal)+" y como no metal "+listar(el.nm)+"."};
+  }},
+
+  // 6 · valencia fija negativa
+  {modos:["nom","todos"], f: () => {
+    const el = alAzar(NOM_PLANO.filter(e => e.fija !== null));
+    const c = signo(el.fija);
+    return {texto:"¿Cuál es la valencia fija negativa del "+el.n+" ("+el.s+")?",
+      contexto:"📋 Se combina con un metal, así que usa su valencia negativa.",
+      opciones:mezclar(["−1","−2","−3","−4"]), correcta:c,
+      explicacion:"Todos los "+el.fam.toLowerCase()+" tienen valencia fija "+c+" frente a metales e hidrógeno."};
+  }},
+
+  // 7 · sufijo según la valencia
+  {modos:["nom","todos"], f: () => {
+    const el = alAzar(NOM_PLANO.filter(e => e.var.length >= 2));
+    const v = alAzar(el.var);
+    const c = sufijoDe(el, v);
+    return {texto:"El "+el.n+" actúa con valencia +"+v+". ¿Qué sufijo le corresponde?",
+      contexto:"📋 Estás nombrando el anhídrido con nomenclatura tradicional.",
+      opciones:mezclar(["hipo–oso","–oso","–ico","per–ico"]), correcta:c,
+      explicacion:"En los "+el.fam.toLowerCase()+" la valencia +"+v+" lleva el sufijo "+c+"."};
+  }},
+
+  // 8 · anfóteros: valencias según el papel
+  {modos:["anf","todos"], f: () => {
+    const el = alAzar(ANF_PLANO);
+    const comoMetal = Math.random() < .5;
+    const c = listar(comoMetal ? el.metal : el.nm);
+    const gen = () => { const o = alAzar(ANF_PLANO); return listar(Math.random()<.5 ? o.metal : o.nm); };
+    return {texto:"¿Con qué valencias actúa el "+el.n+" cuando se comporta como "+(comoMetal?"metal":"no metal")+"?",
+      contexto:"📋 Los anfóteros cambian de comportamiento según su valencia.",
+      opciones:opcionesDe(c, gen, 4), correcta:c,
+      explicacion:"El "+el.n+" usa "+listar(el.metal)+" como metal y "+listar(el.nm)+" como no metal"+
+                  (el.anf ? ", con "+signo(el.anf)+" como valencia anfótera." : ".")};
+  }},
+
+  // 9 · anfóteros: ¿metal o no metal con esta valencia?
+  {modos:["anf","todos"], f: () => {
+    const el = alAzar(ANF_PLANO);
+    const comoMetal = Math.random() < .5;
+    const v = alAzar(comoMetal ? el.metal : el.nm);
+    const c = comoMetal ? "Como metal (óxido básico)" : "Como no metal (anhídrido)";
+    return {texto:"El "+el.n+" actúa con valencia +"+v+". ¿Cómo se está comportando?",
+      contexto:"📋 En los anfóteros, las valencias bajas y altas no significan lo mismo.",
+      opciones:mezclar(["Como metal (óxido básico)","Como no metal (anhídrido)"]), correcta:c,
+      explicacion:"El "+el.n+" se comporta como metal con "+listar(el.metal)+
+                  " y como no metal con "+listar(el.nm)+". Con +"+v+" forma "+formulaOxido(el.s,v)+"."};
+  }},
+
+  // 10 · armar la fórmula del óxido
+  {modos:["met","nom","anf","todos"], f: m => {
+    let el, v;
+    if(m === "met"){ el = alAzar(MET_PLANO); v = alAzar(el.v); }
+    else if(m === "nom"){ el = alAzar(NOM_PLANO.filter(e => e.var.length)); v = alAzar(el.var); }
+    else if(m === "anf"){ el = alAzar(ANF_PLANO); v = alAzar(el.metal.concat(el.nm)); }
+    else {
+      const r = Math.random();
+      if(r < .5){ el = alAzar(MET_PLANO); v = alAzar(el.v); }
+      else if(r < .8){ el = alAzar(NOM_PLANO.filter(e => e.var.length)); v = alAzar(el.var); }
+      else { el = alAzar(ANF_PLANO); v = alAzar(el.metal.concat(el.nm)); }
+    }
+    const c = formulaOxido(el.s, v);
+    const cand = new Set([c, formulaInvertida(el.s,v), formulaSinReducir(el.s,v)]);
+    [1,2,3,4,5,6,7].forEach(o => { if(o !== v) cand.add(formulaOxido(el.s, o)); });
+    const otros = Array.from(cand).filter(x => x !== c).slice(0,3);
+    return {texto:"El "+el.n+" actúa con valencia +"+v+". ¿Cuál es la fórmula de su óxido?",
+      contexto:"📋 Recuerda: el oxígeno trabaja con −2 y las valencias se cruzan como subíndices.",
+      opciones:mezclar([c].concat(otros)), correcta:c,
+      explicacion:"Se cruzan las valencias: "+el.s+" con +"+v+" y O con −2 dan "+
+                  formulaSinReducir(el.s,v)+(formulaSinReducir(el.s,v)!==c ? ", que se simplifica a "+c+"." : ".")};
+  }}
+];
+
+/* ==========================================================
+   10 · MOTOR DEL QUIZ
+   ========================================================== */
+
+const MODOS = {
+  met:   {et:"Metales",    ic:"⚛", su:"7 familias",  c:"#D85A30", bg:"#FDEDE7", total:10},
+  nom:   {et:"No metales", ic:"⚗", su:"4 familias",  c:"#1D9E75", bg:"#E4F6EF", total:10},
+  anf:   {et:"Anfóteros",  ic:"⇄", su:"11 elementos",c:"#B5701A", bg:"#FCF1DE", total:10},
+  todos: {et:"Todo junto", ic:"🎯", su:"las 3 tablas",c:"#534AB7", bg:"#EEEDFE", total:15}
+};
+
+function leerRecord(m){
+  try{ return parseInt(localStorage.getItem("valencias2sec_"+m) || "0", 10) || 0; }
+  catch(e){ return 0; }
+}
+function guardarRecord(m, p){
+  try{ if(p > leerRecord(m)) localStorage.setItem("valencias2sec_"+m, String(p)); }catch(e){}
+}
+
+function pintarModos(){
+  const cont = $("#modos");
+  cont.innerHTML = "";
+  Object.keys(MODOS).forEach(k => {
+    const m = MODOS[k];
+    const best = leerRecord(k);
+    const b = document.createElement("button");
+    b.className = "modo"; b.type = "button";
+    b.style.setProperty("--mc", m.c);
+    b.style.setProperty("--mc-bg", m.bg);
+    b.innerHTML = '<div class="ic">'+m.ic+'</div><div class="ti">'+m.et+'</div>'+
+                  '<div class="su">'+m.su+' · '+m.total+' preguntas</div>'+
+                  (best ? '<div class="best">★ Mejor: '+best+'/'+m.total+'</div>' : '');
+    b.addEventListener("click", () => iniciar(k));
+    cont.appendChild(b);
+  });
+}
+
+let modo = "todos", banco = [], indice = 0, aciertos = 0, racha = 0, mejorRacha = 0, historial = [];
+
+function armarBanco(m){
+  const gens = GEN.filter(g => g.modos.includes(m));
+  const objetivo = MODOS[m].total;
+  const preguntas = [], vistas = new Set();
+  let i = 0;
+  while(preguntas.length < objetivo && i < 900){
+    i++;
+    const q = gens[preguntas.length % gens.length].f(m);
+    if(vistas.has(q.texto)) continue;
+    vistas.add(q.texto);
+    preguntas.push(q);
+  }
+  return mezclar(preguntas);
+}
+
+function iniciar(m){
+  modo = m;
+  banco = armarBanco(m);
+  indice = 0; aciertos = 0; racha = 0; mejorRacha = 0; historial = [];
+  $("#q-inicio").hidden = true;
+  $("#q-fin").hidden = true;
+  $("#q-juego").hidden = false;
+  const cfg = MODOS[m];
+  const et = $("#q-etq");
+  et.textContent = cfg.ic + "  " + cfg.et;
+  et.style.setProperty("--mc", cfg.c);
+  et.style.setProperty("--mc-bg", cfg.bg);
+  mostrar();
+  window.scrollTo({top:0, behavior:"smooth"});
+}
+
+function mostrar(){
+  const q = banco[indice];
+  $("#m-progreso").textContent = "Pregunta " + (indice+1) + " de " + banco.length;
+  $("#m-racha").textContent = racha >= 2 ? "🔥 " + racha + " seguidas" : "";
+  $("#m-puntos").textContent = aciertos + " pts";
+  $("#m-barra").style.width = (indice/banco.length*100) + "%";
+  $("#q-texto").textContent = q.texto;
+  $("#q-contexto").textContent = q.contexto;
+  $("#q-feedback").innerHTML = "";
+  $("#q-siguiente").innerHTML = "";
+
+  const cont = $("#q-opciones");
+  cont.innerHTML = "";
+  const letras = ["A","B","C","D","E"];
+  q.opciones.forEach((op,i) => {
+    const b = document.createElement("button");
+    b.className = "opcion"; b.type = "button";
+    b.innerHTML = '<span class="letra">'+letras[i]+'</span><span>'+op+'</span>';
+    b.addEventListener("click", () => responder(op, b));
+    cont.appendChild(b);
+  });
+}
+
+function responder(elegida, boton){
+  const q = banco[indice];
+  const ok = elegida === q.correcta;
+
+  $$("#q-opciones .opcion").forEach(b => {
+    b.disabled = true;
+    if(b.querySelector("span:last-child").textContent === q.correcta) b.classList.add("ok");
+  });
+  if(!ok) boton.classList.add("mal");
+
+  if(ok){ aciertos++; racha++; mejorRacha = Math.max(mejorRacha, racha); } else { racha = 0; }
+  $("#m-puntos").textContent = aciertos + " pts";
+  $("#m-racha").textContent = racha >= 2 ? "🔥 " + racha + " seguidas" : "";
+  historial.push({texto:q.texto, ok, exp:q.explicacion});
+
+  const bonus = ok && racha >= 3 ? " <b>¡" + racha + " seguidas!</b>" : "";
+  $("#q-feedback").innerHTML =
+    '<div class="feedback '+(ok?"ok":"mal")+'"><b>'+
+    (ok ? "¡Correcto!" : "Respuesta correcta: " + q.correcta) + '</b>'+bonus+'<br>'+q.explicacion+'</div>';
+
+  const b = document.createElement("button");
+  b.className = "btn"; b.style.marginTop = "13px";
+  b.textContent = indice === banco.length-1 ? "Ver mi resultado" : "Siguiente pregunta";
+  b.addEventListener("click", () => { indice++; indice >= banco.length ? terminar() : mostrar(); });
+  $("#q-siguiente").appendChild(b);
+  b.focus();
+}
+
+function codigoVerificacion(){
+  const base = "VAL3" + modo + aciertos + banco.length + mejorRacha + Date.now();
+  let suma = 0;
+  for(let i=0;i<base.length;i++) suma = (suma*31 + base.charCodeAt(i)) % 99991;
+  const letras = "ABCDEFGHJKLMNPQRSTUVWXYZ";
+  let cod = "", n = suma;
+  for(let i=0;i<3;i++){ cod += letras[n % letras.length]; n = Math.floor(n/letras.length); }
+  const pre = {met:"MET", nom:"NOM", anf:"ANF", todos:"ALL"}[modo];
+  return pre + "-" + aciertos + banco.length + "-" + cod + (suma % 97).toString().padStart(2,"0");
+}
+
+function terminar(){
+  const cfg = MODOS[modo];
+  const previo = leerRecord(modo);
+  const esRecord = aciertos > previo;
+  guardarRecord(modo, aciertos);
+
+  $("#q-juego").hidden = true;
+  $("#q-fin").hidden = false;
+  $("#m-barra").style.width = "100%";
+
+  const et = $("#r-etq");
+  et.textContent = cfg.ic + "  " + cfg.et;
+  et.style.setProperty("--mc", cfg.c);
+  et.style.setProperty("--mc-bg", cfg.bg);
+
+  $("#r-puntaje").innerHTML = aciertos + '<small>/' + banco.length + '</small>';
+  $("#r-record").innerHTML = esRecord && aciertos > 0
+    ? '<div class="record">★ ¡Nuevo récord personal!</div>'
+    : (previo ? '<div class="record" style="background:#EEEDFE;color:var(--violeta)">Tu mejor marca: '+previo+'/'+banco.length+'</div>' : '');
+
+  const pct = aciertos / banco.length;
+  let nivel, mensaje, color;
+  if(pct === 1){
+    nivel = "🏆 ¡Dominas la tabla!"; color = "var(--verde)";
+    mensaje = "Respondiste todo correctamente. Prueba con otro modo para seguir practicando.";
+  } else if(pct >= .75){
+    nivel = "💪 Muy bien encaminado"; color = "var(--violeta)";
+    mensaje = "Manejas la mayoría de las valencias. Repasa las que fallaste y vuelve a intentarlo.";
+  } else if(pct >= .5){
+    nivel = "📚 Vas por buen camino"; color = "var(--coral)";
+    mensaje = "Ya reconoces varias familias. Usa el modo memoria en las tablas, practica familia por familia y vuelve.";
+  } else {
+    nivel = "🔁 Toca repasar"; color = "var(--rosa)";
+    mensaje = "Vuelve a las tablas, aísla una familia y tápale las valencias hasta que te salgan de memoria.";
+  }
+  $("#r-nivel").textContent = nivel;
+  $("#r-nivel").style.color = color;
+  $("#r-mensaje").textContent = mensaje;
+
+  const cod = codigoVerificacion();
+  $("#r-codigo").querySelector("span").textContent = cod;
+
+  const fallos = historial.filter(h => !h.ok);
+  $("#r-repaso").innerHTML = fallos.length
+    ? '<h3>Para repasar (' + fallos.length + ')</h3>' +
+      fallos.map(h => '<div class="item"><b>'+h.texto+'</b>'+h.exp+'</div>').join("")
+    : '<h3>Repaso</h3><div class="item ok"><b>Sin errores</b>Respondiste correctamente las '+banco.length+' preguntas.</div>';
+
+  $("#btn-wa").onclick = () => {
+    const txt = "Quiz Tabla de Valencias - 2do de Secundaria\n" +
+                "Modo: " + cfg.et + "\n" +
+                "Puntaje: " + aciertos + "/" + banco.length + "\n" +
+                "Mejor racha: " + mejorRacha + "\n" +
+                "Codigo: " + cod + "\n" +
+                "Area Biologia-Geografia - UE Nuevo Amanecer Boliviano";
+    window.open("https://wa.me/?text=" + encodeURIComponent(txt), "_blank");
+  };
+}
+
+$("#btn-otra").addEventListener("click", () => iniciar(modo));
+$("#btn-modos").addEventListener("click", () => {
+  $("#q-fin").hidden = true;
+  $("#q-inicio").hidden = false;
+  pintarModos();
+  window.scrollTo({top:0, behavior:"smooth"});
+});
+
+pintarModos();
+</script>
+</body>
+</html>
