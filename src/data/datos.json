@@ -20,6 +20,16 @@
           "fecha": "2026-07-29",
           "estado": "disponible",
           "link": "https://drive.google.com/file/d/1CULtU-lVeJ52Oa4Y3UugXV6QjCQ4sGA4/view?usp=sharing"
+        },
+        {
+          "id": "app-tabla-valencias-2do",
+          "categoria": "app",
+          "titulo": "Tabla de Valencias",
+          "tema": "Metales, no metales y anfóteros",
+          "descripcion": "Tablas interactivas con modo memoria y quiz por categoría.",
+          "fecha": "2026-08-02",
+          "estado": "nuevo",
+          "link": "https://biogeo-uenab.pages.dev/tabla-valencias-2sec-v3.html"
         }
       ]
     },
