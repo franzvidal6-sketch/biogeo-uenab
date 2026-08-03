@@ -57,6 +57,16 @@
           "fecha": "2026-07-29",
           "estado": "disponible",
           "link": "https://drive.google.com/file/d/1BY3zEHSciS7sx1JJyUmE9-phzw6TyV69/view?usp=sharing"
+        },
+        {
+          "id": "app-tejidos-vegetales-5to",
+          "categoria": "app",
+          "titulo": "Tejidos Orgánicos de los Vegetales",
+          "tema": "Tema 6 — Sistemas de tejidos vegetales",
+          "descripcion": "Lección interactiva: sistemas epidérmico, fundamental y vascular, meristemos y estructura de una angiosperma.",
+          "fecha": "2026-08-03",
+          "estado": "nuevo",
+          "link": "https://biogeo-uenab.pages.dev/tejidos-vegetales-5sec.html"
         }
       ]
     },
