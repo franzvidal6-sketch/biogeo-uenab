@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+<title>Diario de un Botánico Explorador · Tema 6 · Biología-Geografía 5°</title>
+<meta name="description" content="Juego de memoria para reforzar el Tema 6: Tejidos Orgánicos de los Vegetales — Biología-Geografía 5° de Secundaria">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --violeta: #534AB7;
+  --violeta-oscuro: #26215C;
+  --violeta-suave: #EEEDFE;
+  --coral: #D85A30;
+  --verde: #1D9E75;
+  --verde-claro: #5DCAA5;
+  --rosa: #D4537E;
+  --rosa-suave: #F6C9D8;
+  --texto: #2B2750;
+  --texto-suave: #6B678E;
+  --blanco: #FFFFFF;
+  --borde: #DEDBF7;
+  --sombra: 0 4px 20px rgba(83,74,183,0.12);
+  --sombra-fuerte: 0 10px 34px rgba(38,33,92,0.22);
+  --radio: 18px;
+  --radio-chico: 12px;
+  --font-titulo: 'Poppins', sans-serif;
+  --font-texto: 'Inter', sans-serif;
+}
+*{box-sizing:border-box; margin:0; padding:0;}
+body{
+  font-family: var(--font-texto);
+  background: var(--violeta-suave);
+  color: var(--texto);
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  padding-bottom: 24px;
+}
+h1,h2,h3{ font-family: var(--font-titulo); color: var(--violeta-oscuro); }
+button{ font-family: var(--font-texto); cursor:pointer; border:none; background:none; }
+
+/* Encabezado */
+#encabezado{
+  background: var(--violeta-oscuro); color:#fff; padding: 16px 18px 20px; text-align:center;
+  position:relative; overflow:hidden;
+}
+#encabezado::before{
+  content:""; position:absolute; inset:0; opacity:.1;
+  background-image: radial-gradient(circle at 20% 20%, #fff 1px, transparent 1px),
+                     radial-gradient(circle at 70% 60%, #fff 1px, transparent 1px);
+  background-size: 50px 50px, 70px 70px;
+}
+#encabezado .tag{ position:relative; z-index:1; font-size:.68rem; font-weight:700; letter-spacing:.08em; text-transform:uppercase; color: var(--verde-claro); display:block; margin-bottom:6px;}
+#encabezado h1{ position:relative; z-index:1; color:#fff; font-size:1.35rem; font-weight:800; margin-bottom:6px;}
+#encabezado p{ position:relative; z-index:1; font-size:.82rem; color:#DAD8F5; max-width:420px; margin:0 auto;}
+
+/* Barra de estado */
+#barraEstado{
+  display:flex; align-items:center; justify-content:space-between; gap:10px;
+  max-width:900px; margin: 14px auto 0; padding: 0 16px;
+}
+.chip{
+  background: var(--blanco); border:1px solid var(--borde); border-radius:100px;
+  padding: 8px 14px; font-size:.78rem; font-weight:700; color: var(--violeta-oscuro);
+  box-shadow: var(--sombra); display:flex; align-items:center; gap:6px;
+}
+#btnReiniciar{
+  background: var(--coral); color:#fff; font-weight:700; font-size:.78rem;
+  padding: 9px 16px; border-radius:100px; box-shadow: var(--sombra);
+}
+#btnReiniciar:active{ transform: scale(.96); }
+
+/* Layout principal */
+#contenedor{
+  max-width:900px; margin: 18px auto; padding: 0 16px;
+  display:grid; grid-template-columns: 1fr; gap:20px;
+}
+@media(min-width:760px){
+  #contenedor{ grid-template-columns: 1.35fr 1fr; align-items:start; }
+}
+
+/* Tablero */
+#tablero{
+  display:grid; grid-template-columns: repeat(4, 1fr); gap:10px;
+}
+.carta{
+  aspect-ratio: 3/4; perspective: 800px;
+}
+.carta-interior{
+  position:relative; width:100%; height:100%; transform-style: preserve-3d;
+  transition: transform .5s cubic-bezier(.4,0,.2,1);
+}
+.carta.volteada .carta-interior, .carta.encontrada .carta-interior{ transform: rotateY(180deg); }
+.carta-cara{
+  position:absolute; inset:0; backface-visibility:hidden; border-radius: var(--radio-chico);
+  display:flex; flex-direction:column; align-items:center; justify-content:center;
+  text-align:center; padding:8px; box-shadow: var(--sombra);
+}
+.carta-atras{
+  background: linear-gradient(135deg, var(--violeta), #6a60cc);
+  color:#fff; font-size:1.6rem;
+}
+.carta-atras span{ opacity:.85; }
+.carta-frente{ transform: rotateY(180deg); }
+.carta-frente.tipo-concepto{ background: var(--blanco); border:2px solid var(--violeta); }
+.carta-frente.tipo-concepto .icono{ font-size:1.1rem; margin-bottom:4px; }
+.carta-frente.tipo-concepto .texto{ font-family: var(--font-titulo); font-weight:700; font-size:.78rem; color: var(--violeta-oscuro); }
+.carta-frente.tipo-dato{ background: linear-gradient(135deg, var(--verde-claro), #7fdcb8); border:2px solid var(--verde); }
+.carta-frente.tipo-dato .icono{ font-size:1.1rem; margin-bottom:4px; }
+.carta-frente.tipo-dato .texto{ font-size:.68rem; font-style:italic; font-weight:600; color: var(--violeta-oscuro); line-height:1.25; }
+.carta.encontrada .carta-frente{ opacity:.55; }
+.carta.encontrada{ pointer-events:none; }
+.carta.encontrada .carta-atras{ display:none; }
+.marca-encontrada{
+  position:absolute; top:4px; right:4px; background: var(--rosa); color:#fff; border-radius:50%;
+  width:18px; height:18px; display:flex; align-items:center; justify-content:center; font-size:.6rem; z-index:2;
+}
+
+/* Cuadernillo lateral */
+#cuadernillo{
+  background: var(--blanco); border-radius: var(--radio); box-shadow: var(--sombra);
+  border:1px solid var(--borde); padding: 16px;
+}
+#cuadernillo h2{ font-size:1rem; margin-bottom:4px; display:flex; align-items:center; gap:6px;}
+#cuadernillo .subt{ font-size:.72rem; color: var(--texto-suave); margin-bottom:12px; }
+#listaMuestras{ list-style:none; display:flex; flex-direction:column; gap:8px; }
+#listaMuestras li{
+  background: var(--violeta-suave); border-radius: 10px; padding: 8px 10px; font-size:.74rem;
+  color: var(--texto-suave); border:1px dashed var(--borde);
+}
+#listaMuestras li.catalogada{
+  background: #fff; border:1px solid var(--borde); border-left:4px solid var(--verde);
+  color: var(--texto); animation: entrarMuestra .35s ease;
+}
+#listaMuestras li strong{ display:block; color: var(--violeta-oscuro); font-family: var(--font-titulo); font-size:.78rem; margin-bottom:2px;}
+@keyframes entrarMuestra{ from{opacity:0; transform:translateX(8px);} to{opacity:1; transform:translateX(0);} }
+
+/* Overlay de finalización */
+#overlay{
+  position:fixed; inset:0; background: rgba(38,33,92,0.72); display:none; align-items:center;
+  justify-content:center; z-index:700; padding:20px;
+}
+#overlay.activo{ display:flex; }
+#tarjetaFinal{
+  background: var(--blanco); border-radius: var(--radio); max-width:420px; width:100%;
+  padding: 26px 22px; text-align:center; box-shadow: var(--sombra-fuerte); animation: aparecer .4s ease;
+}
+@keyframes aparecer{ from{opacity:0; transform:scale(.9);} to{opacity:1; transform:scale(1);} }
+#tarjetaFinal .medalla{ font-size:2.6rem; margin-bottom:6px; }
+#tarjetaFinal h2{ font-size:1.2rem; margin-bottom:4px; }
+#tarjetaFinal .rango{ font-size:.85rem; color: var(--verde); font-weight:700; margin-bottom:14px;}
+#tarjetaFinal .intentos-final{ font-size:.8rem; color: var(--texto-suave); margin-bottom:18px;}
+#bonusCard{
+  background: linear-gradient(135deg, var(--rosa), #B8447A); color:#fff; border-radius: var(--radio-chico);
+  padding: 14px 16px; text-align:left; margin-bottom:18px;
+}
+#bonusCard .etiqueta{ font-size:.62rem; font-weight:700; letter-spacing:.06em; text-transform:uppercase; opacity:.85; display:block; margin-bottom:4px;}
+#bonusCard h3{ color:#fff; font-size:.92rem; margin-bottom:6px; }
+#bonusCard p{ font-size:.78rem; line-height:1.5; }
+#btnJugarDeNuevo{
+  background: var(--violeta); color:#fff; font-weight:700; font-size:.85rem;
+  padding: 12px 24px; border-radius:100px; box-shadow: var(--sombra);
+}
+#btnJugarDeNuevo:active{ transform: scale(.97); }
+
+footer.credito{ text-align:center; font-size:.66rem; color: var(--texto-suave); padding: 20px 10px 6px; }
+</style>
+</head>
+<body>
+
+<header id="encabezado">
+  <span class="tag">Actividad · Tema 6 · Biología-Geografía 5°</span>
+  <h1>🔬 Diario de un Botánico Explorador</h1>
+  <p>Encuentra cada pareja: un concepto con su dato o analogía. Sin cronómetro — solo explora con calma.</p>
+</header>
+
+<div id="barraEstado">
+  <div class="chip">🧪 Intentos: <span id="contadorIntentos">0</span></div>
+  <div class="chip">📖 Muestras: <span id="contadorMuestras">0</span>/8</div>
+  <button id="btnReiniciar">↻ Reiniciar</button>
+</div>
+
+<div id="contenedor">
+  <div id="tablero"></div>
+
+  <div id="cuadernillo">
+    <h2>📓 Mi cuaderno de campo</h2>
+    <p class="subt">Cada pareja que encuentres se cataloga aquí como una muestra.</p>
+    <ul id="listaMuestras"></ul>
+  </div>
+</div>
+
+<footer class="credito">
+  Biología-Geografía · 5° de Secundaria · UE Nuevo Amanecer Boliviano<br>
+  Prof. Franz Vidal Condori M.
+</footer>
+
+<div id="overlay">
+  <div id="tarjetaFinal">
+    <div class="medalla" id="medallaFinal">🥇</div>
+    <h2>¡Diario completo!</h2>
+    <div class="rango" id="rangoFinal">Memoria de Botánico Experto</div>
+    <div class="intentos-final" id="intentosFinal">Lo lograste en 8 intentos.</div>
+    <div id="bonusCard">
+      <span class="etiqueta">Muestra bonus desbloqueada</span>
+      <h3 id="bonusTitulo"></h3>
+      <p id="bonusTexto"></p>
+    </div>
+    <button id="btnJugarDeNuevo">Jugar de nuevo</button>
+  </div>
+</div>
+
+<script>
+(function(){
+  var PARES = [
+    { id:1, concepto:"Colénquima", dato:"Como el cartílago: flexible" },
+    { id:2, concepto:"Esclerénquima", dato:"Como el hueso: rígido" },
+    { id:3, concepto:"Xilema", dato:"Savia bruta, sube sin parar" },
+    { id:4, concepto:"Floema", dato:"Savia elaborada, va y viene" },
+    { id:5, concepto:"Estomas", dato:"Poros que respiran y transpiran" },
+    { id:6, concepto:"Meristemo apical", dato:"Crece hacia arriba y abajo" },
+    { id:7, concepto:"Meristemo lateral", dato:"Crece en grosor (anillos)" },
+    { id:8, concepto:"Cutícula", dato:"Cera que evita que se seque" }
+  ];
+
+  var DATOS_BONUS = [
+    {
+      titulo: "La Yareta",
+      texto: "La Yareta (Azorella compacta), nativa del Altiplano boliviano, es un arbusto leñoso tan denso que parece una roca cubierta de musgo. Sus meristemos crecen apenas 1 milímetro al año — algunas yaretas en Potosí superan los 3.000 años."
+    },
+    {
+      titulo: "La Puya Raimondi",
+      texto: "La Puya Raimondi, \"Reina de los Andes\", crece 80 a 100 años sin reproducirse. Al final de su vida lanza una inflorescencia de hasta 10 metros con miles de flores, produce millones de semillas... y muere."
+    }
+  ];
+
+  var tablero = document.getElementById('tablero');
+  var listaMuestras = document.getElementById('listaMuestras');
+  var contadorIntentos = document.getElementById('contadorIntentos');
+  var contadorMuestras = document.getElementById('contadorMuestras');
+  var overlay = document.getElementById('overlay');
+
+  var mazo = [];
+  var volteadas = [];
+  var bloqueado = false;
+  var intentos = 0;
+  var encontradas = 0;
+
+  function barajar(arr){
+    for(var i = arr.length - 1; i > 0; i--){
+      var j = Math.floor(Math.random() * (i + 1));
+      var tmp = arr[i]; arr[i] = arr[j]; arr[j] = tmp;
+    }
+    return arr;
+  }
+
+  function construirMazo(){
+    var cartas = [];
+    PARES.forEach(function(par){
+      cartas.push({ pairId: par.id, tipo: 'concepto', texto: par.concepto });
+      cartas.push({ pairId: par.id, tipo: 'dato', texto: par.dato });
+    });
+    return barajar(cartas);
+  }
+
+  function crearMuestrasVacias(){
+    listaMuestras.innerHTML = '';
+    for(var i = 0; i < PARES.length; i++){
+      var li = document.createElement('li');
+      li.textContent = '❔ Muestra #' + (i + 1) + ' — sin catalogar';
+      listaMuestras.appendChild(li);
+    }
+  }
+
+  function catalogarMuestra(par){
+    var pendientes = listaMuestras.querySelectorAll('li:not(.catalogada)');
+    if(pendientes.length === 0) return;
+    var li = pendientes[0];
+    li.classList.add('catalogada');
+    li.innerHTML = '<strong>' + par.concepto + '</strong>' + par.dato;
+  }
+
+  function renderTablero(){
+    tablero.innerHTML = '';
+    mazo.forEach(function(carta, indice){
+      var iconoTipo = carta.tipo === 'concepto' ? '🔬' : '📖';
+      var claseTipo = carta.tipo === 'concepto' ? 'tipo-concepto' : 'tipo-dato';
+      var el = document.createElement('div');
+      el.className = 'carta';
+      el.dataset.indice = indice;
+      el.innerHTML =
+        '<div class="carta-interior">' +
+          '<div class="carta-cara carta-atras"><span>🌿</span></div>' +
+          '<div class="carta-cara carta-frente ' + claseTipo + '">' +
+            '<div class="marca-encontrada" style="display:none">✓</div>' +
+            '<div class="icono">' + iconoTipo + '</div>' +
+            '<div class="texto">' + carta.texto + '</div>' +
+          '</div>' +
+        '</div>';
+      el.addEventListener('click', function(){ voltearCarta(indice); });
+      tablero.appendChild(el);
+    });
+  }
+
+  function elementoDe(indice){
+    return tablero.querySelector('.carta[data-indice="' + indice + '"]');
+  }
+
+  function voltearCarta(indice){
+    if(bloqueado) return;
+    var el = elementoDe(indice);
+    if(el.classList.contains('volteada') || el.classList.contains('encontrada')) return;
+    if(volteadas.length >= 2) return;
+
+    el.classList.add('volteada');
+    volteadas.push(indice);
+
+    if(volteadas.length === 2){
+      bloqueado = true;
+      intentos++;
+      contadorIntentos.textContent = intentos;
+      var a = mazo[volteadas[0]];
+      var b = mazo[volteadas[1]];
+
+      if(a.pairId === b.pairId){
+        setTimeout(function(){
+          volteadas.forEach(function(i){
+            elementoDe(i).classList.add('encontrada');
+            elementoDe(i).querySelector('.marca-encontrada').style.display = 'flex';
+          });
+          var par = PARES.filter(function(p){ return p.id === a.pairId; })[0];
+          catalogarMuestra(par);
+          encontradas++;
+          contadorMuestras.textContent = encontradas;
+          volteadas = [];
+          bloqueado = false;
+          if(encontradas === PARES.length){
+            setTimeout(mostrarFinal, 500);
+          }
+        }, 550);
+      } else {
+        setTimeout(function(){
+          volteadas.forEach(function(i){ elementoDe(i).classList.remove('volteada'); });
+          volteadas = [];
+          bloqueado = false;
+        }, 900);
+      }
+    }
+  }
+
+  function calcularRango(){
+    if(intentos <= 10) return { medalla: '🥇', rango: 'Memoria de Botánico Experto' };
+    if(intentos <= 14) return { medalla: '🥈', rango: 'Buen Explorador de Campo' };
+    return { medalla: '🥉', rango: 'Explorador en Entrenamiento' };
+  }
+
+  function mostrarFinal(){
+    var r = calcularRango();
+    document.getElementById('medallaFinal').textContent = r.medalla;
+    document.getElementById('rangoFinal').textContent = r.rango;
+    document.getElementById('intentosFinal').textContent = 'Lo lograste en ' + intentos + ' intentos.';
+
+    var bonus = DATOS_BONUS[Math.floor(Math.random() * DATOS_BONUS.length)];
+    document.getElementById('bonusTitulo').textContent = bonus.titulo;
+    document.getElementById('bonusTexto').textContent = bonus.texto;
+
+    overlay.classList.add('activo');
+  }
+
+  function iniciarJuego(){
+    mazo = construirMazo();
+    volteadas = [];
+    bloqueado = false;
+    intentos = 0;
+    encontradas = 0;
+    contadorIntentos.textContent = '0';
+    contadorMuestras.textContent = '0';
+    overlay.classList.remove('activo');
+    renderTablero();
+    crearMuestrasVacias();
+  }
+
+  document.getElementById('btnReiniciar').addEventListener('click', iniciarJuego);
+  document.getElementById('btnJugarDeNuevo').addEventListener('click', iniciarJuego);
+
+  iniciarJuego();
+})();
+</script>
+</body>
+</html>
