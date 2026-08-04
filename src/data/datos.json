@@ -94,7 +94,17 @@
           "fecha": "2026-07-29",
           "estado": "disponible",
           "link": "https://drive.google.com/file/d/1Q41MGdaohaJ8XfD2OEpV3wiAIHZolceT/view?usp=sharing"
-        }
+        },
+                {
+                            "id": "app-primeros-auxilios-6to",
+                            "categoria": "app",
+                            "titulo": "Primeros Auxilios en la Comunidad",
+                            "tema": "Medidas de Atención a la Salud (Tema 6)",
+                            "descripcion": "Central de Emergencias interactiva: Protocolo PAS, RCP, botiquín y 9 escenas de decisión.",
+                            "fecha": "2026-08-03",
+                            "estado": "nuevo",
+                            "link": "https://biogeo-uenab.pages.dev/primeros-auxilios-6sec.html"
+                }
       ]
     }
   ]
