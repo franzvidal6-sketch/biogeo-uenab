@@ -91,6 +91,16 @@
           "fecha": "2026-08-03",
           "estado": "nuevo",
           "link": "https://biogeo-uenab.pages.dev/diario-botanico-tema6.html"
+        },
+        {
+          "id": "herbario-5sec",
+          "categoria": "app",
+          "titulo": "Guía del herbario escolar",
+          "tema": "Recolección y conservación de la biodiversidad local",
+          "descripcion": "Guía interactiva para elaborar el herbario: normas de recolección, procedimiento de prensado, ficha de especie y rúbrica de evaluación",
+          "fecha": "2026-08-06",
+          "estado": "nuevo",
+          "link": "/herbario-5sec.html"
         }
       ]
     },
