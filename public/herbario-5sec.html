@@ -1,0 +1,743 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+<title>Guía del Herbario Escolar · 5° Secundaria</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --violeta:#534AB7;
+    --violeta-oscuro:#26215C;
+    --violeta-claro:#EEEDFE;
+    --violeta-medio:#7F77DD;
+    --coral:#D85A30;
+    --coral-claro:#FAECE7;
+    --coral-oscuro:#712B13;
+    --verde:#1D9E75;
+    --verde-claro:#E1F5EE;
+    --verde-oscuro:#085041;
+    --rosa:#D4537E;
+    --rosa-claro:#FBEAF0;
+    --rosa-oscuro:#72243E;
+    --amber:#BA7517;
+    --amber-claro:#FAEEDA;
+    --amber-oscuro:#633806;
+    --gris-900:#2C2C2A;
+    --gris-700:#5F5E5A;
+    --gris-500:#888780;
+    --gris-200:#D3D1C7;
+    --gris-100:#EDEBE4;
+    --blanco:#FFFFFF;
+    --radius:14px;
+  }
+  *{box-sizing:border-box;}
+  html,body{margin:0;padding:0;}
+  body{
+    font-family:'Inter',sans-serif;
+    background:var(--violeta-claro);
+    color:var(--gris-900);
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+  }
+  h1,h2,h3,h4{font-family:'Poppins',sans-serif;margin:0;}
+  p{margin:0 0 12px 0;}
+  img,svg{display:block;}
+  svg.icon{display:inline-block;vertical-align:middle;}
+  button{font-family:inherit;cursor:pointer;}
+
+  /* ===== HEADER ===== */
+  .app-header{
+    background:var(--violeta-oscuro);
+    color:var(--blanco);
+    padding:22px 18px 20px;
+    position:relative;
+    overflow:hidden;
+  }
+  .app-header .molecular-bg{position:absolute;top:0;left:0;width:100%;height:100%;opacity:.10;pointer-events:none;}
+  .header-inner{position:relative;z-index:1;max-width:760px;margin:0 auto;}
+  .header-tag{
+    display:inline-flex;align-items:center;gap:6px;
+    background:var(--verde);color:var(--blanco);
+    font-size:11px;font-weight:700;letter-spacing:.04em;text-transform:uppercase;
+    padding:5px 12px;border-radius:20px;margin-bottom:12px;
+  }
+  .app-header h1{font-size:22px;font-weight:800;line-height:1.28;text-shadow:0 1px 3px rgba(0,0,0,.25);}
+  .app-header h1 span{color:#8FE3C4;}
+  .header-sub{font-size:13.5px;color:#D9D6F5;margin-top:8px;font-weight:500;}
+  .header-meta{
+    margin-top:14px;background:rgba(255,255,255,.08);
+    border:1px solid rgba(255,255,255,.16);
+    border-radius:10px;padding:10px 12px;font-size:12.5px;color:#E4E2F7;
+  }
+  .header-meta div{display:flex;justify-content:space-between;padding:3px 0;}
+  .header-meta b{color:var(--blanco);font-weight:600;}
+
+  /* ===== NAV TABS ===== */
+  .tabbar-wrap{
+    position:sticky;top:0;z-index:20;
+    background:var(--blanco);
+    border-bottom:1px solid var(--gris-200);
+    box-shadow:0 2px 8px rgba(38,33,92,.06);
+  }
+  .tabbar{
+    display:flex;gap:6px;overflow-x:auto;
+    padding:10px 12px;max-width:760px;margin:0 auto;
+    scrollbar-width:none;
+  }
+  .tabbar::-webkit-scrollbar{display:none;}
+  .tab-btn{
+    flex:0 0 auto;
+    display:flex;align-items:center;gap:6px;
+    background:var(--gris-100);border:1px solid transparent;
+    color:var(--gris-700);font-size:12.5px;font-weight:600;
+    padding:9px 13px;border-radius:20px;white-space:nowrap;
+    transition:background .15s, color .15s;
+  }
+  .tab-btn .num{
+    display:flex;align-items:center;justify-content:center;
+    width:17px;height:17px;border-radius:50%;
+    background:var(--gris-200);color:var(--gris-700);
+    font-size:10px;font-weight:700;flex:0 0 auto;
+  }
+  .tab-btn.active{background:var(--violeta);color:var(--blanco);}
+  .tab-btn.active .num{background:rgba(255,255,255,.25);color:var(--blanco);}
+
+  /* ===== MAIN ===== */
+  main{max-width:760px;margin:0 auto;padding:18px 16px 60px;}
+  .panel{display:none;animation:fadeIn .25s ease;}
+  .panel.active{display:block;}
+  @keyframes fadeIn{from{opacity:0;transform:translateY(6px);}to{opacity:1;transform:translateY(0);}}
+
+  .section-title{display:flex;align-items:center;gap:10px;margin-bottom:14px;}
+  .section-title .icon-badge{
+    width:38px;height:38px;border-radius:11px;flex:0 0 auto;
+    display:flex;align-items:center;justify-content:center;
+  }
+  .section-title h2{font-size:18px;color:var(--violeta-oscuro);}
+  .section-title .sub{font-size:12px;color:var(--gris-700);font-weight:500;}
+
+  .card{
+    background:var(--blanco);border-radius:var(--radius);
+    padding:16px;margin-bottom:14px;
+    border:1px solid var(--gris-200);
+  }
+  .card h3{font-size:14.5px;color:var(--violeta-oscuro);margin-bottom:8px;}
+  .card p{font-size:14.5px;color:var(--gris-900);}
+
+  .callout{
+    border-radius:var(--radius);padding:14px 16px;margin-bottom:14px;
+    display:flex;gap:12px;align-items:flex-start;
+  }
+  .callout .ic{flex:0 0 auto;margin-top:1px;}
+  .callout p{margin:0;font-size:14px;}
+  .callout b{font-weight:700;}
+  .callout.warn{background:var(--amber-claro);color:var(--amber-oscuro);}
+  .callout.warn svg{stroke:var(--amber-oscuro);}
+  .callout.danger{background:var(--rosa-claro);color:var(--rosa-oscuro);}
+  .callout.danger svg{stroke:var(--rosa-oscuro);}
+  .callout.info{background:var(--verde-claro);color:var(--verde-oscuro);}
+  .callout.info svg{stroke:var(--verde-oscuro);}
+
+  ul.list, ol.list{margin:0;padding-left:0;list-style:none;}
+  ul.list li, ol.list li{
+    display:flex;gap:10px;padding:9px 0;
+    border-bottom:1px solid var(--gris-100);
+    font-size:14.5px;
+  }
+  ul.list li:last-child, ol.list li:last-child{border-bottom:none;}
+  ul.list li .dot{
+    flex:0 0 auto;width:7px;height:7px;border-radius:50%;
+    background:var(--violeta-medio);margin-top:7px;
+  }
+
+  .stat-row{display:flex;gap:10px;margin-bottom:14px;flex-wrap:wrap;}
+  .stat-box{
+    flex:1 1 100px;background:var(--blanco);border-radius:12px;
+    padding:12px;text-align:center;border:1px solid var(--gris-200);
+  }
+  .stat-box .n{font-family:'Poppins';font-weight:800;font-size:20px;color:var(--coral);}
+  .stat-box .l{font-size:10.5px;color:var(--gris-700);font-weight:600;text-transform:uppercase;letter-spacing:.02em;}
+
+  /* deadline banner */
+  .deadline-banner{
+    background:linear-gradient(180deg, var(--coral) 0%, var(--coral) 100%);
+    background:var(--coral);
+    border-radius:var(--radius);color:var(--blanco);padding:16px;margin-bottom:14px;
+    display:flex;gap:12px;align-items:center;
+  }
+  .deadline-banner .txt b{display:block;font-size:15px;font-weight:700;margin-bottom:2px;}
+  .deadline-banner .txt span{font-size:12.5px;color:var(--coral-claro);}
+
+  /* materials grid */
+  .mat-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;}
+  .mat-card{
+    background:var(--blanco);border:1px solid var(--gris-200);border-radius:12px;
+    padding:12px;
+  }
+  .mat-card .icon-badge{width:32px;height:32px;border-radius:9px;margin-bottom:8px;}
+  .mat-card h4{font-size:12.5px;color:var(--violeta-oscuro);margin-bottom:6px;}
+  .mat-card p{font-size:12px;color:var(--gris-700);margin:0;line-height:1.5;}
+
+  /* icon badge color variants */
+  .bg-violeta{background:var(--violeta-claro);}
+  .bg-coral{background:var(--coral-claro);}
+  .bg-verde{background:var(--verde-claro);}
+  .bg-rosa{background:var(--rosa-claro);}
+  .bg-amber{background:var(--amber-claro);}
+
+  /* ===== STEPPER (procedimiento) ===== */
+  .stepper-dots{display:flex;justify-content:center;gap:6px;margin-bottom:16px;}
+  .step-dot{width:8px;height:8px;border-radius:50%;background:var(--gris-200);transition:background .2s, width .2s;}
+  .step-dot.active{background:var(--violeta);width:22px;border-radius:5px;}
+  .step-dot.done{background:var(--verde);}
+  .step-card{
+    background:var(--blanco);border-radius:16px;padding:20px;
+    border:1px solid var(--gris-200);text-align:center;min-height:230px;
+    display:flex;flex-direction:column;align-items:center;justify-content:center;
+    margin-bottom:14px;
+  }
+  .step-card .step-num{
+    width:42px;height:42px;border-radius:50%;background:var(--violeta);color:var(--blanco);
+    display:flex;align-items:center;justify-content:center;font-family:'Poppins';font-weight:800;
+    font-size:16px;margin-bottom:14px;
+  }
+  .step-card h3{font-size:15.5px;color:var(--violeta-oscuro);margin-bottom:10px;}
+  .step-card p{font-size:14px;color:var(--gris-900);margin:0;}
+  .step-card.highlight{border:2px solid var(--coral);}
+  .step-card.highlight .step-num{background:var(--coral);}
+  .step-tag{
+    display:inline-block;margin-top:10px;background:var(--coral-claro);color:var(--coral-oscuro);
+    font-size:11px;font-weight:700;padding:4px 10px;border-radius:20px;
+  }
+  .step-nav{display:flex;gap:10px;}
+  .step-nav button{
+    flex:1;padding:12px;border-radius:11px;border:none;font-weight:700;font-size:13.5px;
+  }
+  .btn-prev{background:var(--gris-100);color:var(--gris-700);}
+  .btn-next{background:var(--violeta);color:var(--blanco);}
+  .btn-prev:disabled{opacity:.4;}
+
+  /* ===== FICHA FIELDS ===== */
+  .field-item{
+    background:var(--blanco);border-radius:12px;padding:13px 14px;margin-bottom:9px;
+    border:1px solid var(--gris-200);border-left:4px solid var(--violeta-medio);
+  }
+  .field-item .fname{font-size:13.5px;font-weight:700;color:var(--violeta-oscuro);margin-bottom:3px;}
+  .field-item .fdesc{font-size:13px;color:var(--gris-700);}
+
+  .sci-name-box{
+    background:var(--verde-claro);border-radius:12px;padding:16px;margin-bottom:14px;
+  }
+  .sci-name-box .example{
+    font-family:'Poppins';font-style:italic;font-weight:700;font-size:19px;
+    color:var(--verde-oscuro);margin-top:8px;
+  }
+  .sci-name-box .example .gen{text-decoration:underline;text-decoration-color:var(--verde);text-decoration-thickness:2px;}
+
+  /* ===== FICHA EJEMPLO ===== */
+  .specimen-card{
+    background:var(--blanco);border-radius:16px;overflow:hidden;
+    border:1px solid var(--gris-200);margin-bottom:14px;
+  }
+  .specimen-header{background:var(--verde);color:var(--blanco);padding:14px 16px;display:flex;justify-content:space-between;align-items:center;}
+  .specimen-header .code{font-family:'Poppins';font-weight:800;font-size:13px;background:rgba(255,255,255,.2);padding:3px 10px;border-radius:20px;}
+  .specimen-illustration{background:var(--verde-claro);padding:14px 0;display:flex;justify-content:center;}
+  .specimen-body{padding:14px 16px;}
+  .specimen-row{display:flex;justify-content:space-between;gap:10px;padding:8px 0;border-bottom:1px solid var(--gris-100);font-size:13px;}
+  .specimen-row:last-child{border-bottom:none;}
+  .specimen-row .k{color:var(--gris-700);font-weight:600;flex:0 0 40%;}
+  .specimen-row .v{color:var(--gris-900);flex:1;text-align:right;}
+  .specimen-row .v i{font-style:italic;}
+
+  /* ===== TABLES ===== */
+  .tbl-wrap{overflow-x:auto;border-radius:var(--radius);border:1px solid var(--gris-200);margin-bottom:14px;}
+  table.rubric{width:100%;border-collapse:collapse;font-size:12.5px;background:var(--blanco);}
+  table.rubric th{
+    background:var(--violeta);color:var(--blanco);text-align:left;padding:10px 10px;
+    font-family:'Poppins';font-weight:600;font-size:11.5px;
+  }
+  table.rubric td{padding:10px 10px;border-bottom:1px solid var(--gris-100);vertical-align:top;}
+  table.rubric tr:last-child td{border-bottom:none;}
+  table.rubric tr.total td{background:var(--violeta-claro);font-weight:700;color:var(--violeta-oscuro);}
+  table.rubric td.pts{font-family:'Poppins';font-weight:700;color:var(--coral);text-align:center;white-space:nowrap;}
+
+  /* ===== CHECKLIST ===== */
+  .check-item{
+    display:flex;align-items:center;gap:12px;background:var(--blanco);
+    border:1px solid var(--gris-200);border-radius:12px;padding:13px 14px;margin-bottom:8px;
+    transition:background .15s, border-color .15s;
+  }
+  .check-item.checked{background:var(--verde-claro);border-color:var(--verde);}
+  .check-box{
+    flex:0 0 auto;width:24px;height:24px;border-radius:7px;border:2px solid var(--gris-200);
+    display:flex;align-items:center;justify-content:center;background:var(--blanco);
+  }
+  .check-item.checked .check-box{background:var(--verde);border-color:var(--verde);}
+  .check-item span.txt{font-size:13.5px;color:var(--gris-900);font-weight:500;}
+  .check-item.checked span.txt{color:var(--verde-oscuro);text-decoration:line-through;text-decoration-color:var(--verde);}
+  .progress-wrap{margin-bottom:16px;}
+  .progress-bar-bg{background:var(--gris-200);border-radius:20px;height:10px;overflow:hidden;}
+  .progress-bar-fill{background:var(--verde);height:100%;border-radius:20px;transition:width .3s;width:0%;}
+  .progress-label{display:flex;justify-content:space-between;font-size:12px;color:var(--gris-700);font-weight:600;margin-bottom:6px;}
+
+  .footer-note{text-align:center;font-size:11.5px;color:var(--gris-500);margin-top:20px;padding:0 10px;}
+</style>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute;overflow:hidden;" aria-hidden="true">
+  <defs>
+    <symbol id="ic-leaf" viewBox="0 0 24 24"><path d="M12 2C6 6 4 12 4 15a8 8 0 0 0 16 0c0-3-2-9-8-13Z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><path d="M12 4v17" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></symbol>
+    <symbol id="ic-target" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="1.8"/><circle cx="12" cy="12" r="5" fill="none" stroke="currentColor" stroke-width="1.8"/><circle cx="12" cy="12" r="1.3" fill="currentColor"/></symbol>
+    <symbol id="ic-shield" viewBox="0 0 24 24"><path d="M12 3l7 3v6c0 5-3 8-7 9-4-1-7-4-7-9V6l7-3Z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><path d="M9 12l2 2 4-4" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+    <symbol id="ic-tools" viewBox="0 0 24 24"><rect x="3" y="10" width="18" height="9" rx="2" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M6 10V7a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v3" fill="none" stroke="currentColor" stroke-width="1.8"/><line x1="3" y1="14.5" x2="21" y2="14.5" stroke="currentColor" stroke-width="1.8"/></symbol>
+    <symbol id="ic-scissors" viewBox="0 0 24 24"><circle cx="6" cy="6" r="2.4" fill="none" stroke="currentColor" stroke-width="1.8"/><circle cx="6" cy="18" r="2.4" fill="none" stroke="currentColor" stroke-width="1.8"/><line x1="8" y1="7.5" x2="20" y2="19" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/><line x1="8" y1="16.5" x2="20" y2="5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></symbol>
+    <symbol id="ic-layers" viewBox="0 0 24 24"><path d="M12 3 2 9l10 6 10-6-10-6Z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><path d="M2 15l10 6 10-6" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></symbol>
+    <symbol id="ic-file" viewBox="0 0 24 24"><rect x="5" y="3" width="14" height="18" rx="2" fill="none" stroke="currentColor" stroke-width="1.8"/><line x1="8" y1="8" x2="16" y2="8" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/><line x1="8" y1="12" x2="16" y2="12" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/><line x1="8" y1="16" x2="12" y2="16" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></symbol>
+    <symbol id="ic-paperclip" viewBox="0 0 24 24"><path d="M8 12.5 15 5.5a3 3 0 1 1 4.2 4.2l-8.4 8.4a5 5 0 0 1-7-7L11 3.9" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+    <symbol id="ic-folder" viewBox="0 0 24 24"><path d="M3 7a2 2 0 0 1 2-2h4l2 2h8a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V7Z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></symbol>
+    <symbol id="ic-camera" viewBox="0 0 24 24"><rect x="3" y="7" width="18" height="13" rx="2" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M8 7l1.5-3h5L16 7" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><circle cx="12" cy="13.5" r="3.5" fill="none" stroke="currentColor" stroke-width="1.8"/></symbol>
+    <symbol id="ic-list" viewBox="0 0 24 24"><line x1="9" y1="6" x2="20" y2="6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/><line x1="9" y1="12" x2="20" y2="12" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/><line x1="9" y1="18" x2="20" y2="18" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/><circle cx="4.5" cy="6" r="1.3" fill="currentColor"/><circle cx="4.5" cy="12" r="1.3" fill="currentColor"/><circle cx="4.5" cy="18" r="1.3" fill="currentColor"/></symbol>
+    <symbol id="ic-clipboard" viewBox="0 0 24 24"><rect x="5" y="4" width="14" height="17" rx="2" fill="none" stroke="currentColor" stroke-width="1.8"/><rect x="9" y="2" width="6" height="4" rx="1" fill="none" stroke="currentColor" stroke-width="1.8"/><line x1="8" y1="11" x2="16" y2="11" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/><line x1="8" y1="15" x2="16" y2="15" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/><line x1="8" y1="19" x2="12" y2="19" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></symbol>
+    <symbol id="ic-books" viewBox="0 0 24 24"><path d="M12 6.5c-2-1-5-1-7 0v13c2-1 5-1 7 0 2-1 5-1 7 0v-13c-2-1-5-1-7 0Z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><line x1="12" y1="6.5" x2="12" y2="19.5" stroke="currentColor" stroke-width="1.8"/></symbol>
+    <symbol id="ic-eye" viewBox="0 0 24 24"><path d="M2 12s4-7 10-7 10 7 10 7-4 7-10 7-10-7-10-7Z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><circle cx="12" cy="12" r="3" fill="none" stroke="currentColor" stroke-width="1.8"/></symbol>
+    <symbol id="ic-star" viewBox="0 0 24 24"><path d="M12 3l2.6 5.6 6.1.6-4.6 4.1 1.3 6-5.4-3.1L6.6 19.3l1.3-6-4.6-4.1 6.1-.6Z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></symbol>
+    <symbol id="ic-chart" viewBox="0 0 24 24"><line x1="4" y1="20" x2="20" y2="20" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/><rect x="6" y="12" width="3" height="8" fill="currentColor"/><rect x="11" y="8" width="3" height="12" fill="currentColor"/><rect x="16" y="4" width="3" height="16" fill="currentColor"/></symbol>
+    <symbol id="ic-checklist" viewBox="0 0 24 24"><rect x="4" y="4" width="16" height="16" rx="2" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M8 12.5l2.5 2.5L16 9" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  </defs>
+</svg>
+
+
+<header class="app-header">
+  <svg class="molecular-bg" viewBox="0 0 400 200" xmlns="http://www.w3.org/2000/svg">
+    <circle cx="40" cy="30" r="3" fill="#fff"/><circle cx="120" cy="60" r="2" fill="#fff"/>
+    <circle cx="200" cy="20" r="3" fill="#fff"/><circle cx="280" cy="70" r="2" fill="#fff"/>
+    <circle cx="350" cy="30" r="3" fill="#fff"/><circle cx="80" cy="140" r="2" fill="#fff"/>
+    <circle cx="180" cy="160" r="3" fill="#fff"/><circle cx="260" cy="130" r="2" fill="#fff"/>
+    <circle cx="340" cy="170" r="3" fill="#fff"/>
+    <line x1="40" y1="30" x2="120" y2="60" stroke="#fff" stroke-width="1"/>
+    <line x1="120" y1="60" x2="200" y2="20" stroke="#fff" stroke-width="1"/>
+    <line x1="200" y1="20" x2="280" y2="70" stroke="#fff" stroke-width="1"/>
+    <line x1="280" y1="70" x2="350" y2="30" stroke="#fff" stroke-width="1"/>
+    <line x1="80" y1="140" x2="180" y2="160" stroke="#fff" stroke-width="1"/>
+    <line x1="180" y1="160" x2="260" y2="130" stroke="#fff" stroke-width="1"/>
+    <line x1="260" y1="130" x2="340" y2="170" stroke="#fff" stroke-width="1"/>
+  </svg>
+  <div class="header-inner">
+    <span class="header-tag"><svg class="icon" width="14" height="14" style="color:#fff;"><use href="#ic-leaf"/></svg>Biología · 5° de secundaria</span>
+    <h1>Guía para la elaboración del <span>herbario escolar</span></h1>
+    <div class="header-sub">Recolección responsable, prensado, identificación y conservación de la biodiversidad local</div>
+    <div class="header-meta">
+      <div><span>Unidad Educativa</span><b>Nuevo Amanecer Boliviano</b></div>
+      <div><span>Área</span><b>Biología · Geografía</b></div>
+      <div><span>Puntaje total</span><b>100 puntos</b></div>
+    </div>
+  </div>
+</header>
+
+<div class="tabbar-wrap">
+  <nav class="tabbar" id="tabbar">
+    <button class="tab-btn active" data-panel="p1"><span class="num">1</span>Inicio</button>
+    <button class="tab-btn" data-panel="p2"><span class="num">2</span>Normas y materiales</button>
+    <button class="tab-btn" data-panel="p3"><span class="num">3</span>Procedimiento</button>
+    <button class="tab-btn" data-panel="p4"><span class="num">4</span>La ficha</button>
+    <button class="tab-btn" data-panel="p5"><span class="num">5</span>Ejemplo</button>
+    <button class="tab-btn" data-panel="p6"><span class="num">6</span>Organización</button>
+    <button class="tab-btn" data-panel="p7"><span class="num">7</span>Rúbrica</button>
+    <button class="tab-btn" data-panel="p8"><span class="num">8</span>Checklist</button>
+  </nav>
+</div>
+
+<main>
+
+  <!-- PANEL 1 : INICIO -->
+  <section class="panel active" id="p1">
+    <div class="section-title">
+      <div class="icon-badge bg-coral"><svg class="icon" width="20" height="20" style="color:var(--coral);"><use href="#ic-target"/></svg></div>
+      <div><h2>Objetivo del herbario</h2><div class="sub">Qué vamos a lograr y por qué</div></div>
+    </div>
+    <div class="card">
+      <p>Elaborar un herbario escolar con especies vegetales de la región, mediante la recolección responsable, el prensado, la conservación, la identificación y la descripción de sus principales características, con el propósito de conocer, valorar y contribuir al cuidado de la biodiversidad local.</p>
+    </div>
+
+    <div class="stat-row">
+      <div class="stat-box"><div class="n">15+</div><div class="l">especies mínimo</div></div>
+      <div class="stat-box"><div class="n">1</div><div class="l">ficha por especie</div></div>
+      <div class="stat-box"><div class="n">100</div><div class="l">puntos totales</div></div>
+    </div>
+
+    <div class="deadline-banner">
+      <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.8"><rect x="3" y="5" width="18" height="16" rx="2"/><line x1="3" y1="10" x2="21" y2="10"/><line x1="7" y1="3" x2="7" y2="7"/><line x1="17" y1="3" x2="17" y2="7"/></svg>
+      <div class="txt"><b>Entrega: mediados del tercer trimestre</b><span>La fecha se confirmará en clase con anticipación</span></div>
+    </div>
+
+    <div class="callout warn">
+      <svg class="ic" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke-width="1.8"><path d="M12 9v4M12 17h.01M10.29 3.86 1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0Z"/></svg>
+      <p><b>¿Por qué recibimos esta guía desde ahora?</b> Porque el proceso de prensado y secado de las hojas y muestras toma varias semanas. Cada planta que consigan debe empezar a prensarse de inmediato para que llegue seca y en buen estado a la fecha de entrega. Empezar la recolección hoy es lo que hace posible cumplir con calidad más adelante.</p>
+    </div>
+
+    <div class="card">
+      <h3>Producto esperado</h3>
+      <ul class="list">
+        <li><span class="dot"></span>Un herbario con un mínimo de 15 especies vegetales diferentes, sin repeticiones.</li>
+        <li><span class="dot"></span>Una muestra prensada y seca por especie, acompañada de su ficha de identificación.</li>
+        <li><span class="dot"></span>Portada, índice, introducción breve, fichas de especies, conclusión y bibliografía.</li>
+        <li><span class="dot"></span>Presentación ordenada en carpeta, archivador o anillado, con hojas numeradas.</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- PANEL 2 : NORMAS Y MATERIALES -->
+  <section class="panel" id="p2">
+    <div class="section-title">
+      <div class="icon-badge bg-rosa"><svg class="icon" width="20" height="20" style="color:var(--rosa);"><use href="#ic-shield"/></svg></div>
+      <div><h2>Normas de recolección responsable y seguridad</h2><div class="sub">Antes de salir a recolectar</div></div>
+    </div>
+    <div class="card">
+      <ul class="list">
+        <li><span class="dot"></span>Recolectar únicamente la cantidad necesaria; evitar arrancar la planta completa cuando no sea indispensable.</li>
+        <li><span class="dot"></span>No recolectar especies escasas, protegidas, en peligro de extinción, ni plantas de áreas protegidas sin autorización.</li>
+        <li><span class="dot"></span>No ingresar a propiedades privadas ni terrenos de cultivo sin permiso.</li>
+        <li><span class="dot"></span>Evitar plantas con espinas, savia irritante, toxicidad desconocida o riesgo de causar alergias.</li>
+        <li><span class="dot"></span>Usar guantes cuando sea necesario y lavarse las manos después de manipular las muestras.</li>
+        <li><span class="dot"></span>No probar, consumir ni oler directamente las plantas recolectadas.</li>
+      </ul>
+    </div>
+
+    <div class="section-title" style="margin-top:22px;">
+      <div class="icon-badge bg-verde"><svg class="icon" width="20" height="20" style="color:var(--verde);"><use href="#ic-tools"/></svg></div>
+      <div><h2>Materiales sugeridos</h2><div class="sub">Lo que necesitan reunir</div></div>
+    </div>
+    <div class="mat-grid">
+      <div class="mat-card">
+        <div class="icon-badge bg-coral"><svg class="icon" width="16" height="16" style="color:var(--coral);"><use href="#ic-scissors"/></svg></div>
+        <h4>Recolección</h4>
+        <p>Tijeras o podadora pequeña, guantes y bolsas de papel.</p>
+      </div>
+      <div class="mat-card">
+        <div class="icon-badge bg-violeta"><svg class="icon" width="16" height="16" style="color:var(--violeta);"><use href="#ic-layers"/></svg></div>
+        <h4>Prensado</h4>
+        <p>Periódicos, cartón, papel absorbente y libros pesados o prensa botánica.</p>
+      </div>
+      <div class="mat-card">
+        <div class="icon-badge bg-amber"><svg class="icon" width="16" height="16" style="color:var(--amber);"><use href="#ic-file"/></svg></div>
+        <h4>Montaje</h4>
+        <p>Cartulina o papel bond grueso tamaño carta u oficio.</p>
+      </div>
+      <div class="mat-card">
+        <div class="icon-badge bg-rosa"><svg class="icon" width="16" height="16" style="color:var(--rosa);"><use href="#ic-paperclip"/></svg></div>
+        <h4>Fijado</h4>
+        <p>Tiras de papel, hilo, pegamento en puntos específicos o sobres para semillas.</p>
+      </div>
+      <div class="mat-card">
+        <div class="icon-badge bg-verde"><svg class="icon" width="16" height="16" style="color:var(--verde);"><use href="#ic-folder"/></svg></div>
+        <h4>Archivo final</h4>
+        <p>Carpeta, archivador o anillado para presentar el herbario completo.</p>
+      </div>
+      <div class="mat-card">
+        <div class="icon-badge bg-violeta"><svg class="icon" width="16" height="16" style="color:var(--violeta);"><use href="#ic-camera"/></svg></div>
+        <h4>Registro</h4>
+        <p>Cuaderno o teléfono para anotar lugar, fecha y fotografiar la planta en su ambiente.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- PANEL 3 : PROCEDIMIENTO -->
+  <section class="panel" id="p3">
+    <div class="section-title">
+      <div class="icon-badge bg-violeta"><svg class="icon" width="20" height="20" style="color:var(--violeta);"><use href="#ic-list"/></svg></div>
+      <div><h2>Procedimiento de elaboración</h2><div class="sub">Siete pasos, en orden</div></div>
+    </div>
+
+    <div class="stepper-dots" id="stepperDots"></div>
+    <div id="stepCardWrap"></div>
+    <div class="step-nav">
+      <button class="btn-prev" id="btnPrev">← Anterior</button>
+      <button class="btn-next" id="btnNext">Siguiente →</button>
+    </div>
+  </section>
+
+  <!-- PANEL 4 : LA FICHA -->
+  <section class="panel" id="p4">
+    <div class="section-title">
+      <div class="icon-badge bg-coral"><svg class="icon" width="20" height="20" style="color:var(--coral);"><use href="#ic-clipboard"/></svg></div>
+      <div><h2>Contenido obligatorio de cada ficha</h2><div class="sub">12 datos que no pueden faltar</div></div>
+    </div>
+
+    <div class="field-item"><div class="fname">Código de muestra</div><div class="fdesc">Ejemplo: HV-01, HV-02, HV-03.</div></div>
+    <div class="field-item"><div class="fname">Nombre común</div><div class="fdesc">Nombre utilizado en la comunidad o región.</div></div>
+    <div class="field-item"><div class="fname">Nombre científico</div><div class="fdesc">Debe incluir género y especie.</div></div>
+    <div class="field-item"><div class="fname">Familia botánica</div><div class="fdesc">Grupo taxonómico al que pertenece la especie.</div></div>
+    <div class="field-item"><div class="fname">Lugar de recolección</div><div class="fdesc">Sitio concreto donde se encontró la planta.</div></div>
+    <div class="field-item"><div class="fname">Fecha de recolección</div><div class="fdesc">Día, mes y año.</div></div>
+    <div class="field-item"><div class="fname">Hábitat</div><div class="fdesc">Ambiente general donde suele crecer.</div></div>
+    <div class="field-item"><div class="fname">Tipo de planta</div><div class="fdesc">Hierba, arbusto, árbol, trepadora u otra forma.</div></div>
+    <div class="field-item"><div class="fname">Características morfológicas</div><div class="fdesc">Tallo, hojas, flores, frutos, semillas, tamaño, textura u otras características observables.</div></div>
+    <div class="field-item"><div class="fname">Usos o importancia</div><div class="fdesc">Alimenticia, medicinal, ornamental, ecológica, artesanal u otra, con respaldo confiable.</div></div>
+    <div class="field-item"><div class="fname">Fuente consultada</div><div class="fdesc">Libro, guía, página institucional, entrevista u otra fuente.</div></div>
+    <div class="field-item"><div class="fname">Recolector</div><div class="fdesc">Nombre del estudiante responsable.</div></div>
+
+    <div class="sci-name-box" style="margin-top:18px;">
+      <h3 style="color:var(--verde-oscuro);">Escritura correcta del nombre científico</h3>
+      <p style="color:var(--verde-oscuro);margin:0;font-size:13.5px;">El género inicia con mayúscula y la especie se escribe en minúscula. Ambos términos van en cursiva; si el trabajo es manuscrito, pueden subrayarse por separado.</p>
+      <div class="example"><span class="gen">Helianthus</span> annuus</div>
+    </div>
+
+    <div class="callout danger">
+      <svg class="ic" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke-width="1.8"><circle cx="12" cy="12" r="9"/><line x1="12" y1="8" x2="12" y2="13"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+      <p><b>Importante — usos medicinales:</b> incluir un uso medicinal en la ficha no significa que la planta pueda consumirse o utilizarse sin orientación especializada. Algunas especies pueden ser tóxicas o confundirse con otras similares.</p>
+    </div>
+  </section>
+
+  <!-- PANEL 5 : EJEMPLO -->
+  <section class="panel" id="p5">
+    <div class="section-title">
+      <div class="icon-badge bg-verde"><svg class="icon" width="20" height="20" style="color:var(--verde);"><use href="#ic-leaf"/></svg></div>
+      <div><h2>Ejemplo de ficha completa</h2><div class="sub">Así se ve una ficha bien resuelta</div></div>
+    </div>
+
+    <div class="specimen-card">
+      <div class="specimen-header">
+        <span style="font-family:'Poppins';font-weight:700;font-size:14.5px;">Girasol</span>
+        <span class="code">HV-01</span>
+      </div>
+      <div class="specimen-illustration">
+        <svg width="140" height="130" viewBox="0 0 140 130">
+          <!-- fondo tipo papel de montaje -->
+          <rect x="10" y="8" width="120" height="114" rx="4" fill="#F5F1E4" stroke="#D3D1C7" stroke-width="1"/>
+          <!-- hoja prensada, forma acorazonada tipo hoja de girasol -->
+          <path d="M70 22
+                   C 92 26, 106 44, 104 62
+                   C 102 82, 90 96, 74 106
+                   C 70 108, 70 108, 66 106
+                   C 50 96, 38 82, 36 62
+                   C 34 44, 48 26, 70 22 Z"
+                fill="#97C459" stroke="#3B6D11" stroke-width="1.6" stroke-linejoin="round"/>
+          <!-- borde ligeramente irregular / dentado, simulando secado -->
+          <path d="M70 22 C 92 26, 106 44, 104 62 C 102 82, 90 96, 74 106"
+                fill="none" stroke="#639922" stroke-width="0.8" stroke-dasharray="2 3"/>
+          <!-- nervadura central -->
+          <line x1="70" y1="26" x2="70" y2="104" stroke="#3B6D11" stroke-width="1.6" stroke-linecap="round"/>
+          <!-- nervaduras laterales -->
+          <path d="M70 40 C 60 46, 52 50, 44 52" fill="none" stroke="#3B6D11" stroke-width="1" stroke-linecap="round"/>
+          <path d="M70 55 C 58 62, 50 66, 40 68" fill="none" stroke="#3B6D11" stroke-width="1" stroke-linecap="round"/>
+          <path d="M70 70 C 60 78, 54 82, 46 86" fill="none" stroke="#3B6D11" stroke-width="1" stroke-linecap="round"/>
+          <path d="M70 40 C 80 46, 88 50, 96 52" fill="none" stroke="#3B6D11" stroke-width="1" stroke-linecap="round"/>
+          <path d="M70 55 C 82 62, 90 66, 100 68" fill="none" stroke="#3B6D11" stroke-width="1" stroke-linecap="round"/>
+          <path d="M70 70 C 80 78, 86 82, 94 86" fill="none" stroke="#3B6D11" stroke-width="1" stroke-linecap="round"/>
+          <!-- pequeña tira de papel fijando la hoja, como en el montaje real -->
+          <rect x="58" y="30" width="24" height="7" rx="1" fill="#EDEBE4" stroke="#B4B2A9" stroke-width="0.6" opacity="0.85"/>
+          <rect x="52" y="92" width="24" height="7" rx="1" fill="#EDEBE4" stroke="#B4B2A9" stroke-width="0.6" opacity="0.85"/>
+          <!-- pecíolo -->
+          <line x1="70" y1="104" x2="70" y2="116" stroke="#3B6D11" stroke-width="2.2" stroke-linecap="round"/>
+        </svg>
+      </div>
+      <div class="specimen-body">
+        <div class="specimen-row"><span class="k">Nombre científico</span><span class="v"><i>Helianthus annuus</i></span></div>
+        <div class="specimen-row"><span class="k">Familia botánica</span><span class="v">Asteraceae</span></div>
+        <div class="specimen-row"><span class="k">Lugar de recolección</span><span class="v">Jardín familiar, zona urbana</span></div>
+        <div class="specimen-row"><span class="k">Hábitat</span><span class="v">Campos cultivados, jardines y espacios soleados</span></div>
+        <div class="specimen-row"><span class="k">Tipo de planta</span><span class="v">Herbácea anual</span></div>
+        <div class="specimen-row"><span class="k">Características</span><span class="v">Tallo robusto y erguido; hojas grandes y ásperas; inflorescencia grande con flores amarillas y centro oscuro</span></div>
+        <div class="specimen-row"><span class="k">Usos</span><span class="v">Semillas comestibles, aceite y uso ornamental</span></div>
+        <div class="specimen-row"><span class="k">Fuente consultada</span><span class="v">Guía botánica o fuente institucional</span></div>
+      </div>
+    </div>
+    <p style="font-size:12.5px;color:var(--gris-700);text-align:center;">La ilustración representa la hoja prensada y fijada sobre la hoja de montaje — así es como se ve la muestra real dentro del herbario.</p>
+  </section>
+
+  <!-- PANEL 6 : ORGANIZACIÓN -->
+  <section class="panel" id="p6">
+    <div class="section-title">
+      <div class="icon-badge bg-violeta"><svg class="icon" width="20" height="20" style="color:var(--violeta);"><use href="#ic-books"/></svg></div>
+      <div><h2>Organización del herbario</h2><div class="sub">Orden final del trabajo completo</div></div>
+    </div>
+    <div class="card">
+      <ol class="list">
+        <li><span class="dot"></span>Portada completa.</li>
+        <li><span class="dot"></span>Índice con número, nombre común, nombre científico y página.</li>
+        <li><span class="dot"></span>Introducción breve: qué es un herbario, para qué sirve y qué zona fue estudiada.</li>
+        <li><span class="dot"></span>Quince o más fichas con sus respectivas muestras.</li>
+        <li><span class="dot"></span>Conclusión o reflexión personal.</li>
+        <li><span class="dot"></span>Bibliografía o lista de fuentes consultadas.</li>
+      </ol>
+    </div>
+
+    <div class="section-title" style="margin-top:22px;">
+      <div class="icon-badge bg-coral"><svg class="icon" width="20" height="20" style="color:var(--coral);"><use href="#ic-eye"/></svg></div>
+      <div><h2>Criterios de presentación</h2><div class="sub">Cómo debe verse cada muestra</div></div>
+    </div>
+    <div class="card">
+      <ul class="list">
+        <li><span class="dot"></span>Cada especie debe ocupar una hoja o un espacio claramente delimitado.</li>
+        <li><span class="dot"></span>Las muestras deben estar completamente secas, limpias y sin hongos.</li>
+        <li><span class="dot"></span>La planta debe quedar firmemente sujeta, sin cubrir sus estructuras principales.</li>
+        <li><span class="dot"></span>La información debe ser legible, clara y ordenada.</li>
+        <li><span class="dot"></span>Las fotografías o ilustraciones son complementarias y no reemplazan la muestra prensada.</li>
+        <li><span class="dot"></span>La decoración no debe dificultar la lectura ni cubrir partes de la planta.</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- PANEL 7 : RÚBRICA -->
+  <section class="panel" id="p7">
+    <div class="section-title">
+      <div class="icon-badge bg-amber"><svg class="icon" width="20" height="20" style="color:var(--amber);"><use href="#ic-star"/></svg></div>
+      <div><h2>Rúbrica de evaluación</h2><div class="sub">100 puntos en total</div></div>
+    </div>
+
+    <div class="tbl-wrap">
+      <table class="rubric">
+        <thead><tr><th>Criterio</th><th style="text-align:center;">Pts</th><th>Indicadores</th></tr></thead>
+        <tbody>
+          <tr><td>Cantidad y variedad de especies</td><td class="pts">15</td><td>15 especies distintas, sin repeticiones.</td></tr>
+          <tr><td>Identificación científica y común</td><td class="pts">20</td><td>Nombre común, científico, familia botánica y correspondencia con la muestra.</td></tr>
+          <tr><td>Datos de recolección</td><td class="pts">10</td><td>Código, lugar, fecha, recolector y tipo de ambiente.</td></tr>
+          <tr><td>Descripción morfológica y hábitat</td><td class="pts">15</td><td>Descripción clara de estructuras observables y ambiente de crecimiento.</td></tr>
+          <tr><td>Usos, importancia y fuentes</td><td class="pts">10</td><td>Información pertinente, responsable y respaldada.</td></tr>
+          <tr><td>Prensado, secado y conservación</td><td class="pts">15</td><td>Muestra seca, sin humedad, hongos ni deterioro excesivo.</td></tr>
+          <tr><td>Montaje, orden y rotulado</td><td class="pts">10</td><td>Muestra bien fijada, ficha legible y hojas numeradas.</td></tr>
+          <tr><td>Presentación general</td><td class="pts">5</td><td>Portada, índice, introducción, conclusión y bibliografía.</td></tr>
+          <tr class="total"><td>Total</td><td class="pts">100</td><td></td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="section-title" style="margin-top:20px;">
+      <div class="icon-badge bg-rosa"><svg class="icon" width="20" height="20" style="color:var(--rosa);"><use href="#ic-chart"/></svg></div>
+      <div><h2>Escala según cantidad de especies</h2><div class="sub">Referencia del primer criterio</div></div>
+    </div>
+    <div class="tbl-wrap">
+      <table class="rubric">
+        <thead><tr><th>Cantidad presentada</th><th style="text-align:center;">Puntaje</th></tr></thead>
+        <tbody>
+          <tr><td>15 o más especies</td><td class="pts">15 pts</td></tr>
+          <tr><td>12 a 14 especies</td><td class="pts">12 pts</td></tr>
+          <tr><td>9 a 11 especies</td><td class="pts">9 pts</td></tr>
+          <tr><td>Menos de 9 especies</td><td class="pts">Hasta 7 pts</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- PANEL 8 : CHECKLIST -->
+  <section class="panel" id="p8">
+    <div class="section-title">
+      <div class="icon-badge bg-verde"><svg class="icon" width="20" height="20" style="color:var(--verde);"><use href="#ic-checklist"/></svg></div>
+      <div><h2>Checklist antes de entregar</h2><div class="sub">Revisen esto antes de presentar el herbario</div></div>
+    </div>
+
+    <div class="progress-wrap">
+      <div class="progress-label"><span id="progressText">0 de 8 completados</span><span id="progressPct">0%</span></div>
+      <div class="progress-bar-bg"><div class="progress-bar-fill" id="progressFill"></div></div>
+    </div>
+
+    <div id="checklistWrap"></div>
+    <p class="footer-note">Esta casilla no guarda datos: es solo una guía para repasar antes de entregar el trabajo impreso.</p>
+  </section>
+
+</main>
+
+<p class="footer-note">UE Nuevo Amanecer Boliviano · Biología-Geografía · Guía elaborada a partir de la normativa institucional del herbario escolar</p>
+
+<script>
+/* ===== TABS ===== */
+const tabBtns = document.querySelectorAll('.tab-btn');
+const panels = document.querySelectorAll('.panel');
+tabBtns.forEach(btn=>{
+  btn.addEventListener('click', ()=>{
+    tabBtns.forEach(b=>b.classList.remove('active'));
+    panels.forEach(p=>p.classList.remove('active'));
+    btn.classList.add('active');
+    document.getElementById(btn.dataset.panel).classList.add('active');
+    window.scrollTo({top:0, behavior:'smooth'});
+  });
+});
+
+/* ===== STEPPER : PROCEDIMIENTO ===== */
+const steps = [
+  {n:1, title:'Seleccionar y registrar', text:'Elegir especies diferentes y registrar durante la recolección: lugar, fecha, tipo de ambiente y nombre del recolector.', tag:null},
+  {n:2, title:'Recolectar la muestra', text:'Recolectar una parte representativa de la planta. Cuando sea posible, incluir tallo, hojas, flores y/o frutos.', tag:null},
+  {n:3, title:'Colocar entre papel', text:'Colocar la muestra entre hojas de periódico, acomodando sus partes para que queden visibles.', tag:null},
+  {n:4, title:'Prensar y secar', text:'Prensar entre cartones y aplicar peso uniforme. Cambiar el papel húmedo hasta que la planta esté completamente seca.', tag:'Este paso toma más tiempo — por eso empezamos ya'},
+  {n:5, title:'Identificar la especie', text:'Identificar la especie con apoyo de libros, guías, fuentes institucionales o una persona conocedora.', tag:null},
+  {n:6, title:'Montar la muestra', text:'Montar la muestra seca sobre una hoja gruesa, dejando espacio suficiente para la ficha.', tag:null},
+  {n:7, title:'Ordenar y numerar', text:'Ordenar las especies alfabéticamente y numerar todas las páginas.', tag:null},
+];
+let curStep = 0;
+const dotsWrap = document.getElementById('stepperDots');
+const cardWrap = document.getElementById('stepCardWrap');
+const btnPrev = document.getElementById('btnPrev');
+const btnNext = document.getElementById('btnNext');
+
+function renderDots(){
+  dotsWrap.innerHTML = steps.map((s,i)=>{
+    let cls = 'step-dot';
+    if(i === curStep) cls += ' active';
+    else if(i < curStep) cls += ' done';
+    return `<div class="${cls}"></div>`;
+  }).join('');
+}
+function renderStep(){
+  const s = steps[curStep];
+  cardWrap.innerHTML = `
+    <div class="step-card ${s.tag ? 'highlight' : ''}">
+      <div class="step-num">${s.n}</div>
+      <h3>${s.title}</h3>
+      <p>${s.text}</p>
+      ${s.tag ? `<div class="step-tag">${s.tag}</div>` : ''}
+    </div>`;
+  btnPrev.disabled = curStep === 0;
+  btnNext.textContent = curStep === steps.length - 1 ? 'Reiniciar ↺' : 'Siguiente →';
+  renderDots();
+}
+btnPrev.addEventListener('click', ()=>{ if(curStep > 0){ curStep--; renderStep(); }});
+btnNext.addEventListener('click', ()=>{
+  if(curStep === steps.length - 1){ curStep = 0; } else { curStep++; }
+  renderStep();
+});
+renderStep();
+
+/* ===== CHECKLIST ===== */
+const checklistItems = [
+  'Presenté al menos 15 especies diferentes.',
+  'Todas las muestras están secas y sin hongos.',
+  'Cada ficha contiene nombre común, nombre científico y familia botánica.',
+  'Registré lugar, fecha, recolector y código de muestra.',
+  'Escribí correctamente los nombres científicos.',
+  'Incluí portada, índice, introducción, conclusión y bibliografía.',
+  'Las hojas están numeradas y ordenadas.',
+  'Revisé la ortografía y la presentación final.',
+];
+const checklistWrap = document.getElementById('checklistWrap');
+const checkedState = new Array(checklistItems.length).fill(false);
+
+function renderChecklist(){
+  checklistWrap.innerHTML = checklistItems.map((txt,i)=>`
+    <div class="check-item ${checkedState[i] ? 'checked' : ''}" data-i="${i}">
+      <div class="check-box">${checkedState[i] ? '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>' : ''}</div>
+      <span class="txt">${txt}</span>
+    </div>`).join('');
+  document.querySelectorAll('.check-item').forEach(el=>{
+    el.addEventListener('click', ()=>{
+      const i = +el.dataset.i;
+      checkedState[i] = !checkedState[i];
+      renderChecklist();
+      updateProgress();
+    });
+  });
+}
+function updateProgress(){
+  const done = checkedState.filter(Boolean).length;
+  const pct = Math.round((done/checklistItems.length)*100);
+  document.getElementById('progressText').textContent = `${done} de ${checklistItems.length} completados`;
+  document.getElementById('progressPct').textContent = `${pct}%`;
+  document.getElementById('progressFill').style.width = pct + '%';
+}
+renderChecklist();
+updateProgress();
+</script>
+</body>
+</html>
