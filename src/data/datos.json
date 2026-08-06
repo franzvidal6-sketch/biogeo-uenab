@@ -12,6 +12,13 @@
       "nombre": "Segundo de Secundaria",
       "recursos": [
         {
+          "id": "anuncio-construccion-segundo",
+          "categoria": "anuncio",
+          "titulo": "Plataforma en construcción",
+          "descripcion": "Iremos agregando materiales, aplicaciones y simulacros durante toda la gestión 2026. Si no encuentras algo todavía, vuelve a revisar más adelante.",
+          "fecha": "2026-08-04"
+        },
+        {
           "id": "texto-biologia-geografia-2do",
           "categoria": "texto",
           "titulo": "Texto — Biología y Geografía 2°",
@@ -48,6 +55,13 @@
       "grado": "5°",
       "nombre": "Quinto de Secundaria",
       "recursos": [
+        {
+          "id": "anuncio-construccion-quinto",
+          "categoria": "anuncio",
+          "titulo": "Plataforma en construcción",
+          "descripcion": "Iremos agregando materiales, aplicaciones y simulacros durante toda la gestión 2026. Si no encuentras algo todavía, vuelve a revisar más adelante.",
+          "fecha": "2026-08-04"
+        },
         {
           "id": "texto-biologia-geografia-5to",
           "categoria": "texto",
@@ -86,6 +100,13 @@
       "nombre": "Sexto de Secundaria",
       "recursos": [
         {
+          "id": "anuncio-construccion-sexto",
+          "categoria": "anuncio",
+          "titulo": "Plataforma en construcción",
+          "descripcion": "Iremos agregando materiales, aplicaciones y simulacros durante toda la gestión 2026. Si no encuentras algo todavía, vuelve a revisar más adelante.",
+          "fecha": "2026-08-04"
+        },
+        {
           "id": "texto-biologia-geografia-6to",
           "categoria": "texto",
           "titulo": "Texto — Biología y Geografía 6°",
@@ -95,16 +116,16 @@
           "estado": "disponible",
           "link": "https://drive.google.com/file/d/1Q41MGdaohaJ8XfD2OEpV3wiAIHZolceT/view?usp=sharing"
         },
-                {
-                            "id": "app-primeros-auxilios-6to",
-                            "categoria": "app",
-                            "titulo": "Primeros Auxilios en la Comunidad",
-                            "tema": "Medidas de Atención a la Salud (Tema 6)",
-                            "descripcion": "Central de Emergencias interactiva: Protocolo PAS, RCP, botiquín y 9 escenas de decisión.",
-                            "fecha": "2026-08-03",
-                            "estado": "nuevo",
-                            "link": "https://biogeo-uenab.pages.dev/primeros-auxilios-6sec.html"
-                }
+        {
+          "id": "app-primeros-auxilios-6to",
+          "categoria": "app",
+          "titulo": "Primeros Auxilios en la Comunidad",
+          "tema": "Medidas de Atención a la Salud (Tema 6)",
+          "descripcion": "Central de Emergencias interactiva: Protocolo PAS, RCP, botiquín y 9 escenas de decisión.",
+          "fecha": "2026-08-03",
+          "estado": "nuevo",
+          "link": "https://biogeo-uenab.pages.dev/primeros-auxilios-6sec.html"
+        }
       ]
     }
   ]
