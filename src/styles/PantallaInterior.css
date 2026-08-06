@@ -56,7 +56,7 @@
 }
 .pi-navbar-logo span { color: #AFA9EC; }
 .pi-navbar-inst {
-  font-size: 9px;
+  font-size: 12px;
   color: #AFA9EC;
 }
 .pi-logo-area {
@@ -94,7 +94,7 @@
   z-index: 2;
 }
 .pi-breadcrumb {
-  font-size: 10px;
+  font-size: 12px;
   color: #AFA9EC;
   font-family: 'Inter', sans-serif;
   margin-bottom: 6px;
@@ -121,7 +121,7 @@
   flex-wrap: wrap;
 }
 .pi-cstat {
-  font-size: 10px;
+  font-size: 12px;
   font-weight: 600;
   padding: 3px 10px;
   border-radius: 20px;
@@ -158,12 +158,12 @@
 .pi-si-anun  { background: #FBEAF0; }
 .pi-seccion-titulo {
   font-family: 'Poppins', sans-serif;
-  font-size: 14px;
+  font-size: 16px;
   font-weight: 700;
   color: #26215C;
 }
 .pi-seccion-count {
-  font-size: 10px;
+  font-size: 12px;
   color: #7F77DD;
   font-family: 'Inter', sans-serif;
   font-weight: 600;
@@ -214,7 +214,7 @@
 .pi-iw-simulacro { background: #EEEDFE; }
 .pi-t-tema-pill {
   display: inline-block;
-  font-size: 10px;
+  font-size: 12px;
   font-weight: 700;
   padding: 2px 8px;
   border-radius: 20px;
@@ -226,14 +226,14 @@
 .pi-tp-simulacro { background: #EEEDFE; color: #534AB7; }
 .pi-t-titulo {
   font-family: 'Poppins', sans-serif;
-  font-size: 13px;
+  font-size: 15px;
   font-weight: 700;
   color: #26215C;
   line-height: 1.35;
   margin-bottom: 5px;
 }
 .pi-t-desc {
-  font-size: 11px;
+  font-size: 13px;
   color: #3C3489;
   font-family: 'Inter', sans-serif;
   line-height: 1.5;
@@ -248,7 +248,7 @@
   border-top: 1px solid #EEEDFE;
 }
 .pi-t-badge {
-  font-size: 9px;
+  font-size: 12px;
   font-weight: 700;
   padding: 2px 8px;
   border-radius: 20px;
@@ -280,19 +280,19 @@
 }
 .pi-a-titulo {
   font-family: 'Poppins', sans-serif;
-  font-size: 13px;
+  font-size: 15px;
   font-weight: 700;
   color: #fff;
   margin-bottom: 3px;
 }
 .pi-a-texto {
-  font-size: 11px;
+  font-size: 13px;
   color: rgba(238,237,254,0.85);
   font-family: 'Inter', sans-serif;
   line-height: 1.5;
 }
 .pi-a-fecha {
-  font-size: 9px;
+  font-size: 12px;
   color: #AFA9EC;
   font-family: 'Inter', sans-serif;
   margin-top: 6px;
@@ -307,12 +307,12 @@
   gap: 8px;
 }
 .pi-footer-text {
-  font-size: 10px;
+  font-size: 12px;
   color: #7F77DD;
   font-family: 'Inter', sans-serif;
 }
 .pi-footer-badge {
-  font-size: 9px;
+  font-size: 12px;
   background: rgba(175,169,236,0.15);
   color: #AFA9EC;
   padding: 2px 8px;
