@@ -247,6 +247,29 @@
   padding-top: 8px;
   border-top: 1px solid #EEEDFE;
 }
+.pi-t-footer-left {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.pi-t-share {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  border: none;
+  background: #E1F5EE;
+  color: #085041;
+  cursor: pointer;
+  padding: 0;
+  flex: 0 0 auto;
+  transition: background 0.15s;
+}
+.pi-t-share:hover {
+  background: #9FE1CB;
+}
 .pi-t-badge {
   font-size: 12px;
   font-weight: 700;
