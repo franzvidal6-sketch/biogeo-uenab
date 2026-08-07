@@ -1,3 +1,4 @@
+import { useState } from "react";
 import "../styles/PantallaInterior.css";
 
 const CATEGORIAS = [
@@ -64,6 +65,18 @@ function Tarjeta({ recurso }) {
 }
 
 export default function PantallaInterior({ plataforma, curso, onVolver }) {
+  const [busqueda, setBusqueda] = useState("");
+
+  const recursosVisibles = curso.recursos.filter(r => {
+    if (!busqueda.trim()) return true;
+    const q = busqueda.trim().toLowerCase();
+    return (
+      r.titulo.toLowerCase().includes(q) ||
+      (r.tema || "").toLowerCase().includes(q) ||
+      (r.descripcion || "").toLowerCase().includes(q)
+    );
+  });
+
   return (
     <div className="pi-app">
 
@@ -114,9 +127,28 @@ export default function PantallaInterior({ plataforma, curso, onVolver }) {
         </div>
       </div>
 
+      <div className="pi-search-wrap">
+        <span className="pi-search-icon">
+          <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        </span>
+        <input
+          type="text"
+          className="pi-search-input"
+          placeholder="Buscar por tema o titulo..."
+          value={busqueda}
+          onChange={e => setBusqueda(e.target.value)}
+        />
+        {busqueda && (
+          <button className="pi-search-clear" onClick={() => setBusqueda("")} aria-label="Limpiar busqueda">✕</button>
+        )}
+      </div>
+
       <div className="pi-contenido">
+        {recursosVisibles.length === 0 && (
+          <div className="pi-sin-resultados">No se encontraron recursos para "{busqueda}".</div>
+        )}
         {CATEGORIAS.map(cat => {
-          const recursos = curso.recursos.filter(r => r.categoria === cat.id);
+          const recursos = recursosVisibles.filter(r => r.categoria === cat.id);
           if (recursos.length === 0) return null;
           return (
             <div key={cat.id} className="pi-seccion">
