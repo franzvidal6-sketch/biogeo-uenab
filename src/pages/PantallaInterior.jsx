@@ -14,8 +14,9 @@ const ICONOS_ESTADO = {
   disponible:  "Disponible",
 };
 
-function Tarjeta({ recurso }) {
+function Tarjeta({ recurso, visitado, onVisitar }) {
   const handleClick = () => {
+    if (onVisitar) onVisitar(recurso.id);
     if (recurso.link) window.open(recurso.link, "_blank");
   };
 
@@ -40,7 +41,7 @@ function Tarjeta({ recurso }) {
   }
 
   return (
-    <div className={`pi-tarjeta pi-t-${recurso.categoria}`} onClick={handleClick}>
+    <div className={`pi-tarjeta pi-t-${recurso.categoria}${visitado ? " pi-t-visitado" : ""}`} onClick={handleClick}>
       <div className={`pi-t-icon-wrap pi-iw-${recurso.categoria}`}>
         {recurso.categoria === "texto"     && "📖"}
         {recurso.categoria === "app"       && "🎮"}
@@ -58,7 +59,11 @@ function Tarjeta({ recurso }) {
             <svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.39 1.26 4.81L2 22l5.42-1.36a9.9 9.9 0 0 0 4.62 1.14h.01c5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.82 9.82 0 0 0 12.04 2Zm0 1.67c2.19 0 4.24.85 5.79 2.4a8.17 8.17 0 0 1 2.41 5.83c0 4.54-3.7 8.24-8.25 8.24a8.2 8.2 0 0 1-4.19-1.15l-.3-.18-3.21.81.86-3.13-.2-.32a8.15 8.15 0 0 1-1.27-4.39c0-4.55 3.71-8.11 8.36-8.11Zm-4.53 4.5c-.16 0-.42.06-.64.31-.22.25-.85.83-.85 2.02s.87 2.35.99 2.51c.12.16 1.7 2.68 4.19 3.65 2.07.81 2.49.65 2.94.61.45-.04 1.46-.6 1.66-1.18.2-.58.2-1.08.14-1.18-.06-.1-.22-.16-.46-.28-.24-.12-1.46-.72-1.68-.8-.23-.08-.39-.12-.56.12-.16.24-.64.8-.78.97-.15.16-.29.18-.53.06-.24-.12-1.03-.38-1.96-1.21-.72-.65-1.21-1.44-1.36-1.68-.14-.24-.02-.37.11-.49.11-.11.24-.29.36-.43.12-.15.16-.25.24-.41.08-.16.04-.31-.02-.43-.06-.12-.56-1.36-.77-1.86-.2-.49-.41-.42-.56-.43h-.48Z"/></svg>
           </button>
         </div>
-        <span className="pi-t-arrow">→</span>
+        {visitado ? (
+          <span className="pi-t-visto">✓ Visto</span>
+        ) : (
+          <span className="pi-t-arrow">→</span>
+        )}
       </div>
     </div>
   );
@@ -76,6 +81,27 @@ export default function PantallaInterior({ plataforma, curso, onVolver }) {
       (r.descripcion || "").toLowerCase().includes(q)
     );
   });
+
+  const CLAVE_VISITADOS = "biogeo-visitados";
+  const [visitados, setVisitados] = useState(() => {
+    try {
+      return new Set(JSON.parse(localStorage.getItem(CLAVE_VISITADOS) || "[]"));
+    } catch {
+      return new Set();
+    }
+  });
+
+  const marcarVisitado = (id) => {
+    setVisitados(prev => {
+      if (prev.has(id)) return prev;
+      const siguiente = new Set(prev);
+      siguiente.add(id);
+      try {
+        localStorage.setItem(CLAVE_VISITADOS, JSON.stringify([...siguiente]));
+      } catch {}
+      return siguiente;
+    });
+  };
 
   return (
     <div className="pi-app">
@@ -150,15 +176,28 @@ export default function PantallaInterior({ plataforma, curso, onVolver }) {
         {CATEGORIAS.map(cat => {
           const recursos = recursosVisibles.filter(r => r.categoria === cat.id);
           if (recursos.length === 0) return null;
+          const esAnuncio = cat.id === "anuncio";
+          const vistos = recursos.filter(r => visitados.has(r.id)).length;
           return (
             <div key={cat.id} className="pi-seccion">
               <div className="pi-seccion-header">
                 <div className={`pi-seccion-icono pi-si-${cat.clase}`}>{cat.icono}</div>
                 <div className="pi-seccion-titulo">{cat.label}</div>
-                <div className="pi-seccion-count">{recursos.length} recurso{recursos.length > 1 ? "s" : ""}</div>
+                <div className="pi-seccion-count">
+                  {esAnuncio
+                    ? `${recursos.length} recurso${recursos.length > 1 ? "s" : ""}`
+                    : `${vistos} de ${recursos.length} explorados`}
+                </div>
               </div>
-              <div className={cat.id === "anuncio" ? "pi-lista" : "pi-grilla"}>
-                {recursos.map(r => <Tarjeta key={r.id} recurso={r} />)}
+              {!esAnuncio && (
+                <div className="pi-seccion-barra">
+                  <div className="pi-seccion-barra-relleno" style={{ width: `${(vistos / recursos.length) * 100}%` }}></div>
+                </div>
+              )}
+              <div className={esAnuncio ? "pi-lista" : "pi-grilla"}>
+                {recursos.map(r => (
+                  <Tarjeta key={r.id} recurso={r} visitado={visitados.has(r.id)} onVisitar={marcarVisitado} />
+                ))}
               </div>
             </div>
           );
