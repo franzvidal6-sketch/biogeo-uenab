@@ -57,6 +57,16 @@
           "fecha": "2026-08-09",
           "estado": "nuevo",
           "link": "https://biogeo-uenab.pages.dev/tema6-2sec-matematica-aplicada.html"
+        },
+        {
+          "id": "juego-casera-unidades-2do",
+          "categoria": "app",
+          "titulo": "La Casera de las Unidades",
+          "tema": "Juego de refuerzo — Factor de conversión (Tema 6)",
+          "descripcion": "Ayuda a doña Rosa en su puesto de mercado a convertir unidades en 8 pedidos reales.",
+          "fecha": "2026-08-09",
+          "estado": "nuevo",
+          "link": "https://biogeo-uenab.pages.dev/casera-unidades-2sec.html"
         }
       ]
     },
