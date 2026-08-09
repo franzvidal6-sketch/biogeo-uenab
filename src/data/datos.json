@@ -47,6 +47,16 @@
           "fecha": "2026-08-02",
           "estado": "nuevo",
           "link": "https://biogeo-uenab.pages.dev/nomenclatura-oxidos-2sec.html"
+        },
+        {
+          "id": "app-matematica-aplicada-2do",
+          "categoria": "app",
+          "titulo": "Matemática Aplicada a las Ciencias Naturales",
+          "tema": "Notación científica, magnitudes y conversión de unidades (Tema 6)",
+          "descripcion": "Guía interactiva con simulador de calculadora científica, tablas de magnitudes y factor de conversión paso a paso.",
+          "fecha": "2026-08-09",
+          "estado": "nuevo",
+          "link": "https://biogeo-uenab.pages.dev/tema6-2sec-matematica-aplicada.html"
         }
       ]
     },
