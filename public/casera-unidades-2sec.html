@@ -1,0 +1,504 @@
+<!DOCTYPE html>
+<html lang="es" translate="no">
+<head>
+<meta charset="UTF-8">
+<meta name="google" content="notranslate">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>La Casera de las Unidades · Tema 6</title>
+<style>
+  :root{
+    --terracota:#B85C3E;
+    --terracota-oscuro:#8C4530;
+    --ambar:#E0912F;
+    --ambar-suave:#FBEAD2;
+    --verde-tierra:#5F7A4F;
+    --verde-tierra-suave:#E4EBDC;
+    --crema:#FBF4E9;
+    --superficie:#FFFFFF;
+    --texto:#3A2A1E;
+    --texto-suave:#6B5642;
+    --borde:#E8DAC4;
+    --rojo-error:#B23A3A;
+    --mono: 'Courier New', Consolas, monospace;
+    --sans: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  html,body{background:var(--crema); color:var(--texto); font-family:var(--sans); font-size:16px; line-height:1.5; -webkit-tap-highlight-color:transparent;}
+  body{padding-bottom:30px; min-height:100vh;}
+  button{font-family:var(--sans); cursor:pointer;}
+
+  /* ===== HEADER ===== */
+  header.app-header{
+    background:linear-gradient(160deg, var(--terracota-oscuro) 0%, var(--terracota) 100%);
+    color:#fff;
+    padding:18px 16px;
+    text-align:center;
+  }
+  .institucional{font-size:11px; letter-spacing:0.06em; text-transform:uppercase; color:#F5DCC8; font-weight:600;}
+  h1.titulo-app{font-size:22px; font-weight:800; margin-top:8px; line-height:1.3;}
+  .subtitulo-app{font-size:14px; color:#F9E8D8; margin-top:5px;}
+
+  main{max-width:640px; margin:0 auto; padding:18px 16px;}
+
+  /* ===== barra de progreso ===== */
+  .progreso-wrap{display:flex; align-items:center; gap:10px; margin-bottom:18px;}
+  .progreso-barra{flex:1; height:10px; background:var(--borde); border-radius:6px; overflow:hidden;}
+  .progreso-fill{height:100%; background:var(--verde-tierra); border-radius:6px; transition:width .35s ease;}
+  .progreso-texto{font-size:13px; font-weight:700; color:var(--texto-suave); white-space:nowrap;}
+
+  /* ===== pantallas ===== */
+  .pantalla{display:none;}
+  .pantalla.activa{display:block; animation:fade .3s ease;}
+  @keyframes fade{from{opacity:0; transform:translateY(6px);} to{opacity:1; transform:translateY(0);}}
+
+  .card{
+    background:var(--superficie);
+    border:1px solid var(--borde);
+    border-radius:16px;
+    padding:20px 18px;
+    box-shadow:0 2px 10px rgba(140,69,48,0.07);
+  }
+
+  /* ===== portada ===== */
+  .portada-emoji{font-size:52px; text-align:center; margin-bottom:6px;}
+  .portada h2{font-size:19px; text-align:center; color:var(--terracota-oscuro); margin-bottom:10px;}
+  .portada p{font-size:15px; line-height:1.65; margin-bottom:10px;}
+  .portada .como-jugar{background:var(--verde-tierra-suave); border-radius:12px; padding:14px; margin-top:14px;}
+  .portada .como-jugar h3{font-size:13px; text-transform:uppercase; letter-spacing:0.04em; color:var(--verde-tierra); margin-bottom:8px;}
+  .portada .como-jugar li{font-size:14.5px; line-height:1.6; margin-left:18px; margin-bottom:4px;}
+  .btn-grande{
+    display:block; width:100%; margin-top:18px;
+    background:var(--terracota-oscuro); color:#fff; border:none; border-radius:12px;
+    padding:15px; font-size:16.5px; font-weight:800; letter-spacing:0.01em;
+  }
+  .btn-grande:active{background:#6E3524;}
+
+  /* ===== pedido ===== */
+  .pedido-cabecera{display:flex; align-items:center; gap:12px; margin-bottom:14px;}
+  .pedido-avatar{font-size:34px; flex:none;}
+  .pedido-globo{
+    background:var(--ambar-suave);
+    border-radius:14px 14px 14px 3px;
+    padding:11px 14px;
+    font-size:14.5px;
+    line-height:1.55;
+    color:var(--texto);
+    flex:1;
+  }
+  .pedido-globo strong{color:var(--texto); font-weight:800;}
+
+  .pedido-tarea{
+    text-align:center;
+    font-size:15px;
+    color:var(--texto-suave);
+    margin-bottom:6px;
+  }
+  .pedido-cantidad{
+    text-align:center;
+    font-family:var(--mono);
+    font-weight:800;
+    font-size:30px;
+    color:var(--terracota-oscuro);
+    margin-bottom:16px;
+  }
+
+  /* balanza (elemento firma) */
+  .balanza-wrap{margin:14px 0 18px; display:flex; justify-content:center;}
+  .balanza-svg{width:100%; max-width:280px; height:auto;}
+  .balanza-etiqueta{
+    text-align:center; font-size:12px; font-weight:700; color:var(--texto-suave);
+    text-transform:uppercase; letter-spacing:0.04em; margin-bottom:8px;
+  }
+
+  .opciones-fraccion{display:grid; grid-template-columns:1fr 1fr; gap:10px; margin-bottom:8px;}
+  .opcion-fraccion{
+    background:var(--crema);
+    border:2px solid var(--borde);
+    border-radius:12px;
+    padding:16px 8px;
+    text-align:center;
+    font-family:var(--mono);
+    font-weight:700;
+    font-size:14.5px;
+    line-height:1.5;
+  }
+  .opcion-fraccion:active{transform:scale(0.97);}
+  .opcion-fraccion.seleccionada{border-color:var(--terracota); background:var(--ambar-suave);}
+  .opcion-fraccion .frac-num{display:block; border-bottom:2px solid var(--texto); padding-bottom:3px; margin-bottom:3px;}
+
+  .paso-titulo{font-size:13px; font-weight:800; text-transform:uppercase; letter-spacing:0.04em; color:var(--verde-tierra); margin:16px 0 8px;}
+
+  .opciones-resultado{display:grid; gap:10px; margin-top:6px;}
+  .opcion-resultado{
+    background:var(--crema);
+    border:2px solid var(--borde);
+    border-radius:12px;
+    padding:13px 16px;
+    font-family:var(--mono);
+    font-weight:700;
+    font-size:16px;
+    text-align:center;
+  }
+  .opcion-resultado:active{transform:scale(0.98);}
+  .opcion-resultado.seleccionada{border-color:var(--terracota); background:var(--ambar-suave);}
+  .opcion-resultado.correcta{border-color:var(--verde-tierra); background:var(--verde-tierra-suave); color:var(--verde-tierra);}
+  .opcion-resultado.incorrecta{border-color:var(--rojo-error); background:#FBE4E4; color:var(--rojo-error);}
+
+  .feedback-caja{
+    margin-top:14px; padding:12px 14px; border-radius:12px;
+    font-size:14px; line-height:1.55; display:none;
+  }
+  .feedback-caja.correcto{display:block; background:var(--verde-tierra-suave); color:#3D5030; border:1px solid #C4D6B4;}
+  .feedback-caja.incorrecto{display:block; background:#FBE4E4; color:#7A2A2A; border:1px solid #E8B8B8;}
+
+  .btn-continuar{
+    display:none;
+    width:100%; margin-top:14px;
+    background:var(--verde-tierra); color:#fff; border:none; border-radius:12px;
+    padding:14px; font-size:15.5px; font-weight:800;
+  }
+  .btn-continuar.visible{display:block;}
+  .btn-continuar:active{opacity:0.85;}
+
+  .btn-desactivado{opacity:0.4; pointer-events:none;}
+
+  /* ===== resultado final ===== */
+  .final-emoji{font-size:60px; text-align:center; margin-bottom:8px;}
+  .final-medalla{font-size:19px; font-weight:800; text-align:center; color:var(--terracota-oscuro); margin-bottom:6px;}
+  .final-puntaje{font-size:15px; text-align:center; color:var(--texto-suave); margin-bottom:16px;}
+  .final-barra-wrap{background:var(--borde); border-radius:8px; height:14px; overflow:hidden; margin-bottom:18px;}
+  .final-barra{height:100%; background:var(--verde-tierra);}
+  .final-mensaje{font-size:14.5px; line-height:1.6; text-align:center; color:var(--texto); margin-bottom:16px;}
+
+  footer{max-width:640px; margin:20px auto 0; padding:0 16px; text-align:center;}
+  .pie-inst{font-size:12.5px; color:var(--texto-suave); line-height:1.7; padding-top:14px; border-top:1px solid var(--borde);}
+</style>
+</head>
+<body>
+
+<header class="app-header">
+  <div class="institucional">U.E. Nuevo Amanecer Boliviano · Distrito El Alto 1</div>
+  <h1 class="titulo-app">🧺 La Casera de las Unidades</h1>
+  <p class="subtitulo-app">Refuerzo del Tema 6 · 2° de Secundaria</p>
+</header>
+
+<main>
+
+  <div class="progreso-wrap" id="progresoWrap" style="display:none;">
+    <div class="progreso-barra"><div class="progreso-fill" id="progresoFill" style="width:0%;"></div></div>
+    <div class="progreso-texto" id="progresoTexto">Pedido 1 de 8</div>
+  </div>
+
+  <!-- ===== PORTADA ===== -->
+  <div class="pantalla activa portada" id="pantallaPortada">
+    <div class="card">
+      <div class="portada-emoji">👵🧺</div>
+      <h2>Ayuda a doña Rosa en su puesto</h2>
+      <p>Doña Rosa vende en el mercado y necesita convertir las unidades de sus pedidos usando el <strong>factor de conversión</strong> que aprendiste en la app del Tema 6.</p>
+      <p>Vas a armar la fracción correcta y calcular el resultado — igual que hiciste con el ejemplo de los 3 kilómetros.</p>
+      <div class="como-jugar">
+        <h3>Cómo se juega</h3>
+        <ul>
+          <li>Cada pedido tiene 2 pasos: armar la fracción y elegir el resultado.</li>
+          <li>No hay cronómetro — piensa con calma.</li>
+          <li>Al final recibes una medalla según tus aciertos.</li>
+        </ul>
+      </div>
+      <button class="btn-grande" onclick="empezarJuego()">Empezar a ayudar a doña Rosa</button>
+    </div>
+  </div>
+
+  <!-- ===== PEDIDO (plantilla dinámica) ===== -->
+  <div class="pantalla" id="pantallaPedido">
+    <div class="card">
+      <div class="pedido-cabecera">
+        <div class="pedido-avatar">👵</div>
+        <div class="pedido-globo" id="pedidoGlobo"></div>
+      </div>
+
+      <div class="pedido-tarea">Convierte:</div>
+      <div class="pedido-cantidad" id="pedidoCantidad"></div>
+
+      <div class="paso-titulo">Paso 1 · Arma la fracción correcta</div>
+      <div class="balanza-wrap"><svg class="balanza-svg" id="balanzaSvg" viewBox="0 0 280 140"></svg></div>
+      <div class="opciones-fraccion" id="opcionesFraccion"></div>
+
+      <div id="bloquePaso2" style="display:none;">
+        <div class="paso-titulo">Paso 2 · Elige el resultado</div>
+        <div class="opciones-resultado" id="opcionesResultado"></div>
+      </div>
+
+      <div class="feedback-caja" id="feedbackCaja"></div>
+      <button class="btn-continuar" id="btnContinuar" onclick="siguientePedido()">Siguiente pedido →</button>
+    </div>
+  </div>
+
+  <!-- ===== FINAL ===== -->
+  <div class="pantalla" id="pantallaFinal">
+    <div class="card">
+      <div class="final-emoji" id="finalEmoji">🏅</div>
+      <div class="final-medalla" id="finalMedalla"></div>
+      <div class="final-puntaje" id="finalPuntaje"></div>
+      <div class="final-barra-wrap"><div class="final-barra" id="finalBarra" style="width:0%;"></div></div>
+      <div class="final-mensaje" id="finalMensaje"></div>
+      <button class="btn-grande" onclick="reiniciarJuego()">Jugar de nuevo</button>
+    </div>
+  </div>
+
+</main>
+
+<footer>
+  <p class="pie-inst">U.E. Nuevo Amanecer Boliviano · Prof. Franz Vidal Condori Mamani<br>Refuerzo — Matemática Aplicada a las Ciencias Naturales · Tema 6</p>
+</footer>
+
+<script>
+// ===================== DATOS DE LOS PEDIDOS =====================
+// Cada pedido: cantidad de partida, unidad de partida, unidad destino,
+// factor correcto (para llegar de partida a destino), resultado correcto,
+// y 2 resultados incorrectos plausibles (errores típicos).
+const PEDIDOS = [
+  {
+    globo: "Compré 3 <strong>kilómetros</strong> de cordel para atar las bolsas del puesto. ¿Cuántos metros son?",
+    cantidad: "3 km", unidadOrigen: "km", unidadDestino: "m",
+    fraccionCorrecta: { arriba: "1000 m", abajo: "1 km" },
+    fraccionIncorrecta: { arriba: "1 km", abajo: "1000 m" },
+    resultado: "3000 m",
+    incorrectos: ["0,003 m", "300 m"]
+  },
+  {
+    globo: "Este rollo de tela mide 250 <strong>centímetros</strong>. ¿Cuántos metros son?",
+    cantidad: "250 cm", unidadOrigen: "cm", unidadDestino: "m",
+    fraccionCorrecta: { arriba: "1 m", abajo: "100 cm" },
+    fraccionIncorrecta: { arriba: "100 cm", abajo: "1 m" },
+    resultado: "2,5 m",
+    incorrectos: ["25000 m", "0,025 m"]
+  },
+  {
+    globo: "El puesto abre en 2 <strong>horas</strong>. ¿Cuántos segundos faltan?",
+    cantidad: "2 h", unidadOrigen: "h", unidadDestino: "s",
+    fraccionCorrecta: { arriba: "3600 s", abajo: "1 h" },
+    fraccionIncorrecta: { arriba: "1 h", abajo: "3600 s" },
+    resultado: "7200 s",
+    incorrectos: ["0,0006 s", "720 s"]
+  },
+  {
+    globo: "Un cliente pide 2 <strong>arrobas</strong> de papa. ¿Cuántos kilos le entrego?",
+    cantidad: "2 arrobas", unidadOrigen: "arrobas", unidadDestino: "kg",
+    fraccionCorrecta: { arriba: "11,5 kg", abajo: "1 arroba" },
+    fraccionIncorrecta: { arriba: "1 arroba", abajo: "11,5 kg" },
+    resultado: "23 kg",
+    incorrectos: ["0,17 kg", "2,3 kg"]
+  },
+  {
+    globo: "Esta bolsita de especias pesa 500 <strong>gramos</strong>. ¿Cuántos kilos son?",
+    cantidad: "500 g", unidadOrigen: "g", unidadDestino: "kg",
+    fraccionCorrecta: { arriba: "1 kg", abajo: "1000 g" },
+    fraccionIncorrecta: { arriba: "1000 g", abajo: "1 kg" },
+    resultado: "0,5 kg",
+    incorrectos: ["5000 kg", "0,05 kg"]
+  },
+  {
+    globo: "Compré 1 <strong>quintal</strong> de cereal para revender. Recuerda: 1 quintal = 4 arrobas. ¿Cuántos kilos son?",
+    cantidad: "1 quintal", unidadOrigen: "quintal", unidadDestino: "kg",
+    fraccionCorrecta: { arriba: "46 kg", abajo: "1 quintal" },
+    fraccionIncorrecta: { arriba: "1 quintal", abajo: "46 kg" },
+    resultado: "46 kg",
+    incorrectos: ["11,5 kg", "460 kg"]
+  },
+  {
+    globo: "Un pedido grande: 3,5 <strong>arrobas</strong> de maíz. ¿Cuántos kilos preparo?",
+    cantidad: "3,5 arrobas", unidadOrigen: "arrobas", unidadDestino: "kg",
+    fraccionCorrecta: { arriba: "11,5 kg", abajo: "1 arroba" },
+    fraccionIncorrecta: { arriba: "1 arroba", abajo: "11,5 kg" },
+    resultado: "40,25 kg",
+    incorrectos: ["4,025 kg", "3,5 kg"]
+  },
+  {
+    globo: "Para la feria del domingo necesito 5 <strong>quintales</strong> de papa. ¿Cuántos kilos debo llevar?",
+    cantidad: "5 quintales", unidadOrigen: "quintal", unidadDestino: "kg",
+    fraccionCorrecta: { arriba: "46 kg", abajo: "1 quintal" },
+    fraccionIncorrecta: { arriba: "1 quintal", abajo: "46 kg" },
+    resultado: "230 kg",
+    incorrectos: ["23 kg", "920 kg"]
+  }
+];
+
+let indicePedido = 0;
+let aciertos = 0;
+let pasoFraccionOK = false;
+
+function mezclarArray(arr){
+  const copia = arr.slice();
+  for (let i = copia.length - 1; i > 0; i--){
+    const j = Math.floor(Math.random() * (i + 1));
+    [copia[i], copia[j]] = [copia[j], copia[i]];
+  }
+  return copia;
+}
+
+function empezarJuego(){
+  document.getElementById('pantallaPortada').classList.remove('activa');
+  document.getElementById('pantallaPedido').classList.add('activa');
+  document.getElementById('progresoWrap').style.display = 'flex';
+  indicePedido = 0;
+  aciertos = 0;
+  cargarPedido();
+}
+
+function svgBalanza(inclinacion){
+  // inclinacion: 0 = equilibrada, 1 = inclinada a la izquierda (bien), -1 = inclinada a la derecha (mal)
+  const angulo = inclinacion * 10;
+  return `
+    <line x1="140" y1="20" x2="140" y2="55" stroke="#8C4530" stroke-width="4"/>
+    <circle cx="140" cy="18" r="6" fill="#B85C3E"/>
+    <g transform="rotate(${angulo} 140 55)">
+      <line x1="60" y1="55" x2="220" y2="55" stroke="#8C4530" stroke-width="4" stroke-linecap="round"/>
+      <line x1="60" y1="55" x2="60" y2="85" stroke="#8C4530" stroke-width="3"/>
+      <ellipse cx="60" cy="95" rx="34" ry="14" fill="#E0912F"/>
+      <line x1="220" y1="55" x2="220" y2="85" stroke="#8C4530" stroke-width="3"/>
+      <ellipse cx="220" cy="95" rx="34" ry="14" fill="#5F7A4F"/>
+    </g>
+    <line x1="90" y1="130" x2="190" y2="130" stroke="#8C4530" stroke-width="5" stroke-linecap="round"/>
+  `;
+}
+
+function cargarPedido(){
+  const p = PEDIDOS[indicePedido];
+  pasoFraccionOK = false;
+
+  document.getElementById('progresoTexto').textContent = `Pedido ${indicePedido+1} de ${PEDIDOS.length}`;
+  document.getElementById('progresoFill').style.width = ((indicePedido)/PEDIDOS.length*100) + '%';
+
+  document.getElementById('pedidoGlobo').innerHTML = p.globo;
+  document.getElementById('pedidoCantidad').textContent = p.cantidad + '  →  ' + p.unidadDestino;
+
+  document.getElementById('balanzaSvg').innerHTML = svgBalanza(0);
+
+  // Paso 1: opciones de fracción en orden aleatorio (evita que el orden sea un patrón adivinable)
+  const opciones = mezclarArray([p.fraccionCorrecta, p.fraccionIncorrecta]);
+
+  const contFraccion = document.getElementById('opcionesFraccion');
+  contFraccion.innerHTML = '';
+  opciones.forEach(op => {
+    const esCorrecta = (op.arriba === p.fraccionCorrecta.arriba);
+    const div = document.createElement('div');
+    div.className = 'opcion-fraccion';
+    div.innerHTML = `<span class="frac-num">${op.arriba}</span><span>${op.abajo}</span>`;
+    div.onclick = () => elegirFraccion(div, esCorrecta);
+    contFraccion.appendChild(div);
+  });
+
+  document.getElementById('bloquePaso2').style.display = 'none';
+  document.getElementById('opcionesResultado').innerHTML = '';
+  document.getElementById('feedbackCaja').className = 'feedback-caja';
+  document.getElementById('feedbackCaja').textContent = '';
+  document.getElementById('btnContinuar').classList.remove('visible');
+}
+
+function elegirFraccion(elemento, esCorrecta){
+  if (pasoFraccionOK) return; // ya avanzó
+  document.querySelectorAll('.opcion-fraccion').forEach(el => el.classList.remove('seleccionada'));
+  elemento.classList.add('seleccionada');
+
+  if (esCorrecta){
+    pasoFraccionOK = true;
+    document.getElementById('balanzaSvg').innerHTML = svgBalanza(6);
+    document.querySelectorAll('.opcion-fraccion').forEach(el => el.style.pointerEvents = 'none');
+    mostrarPaso2();
+  } else {
+    document.getElementById('balanzaSvg').innerHTML = svgBalanza(-6);
+    const feedback = document.getElementById('feedbackCaja');
+    feedback.className = 'feedback-caja incorrecto';
+    feedback.textContent = 'Esa fracción está invertida — las unidades no se cancelan. Intenta con la otra opción.';
+    setTimeout(() => { elemento.classList.remove('seleccionada'); }, 700);
+  }
+}
+
+function mostrarPaso2(){
+  const p = PEDIDOS[indicePedido];
+  document.getElementById('bloquePaso2').style.display = 'block';
+  document.getElementById('feedbackCaja').className = 'feedback-caja';
+  document.getElementById('feedbackCaja').textContent = '';
+
+  const todasOpciones = [p.resultado, ...p.incorrectos];
+  const orden = mezclarArray([0, 1, 2]);
+  const contResultado = document.getElementById('opcionesResultado');
+  contResultado.innerHTML = '';
+  orden.forEach(i => {
+    const valor = todasOpciones[i];
+    const div = document.createElement('div');
+    div.className = 'opcion-resultado';
+    div.textContent = valor;
+    div.onclick = () => elegirResultado(div, valor === p.resultado, p.resultado);
+    contResultado.appendChild(div);
+  });
+}
+
+function elegirResultado(elemento, esCorrecta, correcto){
+  if (document.getElementById('btnContinuar').classList.contains('visible')) return;
+  document.querySelectorAll('.opcion-resultado').forEach(el => el.style.pointerEvents = 'none');
+
+  const feedback = document.getElementById('feedbackCaja');
+  if (esCorrecta){
+    elemento.classList.add('correcta');
+    aciertos++;
+    feedback.className = 'feedback-caja correcto';
+    feedback.textContent = '¡Correcto! Doña Rosa te lo agradece. 🧺';
+  } else {
+    elemento.classList.add('incorrecta');
+    document.querySelectorAll('.opcion-resultado').forEach(el => {
+      if (el.textContent === correcto) el.classList.add('correcta');
+    });
+    feedback.className = 'feedback-caja incorrecto';
+    feedback.textContent = 'No era ese — fíjate en la respuesta marcada en verde para la próxima.';
+  }
+  document.getElementById('btnContinuar').classList.add('visible');
+}
+
+function siguientePedido(){
+  indicePedido++;
+  if (indicePedido >= PEDIDOS.length){
+    mostrarFinal();
+  } else {
+    cargarPedido();
+  }
+}
+
+function mostrarFinal(){
+  document.getElementById('pantallaPedido').classList.remove('activa');
+  document.getElementById('progresoWrap').style.display = 'none';
+  document.getElementById('pantallaFinal').classList.add('activa');
+
+  const total = PEDIDOS.length;
+  const porcentaje = Math.round((aciertos/total)*100);
+
+  let medalla, emoji, mensaje;
+  if (aciertos === total){
+    medalla = 'Casera Maestra'; emoji = '👑';
+    mensaje = 'Dominas el factor de conversión de punta a punta. Doña Rosa ya te quiere de socia en el puesto.';
+  } else if (aciertos >= total - 2){
+    medalla = 'Vendedora Experta'; emoji = '🥇';
+    mensaje = 'Muy bien hecho. Repasa las que fallaste y la próxima vez sale perfecto.';
+  } else if (aciertos >= total/2){
+    medalla = 'Aprendiz de Mercado'; emoji = '🥈';
+    mensaje = 'Vas bien encaminado. Vuelve a la app explicativa del Tema 6 y repite el juego para afianzar.';
+  } else {
+    medalla = 'Primer Día en el Puesto'; emoji = '🌱';
+    mensaje = 'Todo comienzo cuesta. Repasa el método del factor de conversión en la app explicativa y vuelve a intentarlo.';
+  }
+
+  document.getElementById('finalEmoji').textContent = emoji;
+  document.getElementById('finalMedalla').textContent = medalla;
+  document.getElementById('finalPuntaje').textContent = `${aciertos} de ${total} pedidos correctos`;
+  document.getElementById('finalBarra').style.width = porcentaje + '%';
+  document.getElementById('finalMensaje').textContent = mensaje;
+}
+
+function reiniciarJuego(){
+  document.getElementById('pantallaFinal').classList.remove('activa');
+  document.getElementById('pantallaPortada').classList.add('activa');
+}
+</script>
+
+</body>
+</html>
