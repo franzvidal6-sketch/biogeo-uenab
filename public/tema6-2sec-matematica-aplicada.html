@@ -1,0 +1,639 @@
+<!DOCTYPE html>
+<html lang="es" translate="no">
+<head>
+<meta charset="UTF-8">
+<meta name="google" content="notranslate">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>Matemática Aplicada a las Ciencias Naturales · Tema 6</title>
+<style>
+  :root{
+    --azul-profundo:#12384F;
+    --azul-ciencia:#2D82B7;
+    --azul-claro:#E7F2F8;
+    --ambar:#F2A541;
+    --ambar-suave:#FDF1DD;
+    --verde-lcd:#3ED28A;
+    --fondo:#F5F9FC;
+    --superficie:#FFFFFF;
+    --texto:#16242E;
+    --texto-suave:#3E5866;
+    --borde:#D7E6EE;
+    --mono: 'Courier New', Consolas, monospace;
+    --sans: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  html,body{background:var(--fondo); color:var(--texto); font-family:var(--sans); font-size:16px; line-height:1.5; -webkit-tap-highlight-color:transparent;}
+  body{padding-bottom:40px;}
+  img{max-width:100%;}
+
+  /* ===== HEADER ===== */
+  header.app-header{
+    background:linear-gradient(160deg, var(--azul-profundo) 0%, #1C5578 100%);
+    color:#fff;
+    padding:18px 16px 16px;
+    position:relative;
+    overflow:hidden;
+  }
+  header.app-header::before{
+    content:"";
+    position:absolute; inset:0;
+    background-image:
+      radial-gradient(circle at 85% 20%, rgba(255,255,255,0.08) 0, transparent 40%),
+      repeating-linear-gradient(90deg, rgba(255,255,255,0.035) 0px, rgba(255,255,255,0.035) 1px, transparent 1px, transparent 26px);
+    pointer-events:none;
+  }
+  .header-inner{position:relative; z-index:1; max-width:720px; margin:0 auto;}
+  .institucional{font-size:11px; letter-spacing:0.06em; text-transform:uppercase; color:#AFD4E8; font-weight:600;}
+  .institucional strong{color:#fff;}
+  .tema-badge{
+    display:inline-flex; align-items:center; gap:6px;
+    background:rgba(255,255,255,0.12);
+    border:1px solid rgba(255,255,255,0.25);
+    border-radius:20px;
+    padding:3px 10px;
+    font-size:11px;
+    font-weight:700;
+    letter-spacing:0.03em;
+    margin-top:10px;
+  }
+  h1.titulo-app{
+    font-family:var(--sans);
+    font-size:23px;
+    line-height:1.35;
+    margin-top:10px;
+    font-weight:800;
+    letter-spacing:-0.01em;
+  }
+  h1.titulo-app span{color:var(--verde-lcd);}
+  .subtitulo-app{font-size:14.5px; color:#E4F1F8; margin-top:7px; line-height:1.6;}
+
+  /* ===== TABS ===== */
+  nav.tabs{
+    position:sticky; top:0; z-index:20;
+    background:var(--superficie);
+    border-bottom:1px solid var(--borde);
+    display:flex;
+    overflow-x:auto;
+    scrollbar-width:none;
+    box-shadow:0 2px 8px rgba(18,56,79,0.06);
+  }
+  nav.tabs::-webkit-scrollbar{display:none;}
+  nav.tabs button{
+    flex:1 0 auto;
+    min-width:84px;
+    background:none;
+    border:none;
+    padding:12px 8px 10px;
+    font-family:var(--sans);
+    font-size:13px;
+    font-weight:700;
+    color:var(--texto-suave);
+    cursor:pointer;
+    border-bottom:3px solid transparent;
+    display:flex; flex-direction:column; align-items:center; gap:3px;
+    line-height:1.25;
+  }
+  nav.tabs button .tab-num{
+    font-family:var(--mono);
+    font-size:11.5px;
+    color:var(--texto-suave);
+    opacity:0.85;
+  }
+  nav.tabs button.activo{color:var(--azul-ciencia); border-bottom-color:var(--azul-ciencia);}
+  nav.tabs button.activo .tab-num{color:var(--azul-ciencia); opacity:1;}
+
+  main{max-width:720px; margin:0 auto; padding:16px;}
+  section.panel{display:none; animation:fade .25s ease;}
+  section.panel.activo{display:block;}
+  @keyframes fade{from{opacity:0; transform:translateY(4px);} to{opacity:1; transform:translateY(0);}}
+
+  .card{
+    background:var(--superficie);
+    border:1px solid var(--borde);
+    border-radius:14px;
+    padding:16px;
+    margin-bottom:14px;
+  }
+  .card h2{
+    font-size:17px;
+    color:var(--azul-profundo);
+    margin-bottom:10px;
+    display:flex; align-items:center; gap:8px;
+  }
+  .card h2 .icono{font-size:19px;}
+  .card p{font-size:15px; line-height:1.7; color:var(--texto); margin-bottom:9px;}
+  .card p:last-child{margin-bottom:0;}
+  .card .nota{font-size:13.5px; color:var(--texto-suave); font-style:italic;}
+
+  /* ===== ESTRUCTURA a x 10^n ===== */
+  .estructura-formula{
+    display:flex; align-items:center; justify-content:center; gap:6px;
+    background:var(--azul-profundo);
+    border-radius:12px;
+    padding:20px 10px;
+    margin:10px 0 14px;
+    flex-wrap:wrap;
+  }
+  .bloque-formula{
+    font-family:var(--mono);
+    font-weight:700;
+    font-size:26px;
+    color:#fff;
+    background:rgba(255,255,255,0.08);
+    border:1px solid rgba(255,255,255,0.18);
+    border-radius:10px;
+    padding:6px 14px;
+    text-align:center;
+  }
+  .bloque-formula small{display:block; font-size:9px; font-weight:600; letter-spacing:0.05em; text-transform:uppercase; color:var(--verde-lcd); margin-top:2px;}
+  .op-formula{color:#AFD4E8; font-size:20px; font-family:var(--mono);}
+  .exp-formula{position:relative; top:-10px; font-size:16px !important; color:var(--ambar) !important;}
+
+  .leyenda-formula{display:grid; gap:10px; margin-top:6px;}
+  .leyenda-item{display:flex; gap:10px; font-size:14.5px; line-height:1.55; align-items:flex-start;}
+  .leyenda-punto{
+    flex:none; width:8px; height:8px; border-radius:50%; margin-top:5px;
+  }
+  .pt-coef{background:var(--verde-lcd);}
+  .pt-base{background:#AFD4E8;}
+  .pt-exp{background:var(--ambar);}
+
+  /* comparación positivo/negativo */
+  .comparacion{display:grid; grid-template-columns:1fr 1fr; gap:10px; margin-top:10px;}
+  @media(max-width:420px){.comparacion{grid-template-columns:1fr;}}
+  .comp-box{border-radius:10px; padding:12px; font-size:14.5px; line-height:1.55;}
+  .comp-pos{background:var(--azul-claro); border:1px solid #BFDDEC;}
+  .comp-neg{background:var(--ambar-suave); border:1px solid #F0D9AE;}
+  .comp-box .comp-tag{font-family:var(--mono); font-weight:700; font-size:12px; display:block; margin-bottom:5px;}
+  .comp-pos .comp-tag{color:var(--azul-ciencia);}
+  .comp-neg .comp-tag{color:#B3781A;}
+
+  /* ===== PANTALLA CALCULADORA (elemento firma) ===== */
+  .calc-shell{
+    background:#0E2A3B;
+    border-radius:16px;
+    padding:14px;
+    margin:12px 0;
+    box-shadow:inset 0 2px 6px rgba(0,0,0,0.3);
+  }
+  .calc-screen{
+    background:#C9E8D6;
+    background-image:linear-gradient(180deg, rgba(255,255,255,0.15), rgba(0,0,0,0.05));
+    border-radius:8px;
+    padding:14px 12px;
+    font-family:var(--mono);
+    color:#0E2A3B;
+    min-height:52px;
+    display:flex; align-items:center; justify-content:flex-end;
+    font-size:22px;
+    font-weight:700;
+    letter-spacing:0.02em;
+    overflow-x:auto;
+    white-space:nowrap;
+    border:2px solid #0a2130;
+  }
+  .calc-label{color:#A9CFE0; font-size:11.5px; text-transform:uppercase; letter-spacing:0.08em; font-weight:700; margin-bottom:7px;}
+  .calc-controles{display:flex; gap:8px; margin-top:14px;}
+  .calc-controles > div{flex:1;}
+  .calc-controles label{display:block; font-size:11.5px; color:#A9CFE0; text-transform:uppercase; letter-spacing:0.05em; font-weight:700; margin-bottom:5px;}
+  .calc-controles input[type=range]{width:100%; accent-color:var(--verde-lcd);}
+  .calc-valor{font-family:var(--mono); color:#fff; font-size:15px; font-weight:700;}
+  .calc-lectura{
+    margin-top:12px;
+    background:rgba(255,255,255,0.08);
+    border-radius:8px;
+    padding:12px;
+    font-size:14.5px;
+    color:#E4F1F8;
+    line-height:1.6;
+  }
+  .calc-lectura strong{color:var(--verde-lcd); font-family:var(--mono);}
+  .calc-numero-completo{
+    text-align:center;
+    font-family:var(--mono);
+    font-size:17px;
+    color:var(--azul-profundo);
+    background:var(--azul-claro);
+    border-radius:8px;
+    padding:10px;
+    margin-top:10px;
+    font-weight:700;
+    word-break:break-all;
+  }
+
+  /* ===== TABLAS ===== */
+  table.tabla-mag{width:100%; border-collapse:collapse; font-size:14.5px; margin-top:8px;}
+  table.tabla-mag th{
+    background:var(--azul-profundo); color:#fff; text-align:left;
+    padding:9px 10px; font-size:12.5px; text-transform:uppercase; letter-spacing:0.04em;
+  }
+  table.tabla-mag th:first-child{border-radius:8px 0 0 0;}
+  table.tabla-mag th:last-child{border-radius:0 8px 0 0;}
+  table.tabla-mag td{padding:10px; border-bottom:1px solid var(--borde);}
+  table.tabla-mag tr:last-child td{border-bottom:none;}
+  table.tabla-mag td.simbolo{font-family:var(--mono); font-weight:700; color:var(--azul-ciencia);}
+
+  .derivadas-grid{display:grid; gap:10px; margin-top:10px;}
+  .derivada-card{
+    background:var(--azul-claro);
+    border-radius:10px;
+    padding:13px;
+    display:flex; align-items:center; justify-content:space-between; gap:10px;
+    flex-wrap:wrap;
+  }
+  .derivada-nombre{font-weight:700; font-size:14.5px; color:var(--azul-profundo);}
+  .derivada-formula{font-family:var(--mono); font-size:13.5px; color:var(--texto-suave);}
+  .derivada-unidad{
+    font-family:var(--mono); font-weight:700; font-size:13px;
+    background:var(--azul-ciencia); color:#fff; border-radius:6px; padding:4px 9px;
+  }
+
+  /* ===== EQUIVALENCIAS ===== */
+  .equiv-grid{display:grid; grid-template-columns:1fr 1fr; gap:8px; margin-top:8px;}
+  @media(max-width:420px){.equiv-grid{grid-template-columns:1fr;}}
+  .equiv-item{
+    background:var(--fondo);
+    border:1px solid var(--borde);
+    border-radius:8px;
+    padding:10px 11px;
+    font-family:var(--mono);
+    font-size:14.5px;
+    display:flex; align-items:center; justify-content:space-between;
+  }
+  .equiv-item span.eq{color:var(--ambar); font-weight:700;}
+
+  /* factor de conversión paso a paso */
+  .pasos-conversion{margin-top:10px; display:grid; gap:8px;}
+  .paso-conv{
+    display:flex; gap:10px; align-items:flex-start;
+    background:var(--fondo); border-radius:10px; padding:10px;
+    border-left:3px solid var(--azul-ciencia);
+  }
+  .paso-num{
+    flex:none; width:22px; height:22px; border-radius:50%;
+    background:var(--azul-ciencia); color:#fff; font-size:11px; font-weight:700;
+    display:flex; align-items:center; justify-content:center; font-family:var(--mono);
+  }
+  .paso-conv p{font-size:14.5px; margin:0; line-height:1.6;}
+  .fraccion-conv{
+    display:inline-flex; flex-direction:column; align-items:center;
+    font-family:var(--mono); font-weight:700; font-size:14.5px; margin:0 4px;
+    vertical-align:middle;
+  }
+  .fraccion-conv .num{border-bottom:1.5px solid var(--texto); padding:0 4px;}
+  .fraccion-conv .den{padding:0 4px;}
+
+  /* recuadro boliviano */
+  .caja-bolivia{
+    background:linear-gradient(135deg, var(--ambar-suave), #FFF8EC);
+    border:1px solid #EAC888;
+    border-radius:12px;
+    padding:14px;
+    margin-top:6px;
+  }
+  .caja-bolivia .tag-bo{
+    display:inline-flex; align-items:center; gap:6px;
+    font-size:12px; font-weight:800; letter-spacing:0.04em; text-transform:uppercase;
+    color:#7A4E0C; margin-bottom:7px;
+  }
+  .caja-bolivia p{font-size:14.5px; line-height:1.65; color:#3E2E0C;}
+
+  /* resumen y vocabulario */
+  .resumen-mapa{display:grid; gap:12px; margin-top:6px;}
+  .resumen-bloque{
+    border-left:3px solid var(--azul-ciencia);
+    padding:8px 0 8px 13px;
+  }
+  .resumen-bloque .rb-titulo{font-weight:700; font-size:14px; color:var(--azul-profundo); margin-bottom:4px;}
+  .resumen-bloque p{font-size:14px; color:var(--texto-suave); margin:0; line-height:1.6;}
+
+  .vocab-item{
+    border-bottom:1px solid var(--borde);
+    padding:11px 0;
+  }
+  .vocab-item:last-child{border-bottom:none;}
+  .vocab-term{font-family:var(--mono); font-weight:700; color:var(--azul-ciencia); font-size:14.5px;}
+  .vocab-def{font-size:14px; color:var(--texto); margin-top:4px; line-height:1.55;}
+
+  /* ===== FOOTER ===== */
+  footer{max-width:720px; margin:20px auto 0; padding:0 16px;}
+  .pie-inst{text-align:center; font-size:12.5px; color:var(--texto-suave); margin-top:10px; line-height:1.7; padding-top:14px; border-top:1px solid var(--borde);}
+</style>
+</head>
+<body>
+
+<header class="app-header">
+  <div class="header-inner">
+    <div class="institucional"><strong>U.E. Nuevo Amanecer Boliviano</strong> · Distrito El Alto 1</div>
+    <span class="tema-badge">📐 2° de Secundaria · Tema 6</span>
+    <h1 class="titulo-app">Matemática Aplicada a las <span>Ciencias Naturales</span></h1>
+    <p class="subtitulo-app">Notación científica, magnitudes y factores de conversión — el lenguaje que usa la Física para describir el universo.</p>
+  </div>
+</header>
+
+<nav class="tabs" id="tabs">
+  <button class="activo" data-tab="p1"><span>Notación</span><span class="tab-num">01</span></button>
+  <button data-tab="p2"><span>Magnitudes</span><span class="tab-num">02</span></button>
+  <button data-tab="p3"><span>Conversión</span><span class="tab-num">03</span></button>
+  <button data-tab="p4"><span>Referencia</span><span class="tab-num">04</span></button>
+</nav>
+
+<main>
+
+  <!-- ============ PANEL 1: NOTACIÓN CIENTÍFICA ============ -->
+  <section class="panel activo" id="p1">
+
+    <div class="card">
+      <h2><span class="icono">🔬</span>¿Qué es la notación científica?</h2>
+      <p>Es una forma de escribir números muy grandes o muy pequeños de manera abreviada, utilizando potencias de 10. Sin ella, la Física sería solo filosofía: para hablar de galaxias o de átomos necesitamos un lenguaje preciso.</p>
+
+      <div class="estructura-formula">
+        <div class="bloque-formula" style="border:1px solid var(--verde-lcd);">a<small>Coeficiente</small></div>
+        <span class="op-formula">×</span>
+        <div class="bloque-formula">10<span class="exp-formula">n</span><small>Base y exponente</small></div>
+      </div>
+
+      <div class="leyenda-formula">
+        <div class="leyenda-item"><span class="leyenda-punto pt-coef"></span><span><strong>Coeficiente (a):</strong> un número mayor o igual a 1, pero menor que 10 (ej. 3,5).</span></div>
+        <div class="leyenda-item"><span class="leyenda-punto pt-base"></span><span><strong>Base:</strong> siempre es el número 10.</span></div>
+        <div class="leyenda-item"><span class="leyenda-punto pt-exp"></span><span><strong>Exponente (n):</strong> indica cuántos espacios movemos la coma decimal.</span></div>
+      </div>
+    </div>
+
+    <div class="card">
+      <h2><span class="icono">↔️</span>Exponente positivo vs. negativo</h2>
+      <div class="comparacion">
+        <div class="comp-box comp-pos">
+          <span class="comp-tag">EXPONENTE POSITIVO</span>
+          El número es grande. Movemos la coma a la <strong>derecha</strong>.
+        </div>
+        <div class="comp-box comp-neg">
+          <span class="comp-tag">EXPONENTE NEGATIVO</span>
+          El número es pequeño/decimal. Movemos la coma a la <strong>izquierda</strong>.
+        </div>
+      </div>
+      <p style="margin-top:10px;" class="nota">Ejemplo positivo: la velocidad de la luz es 300 000 000 m/s → 3 × 10⁸ m/s.</p>
+      <p style="margin-top:4px;" class="nota">Ejemplo negativo: el radio de un átomo mide aproximadamente 0,0000000001 m → 1 × 10⁻¹⁰ m.</p>
+    </div>
+
+    <div class="card">
+      <h2><span class="icono">🧮</span>Simulador: la calculadora científica</h2>
+      <p>Mueve los controles y observa cómo cambia el número completo y cómo lo mostraría la pantalla de tu calculadora.</p>
+
+      <div class="calc-shell">
+        <div class="calc-label">Pantalla de la calculadora</div>
+        <div class="calc-screen" id="pantallaCalc">5,2 <span style="font-size:14px; margin:0 4px; color:#3a6b52;">E</span> 04</div>
+
+        <div class="calc-controles">
+          <div>
+            <label>Coeficiente (a)</label>
+            <input type="range" id="rangoCoef" min="10" max="99" value="52">
+            <div class="calc-valor" id="valorCoef">5,2</div>
+          </div>
+          <div>
+            <label>Exponente (n)</label>
+            <input type="range" id="rangoExp" min="-6" max="8" value="4">
+            <div class="calc-valor" id="valorExp">4</div>
+          </div>
+        </div>
+
+        <div class="calc-lectura" id="lecturaCalc">
+          La calculadora muestra <strong>5,2 E 04</strong>. La "E" reemplaza a "por diez elevado a": significa <strong>5,2 × 10⁴</strong>.
+        </div>
+      </div>
+
+      <div class="calc-numero-completo" id="numeroCompleto">= 52 000</div>
+    </div>
+
+  </section>
+
+  <!-- ============ PANEL 2: MAGNITUDES ============ -->
+  <section class="panel" id="p2">
+
+    <div class="card">
+      <h2><span class="icono">📏</span>Magnitud, unidad y medir</h2>
+      <p><strong>Magnitud:</strong> es todo aquello que se puede medir (tiempo, longitud, masa).</p>
+      <p><strong>Unidad:</strong> es el patrón de referencia que usamos para comparar (segundo, metro, kilogramo).</p>
+      <p><strong>Medir:</strong> es comparar una magnitud con una unidad patrón.</p>
+      <p class="nota">El mundo científico usa el Sistema Internacional de Unidades (S.I.) para evitar confusiones.</p>
+    </div>
+
+    <div class="card">
+      <h2><span class="icono">🔹</span>Magnitudes fundamentales</h2>
+      <p>Son independientes y sirven de base para las demás. Las tres principales para física básica:</p>
+      <table class="tabla-mag">
+        <thead><tr><th>Magnitud</th><th>Unidad S.I.</th><th>Símbolo</th></tr></thead>
+        <tbody>
+          <tr><td>Longitud</td><td>Metro</td><td class="simbolo">m</td></tr>
+          <tr><td>Masa</td><td>Kilogramo</td><td class="simbolo">kg</td></tr>
+          <tr><td>Tiempo</td><td>Segundo</td><td class="simbolo">s</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="card">
+      <h2><span class="icono">🔸</span>Magnitudes derivadas</h2>
+      <p>Nacen de combinar las fundamentales mediante fórmulas matemáticas.</p>
+      <div class="derivadas-grid">
+        <div class="derivada-card">
+          <div>
+            <div class="derivada-nombre">Superficie</div>
+            <div class="derivada-formula">Longitud × Longitud</div>
+          </div>
+          <div class="derivada-unidad">m²</div>
+        </div>
+        <div class="derivada-card">
+          <div>
+            <div class="derivada-nombre">Volumen</div>
+            <div class="derivada-formula">Longitud × Longitud × Longitud</div>
+          </div>
+          <div class="derivada-unidad">m³</div>
+        </div>
+        <div class="derivada-card">
+          <div>
+            <div class="derivada-nombre">Velocidad</div>
+            <div class="derivada-formula">Longitud ÷ Tiempo</div>
+          </div>
+          <div class="derivada-unidad">m/s</div>
+        </div>
+        <div class="derivada-card">
+          <div>
+            <div class="derivada-nombre">Densidad</div>
+            <div class="derivada-formula">Masa ÷ Volumen</div>
+          </div>
+          <div class="derivada-unidad">kg/m³</div>
+        </div>
+      </div>
+      <p class="nota" style="margin-top:8px;">La densidad no aparece en el texto original, pero se agrega aquí porque es una magnitud derivada muy usada en ciencias naturales y la volverás a encontrar en temas de química.</p>
+    </div>
+
+  </section>
+
+  <!-- ============ PANEL 3: CONVERSIÓN ============ -->
+  <section class="panel" id="p3">
+
+    <div class="card">
+      <h2><span class="icono">🔁</span>Equivalencias comunes</h2>
+      <p>Son igualdades que debemos memorizar o buscar en tablas:</p>
+      <div class="equiv-grid">
+        <div class="equiv-item"><span>1 km</span><span class="eq">=</span><span>1000 m</span></div>
+        <div class="equiv-item"><span>1 m</span><span class="eq">=</span><span>100 cm</span></div>
+        <div class="equiv-item"><span>1 h</span><span class="eq">=</span><span>3600 s</span></div>
+        <div class="equiv-item"><span>1 kg</span><span class="eq">=</span><span>1000 g</span></div>
+      </div>
+    </div>
+
+    <div class="card">
+      <h2><span class="icono">➗</span>Método del factor de conversión</h2>
+      <p>En lugar de la regla de tres, en ciencias usamos <strong>fracciones unitarias</strong>: se coloca la unidad que quiero eliminar abajo y la que quiero obtener arriba, para que se simplifiquen.</p>
+
+      <p class="nota" style="margin-top:8px;">Ejemplo: convertir 3 kilómetros a metros.</p>
+      <div class="pasos-conversion">
+        <div class="paso-conv">
+          <div class="paso-num">1</div>
+          <p>Parto de la cantidad: <strong>3 km</strong></p>
+        </div>
+        <div class="paso-conv">
+          <div class="paso-num">2</div>
+          <p>Multiplico por el factor de conversión, con "km" abajo (para eliminarlo) y "m" arriba (para obtenerlo):<br>
+          3 km ×
+          <span class="fraccion-conv"><span class="num">1000 m</span><span class="den">1 km</span></span>
+          </p>
+        </div>
+        <div class="paso-conv">
+          <div class="paso-num">3</div>
+          <p>Los "km" se simplifican y queda: <strong>3000 m</strong></p>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <h2><span class="icono">🇧🇴</span>¿Sabías que...?</h2>
+      <div class="caja-bolivia">
+        <span class="tag-bo">Dato boliviano</span>
+        <p>Aunque en Bolivia el sistema oficial es el Sistema Internacional (metros y kilos), en nuestros mercados populares y en la agricultura seguimos usando un sistema de medidas colonial antiguo. Es muy común comprar papa por <strong>Arroba (@)</strong>, que equivale a 25 libras (aprox. 11,5 kg), o cereales por <strong>Quintal (qq)</strong>, que son 4 arrobas (aprox. 46 kg). ¡Un buen científico boliviano debe saber moverse entre los libros de física y las caseritas del mercado!</p>
+      </div>
+    </div>
+
+  </section>
+
+  <!-- ============ PANEL 4: REFERENCIA RÁPIDA ============ -->
+  <section class="panel" id="p4">
+
+    <div class="card">
+      <h2><span class="icono">🗺️</span>Resumen final</h2>
+      <div class="resumen-mapa">
+        <div class="resumen-bloque">
+          <div class="rb-titulo">Notación científica</div>
+          <p>Usamos potencias de 10 (a × 10ⁿ) para manejar números gigantes o diminutos, y la calculadora para procesarlos (tecla EXP).</p>
+        </div>
+        <div class="resumen-bloque">
+          <div class="rb-titulo">Magnitudes</div>
+          <p>Se dividen en Fundamentales (longitud, masa, tiempo) y Derivadas (velocidad, volumen, superficie).</p>
+        </div>
+        <div class="resumen-bloque">
+          <div class="rb-titulo">Conversión de unidades</div>
+          <p>Para traducir entre unidades (como de km a m) utilizamos Factores de Conversión, asegurando precisión en nuestros cálculos.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <h2><span class="icono">🔤</span>Prefijos comunes</h2>
+      <p class="nota">No están en el texto original, pero se agregan porque ya usaste estos prefijos en la pestaña de Conversión (km, cm) y ayudan a entender el término "Prefijo" del vocabulario.</p>
+      <table class="tabla-mag" style="margin-top:10px;">
+        <thead><tr><th>Prefijo</th><th>Significado</th><th>Ejemplo</th></tr></thead>
+        <tbody>
+          <tr><td>Kilo (k)</td><td>× 1000</td><td class="simbolo">1 km = 1000 m</td></tr>
+          <tr><td>Centi (c)</td><td>÷ 100</td><td class="simbolo">1 cm = 0,01 m</td></tr>
+          <tr><td>Mili (m)</td><td>÷ 1000</td><td class="simbolo">1 mm = 0,001 m</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="card">
+      <h2><span class="icono">📖</span>Vocabulario científico</h2>
+
+      <div class="vocab-item">
+        <div class="vocab-term">Magnitud</div>
+        <div class="vocab-def">Cualquier propiedad física de los cuerpos que puede ser medida (ej. altura, temperatura, peso).</div>
+      </div>
+      <div class="vocab-item">
+        <div class="vocab-term">Sistema Internacional (S.I.)</div>
+        <div class="vocab-def">Conjunto de unidades estándar aceptadas por casi todos los países del mundo para facilitar la ciencia y el comercio.</div>
+      </div>
+      <div class="vocab-item">
+        <div class="vocab-term">Prefijo</div>
+        <div class="vocab-def">Sílaba que se pone antes de una unidad para multiplicar o dividir su valor (ej. Kilo significa "mil", Mili significa "milésima parte").</div>
+      </div>
+      <div class="vocab-item">
+        <div class="vocab-term">Exponente</div>
+        <div class="vocab-def">Número pequeño colocado arriba a la derecha de la base 10; indica la cantidad de ceros o lugares decimales.</div>
+      </div>
+      <div class="vocab-item">
+        <div class="vocab-term">Patrón de medida</div>
+        <div class="vocab-def">Objeto o fenómeno físico constante que define cuánto vale una unidad (ej. una pesa de metal guardada en Francia definía el kilogramo).</div>
+      </div>
+    </div>
+
+  </section>
+
+</main>
+
+<footer>
+  <p class="pie-inst">U.E. Nuevo Amanecer Boliviano · Prof. Franz Vidal Condori Mamani<br>Matemática Aplicada a las Ciencias Naturales — Tema 6 · 2° de Secundaria</p>
+</footer>
+
+<script>
+  // ===== Navegación por pestañas =====
+  const botonesTab = document.querySelectorAll('#tabs button');
+  const paneles = document.querySelectorAll('.panel');
+  botonesTab.forEach(btn=>{
+    btn.addEventListener('click', ()=>{
+      botonesTab.forEach(b=>b.classList.remove('activo'));
+      paneles.forEach(p=>p.classList.remove('activo'));
+      btn.classList.add('activo');
+      document.getElementById(btn.dataset.tab).classList.add('activo');
+      window.scrollTo({top:0, behavior:'smooth'});
+    });
+  });
+
+  // ===== Simulador de notación científica =====
+  const rangoCoef = document.getElementById('rangoCoef');
+  const rangoExp = document.getElementById('rangoExp');
+  const valorCoef = document.getElementById('valorCoef');
+  const valorExp = document.getElementById('valorExp');
+  const pantallaCalc = document.getElementById('pantallaCalc');
+  const lecturaCalc = document.getElementById('lecturaCalc');
+  const numeroCompleto = document.getElementById('numeroCompleto');
+
+  function formatearNumeroCompleto(coef, exp){
+    const valor = coef * Math.pow(10, exp);
+    const decimalesNecesarios = Math.max(0, 1 - exp);
+    return valor.toLocaleString('es-BO', {maximumFractionDigits: decimalesNecesarios});
+  }
+
+  function actualizarSimulador(){
+    const coef = parseInt(rangoCoef.value) / 10;
+    const exp = parseInt(rangoExp.value);
+    const coefTexto = coef.toLocaleString('es-BO', {minimumFractionDigits:1, maximumFractionDigits:1});
+
+    valorCoef.textContent = coefTexto;
+    valorExp.textContent = exp;
+
+    pantallaCalc.innerHTML = coefTexto + ' <span style="font-size:14px; margin:0 4px; color:#3a6b52;">E</span> ' + String(Math.abs(exp)).padStart(2,'0') + (exp<0 ? ' <span style="font-size:12px;">(neg)</span>' : '');
+
+    const direccion = exp >= 0 ? 'a la <strong>derecha</strong> (número grande)' : 'a la <strong>izquierda</strong> (número pequeño)';
+    lecturaCalc.innerHTML = 'La calculadora muestra <strong>' + coefTexto + ' E ' + String(Math.abs(exp)).padStart(2,'0') + '</strong>. Esto significa <strong>' + coefTexto + ' × 10' + '<sup>' + exp + '</sup></strong>: la coma se mueve ' + direccion + '.';
+
+    numeroCompleto.textContent = '= ' + formatearNumeroCompleto(coef, exp);
+  }
+
+  rangoCoef.addEventListener('input', actualizarSimulador);
+  rangoExp.addEventListener('input', actualizarSimulador);
+  actualizarSimulador();
+
+</script>
+
+</body>
+</html>
