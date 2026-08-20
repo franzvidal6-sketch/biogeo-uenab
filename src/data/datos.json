@@ -155,6 +155,16 @@
           "fecha": "2026-08-03",
           "estado": "nuevo",
           "link": "https://biogeo-uenab.pages.dev/primeros-auxilios-6sec.html"
+        },
+        {
+          "id": "app-jornada-practica-6to",
+          "categoria": "app",
+          "titulo": "Jornada Práctica de Primeros Auxilios",
+          "tema": "Actividad final del Tema 6",
+          "descripcion": "Guía completa de la actividad: los 8 grupos, normas de seguridad, materiales y evaluación.",
+          "fecha": "2026-08-20",
+          "estado": "nuevo",
+          "link": "https://biogeo-uenab.pages.dev/jornada-practica-6sec.html"
         }
       ]
     }
