@@ -116,7 +116,11 @@ li{margin-bottom:5px;}
   font-size:23px; flex-shrink:0; background:var(--violeta-light);
 }
 .hub-card.alerta .hub-icon{background:var(--rosa-light);}
-.hub-card.alerta{border-color:var(--rosa);}
+.hub-badge-importante{
+  display:inline-block; background:var(--rosa); color:#fff;
+  font-size:10.5px; font-weight:800; text-transform:uppercase; letter-spacing:.4px;
+  padding:2px 8px; border-radius:20px; margin-top:4px;
+}
 .hub-card .hub-text{flex:1;}
 .hub-card h3{font-size:15.5px; margin-bottom:2px;}
 .hub-card .hub-sub{font-size:12.5px; color:var(--texto-suave); font-weight:600;}
@@ -450,7 +454,7 @@ li{margin-bottom:5px;}
     </button>
     <button class="hub-card alerta" onclick="irA('b4')">
       <span class="hub-icon">⚠️</span>
-      <span class="hub-text"><h3>Normas de seguridad</h3><span class="hub-sub">Lo que está prohibido y lo que sí se puede hacer</span></span>
+      <span class="hub-text"><h3>Normas de seguridad</h3><span class="hub-sub">Lo que está prohibido y lo que sí se puede hacer</span><br><span class="hub-badge-importante">⚠ Importante</span></span>
       <span class="hub-arrow">›</span>
     </button>
     <button class="hub-card" onclick="irA('b5')">
@@ -1299,14 +1303,29 @@ const PREGUNTAS_FINALES = [
 ];
 
 /* ============================================================
-   MOTOR
+   MOTOR DE NAVEGACIÓN
+   Usa el hash de la URL (#hub, #b0, #b2...) para que el botón
+   "atrás" del celular navegue DENTRO de la app antes de salir
+   de ella, igual que ya hace la plataforma principal con #curso.
    ============================================================ */
-function irA(pantalla){
+function mostrarPantalla(pantalla){
   document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
-  const destino = document.querySelector('[data-screen="'+pantalla+'"]');
-  if(destino) destino.classList.add('active');
+  const destino = document.querySelector('[data-screen="'+pantalla+'"]') || document.querySelector('[data-screen="portada"]');
+  destino.classList.add('active');
   window.scrollTo(0,0);
 }
+
+function irA(pantalla){
+  if(location.hash.replace('#','') === pantalla){
+    mostrarPantalla(pantalla);
+  } else {
+    location.hash = pantalla;
+  }
+}
+
+window.addEventListener('hashchange', function(){
+  mostrarPantalla(location.hash.replace('#','') || 'portada');
+});
 
 function esc(t){
   return String(t).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
@@ -1442,6 +1461,7 @@ function renderPreguntasFinales(){
 renderGrupos();
 renderChecklist();
 renderPreguntasFinales();
+mostrarPantalla(location.hash.replace('#','') || 'portada');
 </script>
 </body>
 </html>
