@@ -1,0 +1,1447 @@
+<!DOCTYPE html>
+<html lang="es" translate="no">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="google" content="notranslate">
+<title>Jornada Práctica de Primeros Auxilios · 6° Secundaria</title>
+<style>
+:root{
+  --violeta:#534AB7;
+  --violeta-dark:#26215C;
+  --violeta-light:#EEEDFE;
+  --violeta-suave:#7F77DD;
+  --coral:#D85A30;
+  --coral-light:#F7D9CC;
+  --verde:#1D9E75;
+  --verde-light:#5DCAA5;
+  --verde-bg:#E4F6EF;
+  --rosa:#D4537E;
+  --rosa-light:#F9DCE4;
+  --texto:#2A2640;
+  --texto-suave:#5B5678;
+  --gris-borde:#E1DFF5;
+  --sombra:0 4px 16px rgba(83,74,183,0.14);
+  --sombra-fuerte:0 8px 28px rgba(38,33,92,0.22);
+  --radio:18px;
+  --radio-chico:12px;
+  --font:'Segoe UI',Roboto,'Helvetica Neue',Arial,sans-serif;
+}
+*{box-sizing:border-box; -webkit-tap-highlight-color:transparent;}
+html,body{margin:0;padding:0;}
+body{
+  font-family:var(--font);
+  background:var(--violeta-light);
+  color:var(--texto);
+  line-height:1.55;
+  min-height:100vh;
+}
+h1,h2,h3,h4{margin:0 0 8px; color:var(--violeta-dark); font-weight:800;}
+p{margin:0 0 12px;}
+button{font-family:inherit; cursor:pointer; border:none;}
+ul{margin:0 0 12px; padding-left:20px;}
+li{margin-bottom:5px;}
+
+/* ---------- HEADER ---------- */
+.top-bar{
+  background:var(--violeta-dark);
+  color:#fff;
+  padding:11px 16px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  position:sticky; top:0; z-index:50;
+  box-shadow:0 2px 10px rgba(0,0,0,0.15);
+}
+.top-bar .school{font-size:12px; opacity:0.88;}
+.top-bar .area{
+  font-size:12px; background:var(--verde);
+  padding:3px 11px; border-radius:20px; font-weight:700;
+}
+
+.app-container{max-width:540px; margin:0 auto; padding:16px 16px 44px;}
+.screen{display:none; animation:fadeIn .35s ease;}
+.screen.active{display:block;}
+@keyframes fadeIn{from{opacity:0; transform:translateY(6px);} to{opacity:1; transform:translateY(0);}}
+@media (prefers-reduced-motion: reduce){
+  .screen{animation:none;}
+  *{transition:none !important;}
+}
+
+/* ---------- BOTONES ---------- */
+.btn{
+  display:inline-flex; align-items:center; justify-content:center; gap:8px;
+  padding:15px 22px; border-radius:14px;
+  font-weight:700; font-size:15.5px;
+  transition:transform .15s ease; width:100%;
+}
+.btn:active{transform:scale(0.97);}
+.btn:focus-visible{outline:3px solid var(--violeta-dark); outline-offset:2px;}
+.btn-primary{background:var(--coral); color:#fff; box-shadow:0 4px 14px rgba(216,90,48,0.35);}
+.btn-verde{background:var(--verde); color:#fff; box-shadow:0 4px 14px rgba(29,158,117,0.3);}
+.btn-outline{background:#fff; color:var(--violeta); border:2px solid var(--violeta);}
+
+/* ---------- PORTADA ---------- */
+.portada{text-align:center; padding:30px 8px 10px;}
+.portada .icono{
+  width:80px; height:80px; background:var(--coral);
+  border-radius:50%; display:flex; align-items:center; justify-content:center;
+  margin:0 auto 18px; font-size:38px; box-shadow:var(--sombra-fuerte);
+}
+.pill-tema{
+  display:inline-block; background:var(--violeta); color:#fff;
+  font-size:12.5px; font-weight:700; padding:5px 14px;
+  border-radius:20px; margin-bottom:14px; letter-spacing:.4px;
+}
+.portada h1{font-size:24px; line-height:1.25;}
+.portada .sub{color:var(--texto-suave); font-weight:600; font-size:14.5px; margin-bottom:8px;}
+.portada .meta{
+  color:var(--texto-suave); font-size:13px; margin-bottom:24px;
+  display:flex; gap:8px; justify-content:center; flex-wrap:wrap;
+}
+.portada .meta span{background:#fff; padding:4px 12px; border-radius:20px; box-shadow:var(--sombra);}
+
+/* ---------- HUB ---------- */
+.hub-grid{display:flex; flex-direction:column; gap:11px;}
+.hub-card{
+  background:#fff; border-radius:var(--radio); padding:16px;
+  display:flex; align-items:center; gap:14px;
+  box-shadow:var(--sombra); border:2px solid transparent;
+  text-align:left; width:100%; transition:border-color .2s;
+}
+.hub-card:focus-visible{outline:3px solid var(--violeta); outline-offset:2px;}
+.hub-card .hub-icon{
+  width:48px; height:48px; border-radius:14px;
+  display:flex; align-items:center; justify-content:center;
+  font-size:23px; flex-shrink:0; background:var(--violeta-light);
+}
+.hub-card.alerta .hub-icon{background:var(--rosa-light);}
+.hub-card.alerta{border-color:var(--rosa);}
+.hub-card .hub-text{flex:1;}
+.hub-card h3{font-size:15.5px; margin-bottom:2px;}
+.hub-card .hub-sub{font-size:12.5px; color:var(--texto-suave); font-weight:600;}
+.hub-card .hub-arrow{color:var(--violeta); font-size:20px; opacity:.5;}
+
+/* ---------- ENCABEZADO DE BLOQUE ---------- */
+.bloque-header{display:flex; align-items:center; gap:11px; margin-bottom:16px;}
+.back-btn{
+  width:40px; height:40px; background:#fff; border-radius:12px;
+  display:flex; align-items:center; justify-content:center;
+  box-shadow:var(--sombra); color:var(--violeta); font-size:18px; flex-shrink:0;
+}
+.back-btn:focus-visible{outline:3px solid var(--violeta); outline-offset:2px;}
+.bloque-header h2{font-size:17.5px; margin:0;}
+
+/* ---------- TARJETAS ---------- */
+.card{background:#fff; border-radius:var(--radio); padding:17px; margin-bottom:14px; box-shadow:var(--sombra);}
+.card h3{font-size:16px;}
+.card p:last-child{margin-bottom:0;}
+.card ul:last-child{margin-bottom:0;}
+
+.sub-header{display:flex; align-items:center; gap:9px; margin:24px 0 12px;}
+.sub-header:first-child{margin-top:2px;}
+.sub-header .badge{
+  width:30px; height:30px; background:var(--violeta); color:#fff;
+  border-radius:10px; display:flex; align-items:center; justify-content:center;
+  font-weight:800; font-size:13.5px; flex-shrink:0;
+}
+.sub-header h3{font-size:16.5px; margin:0;}
+
+/* ---------- CITA / DESTACADO ---------- */
+.destacado{
+  background:linear-gradient(135deg, var(--violeta) 0%, var(--violeta-dark) 100%);
+  color:#fff; border-radius:var(--radio); padding:20px; margin-bottom:14px;
+  box-shadow:var(--sombra-fuerte); text-align:center;
+}
+.destacado p{color:#fff; font-size:17px; font-weight:700; margin:0; line-height:1.4;}
+.destacado .eyebrow{
+  font-size:11.5px; text-transform:uppercase; letter-spacing:.7px;
+  color:var(--verde-light); font-weight:800; margin-bottom:8px;
+}
+
+/* ---------- NOTAS ---------- */
+.nota{
+  border-radius:var(--radio-chico); padding:14px 16px;
+  font-size:13.5px; margin-bottom:14px; display:flex; gap:10px; align-items:flex-start;
+}
+.nota-icon{font-size:18px; flex-shrink:0; line-height:1.3;}
+.nota-verde{background:var(--verde-bg); color:#0F5C43; border-left:4px solid var(--verde);}
+.nota-rosa{background:var(--rosa-light); color:#7A2C48; border-left:4px solid var(--rosa);}
+.nota-coral{background:var(--coral-light); color:#8A3A1A; border-left:4px solid var(--coral);}
+.nota-violeta{background:var(--violeta-light); color:var(--violeta-dark); border-left:4px solid var(--violeta);}
+
+/* ---------- LISTA DE 5 PREGUNTAS ---------- */
+.preguntas-lista{display:flex; flex-direction:column; gap:10px;}
+.pregunta-item{
+  background:#fff; border-radius:var(--radio-chico); padding:13px 15px;
+  box-shadow:var(--sombra); border-left:4px solid var(--verde);
+}
+.pregunta-item strong{display:block; color:var(--violeta-dark); font-size:14.5px; margin-bottom:2px;}
+.pregunta-item span{font-size:13.5px; color:var(--texto-suave);}
+
+/* ---------- PAS ---------- */
+.pas-card{
+  background:#fff; border-radius:var(--radio); padding:17px; margin-bottom:12px;
+  box-shadow:var(--sombra); border-left:6px solid var(--coral);
+}
+.pas-card .pas-letra{
+  display:inline-flex; align-items:center; justify-content:center;
+  width:34px; height:34px; background:var(--coral); color:#fff;
+  border-radius:10px; font-weight:800; font-size:18px; margin-bottom:9px;
+}
+.pas-card h3{font-size:16px; margin-bottom:6px;}
+.pas-card p, .pas-card li{font-size:13.5px;}
+
+/* ---------- TABLA DE GRUPOS ---------- */
+.tabla-grupos{width:100%; border-collapse:collapse; background:#fff; border-radius:var(--radio); overflow:hidden; box-shadow:var(--sombra); margin-bottom:14px;}
+.tabla-grupos th{background:var(--violeta); color:#fff; font-size:12.5px; padding:10px 8px; text-align:left;}
+.tabla-grupos td{padding:10px 8px; font-size:13px; border-bottom:1px solid var(--gris-borde);}
+.tabla-grupos tr:last-child td{border-bottom:none;}
+.tabla-grupos td:first-child{font-weight:800; color:var(--violeta); width:38px;}
+.tabla-grupos td:last-child{text-align:center; color:var(--texto-suave); width:38px;}
+
+/* ---------- ACORDEÓN DE GRUPOS ---------- */
+.grupo-item{background:#fff; border-radius:var(--radio); margin-bottom:11px; box-shadow:var(--sombra); overflow:hidden;}
+.grupo-head{
+  width:100%; background:#fff; padding:15px;
+  display:flex; align-items:center; gap:12px; text-align:left;
+}
+.grupo-head:focus-visible{outline:3px solid var(--violeta); outline-offset:-3px;}
+.grupo-num{
+  width:40px; height:40px; border-radius:12px; background:var(--violeta-light);
+  display:flex; align-items:center; justify-content:center; font-size:21px; flex-shrink:0;
+}
+.grupo-head-text{flex:1;}
+.grupo-head-text .g-label{font-size:11.5px; color:var(--texto-suave); font-weight:700; text-transform:uppercase; letter-spacing:.4px;}
+.grupo-head-text h3{font-size:15px; margin:1px 0 0;}
+.grupo-head-text .g-cant{font-size:12.5px; color:var(--texto-suave); font-weight:600;}
+.grupo-toggle{color:var(--violeta); font-size:19px; transition:transform .25s;}
+.grupo-item.abierto .grupo-toggle{transform:rotate(180deg);}
+.grupo-body{display:none; padding:0 15px 15px; border-top:1px solid var(--gris-borde);}
+.grupo-item.abierto .grupo-body{display:block; animation:fadeIn .25s;}
+
+.g-seccion{margin-top:15px;}
+.g-seccion:first-child{margin-top:14px;}
+.g-seccion .g-titulo{
+  font-size:12.5px; font-weight:800; color:var(--violeta);
+  text-transform:uppercase; letter-spacing:.4px; margin-bottom:7px;
+  display:flex; align-items:center; gap:6px;
+}
+.g-seccion p, .g-seccion li{font-size:13.5px;}
+.g-seccion p{margin-bottom:0;}
+.g-seccion ul{margin-bottom:0; padding-left:19px;}
+
+.g-roles{display:flex; flex-direction:column; gap:6px;}
+.g-rol{background:var(--violeta-light); border-radius:10px; padding:9px 12px; font-size:13px;}
+.g-rol strong{color:var(--violeta-dark);}
+
+.g-pasos{counter-reset:paso; list-style:none; padding-left:0; margin:0;}
+.g-pasos li{
+  counter-increment:paso; position:relative; padding-left:31px;
+  margin-bottom:8px; font-size:13.5px;
+}
+.g-pasos li::before{
+  content:counter(paso); position:absolute; left:0; top:1px;
+  width:22px; height:22px; background:var(--verde); color:#fff;
+  border-radius:50%; display:flex; align-items:center; justify-content:center;
+  font-size:11.5px; font-weight:800;
+}
+.g-explicar{display:flex; flex-direction:column; gap:5px;}
+.g-exp-item{font-size:13px; background:var(--verde-bg); border-radius:9px; padding:8px 11px; color:#0F5C43;}
+.g-exp-item strong{color:#0B4633;}
+
+.g-errores{list-style:none; padding-left:0; margin:0;}
+.g-errores li{
+  font-size:13.5px; padding-left:22px; position:relative; margin-bottom:6px; color:#8A3A1A;
+}
+.g-errores li::before{content:'✕'; position:absolute; left:0; color:var(--coral); font-weight:800;}
+
+.g-materiales{display:flex; flex-wrap:wrap; gap:6px;}
+.g-mat{background:var(--violeta-light); color:var(--violeta-dark); font-size:12.5px; padding:5px 11px; border-radius:20px; font-weight:600;}
+
+.g-reto{
+  background:linear-gradient(135deg, #D4537E 0%, #A63A5E 100%);
+  color:#fff; border-radius:var(--radio-chico); padding:14px 16px; margin-top:15px;
+}
+.g-reto .g-reto-label{font-size:11.5px; font-weight:800; text-transform:uppercase; letter-spacing:.5px; opacity:.9; margin-bottom:5px;}
+.g-reto p{margin:0; font-size:14px; font-style:italic; color:#fff;}
+
+.g-frase{
+  background:var(--violeta-dark); color:#fff; border-radius:var(--radio-chico);
+  padding:14px 16px; margin-top:12px; text-align:center;
+}
+.g-frase .g-frase-label{font-size:11px; font-weight:800; text-transform:uppercase; letter-spacing:.5px; color:var(--verde-light); margin-bottom:5px;}
+.g-frase p{margin:0; font-size:14.5px; font-weight:700; color:#fff; line-height:1.35;}
+
+.g-alerta{
+  background:var(--coral-light); border-left:4px solid var(--coral);
+  border-radius:var(--radio-chico); padding:12px 14px; margin-top:14px;
+  font-size:13px; color:#8A3A1A;
+}
+.g-alerta strong{color:#6E2D13;}
+
+/* ---------- SEGURIDAD ---------- */
+.seguridad-hero{
+  background:linear-gradient(135deg, #C0392B 0%, #7B241C 100%);
+  color:#fff; border-radius:var(--radio); padding:22px 18px; margin-bottom:16px;
+  text-align:center; box-shadow:var(--sombra-fuerte);
+}
+.seguridad-hero .s-icon{font-size:36px; margin-bottom:8px;}
+.seguridad-hero p{color:#fff; font-size:16px; font-weight:700; margin:0; line-height:1.4;}
+.lista-seg{list-style:none; padding-left:0; margin:0;}
+.lista-seg li{font-size:13.5px; padding-left:26px; position:relative; margin-bottom:8px;}
+.lista-prohibido li::before{content:'⛔'; position:absolute; left:0; font-size:13px;}
+.lista-permitido li::before{content:'✅'; position:absolute; left:0; font-size:13px;}
+.card-prohibido{background:#FDECEA; border:2px solid #E74C3C;}
+.card-prohibido h3{color:#922B21;}
+.card-prohibido li{color:#922B21;}
+.card-permitido{background:var(--verde-bg); border:2px solid var(--verde);}
+.card-permitido h3{color:#0F5C43;}
+.card-permitido li{color:#0F5C43;}
+
+/* ---------- TIEMPOS ---------- */
+.tiempo-grid{display:flex; flex-direction:column; gap:8px; margin-bottom:14px;}
+.tiempo-item{display:flex; align-items:center; gap:12px; background:#fff; border-radius:var(--radio-chico); padding:12px 14px; box-shadow:var(--sombra);}
+.tiempo-min{
+  background:var(--coral); color:#fff; font-weight:800; font-size:12.5px;
+  padding:5px 10px; border-radius:8px; flex-shrink:0; min-width:62px; text-align:center;
+}
+.tiempo-item span{font-size:13.5px;}
+
+.comparacion{display:flex; flex-direction:column; gap:10px; margin-bottom:14px;}
+.comp-item{border-radius:var(--radio-chico); padding:14px 16px; font-size:13.5px;}
+.comp-mal{background:#FDECEA; border-left:4px solid #E74C3C; color:#922B21;}
+.comp-bien{background:var(--verde-bg); border-left:4px solid var(--verde); color:#0F5C43;}
+.comp-item .comp-label{font-size:11.5px; font-weight:800; text-transform:uppercase; letter-spacing:.5px; margin-bottom:5px;}
+.comp-item p{margin:0; font-style:italic;}
+
+/* ---------- EVALUACIÓN ---------- */
+.tabla-eval{width:100%; border-collapse:collapse; background:#fff; border-radius:var(--radio); overflow:hidden; box-shadow:var(--sombra); margin-bottom:14px;}
+.tabla-eval th{background:var(--violeta); color:#fff; font-size:12.5px; padding:11px 10px; text-align:left;}
+.tabla-eval th:last-child, .tabla-eval td:last-child{text-align:right; white-space:nowrap;}
+.tabla-eval td{padding:11px 10px; font-size:13.5px; border-bottom:1px solid var(--gris-borde);}
+.tabla-eval tr.total td{background:var(--violeta-light); font-weight:800; color:var(--violeta-dark); border-bottom:none; font-size:14.5px;}
+.crit-detalle{margin-bottom:11px;}
+.crit-detalle .crit-nombre{font-size:14px; font-weight:800; color:var(--violeta-dark); margin-bottom:3px;}
+.crit-detalle p{font-size:13.5px; margin:0; color:var(--texto-suave);}
+
+/* ---------- ORDEN DEL DÍA ---------- */
+.orden-lista{list-style:none; padding-left:0; margin:0 0 14px;}
+.orden-item{
+  display:flex; align-items:center; gap:12px; background:#fff;
+  border-radius:var(--radio-chico); padding:12px 14px; margin-bottom:8px; box-shadow:var(--sombra);
+}
+.orden-num{
+  width:28px; height:28px; background:var(--violeta); color:#fff; border-radius:50%;
+  display:flex; align-items:center; justify-content:center; font-size:13px; font-weight:800; flex-shrink:0;
+}
+.orden-item .orden-emoji{font-size:19px;}
+.orden-item span.orden-txt{font-size:13.5px; font-weight:600;}
+
+/* ---------- CHECKLIST ---------- */
+.check-item{
+  display:flex; align-items:flex-start; gap:12px; background:#fff;
+  border-radius:var(--radio-chico); padding:13px 15px; margin-bottom:8px;
+  box-shadow:var(--sombra); width:100%; text-align:left; border:2px solid transparent;
+  transition:background .2s, border-color .2s;
+}
+.check-item:focus-visible{outline:3px solid var(--violeta); outline-offset:2px;}
+.check-box{
+  width:24px; height:24px; border-radius:7px; border:2px solid var(--gris-borde);
+  flex-shrink:0; display:flex; align-items:center; justify-content:center;
+  font-size:14px; color:transparent; background:#fff; transition:all .2s; margin-top:1px;
+}
+.check-item.marcado{background:var(--verde-bg); border-color:var(--verde-light);}
+.check-item.marcado .check-box{background:var(--verde); border-color:var(--verde); color:#fff;}
+.check-item.marcado .check-txt{color:#0F5C43;}
+.check-txt{font-size:13.5px; font-weight:600;}
+.check-progreso{
+  background:#fff; border-radius:var(--radio); padding:15px 17px;
+  margin-bottom:14px; box-shadow:var(--sombra); text-align:center;
+}
+.check-progreso .cp-num{font-size:26px; font-weight:800; color:var(--violeta); line-height:1.1;}
+.check-progreso .cp-txt{font-size:13px; color:var(--texto-suave); font-weight:600; margin-bottom:9px;}
+.cp-barra{height:10px; background:var(--gris-borde); border-radius:10px; overflow:hidden;}
+.cp-fill{height:100%; background:linear-gradient(90deg, var(--coral), var(--verde)); border-radius:10px; width:0%; transition:width .35s ease;}
+
+/* ---------- CIERRE ---------- */
+.preg-final{
+  background:#fff; border-radius:var(--radio-chico); padding:13px 15px;
+  margin-bottom:8px; box-shadow:var(--sombra); display:flex; gap:12px; align-items:flex-start;
+}
+.preg-final .pf-num{
+  width:25px; height:25px; background:var(--violeta-light); color:var(--violeta);
+  border-radius:50%; display:flex; align-items:center; justify-content:center;
+  font-size:12px; font-weight:800; flex-shrink:0;
+}
+.preg-final span{font-size:13.5px;}
+.principio{display:flex; flex-direction:column; gap:7px; margin-bottom:16px;}
+.principio-paso{
+  background:#fff; border-radius:var(--radio-chico); padding:12px 15px;
+  box-shadow:var(--sombra); border-left:5px solid var(--violeta);
+}
+.principio-paso strong{font-size:14.5px; color:var(--violeta-dark); display:block;}
+.principio-paso span{font-size:13px; color:var(--texto-suave);}
+.link-app{
+  display:flex; align-items:center; gap:13px; background:#fff;
+  border-radius:var(--radio); padding:16px; box-shadow:var(--sombra);
+  text-decoration:none; color:inherit; border:2px solid var(--verde-light); margin-bottom:14px;
+}
+.link-app:focus-visible{outline:3px solid var(--verde); outline-offset:2px;}
+.link-app .la-icon{
+  width:46px; height:46px; border-radius:13px; background:var(--verde-bg);
+  display:flex; align-items:center; justify-content:center; font-size:22px; flex-shrink:0;
+}
+.link-app h4{font-size:14.5px; margin:0 0 2px;}
+.link-app p{font-size:12.5px; color:var(--texto-suave); margin:0;}
+.link-app .la-arrow{color:var(--verde); font-size:19px; margin-left:auto;}
+
+.volver{margin-top:22px;}
+</style>
+</head>
+<body>
+
+<div class="top-bar">
+  <span class="school">U.E. Nuevo Amanecer Boliviano</span>
+  <span class="area">Biología-Geografía · 6°</span>
+</div>
+
+<div class="app-container">
+
+<!-- ============ PORTADA ============ -->
+<section class="screen active" data-screen="portada">
+  <div class="portada">
+    <div class="icono">🚑</div>
+    <span class="pill-tema">ACTIVIDAD FINAL · TEMA 6</span>
+    <h1>Jornada Práctica de Primeros Auxilios</h1>
+    <p class="sub">Saber actuar ante una emergencia</p>
+    <div class="meta">
+      <span>8 grupos</span>
+      <span>22 estudiantes</span>
+      <span>Demostración práctica</span>
+    </div>
+    <button class="btn btn-primary" onclick="irA('hub')">Ver la actividad →</button>
+  </div>
+</section>
+
+<!-- ============ HUB ============ -->
+<section class="screen" data-screen="hub">
+  <h2 style="font-size:19px; margin:6px 0 14px;">¿Qué necesitas consultar?</h2>
+  <div class="hub-grid">
+    <button class="hub-card" onclick="irA('b0')">
+      <span class="hub-icon">📌</span>
+      <span class="hub-text"><h3>Qué vamos a hacer</h3><span class="hub-sub">La actividad y su objetivo</span></span>
+      <span class="hub-arrow">›</span>
+    </button>
+    <button class="hub-card" onclick="irA('b1')">
+      <span class="hub-icon">🧭</span>
+      <span class="hub-text"><h3>Bases para todos los grupos</h3><span class="hub-sub">La estación práctica y el protocolo PAS</span></span>
+      <span class="hub-arrow">›</span>
+    </button>
+    <button class="hub-card" onclick="irA('b2')">
+      <span class="hub-icon">👥</span>
+      <span class="hub-text"><h3>Los 8 grupos</h3><span class="hub-sub">Situación, pasos y materiales de cada uno</span></span>
+      <span class="hub-arrow">›</span>
+    </button>
+    <button class="hub-card" onclick="irA('b3')">
+      <span class="hub-icon">🎒</span>
+      <span class="hub-text"><h3>Materiales y botiquín</h3><span class="hub-sub">Qué usar y qué no hace falta comprar</span></span>
+      <span class="hub-arrow">›</span>
+    </button>
+    <button class="hub-card alerta" onclick="irA('b4')">
+      <span class="hub-icon">⚠️</span>
+      <span class="hub-text"><h3>Normas de seguridad</h3><span class="hub-sub">Lo que está prohibido y lo que sí se puede hacer</span></span>
+      <span class="hub-arrow">›</span>
+    </button>
+    <button class="hub-card" onclick="irA('b5')">
+      <span class="hub-icon">🎤</span>
+      <span class="hub-text"><h3>El día de la presentación</h3><span class="hub-sub">Tiempos, cartel, evaluación y orden</span></span>
+      <span class="hub-arrow">›</span>
+    </button>
+    <button class="hub-card" onclick="irA('b6')">
+      <span class="hub-icon">✅</span>
+      <span class="hub-text"><h3>Antes de presentar</h3><span class="hub-sub">Lista de verificación del grupo</span></span>
+      <span class="hub-arrow">›</span>
+    </button>
+    <button class="hub-card" onclick="irA('b7')">
+      <span class="hub-icon">🎯</span>
+      <span class="hub-text"><h3>Cierre</h3><span class="hub-sub">Lo que todos deben saber al terminar</span></span>
+      <span class="hub-arrow">›</span>
+    </button>
+  </div>
+</section>
+
+<!-- ============ B0 · QUÉ VAMOS A HACER ============ -->
+<section class="screen" data-screen="b0">
+  <div class="bloque-header">
+    <button class="back-btn" onclick="irA('hub')" aria-label="Volver al menú">←</button>
+    <h2>Qué vamos a hacer</h2>
+  </div>
+
+  <div class="card">
+    <p>Después de desarrollar el Tema 6 <strong>“Medidas de atención a la salud en la comunidad”</strong>, realizaremos una <strong>Jornada Práctica de Primeros Auxilios</strong>.</p>
+    <p>La clase se organizará en <strong>8 grupos</strong>. Cada grupo recibirá una situación de emergencia diferente que podría ocurrir realmente: en el colegio, durante Educación Física, en el recreo, en casa, en la calle o durante una actividad cotidiana.</p>
+    <p>Cada grupo deberá preparar la situación y <strong>demostrar frente al curso cómo actuar correctamente</strong>. No será una exposición tradicional basada únicamente en hablar o leer información.</p>
+  </div>
+
+  <div class="destacado">
+    <div class="eyebrow">La pregunta principal</div>
+    <p>“Si esto ocurriera ahora mismo, ¿sabríamos qué hacer?”</p>
+  </div>
+
+  <div class="sub-header"><span class="badge">🎯</span><h3>Objetivo de la actividad</h3></div>
+  <div class="card">
+    <p>Demostrar de manera práctica, segura y responsable los procedimientos básicos de actuación ante diferentes situaciones de emergencia.</p>
+    <p style="font-weight:700; color:var(--violeta-dark); margin-bottom:8px;">Al finalizar, cada estudiante debería poder:</p>
+    <ul>
+      <li>Reconocer una posible emergencia</li>
+      <li>Mantener la calma</li>
+      <li>Evaluar los peligros del lugar</li>
+      <li>Solicitar ayuda</li>
+      <li>Aplicar el protocolo PAS</li>
+      <li>Utilizar correctamente materiales básicos</li>
+      <li>Realizar acciones iniciales apropiadas</li>
+      <li>Identificar acciones que pueden resultar peligrosas</li>
+      <li>Comprender los límites de los primeros auxilios</li>
+      <li>Reconocer cuándo se necesita ayuda profesional</li>
+    </ul>
+  </div>
+
+  <div class="nota nota-violeta">
+    <span class="nota-icon">ℹ️</span>
+    <span>Los primeros auxilios son medidas iniciales que se realizan ante accidentes o enfermedades repentinas hasta la llegada de profesionales. <strong>No sustituyen la atención especializada.</strong></span>
+  </div>
+
+  <button class="btn btn-verde volver" onclick="irA('hub')">Volver al menú</button>
+</section>
+
+<!-- ============ B1 · BASES ============ -->
+<section class="screen" data-screen="b1">
+  <div class="bloque-header">
+    <button class="back-btn" onclick="irA('hub')" aria-label="Volver al menú">←</button>
+    <h2>Bases para todos los grupos</h2>
+  </div>
+
+  <div class="sub-header"><span class="badge">A</span><h3>La estación práctica</h3></div>
+  <p style="font-size:13.5px; color:var(--texto-suave); margin-bottom:12px;">Cada grupo prepara una estación formada por cuatro elementos:</p>
+
+  <div class="card">
+    <h3>1 · Situación realista</h3>
+    <p style="font-size:13.5px;">El grupo representa brevemente una emergencia que podría ocurrir en la vida cotidiana. Por ejemplo: <em>“Durante el recreo, un estudiante se corta accidentalmente el antebrazo y presenta una hemorragia.”</em></p>
+    <div class="nota nota-coral" style="margin:0;">
+      <span class="nota-icon">⚠️</span>
+      <span>La introducción debe ser breve. <strong>No queremos una obra de teatro</strong>: el objetivo es presentar el problema para después actuar.</span>
+    </div>
+  </div>
+
+  <div class="card">
+    <h3>2 · Actuación práctica</h3>
+    <p style="font-size:13.5px;">Los integrantes utilizan materiales y demuestran paso a paso qué harían realmente: ponerse guantes, usar gasas, ejercer presión sobre una hemorragia simulada, enfriar una quemadura simulada, preparar una inmovilización, colocar a una persona en posición lateral de seguridad, despejar el lugar durante una convulsión, simular una llamada de emergencia o demostrar RCP sobre un maniquí.</p>
+  </div>
+
+  <div class="card">
+    <h3>3 · Explicación</h3>
+    <p style="font-size:13.5px; margin-bottom:12px;">Mientras realizan las acciones, deben explicar brevemente cinco cosas. <strong>Este mismo marco se usa en los 8 grupos.</strong></p>
+    <div class="preguntas-lista">
+      <div class="pregunta-item"><strong>🧐 Reconocer</strong><span>¿Qué está ocurriendo?</span></div>
+      <div class="pregunta-item"><strong>🛡️ Proteger</strong><span>¿Qué peligros existen?</span></div>
+      <div class="pregunta-item"><strong>✅ Actuar</strong><span>¿Qué debemos hacer?</span></div>
+      <div class="pregunta-item"><strong>❌ Evitar</strong><span>¿Qué NO debemos hacer?</span></div>
+      <div class="pregunta-item"><strong>🚑 Pedir ayuda</strong><span>¿Cuándo se necesita atención profesional?</span></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <h3>4 · Apoyo visual</h3>
+    <p style="font-size:13.5px;">Cada grupo prepara <strong>un cartel, lámina o infografía sencilla</strong> con cuatro secciones: 🧐 Reconoce (signos principales), ✅ Actúa (acciones correctas), ❌ Evita (errores frecuentes) y 🚑 Pide ayuda (cuándo buscar atención profesional).</p>
+    <div class="nota nota-coral" style="margin:0;">
+      <span class="nota-icon">⚠️</span>
+      <span>El cartel debe ayudar a comprender la demostración. <strong>No debe contener largos párrafos para ser leídos durante la presentación.</strong></span>
+    </div>
+  </div>
+
+  <div class="sub-header"><span class="badge">B</span><h3>Protocolo PAS</h3></div>
+  <div class="nota nota-violeta">
+    <span class="nota-icon">📢</span>
+    <span>Aunque solo el <strong>Grupo 1</strong> tiene el protocolo PAS como tema principal, <strong>los 8 grupos deben aplicarlo</strong> durante su demostración.</span>
+  </div>
+
+  <div class="pas-card">
+    <span class="pas-letra">P</span>
+    <h3>Proteger</h3>
+    <p>Antes de acercarse: <strong>observar el lugar</strong>. Preguntarse:</p>
+    <ul>
+      <li>¿Es seguro acercarme?</li>
+      <li>¿Hay fuego, electricidad o vehículos?</li>
+      <li>¿Hay vidrios u objetos peligrosos?</li>
+      <li>¿Hay sustancias desconocidas?</li>
+      <li>¿Existe sangre u otro fluido?</li>
+      <li>¿Corro peligro si intento ayudar?</li>
+    </ul>
+  </div>
+
+  <div class="pas-card">
+    <span class="pas-letra">A</span>
+    <h3>Avisar</h3>
+    <p>Pedir ayuda. Si hay varias personas presentes, no basta con gritar “¡Alguien llame!”. Se debe asignar la tarea directamente: <strong>“Tú, llama a emergencias.”</strong></p>
+    <p style="margin-bottom:6px;">Al comunicar la emergencia hay que informar:</p>
+    <ul>
+      <li>Qué ocurrió</li>
+      <li>Dónde ocurrió</li>
+      <li>Cuántas personas están afectadas</li>
+      <li>Si existen peligros</li>
+      <li>Si la persona responde</li>
+      <li>Si respira normalmente</li>
+    </ul>
+    <div class="nota nota-rosa" style="margin:12px 0 0;">
+      <span class="nota-icon">📵</span>
+      <span>Durante la práctica <strong>NO se realizará una llamada real</strong> a los servicios de emergencia.</span>
+    </div>
+  </div>
+
+  <div class="pas-card">
+    <span class="pas-letra">S</span>
+    <h3>Socorrer</h3>
+    <p>Después de comprobar que es seguro acercarse:</p>
+    <ul>
+      <li>Evaluar a la persona</li>
+      <li>Ayudar de acuerdo con la situación</li>
+      <li>Utilizar únicamente procedimientos conocidos</li>
+      <li>Permanecer con la víctima</li>
+      <li>Esperar o facilitar la llegada de ayuda profesional</li>
+    </ul>
+  </div>
+
+  <div class="sub-header"><span class="badge">📋</span><h3>Organización de los 8 grupos</h3></div>
+  <table class="tabla-grupos">
+    <thead><tr><th>N.º</th><th>Tema</th><th>Est.</th></tr></thead>
+    <tbody>
+      <tr><td>1</td><td>Protocolo PAS y evaluación de la escena</td><td>3</td></tr>
+      <tr><td>2</td><td>RCP básica y DEA</td><td>3</td></tr>
+      <tr><td>3</td><td>Atragantamiento</td><td>3</td></tr>
+      <tr><td>4</td><td>Heridas y hemorragias</td><td>3</td></tr>
+      <tr><td>5</td><td>Quemaduras</td><td>3</td></tr>
+      <tr><td>6</td><td>Fracturas, esguinces y traumatismos</td><td>3</td></tr>
+      <tr><td>7</td><td>Desmayo y posición lateral de seguridad</td><td>2</td></tr>
+      <tr><td>8</td><td>Convulsiones y electrocución</td><td>2</td></tr>
+    </tbody>
+  </table>
+
+  <button class="btn btn-verde volver" onclick="irA('hub')">Volver al menú</button>
+</section>
+
+<!-- ============ B2 · LOS 8 GRUPOS ============ -->
+<section class="screen" data-screen="b2">
+  <div class="bloque-header">
+    <button class="back-btn" onclick="irA('hub')" aria-label="Volver al menú">←</button>
+    <h2>Los 8 grupos</h2>
+  </div>
+  <div class="nota nota-violeta">
+    <span class="nota-icon">👀</span>
+    <span>Los grupos aún no se han sorteado. Puedes consultar la información de todos ellos.</span>
+  </div>
+  <div id="grupos-lista"></div>
+  <button class="btn btn-verde volver" onclick="irA('hub')">Volver al menú</button>
+</section>
+
+<!-- ============ B3 · MATERIALES ============ -->
+<section class="screen" data-screen="b3">
+  <div class="bloque-header">
+    <button class="back-btn" onclick="irA('hub')" aria-label="Volver al menú">←</button>
+    <h2>Materiales y botiquín</h2>
+  </div>
+
+  <div class="destacado">
+    <div class="eyebrow">Regla principal</div>
+    <p>No se valora cuánto dinero gasta un grupo, sino qué tan inteligentemente utiliza materiales sencillos.</p>
+  </div>
+
+  <div class="sub-header"><span class="badge">🧰</span><h3>El botiquín en todas las actividades</h3></div>
+  <div class="card">
+    <p style="font-size:13.5px;">No existirá un grupo exclusivo para explicar el botiquín. Cada grupo deberá preguntarse: <strong>“¿Qué elementos del botiquín podrían ser útiles en nuestra situación?”</strong></p>
+    <p style="font-weight:700; color:var(--violeta-dark); margin-bottom:8px; font-size:14px;">Elementos básicos del Tema 6:</p>
+    <div class="g-materiales">
+      <span class="g-mat">Gasas estériles</span><span class="g-mat">Vendas</span><span class="g-mat">Curitas</span>
+      <span class="g-mat">Esparadrapo</span><span class="g-mat">Antisépticos</span><span class="g-mat">Tijeras</span>
+      <span class="g-mat">Pinzas</span><span class="g-mat">Termómetro</span><span class="g-mat">Guantes</span>
+    </div>
+    <div class="nota nota-verde" style="margin:14px 0 0;">
+      <span class="nota-icon">💡</span>
+      <span>No significa que todos los grupos deban utilizar todos esos elementos. Deben seleccionar solamente los que tengan sentido para su caso.</span>
+    </div>
+  </div>
+
+  <div class="sub-header"><span class="badge">🏠</span><h3>Materiales cotidianos</h3></div>
+  <div class="card">
+    <div class="g-materiales">
+      <span class="g-mat">Cartón</span><span class="g-mat">Revistas</span><span class="g-mat">Botellas plásticas</span>
+      <span class="g-mat">Bolsas</span><span class="g-mat">Recipientes</span><span class="g-mat">Toallas</span>
+      <span class="g-mat">Pañuelos</span><span class="g-mat">Ropa vieja</span><span class="g-mat">Mochilas</span>
+      <span class="g-mat">Sillas</span><span class="g-mat">Celulares</span><span class="g-mat">Cartulina</span>
+      <span class="g-mat">Marcadores</span><span class="g-mat">Cinta adhesiva</span>
+    </div>
+  </div>
+
+  <div class="sub-header"><span class="badge">🎭</span><h3>Materiales para simulación</h3></div>
+  <div class="card">
+    <div class="g-materiales">
+      <span class="g-mat">Agua coloreada</span><span class="g-mat">Esponjas</span><span class="g-mat">Muñecos</span>
+      <span class="g-mat">Almohadas</span><span class="g-mat">Cajas</span><span class="g-mat">Carteles</span>
+      <span class="g-mat">Objetos desconectados</span>
+    </div>
+  </div>
+
+  <button class="btn btn-verde volver" onclick="irA('hub')">Volver al menú</button>
+</section>
+
+<!-- ============ B4 · SEGURIDAD ============ -->
+<section class="screen" data-screen="b4">
+  <div class="bloque-header">
+    <button class="back-btn" onclick="irA('hub')" aria-label="Volver al menú">←</button>
+    <h2>Normas de seguridad</h2>
+  </div>
+
+  <div class="seguridad-hero">
+    <div class="s-icon">⚠️</div>
+    <p>Toda emergencia será SIMULADA</p>
+    <p style="font-size:13.5px; font-weight:600; margin-top:9px; opacity:.95;">El aprendizaje de primeros auxilios nunca debe convertirse en una situación que provoque un accidente.</p>
+  </div>
+
+  <div class="card card-prohibido">
+    <h3>⛔ Está prohibido</h3>
+    <ul class="lista-seg lista-prohibido">
+      <li>Provocar heridas</li>
+      <li>Utilizar sangre real</li>
+      <li>Utilizar cuchillos u objetos cortantes</li>
+      <li>Utilizar fuego</li>
+      <li>Utilizar agua caliente</li>
+      <li>Provocar quemaduras</li>
+      <li>Utilizar productos químicos peligrosos</li>
+      <li>Utilizar corriente eléctrica</li>
+      <li>Enchufar aparatos para representar electrocución</li>
+      <li>Provocar caídas</li>
+      <li>Provocar realmente un desmayo</li>
+      <li>Intentar producir un atragantamiento</li>
+      <li>Realizar golpes reales en la espalda</li>
+      <li>Practicar compresiones abdominales con fuerza sobre compañeros</li>
+      <li>Realizar compresiones de RCP sobre compañeros</li>
+      <li>Aplicar un torniquete apretado a un compañero</li>
+      <li>Administrar medicamentos</li>
+      <li>Ingerir sustancias como parte de la demostración</li>
+      <li>Realizar cualquier acción que pueda producir dolor o lesión</li>
+    </ul>
+  </div>
+
+  <div class="card card-permitido">
+    <h3>✅ Sí pueden hacer</h3>
+    <ul class="lista-seg lista-permitido">
+      <li>Colocarse guantes</li>
+      <li>Colocar gasas y vendas</li>
+      <li>Ejercer presión sobre un brazo artificial</li>
+      <li>Verter agua fresca sobre una mano sana para simular el enfriamiento de una quemadura</li>
+      <li>Preparar una férula sencilla</li>
+      <li>Colocar suavemente una férula demostrativa</li>
+      <li>Envolver hielo en una toalla</li>
+      <li>Retirar objetos alrededor de una “víctima”</li>
+      <li>Utilizar el cronómetro del celular</li>
+      <li>Realizar una llamada simulada</li>
+      <li>Practicar cuidadosamente la posición lateral de seguridad sobre una colchoneta</li>
+      <li>Demostrar la posición para el atragantamiento sin aplicar fuerza</li>
+      <li>Practicar RCP sobre un maniquí</li>
+      <li>Fabricar un DEA de entrenamiento</li>
+      <li>Utilizar materiales cotidianos para recrear escenarios</li>
+    </ul>
+  </div>
+
+  <button class="btn btn-verde volver" onclick="irA('hub')">Volver al menú</button>
+</section>
+
+<!-- ============ B5 · EL DÍA DE LA PRESENTACIÓN ============ -->
+<section class="screen" data-screen="b5">
+  <div class="bloque-header">
+    <button class="back-btn" onclick="irA('hub')" aria-label="Volver al menú">←</button>
+    <h2>El día de la presentación</h2>
+  </div>
+
+  <div class="sub-header"><span class="badge">⏱️</span><h3>Tiempos: 6 a 8 minutos</h3></div>
+  <div class="tiempo-grid">
+    <div class="tiempo-item"><span class="tiempo-min">1 min</span><span>Presentar la situación</span></div>
+    <div class="tiempo-item"><span class="tiempo-min">3–4 min</span><span>Actuar y demostrar el procedimiento</span></div>
+    <div class="tiempo-item"><span class="tiempo-min">1 min</span><span>Explicar errores frecuentes</span></div>
+    <div class="tiempo-item"><span class="tiempo-min">1–2 min</span><span>Preguntas o conclusión</span></div>
+  </div>
+
+  <div class="sub-header"><span class="badge">🗣️</span><h3>No memoricen un discurso</h3></div>
+  <div class="comparacion">
+    <div class="comp-item comp-mal">
+      <div class="comp-label">❌ Así no</div>
+      <p>“Buenos días profesor y compañeros, hoy vamos a hablar sobre las hemorragias. Una hemorragia se define como…”</p>
+    </div>
+    <div class="comp-item comp-bien">
+      <div class="comp-label">✅ Así sí</div>
+      <p>“Estamos en el aula. Mi compañero acaba de sufrir un corte y está sangrando. ¿Qué hacemos?” — y comienza la actuación.</p>
+    </div>
+  </div>
+  <div class="nota nota-violeta">
+    <span class="nota-icon">💡</span>
+    <span>Esa será la diferencia entre una <strong>exposición</strong> y una <strong>demostración práctica</strong>.</span>
+  </div>
+
+  <div class="sub-header"><span class="badge">🖼️</span><h3>El apoyo visual</h3></div>
+  <div class="card">
+    <p style="font-size:13.5px;">Cada grupo presenta <strong>un solo apoyo visual principal</strong> (cartel, lámina o infografía) que debe verse desde cierta distancia, con esta estructura:</p>
+    <ul style="font-size:13.5px;">
+      <li><strong>Nombre de la emergencia</strong></li>
+      <li>🧐 <strong>Reconoce</strong> — 3 a 5 signos</li>
+      <li>✅ <strong>Actúa</strong> — pasos principales</li>
+      <li>❌ <strong>Evita</strong> — 3 a 5 errores</li>
+      <li>🚑 <strong>Pide ayuda</strong> — cuándo corresponde</li>
+    </ul>
+    <div class="nota nota-coral" style="margin:12px 0 0;">
+      <span class="nota-icon">🚫</span>
+      <span>Nada de páginas llenas de texto, definiciones copiadas, párrafos para leer, letra pequeña ni información que nadie pueda observar desde su asiento.</span>
+    </div>
+  </div>
+
+  <div class="sub-header"><span class="badge">👥</span><h3>Funciones dentro del grupo</h3></div>
+  <div class="card">
+    <p style="font-size:13.5px; margin-bottom:10px;">En grupos de 3, una organización posible:</p>
+    <div class="g-roles">
+      <div class="g-rol"><strong>Estudiante A</strong> — Víctima / encargado del escenario</div>
+      <div class="g-rol"><strong>Estudiante B</strong> — Primer respondiente (realiza la mayor parte del procedimiento)</div>
+      <div class="g-rol"><strong>Estudiante C</strong> — Apoyo y comunicación (pide ayuda, entrega materiales, explica, controla el tiempo)</div>
+    </div>
+    <p style="font-size:13.5px; margin:12px 0 0;">En grupos de 2, ambos representan, actúan, explican y responden preguntas.</p>
+    <div class="nota nota-rosa" style="margin:12px 0 0;">
+      <span class="nota-icon">❗</span>
+      <span><strong>Todos deben saber todo el procedimiento.</strong> El profesor podrá preguntar a cualquier integrante: “¿Por qué hicieron eso?”, “¿Qué harías ahora?”, “¿Qué pasaría si la persona deja de respirar?”. No sirve aprender únicamente “mi parte”.</span>
+    </div>
+  </div>
+
+  <div class="sub-header"><span class="badge">📊</span><h3>Cómo se evalúa</h3></div>
+  <table class="tabla-eval">
+    <thead><tr><th>Criterio</th><th>Puntaje</th></tr></thead>
+    <tbody>
+      <tr><td>Ejecución correcta del procedimiento práctico</td><td>35 pts</td></tr>
+      <tr><td>Seguridad y aplicación del protocolo PAS</td><td>20 pts</td></tr>
+      <tr><td>Uso correcto y realista de materiales</td><td>15 pts</td></tr>
+      <tr><td>Dominio y explicación del tema</td><td>15 pts</td></tr>
+      <tr><td>Participación y coordinación del grupo</td><td>10 pts</td></tr>
+      <tr><td>Apoyo visual y presentación</td><td>5 pts</td></tr>
+      <tr class="total"><td>Total</td><td>100 pts</td></tr>
+    </tbody>
+  </table>
+
+  <div class="card">
+    <div class="crit-detalle">
+      <div class="crit-nombre">Procedimiento práctico · 35 pts</div>
+      <p>Orden de las acciones, identificación correcta de la emergencia, aplicación adecuada del procedimiento, capacidad de reacción y coherencia entre lo que explican y lo que hacen. Es el criterio con mayor puntuación porque el objetivo principal es demostrar.</p>
+    </div>
+    <div class="crit-detalle">
+      <div class="crit-nombre">Seguridad y PAS · 20 pts</div>
+      <p>Si evalúan la escena, se protegen, solicitan ayuda, evitan actuaciones peligrosas y respetan las normas de seguridad de la práctica.</p>
+    </div>
+    <div class="crit-detalle">
+      <div class="crit-nombre">Utilización de materiales · 15 pts</div>
+      <p>Selección adecuada, preparación, creatividad, utilización correcta y realismo. No se valora el precio.</p>
+    </div>
+    <div class="crit-detalle">
+      <div class="crit-nombre">Dominio del tema · 15 pts</div>
+      <p>Explicar qué ocurre, por qué actúan de determinada manera, qué no se debe hacer y cuándo pedir ayuda. También deberán responder preguntas.</p>
+    </div>
+    <div class="crit-detalle">
+      <div class="crit-nombre">Trabajo en equipo · 10 pts</div>
+      <p>Participación de todos, coordinación, responsabilidad y organización. No debe existir un integrante que haga todo mientras los demás observan.</p>
+    </div>
+    <div class="crit-detalle" style="margin-bottom:0;">
+      <div class="crit-nombre">Apoyo visual · 5 pts</div>
+      <p>Claridad, utilidad, organización, legibilidad y relación con el procedimiento.</p>
+    </div>
+  </div>
+
+  <div class="sub-header"><span class="badge">📅</span><h3>Orden de la jornada</h3></div>
+  <ul class="orden-lista">
+    <li class="orden-item"><span class="orden-num">1</span><span class="orden-emoji">🛡️</span><span class="orden-txt">PAS y seguridad de la escena</span></li>
+    <li class="orden-item"><span class="orden-num">2</span><span class="orden-emoji">❤️</span><span class="orden-txt">RCP y DEA</span></li>
+    <li class="orden-item"><span class="orden-num">3</span><span class="orden-emoji">🫁</span><span class="orden-txt">Atragantamiento</span></li>
+    <li class="orden-item"><span class="orden-num">4</span><span class="orden-emoji">🩸</span><span class="orden-txt">Heridas y hemorragias</span></li>
+    <li class="orden-item"><span class="orden-num">5</span><span class="orden-emoji">🔥</span><span class="orden-txt">Quemaduras</span></li>
+    <li class="orden-item"><span class="orden-num">6</span><span class="orden-emoji">🦴</span><span class="orden-txt">Fracturas, esguinces y traumatismos</span></li>
+    <li class="orden-item"><span class="orden-num">7</span><span class="orden-emoji">😵</span><span class="orden-txt">Desmayo y posición lateral de seguridad</span></li>
+    <li class="orden-item"><span class="orden-num">8</span><span class="orden-emoji">⚡</span><span class="orden-txt">Convulsiones y electrocución</span></li>
+  </ul>
+  <div class="nota nota-verde">
+    <span class="nota-icon">🧩</span>
+    <span>La jornada comienza con la regla que sirve para todas las demás situaciones (<strong>PAS</strong>), sigue con las emergencias que pueden comprometer rápidamente la vida y termina con otras situaciones frecuentes. Así las ocho presentaciones forman <strong>una sola experiencia de aprendizaje</strong>, en lugar de ocho exposiciones aisladas.</span>
+  </div>
+
+  <button class="btn btn-verde volver" onclick="irA('hub')">Volver al menú</button>
+</section>
+
+<!-- ============ B6 · CHECKLIST ============ -->
+<section class="screen" data-screen="b6">
+  <div class="bloque-header">
+    <button class="back-btn" onclick="irA('hub')" aria-label="Volver al menú">←</button>
+    <h2>Antes de presentar</h2>
+  </div>
+
+  <div class="check-progreso">
+    <div class="cp-num"><span id="check-count">0</span> de 18</div>
+    <div class="cp-txt">puntos verificados</div>
+    <div class="cp-barra"><div class="cp-fill" id="check-fill"></div></div>
+  </div>
+
+  <div class="nota nota-violeta">
+    <span class="nota-icon">📝</span>
+    <span>Marca cada punto para revisar que el grupo esté listo. Esta lista no se guarda: sirve para la revisión del momento.</span>
+  </div>
+
+  <div id="checklist"></div>
+
+  <button class="btn btn-outline" style="margin-top:14px;" onclick="reiniciarChecklist()">Desmarcar todo</button>
+  <button class="btn btn-verde volver" onclick="irA('hub')">Volver al menú</button>
+</section>
+
+<!-- ============ B7 · CIERRE ============ -->
+<section class="screen" data-screen="b7">
+  <div class="bloque-header">
+    <button class="back-btn" onclick="irA('hub')" aria-label="Volver al menú">←</button>
+    <h2>Cierre</h2>
+  </div>
+
+  <div class="sub-header"><span class="badge">❓</span><h3>Lo que todos deben saber al terminar</h3></div>
+  <p style="font-size:13.5px; color:var(--texto-suave); margin-bottom:12px;">Aunque cada estudiante pertenezca a un grupo diferente, al finalizar la jornada todos deberán poder responder estas preguntas:</p>
+  <div id="preguntas-finales"></div>
+
+  <div class="sub-header"><span class="badge">🧭</span><h3>El principio fundamental</h3></div>
+  <p style="font-size:13.5px; color:var(--texto-suave); margin-bottom:12px;">Los primeros auxilios no consisten en demostrar quién sabe realizar más maniobras. Consisten en saber:</p>
+  <div class="principio">
+    <div class="principio-paso"><strong>Observar</strong><span>¿Qué está ocurriendo?</span></div>
+    <div class="principio-paso"><strong>Proteger</strong><span>¿Es seguro acercarme?</span></div>
+    <div class="principio-paso"><strong>Pedir ayuda</strong><span>¿Necesito asistencia profesional?</span></div>
+    <div class="principio-paso"><strong>Actuar</strong><span>¿Qué puedo hacer correctamente?</span></div>
+    <div class="principio-paso"><strong>Evitar</strong><span>¿Qué podría empeorar la situación?</span></div>
+    <div class="principio-paso"><strong>Acompañar</strong><span>Permanecer con la persona hasta que llegue ayuda.</span></div>
+  </div>
+
+  <div class="sub-header"><span class="badge">💬</span><h3>Mensaje final</h3></div>
+  <div class="card">
+    <p style="font-size:13.5px;">En una emergencia, actuar rápidamente es importante. Pero actuar rápidamente <strong>sin saber qué estamos haciendo puede empeorar la situación</strong>.</p>
+    <p style="font-size:13.5px; margin-bottom:0;">Por eso, antes de intervenir debemos recordar: 🛡️ <strong>Proteger</strong> · 📞 <strong>Avisar</strong> · ❤️ <strong>Socorrer</strong>.</p>
+  </div>
+
+  <div class="destacado">
+    <div class="eyebrow">Y preguntarnos siempre</div>
+    <p>“¿Lo que estoy a punto de hacer ayudará a la persona sin ponerla ni ponerme en mayor riesgo?”</p>
+  </div>
+
+  <div class="nota nota-verde">
+    <span class="nota-icon">🎓</span>
+    <span>El objetivo de esta actividad no es convertirnos en médicos, enfermeros o paramédicos. Es aprender algo que cualquier ciudadano debería conocer: <strong>reconocer una emergencia, pedir ayuda y realizar correctamente las primeras acciones que pueden proteger una vida.</strong></span>
+  </div>
+
+  <div class="sub-header"><span class="badge">📱</span><h3>Para repasar el tema</h3></div>
+  <a class="link-app" href="https://biogeo-uenab.pages.dev/primeros-auxilios-6sec.html" target="_blank" rel="noopener">
+    <span class="la-icon">🩹</span>
+    <span>
+      <h4>Primeros Auxilios en la Comunidad</h4>
+      <p>Central de Emergencias interactiva del Tema 6</p>
+    </span>
+    <span class="la-arrow">→</span>
+  </a>
+
+  <button class="btn btn-verde volver" onclick="irA('hub')">Volver al menú</button>
+</section>
+
+</div>
+
+<script>
+/* ============================================================
+   CONTENIDO — los 8 grupos
+   ============================================================ */
+const GRUPOS = [
+  {
+    n:1, emoji:'🛡️', titulo:'Protocolo PAS y evaluación de la escena', cant:3,
+    situacionTitulo:'Accidente en el patio del colegio',
+    situacion:'Durante el recreo, un estudiante se encuentra tendido en el suelo después de un accidente. Alrededor hay objetos que podrían representar un peligro: una mochila atravesada, una silla caída, una botella derramada, objetos esparcidos y una pequeña mancha de “sangre” simulada. Uno de sus compañeros observa la situación y debe decidir qué hacer.',
+    roles:[
+      ['Estudiante 1','Víctima'],
+      ['Estudiante 2','Primer respondiente'],
+      ['Estudiante 3','Compañero testigo encargado de pedir ayuda']
+    ],
+    escenario:'Coloquen en el suelo una mochila, una silla, una botella vacía, algunos cuadernos y un pequeño recipiente o papel con color rojo para representar sangre. La víctima estará recostada sobre una colchoneta o superficie segura.',
+    pasos:[
+      'Detenerse. No correr inmediatamente hacia la víctima: primero observar el lugar.',
+      'Identificar peligros y señalar qué elementos podrían representarlos. Por ejemplo: “Primero compruebo si puedo acercarme de forma segura.”',
+      'Proteger: retirar objetos del paso, pedir a otros compañeros que se alejen, delimitar la zona y colocarse guantes si existe sangre.',
+      'Avisar diciendo directamente “Tú, pide ayuda”. El tercer integrante simula la llamada e informa qué ocurrió, dónde, si la persona responde y si respira normalmente.',
+      'Socorrer cuando sea seguro: acercarse, comprobar respuesta, comprobar respiración, observar si existe una hemorragia importante y permanecer con la víctima.'
+    ],
+    explicar:[
+      ['Reconocer','Hay una persona tendida tras un accidente en el patio.'],
+      ['Proteger','Objetos esparcidos, silla caída, líquido derramado y posible sangre en el lugar.'],
+      ['Actuar','Asegurar la zona primero y recién después acercarse a la víctima.'],
+      ['Evitar','Correr hacia la víctima sin observar el entorno.'],
+      ['Pedir ayuda','Al confirmar que hay una persona lesionada, asignando la tarea a alguien concreto.']
+    ],
+    clave:'¿Por qué no debemos correr inmediatamente hacia una víctima? Porque antes debemos comprobar que nosotros también estamos seguros. Si el auxiliador resulta lesionado, ya tendremos dos víctimas.',
+    errores:[
+      'Correr hacia la víctima sin observar',
+      'Tocar sangre directamente',
+      'Acercarse a una fuente eléctrica activa',
+      'Entrar en una zona con fuego',
+      'Mover innecesariamente a un accidentado',
+      'Permitir que muchas personas rodeen a la víctima'
+    ],
+    materiales:['Mochila','Silla','Cuadernos','Botella vacía','Celular','Guantes','Cinta o señalización','Carteles de peligro','Colchoneta'],
+    reto:null,
+    frase:'Primero me protejo → después ayudo'
+  },
+  {
+    n:2, emoji:'❤️', titulo:'RCP básica y DEA', cant:3,
+    situacionTitulo:'Una persona se desploma durante Educación Física',
+    situacion:'Una persona estaba realizando actividad física y repentinamente cae al suelo. Un compañero se acerca: la persona no responde y no respira normalmente.',
+    roles:[
+      ['Estudiante 1','Representa a la víctima mediante el maniquí o modelo'],
+      ['Estudiante 2','Primer respondiente'],
+      ['Estudiante 3','Solicita ayuda y trae el DEA simulado']
+    ],
+    escenario:'Si el colegio dispone de un maniquí de RCP, se utiliza únicamente ese. Si no existe, se puede usar una almohada o modelo solo para mostrar la posición corporal, la ubicación de las manos, los brazos rectos y el ritmo.',
+    pasos:[
+      'Comprobar que el lugar sea seguro.',
+      'Acercarse e intentar obtener respuesta: “¿Estás bien? ¿Me escuchas?”',
+      'Si no responde, decir: “Tú, pide ayuda y trae un DEA si hay uno disponible.”',
+      'Comprobar si respira normalmente.',
+      'Demostrar la posición de RCP: manos en el centro del pecho, una sobre la otra, dedos entrelazados, brazos rectos y hombros encima de las manos, a un ritmo de 100 a 120 compresiones por minuto (pueden usar un metrónomo en el celular).',
+      'Demostrar el DEA simulado: encender el equipo, colocar los parches, decir “¡Nadie toque a la víctima!”, simular el análisis y continuar con RCP cuando corresponda.'
+    ],
+    explicar:[
+      ['Reconocer','La persona no responde y no respira normalmente.'],
+      ['Proteger','Comprobar que el lugar sea seguro antes de acercarse.'],
+      ['Actuar','Iniciar la respuesta ante un posible paro cardíaco y utilizar el DEA cuando esté disponible.'],
+      ['Evitar','Practicar compresiones reales sobre un compañero o tocar a la víctima durante el análisis del DEA.'],
+      ['Pedir ayuda','De inmediato, apenas se confirma que no responde.']
+    ],
+    clave:'El DEA simulado puede fabricarse con una caja de cartón, cartulina, dos cables viejos sin corriente, dos parches de cartulina y un marcador. Los parches deberán tener dibujos que indiquen su ubicación.',
+    errores:[
+      'Realizar compresiones reales sobre un compañero',
+      'Ignorar que la persona no respira normalmente',
+      'Abandonar a la víctima',
+      'Dejar de pedir ayuda',
+      'Tocar a la persona cuando el DEA está simulando el análisis'
+    ],
+    materiales:['Maniquí de RCP (si existe)','Almohada o modelo','Celular con metrónomo','Caja de cartón','Cartulina','Cables sin corriente','Cinta adhesiva','Marcadores'],
+    alerta:'NO SE REALIZARÁ RCP SOBRE OTRO ESTUDIANTE. Las compresiones se practican únicamente sobre un maniquí de RCP o un simulador de entrenamiento. No se intentará practicar profundidad real de compresión sobre un modelo casero ni sobre una persona.',
+    reto:null,
+    frase:'No responde + no respira normalmente = emergencia vital'
+  },
+  {
+    n:3, emoji:'🫁', titulo:'Atragantamiento', cant:3,
+    situacionTitulo:'Atragantamiento durante el recreo',
+    situacion:'Tres compañeros están comiendo. Uno comienza repentinamente a presentar dificultad.',
+    roles:[
+      ['Estudiante 1','Víctima'],
+      ['Estudiante 2','Auxiliador'],
+      ['Estudiante 3','Compañero encargado de pedir ayuda y explicar']
+    ],
+    escenario:'La demostración tiene dos momentos. Primero, obstrucción leve: la víctima simula tos fuerte, capacidad para emitir sonidos y para responder. Después, obstrucción grave: no puede hablar, la tos es débil o inexistente y se lleva las manos al cuello (signo universal del atragantamiento).',
+    pasos:[
+      'Ante la obstrucción leve, el auxiliador pregunta: “¿Te estás atragantando?”',
+      'Si todavía puede toser eficazmente, animarlo a continuar tosiendo y observarlo.',
+      'Al pasar a obstrucción grave, reconocer el signo universal: manos al cuello, sin poder hablar ni respirar adecuadamente.',
+      'Demostrar 5 golpes en la espalda.',
+      'Demostrar 5 compresiones abdominales.',
+      'Repetir la secuencia hasta que se expulse el objeto o la persona pierda la respuesta.',
+      'Si la persona deja de responder: colocarla de manera segura, activar o confirmar la ayuda de emergencia, iniciar RCP según el entrenamiento y solicitar un DEA.'
+    ],
+    explicar:[
+      ['Reconocer','Diferenciar la obstrucción leve (tose y emite sonidos) de la grave (no habla ni respira, manos al cuello).'],
+      ['Proteger','Actuar con rapidez sin poner en riesgo a la víctima ni a quien ayuda.'],
+      ['Actuar','5 golpes en la espalda seguidos de 5 compresiones abdominales, repitiendo la secuencia.'],
+      ['Evitar','Dar agua o realizar maniobras mientras la persona todavía tose eficazmente.'],
+      ['Pedir ayuda','Llamar al servicio de emergencias apenas se identifica la obstrucción grave.']
+    ],
+    clave:'Sobre el compañero SOLO se demuestra la posición. Los golpes se representan sin impacto real y las compresiones abdominales sin aplicar fuerza: el estudiante coloca correctamente sus brazos y manos, pero no comprime el abdomen del compañero.',
+    errores:[
+      'Dar agua durante una obstrucción grave',
+      'Meter los dedos a ciegas en la boca',
+      'Realizar maniobras violentas sobre alguien que todavía tose eficazmente',
+      'Practicar compresiones abdominales reales sobre un compañero'
+    ],
+    materiales:['Mesa','Plato','Vaso','Envases o alimentos de utilería','Celular','Cartel con los números 5 + 5'],
+    reto:'La persona todavía puede toser con fuerza. ¿Realizas inmediatamente compresiones abdominales?',
+    frase:'Si puede toser → dejar toser. Si no puede hablar o respirar → actuar'
+  },
+  {
+    n:4, emoji:'🩸', titulo:'Heridas y hemorragias', cant:3,
+    situacionTitulo:'Corte accidental durante un trabajo escolar',
+    situacion:'Un estudiante estaba realizando una actividad y accidentalmente sufre un corte en el brazo. Existe sangrado.',
+    roles:[
+      ['Estudiante 1','Víctima'],
+      ['Estudiante 2','Auxiliador'],
+      ['Estudiante 3','Encargado del botiquín, la llamada y la explicación']
+    ],
+    escenario:'El grupo puede fabricar un brazo simulado con una botella plástica, una manga de camisa vieja o tela, una esponja, una pequeña bolsa y agua coloreada de rojo. La esponja o tela representa la zona lesionada y el agua roja permite simular el sangrado, para poder realizar presión real sobre el modelo y no sobre una herida verdadera.',
+    pasos:[
+      'Herida leve: lavarse o higienizarse las manos.',
+      'Herida leve: colocarse guantes, limpiar la herida simulada y protegerla con una gasa o apósito.',
+      'Hemorragia importante: colocarse guantes y pedir ayuda.',
+      'Colocar una gasa o paño limpio directamente sobre la zona.',
+      'Aplicar presión directa, firme y continua.',
+      'Si la primera gasa queda empapada, mantener el control y colocar material adicional encima, sin retirarla.'
+    ],
+    explicar:[
+      ['Reconocer','Distinguir una herida leve de una hemorragia importante.'],
+      ['Proteger','Colocarse guantes antes de cualquier contacto con sangre.'],
+      ['Actuar','Presión directa, firme y continua sobre la zona.'],
+      ['Evitar','Retirar la gasa empapada para observar la herida, porque interrumpe la coagulación.'],
+      ['Pedir ayuda','Ante una hemorragia importante, desde el primer momento.']
+    ],
+    clave:'Sobre el torniquete: el grupo explica que ante una hemorragia potencialmente mortal de una extremidad que no se controla con presión directa, un torniquete apropiado puede ser necesario. NO deben colocar ni apretar un torniquete real sobre un compañero, ni usar cuerdas, cables, cordones o alambres. Si desean mostrar cómo luce, pueden hacerlo sobre una botella, un tubo o un brazo artificial.',
+    errores:[
+      'Tocar sangre sin protección',
+      'Utilizar algodón directamente dentro de una herida',
+      'Levantar continuamente la gasa para mirar',
+      'Aplicar sustancias caseras',
+      'Apretar un torniquete sobre un compañero sano'
+    ],
+    materiales:['Guantes','Gasas','Vendas','Paño limpio','Botella plástica','Manga vieja','Esponja','Agua','Colorante rojo','Recipiente','Botiquín'],
+    reto:'La primera gasa ya está completamente mojada de sangre. ¿Qué haces?',
+    frase:'Hemorragia importante = protección + presión directa + ayuda'
+  },
+  {
+    n:5, emoji:'🔥', titulo:'Quemaduras', cant:3,
+    situacionTitulo:'Accidente en la cocina',
+    situacion:'Una persona estaba preparando una bebida y accidentalmente se derrama líquido caliente sobre una mano. La quemadura será completamente simulada.',
+    roles:[
+      ['Estudiante 1','Víctima'],
+      ['Estudiante 2','Auxiliador'],
+      ['Estudiante 3','Encargado de presentar los materiales correctos e incorrectos']
+    ],
+    escenario:'Sobre una mesa colocarán una botella o jarra con agua fresca, un recipiente, hielo dentro de una bolsa, pasta dental, una botella cerrada de aceite, un envase de mantequilla y gasa o tela limpia. Todo se utiliza únicamente como material demostrativo.',
+    pasos:[
+      'Alejar del peligro: interrumpir la exposición al calor.',
+      'Enfriar colocando la zona bajo agua corriente limpia y fresca. Si no hay grifo, simularlo vertiendo lentamente agua fresca de una jarra sobre la mano y recogiéndola en un recipiente.',
+      'Retirar objetos que aprieten: explicar que anillos, pulseras u objetos ajustados deben retirarse temprano si pueden quitarse fácilmente, porque después puede aparecer inflamación.',
+      'Proteger: explicar cómo cubrir posteriormente la zona con material limpio apropiado cuando corresponda.',
+      'Desafío para el curso: el tercer integrante muestra hielo, pasta dental, aceite, mantequilla y agua, y pregunta “¿Qué utilizarías?” antes de que el grupo demuestre la respuesta correcta.'
+    ],
+    explicar:[
+      ['Reconocer','Una quemadura térmica por líquido caliente sobre la piel.'],
+      ['Proteger','Interrumpir primero la exposición al calor.'],
+      ['Actuar','Enfriar con agua corriente limpia y fresca.'],
+      ['Evitar','Hielo directo, pasta dental, aceites o mantequilla sobre la quemadura.'],
+      ['Pedir ayuda','Cuando la quemadura es extensa, profunda o compromete zonas delicadas.']
+    ],
+    clave:'El Tema 6 advierte específicamente que no debe colocarse hielo directo, pasta dental ni aceites sobre una quemadura.',
+    errores:[
+      'Utilizar fuego o calentar agua',
+      'Producir una quemadura real',
+      'Aplicar pasta dental',
+      'Aplicar mantequilla',
+      'Aplicar aceite',
+      'Romper ampollas',
+      'Arrancar ropa pegada a una quemadura'
+    ],
+    materiales:['Agua fresca','Jarra o botella','Recipiente','Hielo embolsado','Pasta dental cerrada','Aceite cerrado','Mantequilla en su envase','Gasa','Tela limpia','Pulsera o anillo de utilería'],
+    reto:'Un familiar dice que le pongas pasta dental. ¿Qué haces?',
+    frase:'Quemadura → enfriar, proteger y no usar remedios caseros'
+  },
+  {
+    n:6, emoji:'🦴', titulo:'Fracturas, esguinces y traumatismos', cant:3,
+    situacionTitulo:'Caída durante Educación Física',
+    situacion:'Un estudiante se encuentra jugando fútbol, básquet u otro deporte. Sufre una caída y presenta dolor intenso en el antebrazo. Le cuesta moverlo.',
+    roles:[
+      ['Estudiante 1','Persona lesionada'],
+      ['Estudiante 2','Auxiliador'],
+      ['Estudiante 3','Encargado de materiales, solicitud de ayuda y explicación']
+    ],
+    escenario:'Para la férula pueden utilizar cartón firme, una revista gruesa doblada o una tablilla liviana. Para acolchar: tela o una pequeña toalla. Para sujetar: vendas, pañuelos o tiras de tela. No es necesario comprar una férula.',
+    pasos:[
+      'Aplicar el protocolo PAS.',
+      'Preguntar: “¿Dónde te duele?”',
+      'Evitar movimientos innecesarios.',
+      'No intentar comprobar “si realmente está fracturado” moviendo la extremidad.',
+      'Mantener el brazo en una posición cómoda.',
+      'Mostrar una inmovilización sencilla y simulada, suave y holgada.',
+      'Mostrar el frío local correcto: no hielo directamente sobre la piel, sino una bolsa fría envuelta en una toalla.'
+    ],
+    explicar:[
+      ['Reconocer','Dolor intenso, dificultad para mover la zona, posible inflamación.'],
+      ['Proteger','Evitar cualquier movimiento que pueda agravar la lesión.'],
+      ['Actuar','Inmovilizar la zona tal como está y aplicar frío local indirecto.'],
+      ['Evitar','Intentar acomodar el hueso, jalar la extremidad o apretar demasiado la férula.'],
+      ['Pedir ayuda','Para el traslado y la valoración profesional de la lesión.']
+    ],
+    clave:'El tercer estudiante plantea una segunda pregunta al curso: “¿Y si en lugar del brazo, la persona cayó fuertemente y creemos que se lesionó la cabeza, el cuello o la espalda?” La respuesta principal es NO MOVERLA INNECESARIAMENTE, manteniéndola inmóvil mientras llega ayuda.',
+    errores:[
+      'Intentar acomodar un hueso',
+      'Jalar una extremidad',
+      'Pedir que camine “para ver si puede”',
+      'Masajear una lesión importante',
+      'Mover innecesariamente a una persona con posible lesión de columna'
+    ],
+    materiales:['Pelota','Mochila','Cartón','Revista','Venda','Pañuelo','Toalla','Bolsa con hielo','Colchoneta'],
+    reto:'Un compañero propone jalar el brazo para acomodarlo. ¿Qué haces?',
+    frase:'No enderezar → no forzar → estabilizar → pedir ayuda'
+  },
+  {
+    n:7, emoji:'😵', titulo:'Desmayo y posición lateral de seguridad', cant:2,
+    situacionTitulo:'Desmayo durante una formación escolar',
+    situacion:'Después de permanecer un tiempo de pie, un estudiante comienza a sentirse mareado, débil y con sensación de desvanecimiento. Finalmente pierde el conocimiento.',
+    roles:[
+      ['Estudiante 1','Persona que se desvanece'],
+      ['Estudiante 2','Auxiliador y encargado de explicar']
+    ],
+    escenario:'El estudiante NO debe dejarse caer. La demostración comienza con la víctima sentada de forma segura o, preferentemente, ya recostada sobre una colchoneta.',
+    pasos:[
+      'Comprobar que el lugar sea seguro.',
+      'Intentar obtener respuesta: “¿Me escuchas? ¿Estás bien?”',
+      'Pedir ayuda.',
+      'Comprobar si respira normalmente.',
+      'Situación A — si no responde pero respira normalmente y no existen lesiones que hagan peligroso moverla: demostrar la posición lateral de seguridad, lentamente, sobre una colchoneta y sin movimientos bruscos.',
+      'Situación B — si no responde y no respira normalmente: pedir ayuda, iniciar RCP y solicitar un DEA.'
+    ],
+    explicar:[
+      ['Reconocer','Mareo, debilidad y pérdida del conocimiento por tiempo breve.'],
+      ['Proteger','Evitar que la persona se golpee y comprobar que el lugar sea seguro.'],
+      ['Actuar','Posición lateral de seguridad si respira normalmente; RCP si no respira normalmente.'],
+      ['Evitar','Dar agua o alimentos mientras está inconsciente, o moverla si se sospecha traumatismo importante.'],
+      ['Pedir ayuda','Desde el momento en que la persona no responde.']
+    ],
+    clave:'La posición lateral ayuda a mantener la vía aérea y reducir el riesgo de aspiración en una persona con disminución del nivel de conciencia. No debe utilizarse cuando la persona necesita RCP ni cuando determinadas lesiones hacen inconveniente moverla.',
+    errores:[
+      'Obligarlo a levantarse inmediatamente',
+      'Darle agua mientras está inconsciente',
+      'Darle alimentos',
+      'Dejarlo solo',
+      'Colocar en posición lateral a alguien que necesita RCP',
+      'Mover innecesariamente a una persona con posible traumatismo importante'
+    ],
+    materiales:['Colchoneta','Mochila','Chamarra','Celular'],
+    reto:'Ahora la persona ya no respira normalmente. ¿Qué haces?',
+    frase:'Inconsciente + respira normalmente → vigilar y proteger la vía aérea. Inconsciente + no respira normalmente → RCP + ayuda + DEA'
+  },
+  {
+    n:8, emoji:'⚡', titulo:'Convulsiones y electrocución', cant:2,
+    situacionTitulo:'Dos situaciones breves',
+    situacion:'Este grupo desarrollará dos situaciones. Primero, una convulsión en el aula, con una silla, mochila, cuadernos, botella y otros objetos con los que la persona podría golpearse. Después, una electrocución: una persona tendida cerca de una extensión, un cargador, una computadora o un aparato eléctrico, todos completamente desconectados.',
+    roles:[
+      ['Estudiante 1','Persona afectada en ambas situaciones'],
+      ['Estudiante 2','Auxiliador y encargado de explicar']
+    ],
+    escenario:'En la convulsión, el estudiante que representa a la víctima NO debe imitar movimientos violentos: la demostración puede comenzar con la persona ya recostada sobre una colchoneta, porque el objetivo es demostrar qué hace el auxiliador con el entorno. En la electrocución, todos los elementos eléctricos estarán completamente desconectados.',
+    pasos:[
+      'Convulsión — mantener la calma.',
+      'Convulsión — retirar la silla y apartar mochila, botella y objetos cercanos.',
+      'Convulsión — proteger la cabeza con una prenda doblada o elemento blando.',
+      'Convulsión — utilizar el cronómetro del celular para controlar cuánto dura el episodio.',
+      'Convulsión — permanecer con la persona y solicitar ayuda cuando corresponda.',
+      'Electrocución — no tocar a la persona: decir “Primero debo comprobar que la electricidad ya no represente un peligro” y desconectar simbólicamente la fuente.',
+      'Electrocución — declarar “La escena es segura” y recién entonces acercarse, comprobar respuesta y respiración, pedir ayuda y explicar qué haría si no respira normalmente.'
+    ],
+    explicar:[
+      ['Reconocer','En la convulsión, movimientos involuntarios y pérdida de control. En la electrocución, una persona tendida junto a una fuente eléctrica.'],
+      ['Proteger','Despejar el entorno en la convulsión; confirmar que la corriente esté cortada en la electrocución.'],
+      ['Actuar','Proteger la cabeza y cronometrar el episodio; acercarse solo tras declarar segura la escena.'],
+      ['Evitar','Sujetar a la persona o introducir objetos en la boca; tocar a una víctima con riesgo eléctrico.'],
+      ['Pedir ayuda','Ante una primera convulsión, si dura más de 5 minutos, si hay varias seguidas, dificultad para respirar, lesión durante el episodio o mala recuperación posterior.']
+    ],
+    clave:'Durante una convulsión NO se debe sujetar a la persona ni introducir una cuchara, dedos, pañuelos ni ningún objeto en la boca, ni dar agua o alimentos. En la electrocución, no se debe tocar a la víctima mientras exista riesgo de contacto eléctrico.',
+    errores:[
+      'Sujetar a la persona durante la convulsión',
+      'Introducir cualquier objeto en la boca',
+      'Dar agua o alimentos durante el episodio',
+      'Utilizar electricidad real o conectar la extensión',
+      'Tocar a la víctima antes de confirmar que la escena es segura',
+      'Utilizar agua cerca de una fuente eléctrica'
+    ],
+    materiales:['Colchoneta','Silla','Mochila','Cuadernos','Chamarra o toalla','Celular','Extensión desconectada','Cargador desconectado','Aparato apagado','Cartel “Peligro eléctrico — Simulación”'],
+    reto:'Un compañero quiere ponerle una cuchara en la boca durante la convulsión. ¿Qué haces? · La persona sigue tocando el cable. ¿Puedes acercarte?',
+    frase:'Convulsión: proteger, no sujetar y no introducir nada en la boca. Electrocución: no tocar hasta que la escena sea segura'
+  }
+];
+
+const CHECKLIST = [
+  'Conocemos nuestra situación',
+  'Todos sabemos aplicar el protocolo PAS',
+  'Sabemos reconocer la emergencia',
+  'Sabemos qué debemos hacer',
+  'Sabemos qué NO debemos hacer',
+  'Sabemos cuándo pedir ayuda',
+  'Todos conocemos el procedimiento completo',
+  'Todos tenemos una función',
+  'Hemos ensayado',
+  'Tenemos todos los materiales',
+  'Los materiales son seguros',
+  'Nuestra situación parece realista',
+  'Nuestra demostración incluye acciones prácticas',
+  'No realizaremos ninguna maniobra peligrosa sobre un compañero',
+  'Nuestro cartel está terminado',
+  'Podemos explicar sin leer todo',
+  'Podemos responder preguntas',
+  'Nuestra presentación dura entre 6 y 8 minutos'
+];
+
+const PREGUNTAS_FINALES = [
+  '¿Qué significa PAS?',
+  '¿Por qué debo evaluar la escena antes de acercarme?',
+  '¿Qué información debo comunicar al pedir ayuda?',
+  '¿Qué hago si alguien no responde pero respira normalmente?',
+  '¿Qué hago si alguien no responde y no respira normalmente?',
+  '¿Cuál es la medida inicial fundamental ante una hemorragia importante?',
+  '¿Qué debemos utilizar inicialmente para enfriar una quemadura térmica?',
+  '¿Qué productos caseros debemos evitar en las quemaduras?',
+  '¿Cómo diferencio un atragantamiento leve de uno grave?',
+  '¿Qué NO debo hacer durante una convulsión?',
+  '¿Por qué no debo tocar inmediatamente a una persona en contacto con electricidad?',
+  '¿Por qué no debemos intentar acomodar un hueso posiblemente fracturado?'
+];
+
+/* ============================================================
+   MOTOR
+   ============================================================ */
+function irA(pantalla){
+  document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+  const destino = document.querySelector('[data-screen="'+pantalla+'"]');
+  if(destino) destino.classList.add('active');
+  window.scrollTo(0,0);
+}
+
+function esc(t){
+  return String(t).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+}
+
+function renderGrupos(){
+  const cont = document.getElementById('grupos-lista');
+  cont.innerHTML = GRUPOS.map(g => `
+    <div class="grupo-item" id="grupo-${g.n}">
+      <button class="grupo-head" onclick="toggleGrupo(${g.n})" aria-expanded="false">
+        <span class="grupo-num">${g.emoji}</span>
+        <span class="grupo-head-text">
+          <span class="g-label">Grupo ${g.n}</span>
+          <h3>${esc(g.titulo)}</h3>
+          <span class="g-cant">${g.cant} estudiantes</span>
+        </span>
+        <span class="grupo-toggle">⌄</span>
+      </button>
+      <div class="grupo-body">
+
+        <div class="g-seccion">
+          <div class="g-titulo">🎬 Situación</div>
+          <p style="font-weight:700; color:var(--violeta-dark); margin-bottom:5px;">${esc(g.situacionTitulo)}</p>
+          <p>${esc(g.situacion)}</p>
+        </div>
+
+        <div class="g-seccion">
+          <div class="g-titulo">👥 Roles</div>
+          <div class="g-roles">
+            ${g.roles.map(r => `<div class="g-rol"><strong>${esc(r[0])}:</strong> ${esc(r[1])}</div>`).join('')}
+          </div>
+        </div>
+
+        <div class="g-seccion">
+          <div class="g-titulo">🧰 Cómo preparar el escenario</div>
+          <p>${esc(g.escenario)}</p>
+        </div>
+
+        ${g.alerta ? `<div class="g-alerta"><strong>⚠️ ${esc(g.alerta)}</strong></div>` : ''}
+
+        <div class="g-seccion">
+          <div class="g-titulo">📋 Pasos a demostrar</div>
+          <ol class="g-pasos">${g.pasos.map(p => `<li>${esc(p)}</li>`).join('')}</ol>
+        </div>
+
+        <div class="g-seccion">
+          <div class="g-titulo">🗣️ Qué deben explicar</div>
+          <div class="g-explicar">
+            ${g.explicar.map(e => `<div class="g-exp-item"><strong>${esc(e[0])}:</strong> ${esc(e[1])}</div>`).join('')}
+          </div>
+        </div>
+
+        <div class="g-seccion">
+          <div class="g-titulo">💡 Punto clave</div>
+          <p>${esc(g.clave)}</p>
+        </div>
+
+        <div class="g-seccion">
+          <div class="g-titulo">❌ Errores que deben mencionar</div>
+          <ul class="g-errores">${g.errores.map(e => `<li>${esc(e)}</li>`).join('')}</ul>
+        </div>
+
+        <div class="g-seccion">
+          <div class="g-titulo">🎒 Materiales</div>
+          <div class="g-materiales">${g.materiales.map(m => `<span class="g-mat">${esc(m)}</span>`).join('')}</div>
+        </div>
+
+        ${g.reto ? `
+        <div class="g-reto">
+          <div class="g-reto-label">🎯 Te pueden preguntar</div>
+          <p>“${esc(g.reto)}”</p>
+        </div>` : ''}
+
+        <div class="g-frase">
+          <div class="g-frase-label">Qué debe aprender el curso</div>
+          <p>${esc(g.frase)}</p>
+        </div>
+
+      </div>
+    </div>
+  `).join('');
+}
+
+function toggleGrupo(n){
+  const item = document.getElementById('grupo-'+n);
+  const abierto = item.classList.toggle('abierto');
+  item.querySelector('.grupo-head').setAttribute('aria-expanded', abierto ? 'true' : 'false');
+}
+
+function renderChecklist(){
+  const cont = document.getElementById('checklist');
+  cont.innerHTML = CHECKLIST.map((t,i) => `
+    <button class="check-item" id="chk-${i}" onclick="toggleCheck(${i})" aria-pressed="false">
+      <span class="check-box">✓</span>
+      <span class="check-txt">${esc(t)}</span>
+    </button>
+  `).join('');
+  actualizarProgreso();
+}
+
+function toggleCheck(i){
+  const el = document.getElementById('chk-'+i);
+  const marcado = el.classList.toggle('marcado');
+  el.setAttribute('aria-pressed', marcado ? 'true' : 'false');
+  actualizarProgreso();
+}
+
+function actualizarProgreso(){
+  const total = CHECKLIST.length;
+  const hechos = document.querySelectorAll('.check-item.marcado').length;
+  document.getElementById('check-count').textContent = hechos;
+  document.getElementById('check-fill').style.width = Math.round((hechos/total)*100) + '%';
+}
+
+function reiniciarChecklist(){
+  document.querySelectorAll('.check-item').forEach(el => {
+    el.classList.remove('marcado');
+    el.setAttribute('aria-pressed','false');
+  });
+  actualizarProgreso();
+}
+
+function renderPreguntasFinales(){
+  const cont = document.getElementById('preguntas-finales');
+  cont.innerHTML = PREGUNTAS_FINALES.map((p,i) => `
+    <div class="preg-final">
+      <span class="pf-num">${i+1}</span>
+      <span>${esc(p)}</span>
+    </div>
+  `).join('');
+}
+
+renderGrupos();
+renderChecklist();
+renderPreguntasFinales();
+</script>
+</body>
+</html>
