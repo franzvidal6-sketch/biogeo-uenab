@@ -1,0 +1,599 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>App de Refuerzo | Prof. Franz Vidal</title>
+    <style>
+        /* ====================================================================
+           MOTOR QUIZMASTER v1.0  —  Prof. Franz Vidal Condori Mamani
+           Para crear una app nueva: edita SOLO el bloque CONFIG (más abajo).
+           No toques el motor ni la cabecera institucional.
+           Fuentes del sistema = funciona 100% sin internet.
+        ==================================================================== */
+        *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+        ::-webkit-scrollbar{display:none}
+        :root{
+            --font-display:system-ui,-apple-system,'Segoe UI',Roboto,'Helvetica Neue',Arial,sans-serif;
+            --font-body:system-ui,-apple-system,'Segoe UI',Roboto,'Helvetica Neue',Arial,sans-serif;
+            --azul-ue:#0c1d4a;
+            /* La paleta de la materia se inyecta por JS sobre estas variables */
+            --a:#0d9488;--a-dark:#0f766e;--a-soft:#f0fdfa;--accent:#06b6d4;
+            --header-end:#0f766e;--header-title:#5eead4;--header-sub:#99f6e4;
+            --sky:#0284c7;--sky-soft:#f0f9ff;
+            --amber:#f59e0b;--amber-soft:#fffbeb;
+            --violet:#7c3aed;--violet-soft:#f5f3ff;
+            --emerald:#059669;--emerald-soft:#ecfdf5;
+            --rose:#e11d48;--rose-soft:#fff1f2;
+            --verde:#10b981;--rojo:#ef4444;
+            --gris-bg:#eaf2f0;--gris-texto:#475569;--gris-claro:#94a3b8;--blanco:#fff;
+            --sombra:0 4px 24px rgba(12,29,74,0.10);--sombra-lg:0 8px 40px rgba(12,29,74,0.15);
+            --radio:20px;--fs:1;
+        }
+        body{font-family:var(--font-body);background:var(--gris-bg);color:#1e293b;-webkit-tap-highlight-color:transparent;-ms-overflow-style:none;scrollbar-width:none;height:100vh;height:100dvh;display:flex;justify-content:center;overflow:hidden;font-size:calc(16px * var(--fs))}
+        h1,h2,h3,h4{font-family:var(--font-display)}
+        .app-shell{width:100%;max-width:430px;height:100%;display:flex;flex-direction:column;background:var(--blanco);position:relative;overflow:hidden;box-shadow:var(--sombra-lg)}
+
+        /* ====== CABECERA INSTITUCIONAL (ESTRUCTURA FIJA — NO CAMBIAR) ====== */
+        .header{background:linear-gradient(135deg,#0c1d4a 0%,var(--header-end) 100%);color:white;padding:20px 16px 18px;text-align:center;position:relative;z-index:20;flex-shrink:0}
+        .header::after{content:'';position:absolute;bottom:-12px;left:50%;transform:translateX(-50%);width:90%;height:24px;background:inherit;border-radius:0 0 50% 50%}
+        .flag-bar{display:flex;height:3px;width:60%;margin:0 auto 12px;border-radius:2px;overflow:hidden}
+        .flag-bar .r{background:#DA251D;flex:1}.flag-bar .a{background:#F6EB16;flex:1}.flag-bar .v{background:#007A33;flex:1}
+        .header h1{font-size:13px;font-weight:800;letter-spacing:2px;color:var(--header-title);text-transform:uppercase;line-height:1.3}
+        .header .sub{font-size:9px;color:var(--header-sub);letter-spacing:3px;text-transform:uppercase;margin-top:4px;font-weight:700}
+        /* =================================================================== */
+
+        .content-area{flex:1;overflow-y:auto;overflow-x:hidden;position:relative;scroll-behavior:smooth}
+        .screen{display:none;padding:20px 16px 32px}.screen.active{display:block;animation:slideUp .35s ease-out}
+
+        @keyframes slideUp{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:translateY(0)}}
+        @keyframes popIn{from{transform:scale(.85);opacity:0}to{transform:scale(1);opacity:1}}
+        @keyframes shake{10%,90%{transform:translateX(-2px)}20%,80%{transform:translateX(3px)}30%,50%,70%{transform:translateX(-4px)}40%,60%{transform:translateX(4px)}}
+        @keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-6px)}}
+        @keyframes pulse{0%,100%{box-shadow:0 0 0 0 rgba(13,148,136,0.35)}50%{box-shadow:0 0 0 10px rgba(13,148,136,0)}}
+        @keyframes fall{to{transform:translateY(110vh) rotate(540deg);opacity:0}}
+        .pop-in{animation:popIn .3s cubic-bezier(.175,.885,.32,1.275) forwards}
+        .shake{animation:shake .45s ease both}
+        @media (prefers-reduced-motion: reduce){*{animation:none!important;transition:none!important}}
+
+        /* NOMBRE */
+        .name-screen{display:flex;flex-direction:column;justify-content:center;align-items:center;min-height:calc(100dvh - 100px);padding:24px;text-align:center}
+        .resume-banner{width:100%;background:var(--amber-soft);border:1.5px solid #fcd34d;border-radius:14px;padding:12px;margin-bottom:20px;font-size:13px;color:#92400e;font-weight:700}
+        .resume-banner button{margin-top:8px;width:100%;padding:11px;border:none;border-radius:11px;background:var(--amber);color:white;font-weight:800;font-family:var(--font-display);cursor:pointer;font-size:14px}
+        .main-icon{font-size:60px;margin-bottom:16px;animation:float 2.5s ease-in-out infinite}
+        .name-screen h2{font-size:22px;font-weight:900;color:var(--azul-ue);margin-bottom:6px}
+        .role-tag{display:inline-block;background:linear-gradient(135deg,var(--a),var(--emerald));color:white;font-size:11px;font-weight:800;letter-spacing:1.5px;padding:4px 14px;border-radius:20px;margin-bottom:10px}
+        .name-screen p{font-size:14px;color:var(--gris-texto);margin-bottom:28px;line-height:1.5}
+        .name-input{width:100%;padding:16px 20px;border:2px solid #e2e8f0;border-radius:16px;font-size:17px;font-family:var(--font-body);font-weight:700;text-align:center;color:var(--azul-ue);background:#f8fafc;outline:none;transition:border-color .2s,box-shadow .2s}
+        .name-input:focus{border-color:var(--a);box-shadow:0 0 0 4px rgba(13,148,136,.15);background:white}
+        .name-input::placeholder{color:#cbd5e1;font-weight:600}
+        .name-error{font-size:12px;color:var(--rojo);margin-top:8px;min-height:18px;font-weight:600}
+
+        /* TARJETAS */
+        .card{background:var(--blanco);border-radius:var(--radio);box-shadow:var(--sombra);padding:20px;margin-bottom:16px}
+        .card-title{display:inline-block;background:linear-gradient(135deg,var(--a),var(--accent));color:white;font-size:10px;font-weight:800;letter-spacing:1.5px;text-transform:uppercase;padding:5px 12px;border-radius:8px;margin-bottom:12px}
+        .card h2{font-size:21px;font-weight:900;color:var(--azul-ue);line-height:1.25;margin-bottom:4px}
+        .card h3{font-size:14px;font-weight:700;color:var(--a);margin-bottom:12px}
+        .teacher-badge{background:var(--a-soft);border:1px solid rgba(13,148,136,.25);border-radius:12px;padding:8px 14px;font-size:13px;font-weight:700;color:var(--a);text-align:center}
+        .session-badge{display:inline-flex;align-items:center;gap:6px;background:#f0fdf4;border:1px solid #86efac;border-radius:10px;padding:6px 12px;font-size:11px;font-weight:800;color:#166534;margin-bottom:12px}
+        .session-badge .dot{width:8px;height:8px;border-radius:50%;background:#22c55e;animation:pulse 2s infinite}
+
+        .info-card{border-radius:16px;padding:18px;margin-bottom:14px;position:relative;overflow:hidden}
+        .info-card .bg-icon{position:absolute;right:-8px;bottom:-8px;font-size:56px;opacity:.08;pointer-events:none}
+        .info-card h4{font-size:15px;font-weight:800;margin-bottom:8px;display:flex;align-items:center;gap:8px}
+        .info-card p,.info-card li{font-size:13px;line-height:1.6;color:var(--gris-texto)}
+        .info-card ol{padding-left:18px}.info-card ol li{margin-bottom:5px}
+        .info-card ul{list-style:none;padding:0}
+        .info-card ul li{padding-left:16px;position:relative;margin-bottom:4px}
+        .info-card ul li::before{content:'▸';position:absolute;left:0;font-weight:800}
+        .c-sky{background:var(--sky-soft)}.c-sky h4{color:#0369a1}.c-sky li::before{color:var(--sky)}.c-sky strong{color:#0369a1}
+        .c-amber{background:var(--amber-soft)}.c-amber h4{color:#b45309}.c-amber li::before{color:var(--amber)}.c-amber strong{color:#b45309}
+        .c-violet{background:var(--violet-soft)}.c-violet h4{color:#6d28d9}.c-violet li::before{color:var(--violet)}.c-violet strong{color:#6d28d9}
+        .c-emerald{background:var(--emerald-soft)}.c-emerald h4{color:#047857}.c-emerald li::before{color:var(--emerald)}.c-emerald strong{color:#047857}
+        .c-dato{background:var(--a-soft);border:1px solid rgba(13,148,136,.2)}.c-dato strong{color:var(--a-dark)}
+
+        .sym-table{width:100%;border-collapse:collapse;margin-top:10px;font-size:13px}
+        .sym-table th{background:var(--a);color:white;padding:8px 6px;font-family:var(--font-display);font-weight:800;font-size:11px;text-transform:uppercase}
+        .sym-table td{padding:8px 6px;border-bottom:1px solid #e2e8f0;text-align:center;color:#334155;font-weight:700}
+        .sym-table td.sym{font-family:var(--font-display);font-weight:900;color:var(--a-dark);font-size:15px}
+        .sym-table tr:last-child td{border-bottom:none}
+
+        .expandible{cursor:pointer;transition:transform .15s}.expandible:active{transform:scale(.98)}
+        .expand-content{max-height:0;overflow:hidden;transition:max-height .4s ease}
+        .expand-content.open{max-height:1200px}
+        .expand-arrow{transition:transform .3s;display:inline-block;font-size:12px}.expand-arrow.rotated{transform:rotate(90deg)}
+
+        .bolivia-card{background:linear-gradient(135deg,#fef3c7 0%,#fffbeb 100%);border:2px solid #fbbf24;border-radius:var(--radio);padding:20px;margin:8px 0 16px;position:relative}
+        .bolivia-card .flag-emoji{position:absolute;top:-12px;left:12px;font-size:28px}
+        .bolivia-card h4{font-weight:900;font-size:14px;color:#92400e;text-align:center;margin:4px 0 8px}
+        .bolivia-card p{font-size:12px;line-height:1.7;color:#78350f;text-align:justify}
+
+        /* QUIZ */
+        .quiz-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;padding-top:4px}
+        .quiz-counter{font-size:13px;font-weight:700;color:var(--gris-claro)}
+        .quiz-right{display:flex;gap:8px;align-items:center}
+        .quiz-streak{font-size:12px;font-weight:800;color:#b45309;background:var(--amber-soft);padding:5px 10px;border-radius:20px;opacity:0;transition:opacity .3s}
+        .quiz-streak.on{opacity:1}
+        .quiz-score{font-size:13px;font-weight:800;color:var(--a-dark);background:var(--a-soft);padding:5px 14px;border-radius:20px}
+        .progress-track{width:100%;height:6px;background:#e2e8f0;border-radius:3px;margin-bottom:24px;overflow:hidden}
+        .progress-fill{height:100%;background:linear-gradient(90deg,var(--a),var(--accent));border-radius:3px;transition:width .4s ease}
+        .quiz-type-badge{display:inline-block;font-size:10px;font-weight:800;letter-spacing:1px;text-transform:uppercase;padding:4px 10px;border-radius:6px;margin-bottom:12px}
+        .badge-multi{background:#dbeafe;color:#1e40af}.badge-vf{background:#fce7f3;color:#9d174d}.badge-clasif{background:#d1fae5;color:#065f46}.badge-caso{background:#fef3c7;color:#92400e}
+
+        .question-card{background:white;border-radius:24px;padding:28px 22px;box-shadow:var(--sombra-lg);border:3px solid #e2e8f0;text-align:center;margin-bottom:20px;position:relative;transition:border-color .3s,background .3s;min-height:100px;display:flex;flex-direction:column;justify-content:center;align-items:center}
+        .question-card.correct{background:#ecfdf5;border-color:#34d399}.question-card.incorrect{background:#fef2f2;border-color:#f87171}
+        .question-text{font-family:var(--font-display);font-size:17px;font-weight:700;color:var(--azul-ue);line-height:1.45}
+        .question-context{font-size:12px;color:var(--gris-texto);line-height:1.5;margin-bottom:12px;background:#f8fafc;border-radius:12px;padding:10px 14px;text-align:left;width:100%}
+        .question-context strong{color:var(--a-dark)}
+        .feedback-icon{position:absolute;top:-18px;left:50%;transform:translateX(-50%);font-size:40px;display:none}
+        .feedback-icon.show{display:block;animation:popIn .25s ease forwards}
+        .explanation-box{border-radius:12px;padding:12px 14px;margin-top:14px;font-size:12px;line-height:1.6;text-align:left;display:none}
+        .explanation-box.show{display:block;animation:slideUp .3s ease}
+        .explanation-box.err{background:#fffbeb;border:1px solid #fcd34d;color:#92400e}.explanation-box.err strong{color:#78350f}
+        .explanation-box.ok{background:#ecfdf5;border:1px solid #86efac;color:#065f46}.explanation-box.ok strong{color:#047857}
+
+        .options-grid{display:flex;flex-direction:column;gap:10px}
+        .option-btn{width:100%;padding:15px 18px;border-radius:16px;border:2px solid #e2e8f0;background:white;font-family:var(--font-body);font-size:15px;font-weight:700;color:#334155;cursor:pointer;transition:all .15s;text-align:left;display:flex;align-items:center;gap:12px;-webkit-tap-highlight-color:transparent}
+        .option-btn:active{transform:scale(.97)}
+        .option-btn .letter{flex-shrink:0;width:32px;height:32px;border-radius:10px;background:#f1f5f9;display:flex;align-items:center;justify-content:center;font-family:var(--font-display);font-weight:900;font-size:14px;color:#64748b}
+        .option-btn.opt-correct{background:#ecfdf5;border-color:#34d399;color:#065f46}.option-btn.opt-correct .letter{background:#34d399;color:white}
+        .option-btn.opt-wrong{background:#fef2f2;border-color:#f87171;color:#991b1b}.option-btn.opt-wrong .letter{background:#f87171;color:white}
+        .option-btn.opt-dimmed{opacity:.45;pointer-events:none}
+        .vf-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+        .vf-btn{padding:18px;border-radius:16px;border:2px solid #e2e8f0;background:white;font-family:var(--font-display);font-size:18px;font-weight:800;cursor:pointer;transition:all .15s;text-align:center;-webkit-tap-highlight-color:transparent}
+        .vf-btn:active{transform:scale(.96)}.vf-true{color:#047857}.vf-false{color:#b91c1c}
+
+        /* REPASO */
+        .review-title{font-family:var(--font-display);font-size:20px;font-weight:900;color:var(--azul-ue);text-align:center;margin-bottom:4px}
+        .review-sub{font-size:12px;color:var(--gris-texto);text-align:center;margin-bottom:18px}
+        .rev-item{background:white;border-radius:16px;box-shadow:var(--sombra);padding:14px 16px;margin-bottom:12px;border-left:5px solid #e2e8f0}
+        .rev-item.ok{border-left-color:#34d399}.rev-item.bad{border-left-color:#f87171}
+        .rev-item .rev-q{font-size:13px;font-weight:800;color:var(--azul-ue);line-height:1.4;margin-bottom:8px}
+        .rev-item .rev-q .num{color:var(--gris-claro)}
+        .rev-line{font-size:12px;line-height:1.5;margin-bottom:3px}
+        .rev-line.good{color:#047857}.rev-line.miss{color:#b91c1c}
+        .rev-expl{font-size:11.5px;color:#92400e;background:#fffbeb;border-radius:9px;padding:8px 10px;margin-top:6px;line-height:1.5}
+
+        /* RESULTADOS */
+        .results-container{display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:calc(100dvh - 100px);padding:24px 16px;text-align:center}
+        .results-card{background:white;border-radius:28px;padding:36px 24px 28px;box-shadow:var(--sombra-lg);width:100%}
+        .result-icon{font-size:60px;margin-bottom:12px}
+        .result-title{font-family:var(--font-display);font-size:24px;font-weight:900;color:var(--azul-ue);margin-bottom:4px}
+        .result-rank{font-size:14px;font-weight:800;color:var(--a);letter-spacing:1px;margin-bottom:16px}
+        .result-score-value{font-family:var(--font-display);font-size:48px;font-weight:900}
+        .result-score-total{font-size:22px;font-weight:700;color:var(--gris-claro)}
+        .result-score-label{font-size:11px;text-transform:uppercase;letter-spacing:2px;font-weight:800;color:var(--gris-claro);margin-bottom:4px}
+        .result-meta{font-size:12px;color:var(--gris-texto);font-weight:700;margin:6px 0 14px}
+        .result-message{font-size:14px;font-weight:700;margin-bottom:20px;padding:0 8px;line-height:1.5}
+        .result-code-box{background:#f8fafc;border:2px dashed #cbd5e1;border-radius:14px;padding:14px;margin-bottom:20px}
+        .result-code-label{font-size:10px;text-transform:uppercase;letter-spacing:1.5px;font-weight:800;color:var(--gris-claro);margin-bottom:4px}
+        .result-code{font-family:var(--font-display);font-size:18px;font-weight:900;color:var(--azul-ue);letter-spacing:1.5px;word-break:break-all}
+
+        .btn-primary{width:100%;padding:16px;border:none;border-radius:16px;font-family:var(--font-display);font-size:16px;font-weight:800;cursor:pointer;transition:all .15s;-webkit-tap-highlight-color:transparent;display:flex;align-items:center;justify-content:center;gap:8px;margin-bottom:0}
+        .btn-primary:active{transform:scale(.97)}
+        .btn-main{background:linear-gradient(135deg,var(--a) 0%,var(--accent) 100%);color:white;box-shadow:0 4px 16px rgba(13,148,136,.3)}
+        .btn-green{background:linear-gradient(135deg,#059669 0%,#10b981 100%);color:white;box-shadow:0 4px 16px rgba(16,185,129,.3)}
+        .btn-outline{background:white;color:var(--azul-ue);border:2px solid #e2e8f0;box-shadow:none;margin-top:10px}
+        .results-card .btn-primary+.btn-primary{margin-top:10px}
+        .start-btn-flow{margin-top:24px}
+        .start-btn-flow .btn-primary{box-shadow:0 6px 24px rgba(13,148,136,.35)}
+        .credit{font-size:11px;color:var(--gris-claro);font-weight:700;margin-top:20px}
+
+        /* Accesibilidad: botón texto grande */
+        .a11y-btn{position:absolute;top:14px;right:14px;z-index:30;background:rgba(255,255,255,.18);border:1px solid rgba(255,255,255,.35);color:white;border-radius:10px;width:38px;height:32px;font-weight:900;font-size:13px;cursor:pointer;font-family:var(--font-display)}
+
+        .confetti{position:fixed;top:-12px;width:10px;height:14px;border-radius:2px;z-index:50;animation:fall linear forwards}
+    </style>
+</head>
+<body>
+<div class="app-shell">
+    <header class="header">
+        <button class="a11y-btn" id="a11y-btn" onclick="toggleFont()" title="Texto más grande">A+</button>
+        <div class="flag-bar"><div class="r"></div><div class="a"></div><div class="v"></div></div>
+        <h1>Unidad Educativa<br>Nuevo Amanecer Boliviano</h1>
+        <div class="sub">Educación • Disciplina • Excelencia</div>
+    </header>
+    <div class="content-area" id="content-area">
+
+        <!-- NOMBRE -->
+        <div id="screen-name" class="name-screen active">
+            <div id="resume-banner" class="resume-banner" style="display:none;"></div>
+            <div class="main-icon" id="name-icon">🧭</div>
+            <h2 id="name-greeting">¡Hola!</h2>
+            <span class="role-tag" id="name-tag">ACTIVIDAD</span>
+            <p id="name-intro"></p>
+            <input type="text" id="student-name" class="name-input" placeholder="Escribe tu nombre completo" maxlength="60" autocomplete="off">
+            <div class="name-error" id="name-error"></div>
+            <div style="height:16px"></div>
+            <button class="btn-primary btn-main" id="btn-enter" onclick="submitName()" style="width:100%">Empezar 🚀</button>
+        </div>
+
+        <!-- TEORÍA -->
+        <div id="screen-theory" class="screen">
+            <div class="card pop-in" style="text-align:center;">
+                <span class="card-title" id="th-area"></span>
+                <h2 id="th-tema"></h2>
+                <h3 id="th-sub"></h3>
+                <div style="margin-bottom:10px"><span class="session-badge"><span class="dot"></span> <span id="th-badge"></span></span></div>
+                <div class="teacher-badge">👨‍🏫 Prof. Franz Vidal Condori Mamani</div>
+            </div>
+            <div id="theory-cards"></div>
+            <div class="start-btn-flow">
+                <button class="btn-primary btn-main" id="btn-start" onclick="startQuiz()">¡Comenzar! 🚀</button>
+            </div>
+        </div>
+
+        <!-- QUIZ -->
+        <div id="screen-quiz" class="screen" style="padding-bottom:30px;">
+            <div class="quiz-header">
+                <span class="quiz-counter" id="q-counter">1 de 10</span>
+                <span class="quiz-right">
+                    <span class="quiz-streak" id="q-streak">🔥 0</span>
+                    <span class="quiz-score">⭐ <span id="score-display">0</span></span>
+                </span>
+            </div>
+            <div class="progress-track"><div class="progress-fill" id="progress-bar" style="width:10%"></div></div>
+            <div style="text-align:center;"><span class="quiz-type-badge" id="q-type-badge">OPCIÓN MÚLTIPLE</span></div>
+            <div class="question-card" id="question-card">
+                <div class="feedback-icon" id="feedback-icon">✅</div>
+                <div class="question-context" id="question-context" style="display:none;"></div>
+                <p class="question-text" id="question-text">Cargando...</p>
+                <div class="explanation-box" id="explanation-box"></div>
+            </div>
+            <div id="options-container" class="options-grid"></div>
+        </div>
+
+        <!-- REPASO -->
+        <div id="screen-review" class="screen">
+            <div class="review-title">📋 Repaso de respuestas</div>
+            <div class="review-sub">Revisa con calma lo que acertaste y lo que debes reforzar.</div>
+            <div id="review-list"></div>
+            <button class="btn-primary btn-outline" onclick="showScreen('screen-results')" style="margin-top:6px">← Volver a mi resultado</button>
+        </div>
+
+        <!-- RESULTADOS -->
+        <div id="screen-results" class="screen" style="padding-bottom:30px;">
+            <div class="results-container">
+                <div class="results-card pop-in">
+                    <div class="result-icon" id="result-icon">🏆</div>
+                    <div class="result-title">¡Finalizado!</div>
+                    <div class="result-rank" id="result-rank"></div>
+                    <div style="margin:16px 0">
+                        <div class="result-score-label">Tu Puntaje</div>
+                        <div class="result-score-value" id="result-score-value"><span id="final-score">0</span><span class="result-score-total" id="final-total"> / 100</span></div>
+                    </div>
+                    <div class="result-meta" id="result-meta"></div>
+                    <p class="result-message" id="result-message"></p>
+                    <div class="result-code-box">
+                        <div class="result-code-label">Código de verificación</div>
+                        <div class="result-code" id="result-code">---</div>
+                        <p style="font-size:10px;color:#94a3b8;margin-top:6px;">Muestra este código al profesor como evidencia</p>
+                    </div>
+                    <button class="btn-primary btn-outline" onclick="showReview()" style="margin-top:0;margin-bottom:10px">📋 Repasar mis respuestas</button>
+                    <button class="btn-primary btn-green" onclick="shareResult()" id="btn-share">Enviar por WhatsApp 📲</button>
+                    <button class="btn-primary btn-outline" id="btn-retry" onclick="restartApp()" style="display:none">Practicar de nuevo 🔄</button>
+                </div>
+                <p class="credit">Actividad creada por el Prof. Franz Vidal Condori Mamani</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+/* ╔══════════════════════════════════════════════════════════════════════╗
+   ║   CONFIG  —  EDITA SOLO ESTE BLOQUE PARA CREAR UNA APP NUEVA            ║
+   ║   (curso, materia, tema, paleta, teoría y preguntas)                   ║
+   ╚══════════════════════════════════════════════════════════════════════╝ */
+const CONFIG = {
+  paleta: "teal",                       // simulacro: paleta distinta para no confundir con el repaso
+  area: "5° de Secundaria • Biología-Geografía",
+  tema: "Simulacro Tipo Examen",
+  subtitulo: "Tema 6 · Tejidos Orgánicos de los Vegetales",
+  sesionBadge: "Simulacro · Tema 6",
+  codigoPrefijo: "SIMT6",
+  totalPreguntas: 9,                    // igual al número de preguntas de Sección I del examen oficial
+  permitirReintento: true,              // modo práctica: pueden repetir cuantas veces quieran
+  rol: {
+    icono: "🎯",
+    saludo: "¡Simulacro de examen!",
+    tag: "PREGUNTAS TIPO EXAMEN · TEMA 6",
+    intro: "Estas <strong>NO son las preguntas del examen</strong>, pero tienen el <strong>mismo estilo</strong>: cada una es un caso real sobre los tejidos vegetales que debes analizar. Entrénate en leer el escenario, identificar el tejido o proceso, y elegir bien. Escribe tu nombre para empezar.",
+    btnEntrar: "🎯 Entrar al simulacro",
+    btnComenzar: "¡Iniciar simulacro! 🎯"
+  },
+  whatsapp: { emoji: "🎯", linea: "Simulacro tipo examen · Tema 6: Tejidos Orgánicos de los Vegetales", rolLabel: "Estudiante", numero: "" },
+  rangos: [
+    { min: 1.00, icono: "🏆", titulo: "¡DOMINAS EL FORMATO!", msg: "¡Perfecto! Reconoces cada tejido y proceso vegetal en cualquier caso. Llegas con todo al examen." },
+    { min: 0.70, icono: "💪", titulo: "MUY BIEN ENCAMINADO/A", msg: "¡Bien! Ya distingues los tejidos con criterio. Repite el simulacro fijándote en lo que fallaste." },
+    { min: 0.50, icono: "📚", titulo: "EN ENTRENAMIENTO", msg: "Vas bien, pero lee con más calma cada escenario. Identifica qué tejido o proceso te están pidiendo y vuelve a practicar." },
+    { min: 0.00, icono: "🔍", titulo: "A ENTRENAR LA LECTURA", msg: "Los casos te están costando. Relee la teoría del Tema 6 (tejidos y meristemos) y repite este simulacro varias veces antes del examen." }
+  ],
+  teoria: [
+    { tipo:"intro", clase:"c-dato", bgIcon:"🎯", titulo:"🎯 Qué es este simulacro",
+      html:"Tu examen no pregunta definiciones sueltas: te da <strong>casos reales</strong> sobre tejidos y procesos vegetales, y debes <strong>aplicar y analizar</strong>. Aquí practicas exactamente ese tipo de pregunta, con escenarios distintos a los del examen. <strong>Toca las tarjetas de abajo antes de empezar.</strong>" },
+    { tipo:"expand", clase:"c-violet", bgIcon:"📄", titulo:"📄 Cómo será tu examen",
+      resumen:"Conoce la estructura para que nada te sorprenda. Toca para verla.",
+      lista:[ "<strong>Sección I — Selección múltiple:</strong> 9 preguntas tipo caso sobre tejidos, meristemos y procesos vegetales. Lees un escenario y eliges A, B, C o D.",
+               "<strong>Sección II — Desarrollo:</strong> 1 pregunta donde debes <strong>argumentar por escrito</strong>, explicando con terminología precisa dos fenómenos vegetales (por ejemplo, el ascenso del agua y el engrosamiento del tronco).",
+               "Cada pregunta de Sección I vale puntos iguales; la de desarrollo se evalúa con una rúbrica aparte.",
+               "Niveles: <strong>Aplicar</strong> (usar el concepto en un caso) y <strong>Analizar</strong> (explicar el porqué de un fenómeno)." ] },
+    { tipo:"expand", clase:"c-amber", bgIcon:"🧠", titulo:"🧠 Estrategia para casos",
+      resumen:"3 pasos para no caer en distractores. Toca para verlos.",
+      lista:[ "<strong>1. Lee el escenario completo</strong> y subraya mentalmente el dato clave (¿es un tronco, una hoja, una raíz, un fruto?).",
+               "<strong>2. Traduce el caso a un concepto</strong> del Tema 6 (¿de qué tejido, meristemo u hormona están hablando realmente?).",
+               "<strong>3. Descarta distractores:</strong> suelen ser tejidos o procesos verdaderos del tema, pero que NO responden lo que se pregunta (ej. confundir xilema con floema, o colénquima con esclerénquima)." ] },
+    { tipo:"expand", clase:"c-emerald", bgIcon:"✍️", titulo:"✍️ La pregunta de desarrollo",
+      resumen:"Practica también la Sección II por escrito. Toca para el consejo.",
+      lista:[ "La pregunta de desarrollo pide <strong>argumentar</strong>, no solo nombrar un tejido.",
+               "Para que sea 'Logrado', tu respuesta debe explicar, con los <strong>dos fenómenos</strong> que suele combinar el examen: cómo sube el agua (transpiración, cohesión-tensión, xilema) y cómo engrosa un tronco (meristemos laterales: cambium vascular y felógeno).",
+               "<strong>Consejo:</strong> practica escribiéndola a mano en tu cuaderno, nombrando el tejido, el mecanismo y un ejemplo, como en el examen real." ] }
+  ],
+  // BANCO (18) — preguntas PARALELAS, mismo estilo, mismos conceptos y mismo nivel cognitivo
+  // que las 9 preguntas del examen oficial, con escenarios y ciudades bolivianas distintas.
+  // Se muestran 9 al azar (una por cada concepto del examen, en un orden distinto cada vez).
+  banco: [
+    { type:"multi", context:"🍇 En un viñedo de Tarija, un viticultor nota que el tallo de una vid joven es verde y liso, pero después de varios años se vuelve marrón, agrietado y corchoso.", text:"¿Qué tejido ha reemplazado a la epidermis original para proteger el tallo leñoso?", options:["Colénquima","Parénquima clorofílico","Peridermis","Floema"], answer:2, explanation:"La peridermis (con súber o corcho) sustituye a la epidermis en tallos y raíces con crecimiento secundario (leñosos). [Aplicar]" },
+    { type:"multi", context:"☕ En un cafetal de los Yungas (La Paz), el tronco de un cafeto adulto muestra una corteza rugosa y parda, muy distinta a la piel verde de sus ramas jóvenes.", text:"¿Qué estructura, formada por células de súber, sustituye a la epidermis para dar esa protección?", options:["Peridermis","Esclerénquima","Xilema","Parénquima de reserva"], answer:0, explanation:"La peridermis reemplaza a la epidermis en órganos leñosos; está formada por súber o corcho, células muertas con suberina impermeable. [Aplicar]" },
+    { type:"multi", context:"🧵 En Potosí, un artesano teje sogas con fibras de cabuya extremadamente resistentes y duras al tacto, aunque provienen de células ya muertas.", text:"¿Qué tejido de sostén, con paredes gruesas y lignificadas, explica esa dureza?", options:["Colénquima","Esclerénquima","Parénquima clorofílico","Meristemo apical"], answer:1, explanation:"El esclerénquima tiene células muertas con paredes secundarias muy gruesas y lignificadas, brindando soporte rígido (fibras, cáscaras). [Analizar]" },
+    { type:"multi", context:"🥥 En Sucre, un estudiante intenta partir la cáscara dura de una nuez y se sorprende de lo difícil que es romperla con las manos.", text:"¿Qué tejido vegetal, formado por células muertas ricas en lignina, explica esa resistencia extrema?", options:["Parénquima de reserva","Peridermis","Esclerénquima","Colénquima"], answer:2, explanation:"El esclerénquima, por su lignificación y paredes gruesas, da dureza y rigidez a cáscaras y fibras. [Analizar]" },
+    { type:"multi", context:"🌾 En un cultivo de quinua en Oruro, el agua absorbida por las raíces debe llegar hasta las hojas más altas de la planta para que ocurra la fotosíntesis.", text:"¿Qué tejido conduce esa savia bruta de forma unidireccional y ascendente?", options:["Floema","Xilema","Colénquima","Parénquima clorofílico"], answer:1, explanation:"El xilema transporta la savia bruta (agua e iones) desde la raíz hacia las hojas en flujo unidireccional ascendente. [Aplicar]" },
+    { type:"multi", context:"🌳 En Cobija (Pando), un ingeniero forestal explica que el agua absorbida por las raíces de un árbol de castaña recorre todo el tronco hasta llegar a las hojas superiores.", text:"¿Qué sistema de tejido realiza este transporte de agua desde la raíz hacia arriba?", options:["Xilema","Floema","Esclerénquima","Peridermis"], answer:0, explanation:"El xilema (formado por células muertas: traqueidas y vasos) transporta agua y minerales desde la raíz hacia las hojas. [Aplicar]" },
+    { type:"multi", context:"🌴 En Trinidad (Beni), un motacú crece cada año más alto, mientras que en otro árbol leñoso cercano se nota que el tronco también se ensancha con el paso del tiempo.", text:"¿Qué tipos de meristemos son responsables, respectivamente, del crecimiento en altura y en grosor?", options:["Laterales para altura y apicales para grosor","Apicales para altura y laterales para grosor","Felógeno para altura y xilema para grosor","Colénquima para altura y esclerénquima para grosor"], answer:1, explanation:"Los meristemos apicales generan el crecimiento primario (altura); los laterales (cambium vascular y felógeno) generan el crecimiento secundario (grosor). [Analizar]" },
+    { type:"multi", context:"🌲 En un jardín de Sucre, un pino ha crecido notablemente en altura en la última década, y también se observa que su tronco luce más grueso que antes.", text:"¿Qué meristemos explican, respectivamente, el crecimiento en altura y en grosor de este árbol?", options:["Apicales para altura y laterales para grosor","Laterales para altura y apicales para grosor","Cambium vascular para altura y felógeno para grosor","Apicales para ambos crecimientos"], answer:0, explanation:"Los meristemos apicales (en las puntas) producen crecimiento primario/longitudinal; los laterales producen crecimiento secundario/grosor. [Analizar]" },
+    { type:"multi", context:"🍠 En un mercado de Cochabamba, una vendedora ofrece camotes que almacenan gran cantidad de almidón como reserva de energía para la planta.", text:"¿Qué tejido fundamental es el responsable de esa función de almacenamiento?", options:["Parénquima clorofílico","Esclerénquima","Parénquima de reserva","Colénquima"], answer:2, explanation:"El parénquima de reserva almacena almidón, agua o aceites en órganos como tubérculos, frutos y tallos suculentos. [Aplicar]" },
+    { type:"multi", context:"🌱 En Villa Tunari, una familia guarda yuca (mandioca) en su despensa, sabiendo que sus raíces concentran gran cantidad de almidón.", text:"¿Qué tejido vegetal cumple la función de reserva de almidón en este órgano?", options:["Parénquima de reserva","Peridermis","Meristemo lateral","Xilema"], answer:0, explanation:"El parénquima de reserva es un tejido metabólicamente activo especializado en almacenar sustancias de reserva como el almidón. [Aplicar]" },
+    { type:"multi", context:"🍅 En un invernadero de Tarija, un agricultor observa que sus plantas de tomate se marchitan levemente en las horas de más calor, cuando los poros de las hojas permanecen abiertos por más tiempo.", text:"¿Por qué esa apertura prolongada de los poros, aunque necesaria para el CO2, puede causar deshidratación?", options:["Porque provoca una excesiva pérdida de agua por evaporación","Porque bloquea el transporte de savia elaborada por el floema","Porque impide la fotosíntesis en el mesófilo","Porque facilita la entrada de patógenos"], answer:0, explanation:"La apertura prolongada de los estomas permite el ingreso de CO2, pero también aumenta la pérdida de agua por transpiración. [Analizar]" },
+    { type:"multi", context:"🥜 En Camiri (Santa Cruz), durante una ola de calor, las hojas de un cultivo de maní lucen marchitas a pesar de que la tierra está húmeda.", text:"Si los estomas permanecieron muy abiertos durante horas, ¿qué explica esta pérdida de turgencia en la planta?", options:["La falta de luz solar en las hojas","La excesiva pérdida de agua por transpiración a través de los estomas","El exceso de savia elaborada acumulada","La ausencia de meristemos apicales"], answer:1, explanation:"Los estomas abiertos permiten el intercambio gaseoso, pero también una pérdida de agua (transpiración) que puede deshidratar la planta. [Analizar]" },
+    { type:"multi", context:"🍌 En un mercado de Santa Cruz, un vendedor coloca plátanos verdes junto a plátanos ya maduros para acelerar su maduración.", text:"¿Qué fitohormona gaseosa, liberada por los frutos maduros, provoca este efecto?", options:["Auxinas","Giberelinas","Etileno","Savia elaborada"], answer:2, explanation:"El etileno es un gas hormonal que provoca la maduración de los frutos y la caída de hojas. [Aplicar]" },
+    { type:"multi", context:"🥑 En La Paz, una señora guarda paltas duras dentro de una bolsa cerrada junto con un tomate maduro, sabiendo que madurarán más rápido.", text:"¿Qué gas hormonal es responsable de acelerar ese proceso de maduración?", options:["Etileno","Auxinas","Giberelinas","Oxígeno"], answer:0, explanation:"El etileno, gas liberado por frutos maduros, acelera la maduración de otros frutos cercanos. [Aplicar]" },
+    { type:"multi", context:"🌳 En el Parque Madidi (La Paz), un guía explica que un árbol gigante transporta agua hasta su copa, a decenas de metros de altura, sin que exista una bomba interna.", text:"¿Qué mecanismo físico, basado en la evaporación del agua en las hojas, explica este ascenso contra la gravedad?", options:["La presión de raíz generada por ósmosis","La evaporación del agua en las hojas (transpiración) que genera tensión","El bombeo activo del floema","La capilaridad del esclerénquima"], answer:1, explanation:"Según la teoría de Cohesión-Tensión, la transpiración en las hojas crea una tensión negativa que succiona la columna de agua por el xilema. [Analizar]" },
+    { type:"multi", context:"🌲 En un bosque de Pando, un biólogo mide cómo el agua sube por el tronco de un árbol de goma hasta sus hojas más altas.", text:"Según la teoría de Cohesión-Tensión, ¿qué proceso en las hojas genera la fuerza de succión que hace subir el agua?", options:["La transpiración (evaporación del agua en las hojas)","La fotosíntesis en el mesófilo","La producción de etileno","El crecimiento de los meristemos apicales"], answer:0, explanation:"La transpiración foliar genera la tensión que 'jala' el agua desde las raíces a través del xilema, gracias a la cohesión de las moléculas de agua. [Analizar]" },
+    { type:"multi", context:"🥔 En una comunidad de Oruro, un agricultor siembra directamente trozos de tubérculo de oca para obtener nuevas plantas idénticas a la original, sin usar semillas.", text:"¿Qué tipo de reproducción vegetal está utilizando?", options:["Reproducción sexual","Polinización","Reproducción asexual","Fecundación"], answer:2, explanation:"La reproducción asexual (vegetativa), mediante tubérculos, produce clones genéticamente idénticos a la planta madre, sin gametos. [Aplicar]" },
+    { type:"multi", context:"🌱 En Cochabamba, un horticultor multiplica sus plantas de camote cortando esquejes y tubérculos, obteniendo nuevas plantas genéticamente idénticas a la planta madre.", text:"¿Qué tipo de reproducción vegetal es esta?", options:["Reproducción asexual","Reproducción sexual","Germinación sexual","Polinización cruzada"], answer:0, explanation:"La reproducción asexual (por esquejes, tubérculos, estolones, rizomas) genera clones sin intervención de gametos. [Aplicar]" }
+  ]
+};
+
+/* ════════════════ PALETAS POR MATERIA (no editar para crear apps) ═══════ */
+const PALETAS = {
+  teal:   {a:'#0d9488',aDark:'#0f766e',soft:'#f0fdfa',accent:'#06b6d4',hEnd:'#0f766e',hTitle:'#5eead4',hSub:'#99f6e4'},
+  word:   {a:'#2b579a',aDark:'#1e3f73',soft:'#eef3fb',accent:'#3b6fc4',hEnd:'#2b579a',hTitle:'#bfdbfe',hSub:'#93c5fd'},
+  excel:  {a:'#217346',aDark:'#185c37',soft:'#e9f7ef',accent:'#2d9b5e',hEnd:'#185c37',hTitle:'#a7f3d0',hSub:'#6ee7b7'},
+  rose:   {a:'#e11d48',aDark:'#be123c',soft:'#fff1f2',accent:'#fb7185',hEnd:'#9f1239',hTitle:'#fda4af',hSub:'#fecdd3'},
+  violet: {a:'#7c3aed',aDark:'#5b21b6',soft:'#f5f3ff',accent:'#a78bfa',hEnd:'#5b21b6',hTitle:'#ddd6fe',hSub:'#c4b5fd'},
+  amber:  {a:'#d97706',aDark:'#b45309',soft:'#fffbeb',accent:'#f59e0b',hEnd:'#b45309',hTitle:'#fde68a',hSub:'#fcd34d'}
+};
+
+/* ════════════════════════════ MOTOR ════════════════════════════════════ */
+const $=id=>document.getElementById(id);
+const contentArea=$('content-area');
+let studentName='',currentQ=0,score=0,isLocked=false,streak=0;
+let quizSet=[],answersLog=[],quizStart=0,quizElapsedMs=0;
+const STORE_KEY='quizprog_'+CONFIG.codigoPrefijo;
+
+/* --- almacenamiento seguro (no rompe si el navegador lo bloquea) --- */
+function safeGet(k){try{return localStorage.getItem(k)}catch(e){return null}}
+function safeSet(k,v){try{localStorage.setItem(k,v)}catch(e){}}
+function safeDel(k){try{localStorage.removeItem(k)}catch(e){}}
+
+function applyConfig(){
+  const p=PALETAS[CONFIG.paleta]||PALETAS.teal,r=document.documentElement.style;
+  r.setProperty('--a',p.a);r.setProperty('--a-dark',p.aDark);r.setProperty('--a-soft',p.soft);
+  r.setProperty('--accent',p.accent);r.setProperty('--header-end',p.hEnd);
+  r.setProperty('--header-title',p.hTitle);r.setProperty('--header-sub',p.hSub);
+  document.title=CONFIG.tema+' | Prof. Franz Vidal';
+  $('name-icon').textContent=CONFIG.rol.icono;
+  $('name-greeting').textContent=CONFIG.rol.saludo;
+  $('name-tag').textContent=CONFIG.rol.tag;
+  $('name-intro').innerHTML=CONFIG.rol.intro;
+  $('btn-enter').innerHTML=CONFIG.rol.btnEntrar;
+  $('btn-start').innerHTML=CONFIG.rol.btnComenzar;
+  $('th-area').textContent=CONFIG.area;
+  $('th-tema').textContent=CONFIG.tema;
+  $('th-sub').textContent=CONFIG.subtitulo;
+  $('th-badge').textContent=CONFIG.sesionBadge;
+  $('btn-retry').style.display=CONFIG.permitirReintento?'flex':'none';
+  renderTheory();
+}
+function renderTheory(){
+  const wrap=$('theory-cards');wrap.innerHTML='';
+  CONFIG.teoria.forEach(c=>{
+    if(c.tipo==='intro'){
+      wrap.insertAdjacentHTML('beforeend',
+        `<div class="info-card ${c.clase}"><span class="bg-icon">${c.bgIcon||''}</span><h4>${c.titulo}</h4><p>${c.html}</p></div>`);
+    } else if(c.tipo==='expand'){
+      let inner='<ul style="margin-top:10px">'+(c.lista||[]).map(li=>`<li>${li}</li>`).join('')+'</ul>';
+      if(c.tabla){inner+='<table class="sym-table"><tr>'+c.tabla.cols.map(x=>`<th>${x}</th>`).join('')+'</tr>'+
+        c.tabla.rows.map(row=>'<tr>'+row.map((cell,i)=>`<td${i===0?' class="sym"':''}>${cell}</td>`).join('')+'</tr>').join('')+'</table>';}
+      wrap.insertAdjacentHTML('beforeend',
+        `<div class="info-card ${c.clase} expandible" onclick="toggleExpand(this)"><span class="bg-icon">${c.bgIcon||''}</span>`+
+        `<h4>${c.titulo} <span class="expand-arrow">▶</span></h4><p>${c.resumen}</p><div class="expand-content">${inner}</div></div>`);
+    } else if(c.tipo==='bolivia'){
+      wrap.insertAdjacentHTML('beforeend',
+        `<div class="bolivia-card"><span class="flag-emoji">🇧🇴</span><h4>${c.titulo}</h4><p>${c.html}</p></div>`);
+    }
+  });
+}
+
+/* --- accesibilidad: alternar tamaño de texto --- */
+let fsState=0;const FS=[1,1.12,1.25];
+function toggleFont(){fsState=(fsState+1)%FS.length;document.documentElement.style.setProperty('--fs',FS[fsState]);$('a11y-btn').textContent=fsState===0?'A+':(fsState===1?'A++':'A');safeSet('quizfs',fsState);}
+
+/* --- Fisher-Yates: baraja un arreglo --- */
+function shuffle(arr){const a=[...arr];for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];}return a;}
+
+/* --- prepara una pregunta: baraja opciones y recalcula la respuesta correcta --- */
+function prepare(q){
+  if(q.type==='vf') return {type:'vf',text:q.text,context:q.context||null,answer:q.answer,explanation:q.explanation};
+  const tagged=q.options.map((o,i)=>({o,correct:i===q.answer}));
+  const mixed=shuffle(tagged);
+  return {type:q.type,text:q.text,context:q.context||null,explanation:q.explanation,
+          options:mixed.map(x=>x.o),answer:mixed.findIndex(x=>x.correct)};
+}
+function buildSet(){
+  const n=Math.min(CONFIG.totalPreguntas,CONFIG.banco.length);
+  return shuffle(CONFIG.banco).slice(0,n).map(prepare);
+}
+
+function submitName(){
+  const input=$('student-name');const name=input.value.trim();
+  if(name.length<3){$('name-error').textContent='Escribe tu nombre completo (mínimo 3 letras)';input.style.borderColor='#f87171';return;}
+  studentName=name;showScreen('screen-theory');
+}
+$('student-name').addEventListener('keydown',e=>{if(e.key==='Enter')submitName()});
+
+function showScreen(id){
+  document.querySelectorAll('.screen,.name-screen').forEach(s=>{s.classList.remove('active');s.style.display='none'});
+  const t=$(id);t.style.display=t.classList.contains('name-screen')?'flex':'block';
+  t.classList.add('active');contentArea.scrollTo(0,0);
+}
+function toggleExpand(el){el.querySelector('.expand-content').classList.toggle('open');el.querySelector('.expand-arrow').classList.toggle('rotated');}
+
+function startQuiz(){
+  currentQ=0;score=0;streak=0;answersLog=[];quizStart=Date.now();
+  $('score-display').textContent='0';updateStreak();
+  quizSet=buildSet();showScreen('screen-quiz');loadQuestion();saveProgress();
+}
+function updateStreak(){const el=$('q-streak');if(streak>=2){el.textContent='🔥 '+streak;el.classList.add('on');}else{el.classList.remove('on');}}
+
+function loadQuestion(){
+  isLocked=false;const q=quizSet[currentQ],total=quizSet.length;
+  $('q-counter').textContent=`${currentQ+1} de ${total}`;
+  $('progress-bar').style.width=`${((currentQ+1)/total)*100}%`;
+  const badge=$('q-type-badge');
+  if(q.context){badge.textContent='CASO PRÁCTICO';badge.className='quiz-type-badge badge-caso';}
+  else if(q.type==='multi'){badge.textContent='OPCIÓN MÚLTIPLE';badge.className='quiz-type-badge badge-multi';}
+  else if(q.type==='vf'){badge.textContent='VERDADERO O FALSO';badge.className='quiz-type-badge badge-vf';}
+  else{badge.textContent='ELIGE LA OPCIÓN';badge.className='quiz-type-badge badge-clasif';}
+  const ctx=$('question-context');
+  if(q.context){ctx.style.display='block';ctx.innerHTML=q.context;}else{ctx.style.display='none';}
+  $('question-card').className='question-card pop-in';
+  $('question-text').innerHTML=q.text;$('feedback-icon').className='feedback-icon';
+  $('explanation-box').className='explanation-box';$('explanation-box').innerHTML='';
+  const c=$('options-container');c.innerHTML='';
+  if(q.type==='multi'){
+    c.className='options-grid';const L=['A','B','C','D','E'];
+    q.options.forEach((opt,i)=>{const b=document.createElement('button');b.className='option-btn';
+      b.innerHTML=`<span class="letter">${L[i]}</span><span>${opt}</span>`;b.onclick=()=>checkAnswer(i,b);c.appendChild(b);});
+  }else if(q.type==='vf'){
+    c.className='vf-grid';
+    [true,false].forEach(v=>{const b=document.createElement('button');b.className=`vf-btn ${v?'vf-true':'vf-false'}`;
+      b.textContent=v?'✅ Verdadero':'❌ Falso';b.onclick=()=>checkAnswer(v,b);c.appendChild(b);});
+  }else{ // clasif
+    c.className='options-grid';
+    q.options.forEach((opt,i)=>{const b=document.createElement('button');b.className='option-btn';
+      b.innerHTML=`<span class="letter">${opt.i||''}</span><span>${opt.t}</span>`;b.onclick=()=>checkAnswer(i,b);c.appendChild(b);});
+  }
+}
+function optionText(q,idx){return q.type==='clasif'?q.options[idx].t:q.options[idx];}
+function checkAnswer(selected,btnEl){
+  if(isLocked)return;isLocked=true;
+  const q=quizSet[currentQ],isCorrect=selected===q.answer;
+  const card=$('question-card'),icon=$('feedback-icon'),box=$('explanation-box');
+  // registrar para repaso y código
+  let chosenStr,correctStr;
+  if(q.type==='vf'){chosenStr=selected?'Verdadero':'Falso';correctStr=q.answer?'Verdadero':'Falso';}
+  else{chosenStr=optionText(q,selected);correctStr=optionText(q,q.answer);}
+  answersLog.push({text:q.text,isCorrect,chosen:chosenStr,correct:correctStr,explanation:q.explanation});
+  let delay=2300;
+  if(isCorrect){
+    score+=10;streak++;$('score-display').textContent=score;updateStreak();
+    card.className='question-card correct';icon.textContent='✅';icon.className='feedback-icon show';
+    if(q.type==='multi'||q.type==='clasif'){btnEl.classList.add('opt-correct');for(let s of btnEl.parentElement.children)if(s!==btnEl)s.classList.add('opt-dimmed');}
+    else{btnEl.style.background='#ecfdf5';btnEl.style.borderColor='#34d399';for(let s of btnEl.parentElement.children)if(s!==btnEl){s.style.opacity='0.4';s.style.pointerEvents='none';}}
+    box.innerHTML=`✅ <strong>¡Correcto!</strong> ${q.explanation}`;box.className='explanation-box ok show';
+  }else{
+    streak=0;updateStreak();delay=3600;
+    card.className='question-card incorrect shake';icon.textContent='❌';icon.className='feedback-icon show';
+    if(q.type==='multi'||q.type==='clasif'){btnEl.classList.add('opt-wrong');let i=0;for(let s of btnEl.parentElement.children){if(i===q.answer)s.classList.add('opt-correct');else if(s!==btnEl)s.classList.add('opt-dimmed');i++;}}
+    else{btnEl.style.background='#fef2f2';btnEl.style.borderColor='#f87171';for(let s of btnEl.parentElement.children)if(s!==btnEl){s.style.background='#ecfdf5';s.style.borderColor='#34d399';}}
+    box.innerHTML=`💡 <strong>Explicación:</strong> ${q.explanation}`;box.className='explanation-box err show';
+    if(navigator.vibrate)navigator.vibrate(200);
+  }
+  saveProgress();
+  setTimeout(()=>{currentQ++;if(currentQ<quizSet.length){loadQuestion();contentArea.scrollTo(0,0);saveProgress();}else finishQuiz();},delay);
+}
+
+function finishQuiz(){
+  quizElapsedMs=Date.now()-quizStart;safeDel(STORE_KEY);showResults();
+}
+function fmtTime(ms){const s=Math.round(ms/1000),m=Math.floor(s/60),r=s%60;return m>0?`${m} min ${r} s`:`${r} s`;}
+function hashStr(s){let h=2166136261;for(let i=0;i<s.length;i++){h^=s.charCodeAt(i);h=Math.imul(h,16777619);}return (h>>>0);}
+function generateCode(){
+  const seq=answersLog.map(a=>a.isCorrect?'1':'0').join('');
+  const h=hashStr(studentName.toUpperCase()+'|'+score+'|'+seq).toString(36).toUpperCase().padStart(7,'0').slice(-4);
+  const px=studentName.replace(/\s+/g,'').substring(0,2).toUpperCase();
+  const d=new Date(),ds=`${String(d.getDate()).padStart(2,'0')}${String(d.getMonth()+1).padStart(2,'0')}`;
+  return `${CONFIG.codigoPrefijo}-${px}-${score}-${ds}-${h}`;
+}
+function showResults(){
+  showScreen('screen-results');
+  const max=quizSet.length*10,pct=score/max;
+  $('final-score').textContent=score;$('final-total').textContent=` / ${max}`;
+  $('result-meta').innerHTML=`⏱️ Tiempo: ${fmtTime(quizElapsedMs)} &nbsp;•&nbsp; ✅ ${answersLog.filter(a=>a.isCorrect).length}/${quizSet.length} aciertos`;
+  const r=CONFIG.rangos.find(x=>pct>=x.min)||CONFIG.rangos[CONFIG.rangos.length-1];
+  $('result-icon').textContent=r.icono;$('result-rank').textContent=r.titulo;
+  const msg=$('result-message'),val=$('result-score-value');msg.textContent=r.msg;
+  if(pct===1){msg.style.color='#047857';val.style.color='var(--a)';confetti();}
+  else if(pct>=0.7){msg.style.color='#1e40af';val.style.color='#2563eb';}
+  else if(pct>=0.5){msg.style.color='#a16207';val.style.color='#d97706';}
+  else{msg.style.color='#b91c1c';val.style.color='#dc2626';}
+  $('result-code').textContent=generateCode();
+}
+function showReview(){
+  const list=$('review-list');list.innerHTML='';
+  answersLog.forEach((a,i)=>{
+    let html=`<div class="rev-item ${a.isCorrect?'ok':'bad'}"><div class="rev-q"><span class="num">${i+1}.</span> ${a.text}</div>`;
+    html+=`<div class="rev-line good">✅ Correcta: ${a.correct}</div>`;
+    if(!a.isCorrect){html+=`<div class="rev-line miss">✗ Tu respuesta: ${a.chosen}</div><div class="rev-expl">💡 ${a.explanation}</div>`;}
+    html+='</div>';list.insertAdjacentHTML('beforeend',html);
+  });
+  showScreen('screen-review');
+}
+function shareResult(){
+  const max=quizSet.length*10,code=$('result-code').textContent,d=new Date();
+  const fecha=d.toLocaleDateString('es-BO'),hora=d.toLocaleTimeString('es-BO',{hour:'2-digit',minute:'2-digit'});
+  const w=CONFIG.whatsapp;
+  const text=`${w.emoji} *${CONFIG.area.toUpperCase()}*\n━━━━━━━━━━━━━━━━━━\n🏫 U.E. Nuevo Amanecer Boliviano\n📚 ${w.linea}\n━━━━━━━━━━━━━━━━━━\n👤 ${w.rolLabel}: ${studentName}\n⭐ Puntaje: ${score} / ${max}\n⏱️ Tiempo: ${fmtTime(quizElapsedMs)}\n🔐 Código: ${code}\n📅 ${fecha} — ${hora}\n━━━━━━━━━━━━━━━━━━\n👨‍🏫 Prof. Franz Vidal Condori Mamani`;
+  const num=(w.numero||'').replace(/\D/g,'');           // si hay número, va directo a ese chat
+  window.open('https://wa.me/'+num+'?text='+encodeURIComponent(text),'_blank');
+}
+function restartApp(){if(CONFIG.permitirReintento)startQuiz();else safeDel(STORE_KEY);}
+
+/* --- reanudar sesión interrumpida --- */
+function saveProgress(){
+  try{safeSet(STORE_KEY,JSON.stringify({studentName,currentQ,score,streak,quizSet,answersLog,quizStart}));}catch(e){}
+}
+function offerResume(){
+  const raw=safeGet(STORE_KEY);if(!raw)return;
+  let s;try{s=JSON.parse(raw);}catch(e){safeDel(STORE_KEY);return;}
+  if(!s||!s.quizSet||s.currentQ>=s.quizSet.length){safeDel(STORE_KEY);return;}
+  const b=$('resume-banner');
+  b.style.display='block';
+  b.innerHTML=`↩️ <strong>${s.studentName}</strong>, dejaste una prueba en la pregunta ${s.currentQ+1}.<button onclick='resumeProgress()'>Continuar donde quedé</button>`;
+}
+function resumeProgress(){
+  const raw=safeGet(STORE_KEY);if(!raw)return;let s;try{s=JSON.parse(raw);}catch(e){return;}
+  studentName=s.studentName;currentQ=s.currentQ;score=s.score;streak=s.streak||0;
+  quizSet=s.quizSet;answersLog=s.answersLog||[];quizStart=s.quizStart||Date.now();
+  $('score-display').textContent=score;updateStreak();showScreen('screen-quiz');loadQuestion();
+}
+
+/* --- confeti (colores de Bolivia) --- */
+function confetti(){
+  const colors=['#DA251D','#F6EB16','#007A33','#06b6d4','#10b981'];
+  for(let i=0;i<46;i++){const s=document.createElement('span');s.className='confetti';
+    s.style.left=Math.random()*100+'vw';s.style.background=colors[i%colors.length];
+    s.style.animationDuration=(2+Math.random()*1.6)+'s';s.style.animationDelay=(Math.random()*0.5)+'s';
+    s.style.transform='rotate('+(Math.random()*360)+'deg)';document.body.appendChild(s);
+    setTimeout(()=>s.remove(),4200);}
+}
+
+window.addEventListener('load',()=>{
+  applyConfig();
+  const f=safeGet('quizfs');if(f){fsState=parseInt(f)||0;document.documentElement.style.setProperty('--fs',FS[fsState]||1);if(fsState>0)$('a11y-btn').textContent=fsState===1?'A++':'A';}
+  offerResume();
+  document.body.addEventListener('touchmove',e=>{if(e.target.tagName!=='DIV'&&!e.target.closest('.content-area'))e.preventDefault();},{passive:false});
+});
+</script>
+</body>
+</html>
