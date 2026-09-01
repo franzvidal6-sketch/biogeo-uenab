@@ -121,6 +121,16 @@
           "fecha": "2026-08-06",
           "estado": "nuevo",
           "link": "/herbario-5sec.html"
+        },
+        {
+            "id": "simulacro-tema6-5to",
+            "categoria": "simulacro",
+            "titulo": "Simulacro Tipo Examen — Tema 6",
+            "tema": "Tejidos Orgánicos de los Vegetales",
+            "descripcion": "Simulacro de práctica con casos reales sobre los tejidos vegetales, mismo estilo del examen (no son las preguntas oficiales).",
+            "fecha": "2026-09-01",
+            "estado": "nuevo",
+            "link": "/App_Bio5_T6_Simulacro_TipoExamen.html"
         }
       ]
     },
