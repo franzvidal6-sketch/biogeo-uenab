@@ -131,6 +131,16 @@
             "fecha": "2026-09-01",
             "estado": "nuevo",
             "link": "/App_Bio5_T6_Simulacro_TipoExamen.html"
+        },
+        {
+            "id": "simulacro-tema7-5to",
+            "categoria": "simulacro",
+            "titulo": "Simulacro Tipo Examen — Tema 7",
+            "tema": "Estructura y Procesos Vitales de las Plantas",
+            "descripcion": "Simulacro de práctica con casos reales sobre clasificación, órganos, fotosíntesis, hormonas y reproducción de las plantas, mismo estilo del examen (no son las preguntas oficiales).",
+            "fecha": "2026-09-28",
+            "estado": "nuevo",
+            "link": "/simulacro-tema7-5sec.html"
         }
       ]
     },
