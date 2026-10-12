@@ -1,0 +1,586 @@
+<!DOCTYPE html>
+<html lang="es" translate="no">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="google" content="notranslate">
+<meta name="theme-color" content="#26215C">
+<title>Juicio a AgroMax S.A. · 5° de Secundaria</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --violeta:#534AB7; --noche:#26215C; --lila:#EEEDFE; --lila2:#DEDCFB;
+  --verde:#1D9E75; --verde-t:#137A5A; --verde-c:#E1F5EE;
+  --coral:#D85A30; --coral-t:#B4471F; --coral-c:#FBEAE3;
+  --rosa:#D4537E; --rosa-t:#B03A63; --rosa-c:#FBE8EF;
+  --ambar:#B7791F; --ambar-t:#8A5A12; --ambar-c:#FBF1DD;
+  --texto:#22212B; --suave:#5F5E6B; --linea:#DCDAEC; --fondo:#F7F6FE; --blanco:#fff;
+  --r:16px; --sombra:0 1px 2px rgba(38,33,92,.06),0 4px 14px rgba(38,33,92,.07);
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--fondo);color:var(--texto);font-family:Inter,system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;font-size:15.5px;line-height:1.55;padding-bottom:84px}
+h1,h2,h3,.pop{font-family:Poppins,Inter,system-ui,sans-serif}
+a{color:var(--violeta)}
+button{font:inherit;color:inherit;cursor:pointer}
+button:focus-visible,a:focus-visible,input:focus-visible+label,summary:focus-visible{outline:3px solid #9FE1CB;outline-offset:2px;border-radius:8px}
+b{font-weight:700}
+
+/* ---------- Encabezado ---------- */
+.hero{position:relative;background:var(--noche);color:#fff;overflow:hidden}
+.hero svg.red{position:absolute;inset:0;width:100%;height:100%;opacity:.12}
+.hero::after{content:"";position:absolute;inset:0;background:linear-gradient(160deg,rgba(83,74,183,.35),rgba(38,33,92,0) 60%)}
+.hero-in{position:relative;z-index:1;max-width:760px;margin:0 auto;padding:14px 18px 20px}
+.volver{display:inline-flex;align-items:center;gap:6px;color:#CECBF6;text-decoration:none;font-size:13.5px;font-weight:600}
+.kicker{margin:14px 0 2px;color:#9FE1CB;font-size:12px;font-weight:700;letter-spacing:.06em;text-transform:uppercase}
+.hero h1{margin:0;font-size:28px;line-height:1.15;font-weight:800;text-shadow:0 2px 10px rgba(0,0,0,.25)}
+.hero h1 span{color:#5DCAA5}
+.hero p{margin:6px 0 0;color:#EEEDFE;font-weight:600;font-size:14px}
+.mi-badge{margin-top:12px;display:inline-flex;align-items:center;gap:8px;background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.22);padding:6px 12px;border-radius:999px;font-size:13px;font-weight:600}
+.mi-badge b{background:#fff;color:var(--noche);border-radius:6px;padding:0 6px;font-family:Poppins,Inter,sans-serif}
+
+/* ---------- Contenido ---------- */
+main{max-width:760px;margin:0 auto;padding:16px 16px 8px}
+.vista{display:none}
+.vista.activa{display:block;animation:entra .2s ease}
+@keyframes entra{from{opacity:0;transform:translateY(4px)}to{opacity:1;transform:none}}
+@media (prefers-reduced-motion:reduce){.vista.activa{animation:none}}
+h2.sec{font-size:21px;line-height:1.25;color:var(--violeta);margin:22px 0 10px;font-weight:700}
+h2.sec:first-child{margin-top:4px}
+h3{font-size:16px;margin:0 0 6px;color:var(--noche);font-weight:700}
+p{margin:0 0 10px}
+.card{background:var(--blanco);border-radius:var(--r);box-shadow:var(--sombra);padding:16px;margin-bottom:12px}
+.aviso{border-radius:var(--r);padding:14px 16px;margin-bottom:12px;border-left:5px solid}
+.aviso h3{margin-bottom:4px}
+.a-verde{background:var(--verde-c);border-color:var(--verde)} .a-verde h3{color:var(--verde-t)}
+.a-coral{background:var(--coral-c);border-color:var(--coral)} .a-coral h3{color:var(--coral-t)}
+.a-lila{background:var(--lila);border-color:var(--violeta)} .a-lila h3{color:var(--violeta)}
+.a-ambar{background:var(--ambar-c);border-color:var(--ambar)} .a-ambar h3{color:var(--ambar-t)}
+.aviso p:last-child,.card p:last-child{margin-bottom:0}
+.muted{color:var(--suave);font-size:13.5px}
+ul.lista,ol.lista{margin:0;padding-left:20px} ul.lista li,ol.lista li{margin-bottom:6px}
+
+/* pasos de la ruta */
+.ruta{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:12px}
+.ruta button{text-align:left;background:var(--blanco);border:0;border-radius:var(--r);box-shadow:var(--sombra);padding:14px;display:flex;flex-direction:column;gap:2px;min-height:112px}
+.ruta .num{font-family:Poppins,sans-serif;font-weight:800;font-size:24px;color:var(--violeta);line-height:1}
+.ruta strong{font-size:14.5px}
+.ruta small{color:var(--suave);font-size:12.5px;line-height:1.35}
+.ruta .ir{margin-top:auto;color:var(--violeta);font-weight:700;font-size:12.5px}
+
+/* periodos */
+.periodo{display:flex;gap:12px;padding:12px 0;border-top:1px solid var(--linea)}
+.periodo:first-of-type{border-top:0;padding-top:2px}
+.periodo .pn{flex:0 0 38px;height:38px;border-radius:12px;background:var(--lila);color:var(--violeta);font-family:Poppins,sans-serif;font-weight:800;display:grid;place-items:center;font-size:18px}
+.periodo h3{margin-bottom:2px}
+.periodo .listo{font-size:13.5px;color:var(--verde-t);font-weight:600;margin-top:4px}
+
+/* equipos */
+.equipos{display:grid;gap:8px}
+.eq{display:flex;gap:12px;align-items:flex-start;background:var(--blanco);border-radius:14px;box-shadow:var(--sombra);padding:12px 14px;border-left:5px solid var(--c)}
+.eq .cod{font-family:Poppins,sans-serif;font-weight:700;color:var(--ct);font-size:13px;white-space:nowrap;min-width:72px}
+.eq b{display:block;font-size:14.5px}
+.eq span{font-size:13.5px;color:var(--suave)}
+
+/* ---------- Mi rol ---------- */
+.grupo-rol{margin-bottom:14px}
+.grupo-rol h3{font-size:13px;text-transform:uppercase;letter-spacing:.05em;color:var(--ct);margin-bottom:8px}
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.chip-rol{min-width:52px;height:44px;padding:0 12px;border-radius:12px;border:2px solid var(--c);background:var(--blanco);color:var(--ct);font-family:Poppins,sans-serif;font-weight:700;font-size:15px}
+.chip-rol[aria-pressed="true"]{background:var(--c);color:#fff}
+.ficha-cab{display:flex;border-radius:var(--r) var(--r) 0 0;overflow:hidden}
+.ficha-cab .codigo{flex:0 0 78px;background:var(--c);color:#fff;display:grid;place-items:center;font-family:Poppins,sans-serif;font-weight:800;font-size:26px}
+.ficha-cab .info{background:var(--cc);padding:12px 14px;flex:1}
+.ficha-cab .equipo{font-size:11.5px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--ct)}
+.ficha-cab h3{font-size:17px;margin:2px 0 3px}
+.ficha-cab p{font-size:13px;color:var(--suave);margin:0;line-height:1.4}
+.ficha{background:var(--blanco);border-radius:var(--r);box-shadow:var(--sombra);margin-bottom:12px}
+.ficha-cuerpo{padding:4px 16px 16px}
+.ficha h4{font-family:Poppins,sans-serif;font-size:14.5px;color:var(--ct);margin:16px 0 6px}
+.ficha ul,.ficha ol{margin:0;padding-left:20px} .ficha li{margin-bottom:6px}
+.producto{background:var(--cc);border-left:5px solid var(--c);border-radius:12px;padding:12px 14px;margin-top:14px}
+.producto h4{margin-top:0}
+.producto .pt{font-weight:700;margin-bottom:6px}
+.frase{background:var(--fondo);border-radius:10px;padding:8px 12px;margin-bottom:6px;font-size:14.5px}
+.check{display:flex;align-items:center;gap:10px;padding:9px 4px;border-bottom:1px solid var(--linea)}
+.check:last-child{border-bottom:0}
+.check input{width:22px;height:22px;accent-color:var(--c);flex:0 0 auto}
+.check label{flex:1}
+.progreso{display:flex;align-items:center;gap:10px;font-size:13px;color:var(--suave);font-weight:600;margin:4px 0 4px}
+.barra{flex:1;height:8px;background:var(--lila);border-radius:99px;overflow:hidden}
+.barra i{display:block;height:100%;background:var(--verde);border-radius:99px;transition:width .25s}
+.turno{display:flex;gap:10px;align-items:flex-start;padding:8px 0;border-bottom:1px solid var(--linea);font-size:14.5px}
+.turno:last-child{border-bottom:0}
+.turno .tag{flex:0 0 auto;background:var(--lila);color:var(--violeta);font-weight:700;font-size:12px;border-radius:8px;padding:2px 8px;margin-top:2px}
+.cambiar{background:none;border:0;color:var(--violeta);font-weight:700;padding:6px 0;margin-bottom:6px}
+
+/* ---------- Expediente ---------- */
+.cargo-card{display:flex;gap:12px;align-items:flex-start;padding:10px 0;border-top:1px solid var(--linea)}
+.cargo-card:first-of-type{border-top:0}
+.cargo-card .n{flex:0 0 34px;height:34px;border-radius:10px;background:var(--violeta);color:#fff;display:grid;place-items:center;font-family:Poppins,sans-serif;font-weight:700}
+.cargo-card small{display:block;color:var(--suave);font-size:13px}
+.filtros{display:flex;gap:8px;overflow-x:auto;padding:2px 2px 10px;scrollbar-width:none}
+.filtros::-webkit-scrollbar{display:none}
+.filtro{flex:0 0 auto;height:38px;padding:0 14px;border-radius:999px;border:1.5px solid var(--lila2);background:var(--blanco);font-weight:600;font-size:13.5px;color:var(--noche)}
+.filtro[aria-pressed="true"]{background:var(--violeta);border-color:var(--violeta);color:#fff}
+.prueba{display:flex;gap:12px;background:var(--blanco);border-radius:14px;box-shadow:var(--sombra);padding:14px;margin-bottom:10px}
+.prueba .letra{flex:0 0 42px;height:42px;border-radius:12px;background:var(--lila);color:var(--violeta);font-family:Poppins,sans-serif;font-weight:800;font-size:20px;display:grid;place-items:center}
+.prueba h3{font-size:15px;margin-bottom:3px}
+.prueba p{font-size:14.5px;margin:0}
+.prueba .nueva{display:inline-block;font-size:11px;font-weight:700;background:var(--ambar-c);color:var(--ambar-t);border-radius:6px;padding:1px 6px;margin-left:4px;vertical-align:2px}
+
+/* ---------- Sentencia ---------- */
+.medidor{position:sticky;top:0;z-index:5;background:var(--blanco);border-radius:var(--r);box-shadow:0 6px 18px rgba(38,33,92,.12);padding:14px 16px;margin-bottom:12px}
+.medidor .tot{display:flex;justify-content:space-between;align-items:baseline;gap:8px}
+.medidor .monto{font-family:Poppins,sans-serif;font-weight:800;font-size:22px;color:var(--noche)}
+.medidor .tope{font-size:13px;color:var(--suave);font-weight:600}
+.medidor .barra{height:12px;margin:8px 0}
+.medidor.pasado .barra i{background:var(--coral)}
+.medidor.pasado .monto{color:var(--coral-t)}
+.medidor .estado{font-size:13.5px;font-weight:600}
+.cubre{display:flex;gap:6px;flex-wrap:wrap;margin-top:8px;align-items:center;font-size:12.5px;color:var(--suave);font-weight:600}
+.cubre span.c{width:30px;height:30px;border-radius:9px;display:grid;place-items:center;background:var(--fondo);color:#A9A7BD;font-family:Poppins,sans-serif;font-weight:700;font-size:13px;border:1.5px dashed #CFCDE3}
+.cubre span.c.si{background:var(--verde);color:#fff;border:1.5px solid var(--verde)}
+.medida{display:flex;gap:12px;align-items:flex-start;background:var(--blanco);border-radius:14px;box-shadow:var(--sombra);padding:13px 14px;margin-bottom:10px;border:2px solid transparent;width:100%;text-align:left}
+.medida[aria-pressed="true"]{border-color:var(--verde);background:#F6FCF9}
+.medida .caja{flex:0 0 24px;height:24px;border-radius:7px;border:2px solid #B9B7CC;display:grid;place-items:center;color:#fff;font-size:15px;margin-top:2px}
+.medida[aria-pressed="true"] .caja{background:var(--verde);border-color:var(--verde)}
+.medida .cuerpo{flex:1;min-width:0}
+.medida b{display:block;font-size:14.5px;line-height:1.35}
+.medida small{display:block;color:var(--suave);font-size:13px;margin-top:2px}
+.medida .der{text-align:right;flex:0 0 auto}
+.medida .costo{font-family:Poppins,sans-serif;font-weight:700;font-size:14.5px;white-space:nowrap}
+.medida .cg{display:inline-block;margin-top:4px;font-size:11.5px;font-weight:700;color:var(--violeta);background:var(--lila);border-radius:6px;padding:1px 7px;white-space:nowrap}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:44px;padding:0 18px;border-radius:12px;border:0;font-weight:700}
+.btn-sec{background:var(--lila);color:var(--violeta)}
+.btn-pri{background:var(--violeta);color:#fff;text-decoration:none}
+
+/* ---------- Juicio ---------- */
+.pasos h3.per{display:flex;align-items:center;gap:8px;color:#fff;background:var(--violeta);margin:0;padding:10px 14px;border-radius:14px 14px 0 0;font-size:15px}
+.pasos.p4 h3.per{background:var(--noche)}
+.pasos{background:var(--blanco);border-radius:14px;box-shadow:var(--sombra);margin-bottom:14px;overflow:hidden}
+.paso{display:flex;gap:10px;padding:10px 14px;border-top:1px solid var(--linea);font-size:14.5px}
+.paso .q{flex:0 0 66px;font-weight:700;color:var(--violeta);font-size:13.5px}
+.pasos.p4 .paso .q{color:var(--noche)}
+.paso.mio{background:var(--verde-c);box-shadow:inset 4px 0 0 var(--verde)}
+.paso .yo{display:inline-block;background:var(--verde);color:#fff;font-size:11px;font-weight:700;border-radius:6px;padding:0 6px;margin-left:6px;vertical-align:1px}
+.aula{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;background:var(--blanco);border:2px dashed #C9C7DC;border-radius:var(--r);padding:12px}
+.aula .pizarra{grid-column:1/-1;text-align:center;font-size:12px;font-weight:700;color:var(--suave);border-top:6px solid #5F5E6B;border-radius:4px;padding-top:4px;margin:0 18% 2px}
+.aula div.b{border:2px solid var(--c);background:var(--cc);color:var(--ct);border-radius:12px;padding:8px 6px;text-align:center;font-size:12px;line-height:1.3;font-weight:600}
+.aula div.b strong{display:block;font-family:Poppins,sans-serif;font-size:12.5px}
+.aula .pasillo{display:grid;place-items:center;text-align:center;font-size:11.5px;color:var(--suave);font-style:italic;line-height:1.3}
+.aula .ancho{grid-column:1/-1}
+
+/* ---------- Más ---------- */
+.seg{display:flex;gap:6px;overflow-x:auto;padding-bottom:8px;scrollbar-width:none}
+.seg::-webkit-scrollbar{display:none}
+.crit{display:flex;gap:12px;padding:10px 0;border-top:1px solid var(--linea)}
+.crit:first-child{border-top:0}
+.crit .pts{flex:0 0 46px;height:46px;border-radius:12px;background:var(--lila);color:var(--violeta);display:grid;place-items:center;font-family:Poppins,sans-serif;font-weight:800;font-size:13px;line-height:1.1;text-align:center}
+.crit b{display:block;font-size:14.5px}
+.crit span{font-size:14px;color:var(--suave)}
+.frases-g{display:grid;gap:12px}
+.frases-g .card h3{color:var(--ct)}
+.frases-g .card{border-top:4px solid var(--c)}
+
+/* ---------- Navegación inferior ---------- */
+nav.tabs{position:fixed;left:0;right:0;bottom:0;z-index:20;background:rgba(255,255,255,.97);backdrop-filter:blur(8px);border-top:1px solid var(--linea);padding:4px 4px calc(4px + env(safe-area-inset-bottom))}
+nav.tabs .in{max-width:760px;margin:0 auto;display:grid;grid-template-columns:repeat(6,1fr)}
+nav.tabs button{background:none;border:0;display:flex;flex-direction:column;align-items:center;gap:1px;padding:6px 2px;border-radius:12px;color:var(--suave);font-size:11px;font-weight:600;min-height:54px}
+nav.tabs button .ic{font-size:20px;line-height:1.1}
+nav.tabs button[aria-current="page"]{color:var(--violeta);background:var(--lila)}
+@media (min-width:640px){
+  .hero h1{font-size:34px}
+  .ruta{grid-template-columns:repeat(4,1fr)}
+  .frases-g{grid-template-columns:1fr 1fr}
+  .equipos{grid-template-columns:1fr 1fr}
+}
+</style>
+</head>
+<body>
+<header class="hero">
+  <svg class="red" viewBox="0 0 400 200" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+    <g stroke="#fff" stroke-width="1.2" fill="none">
+      <path d="M20 40 L80 70 L140 40 L200 80 L260 50 L320 90 L390 60"/><path d="M80 70 L90 140 L160 160 L200 80"/>
+      <path d="M260 50 L280 130 L340 160 L320 90"/><path d="M160 160 L230 180 L280 130"/><path d="M30 120 L90 140"/>
+    </g>
+    <g fill="#fff">
+      <circle cx="20" cy="40" r="5"/><circle cx="80" cy="70" r="7"/><circle cx="140" cy="40" r="5"/><circle cx="200" cy="80" r="8"/>
+      <circle cx="260" cy="50" r="6"/><circle cx="320" cy="90" r="7"/><circle cx="390" cy="60" r="5"/><circle cx="90" cy="140" r="6"/>
+      <circle cx="160" cy="160" r="7"/><circle cx="280" cy="130" r="6"/><circle cx="340" cy="160" r="5"/><circle cx="230" cy="180" r="5"/><circle cx="30" cy="120" r="5"/>
+    </g>
+  </svg>
+  <div class="hero-in">
+    <a class="volver" href="/">&larr; Plataforma BioGeo</a>
+    <div class="kicker">Tribunal Ambiental de Q'umir Pampa · Expediente N.° 08-2026</div>
+    <h1>Juicio a <span>AgroMax S.A.</span></h1>
+    <p>Tema 8 · Uso sustentable de los recursos de la Madre Tierra · 5° de Secundaria</p>
+    <div id="badge"></div>
+  </div>
+</header>
+
+<main>
+  <!-- ================= INICIO ================= -->
+  <section class="vista" id="v-inicio" aria-label="Inicio">
+    <h2 class="sec">¿Qué vamos a hacer?</h2>
+    <div class="card">
+      <p>Durante cuatro periodos nuestro curso se convierte en un <b>tribunal ambiental</b>. Vamos a juzgar a AgroMax S.A., una empresa agrícola ficticia acusada de dañar el suelo, el agua y la salud de una comunidad.</p>
+      <p>Cada uno de los cinco cargos corresponde a un subtema del Tema 8: para ganar un argumento hay que saber la ciencia. Todos tienen un rol: fiscales, defensoras, testigos, secretaria y jurado.</p>
+    </div>
+    <div class="aviso a-verde">
+      <h3>Lo más importante</h3>
+      <p><b>Tu nota no depende de si tu equipo gana.</b> Depende de cómo usas la ciencia del Tema 8 y las pruebas del expediente. Una defensora que pierde con buenos argumentos puede sacar 20; un fiscal que gana sin pruebas, no.</p>
+    </div>
+    <h2 class="sec">Tu ruta en 4 pasos</h2>
+    <div class="ruta">
+      <button data-ir="expediente"><span class="num">1</span><strong>Lee el expediente</strong><small>Los hechos, los cargos y las pruebas.</small><span class="ir">Ir al expediente &rarr;</span></button>
+      <button data-ir="rol"><span class="num">2</span><strong>Elige tu rol</strong><small>Con el código de tu ficha impresa.</small><span class="ir">Ir a mi rol &rarr;</span></button>
+      <button data-ir="rol"><span class="num">3</span><strong>Prepara tu producto</strong><small>Lo empiezas en clase y lo terminas en casa.</small><span class="ir">Ver mi producto &rarr;</span></button>
+      <button data-ir="juicio"><span class="num">4</span><strong>Participa en el juicio</strong><small>Con tus papeles, tus pruebas y tus frases.</small><span class="ir">Ver el juicio &rarr;</span></button>
+    </div>
+    <h2 class="sec">El juicio en 4 periodos</h2>
+    <div class="card">
+      <div class="periodo"><div class="pn">1</div><div><h3>Apertura del caso</h3><p>El profesor presenta el caso como una noticia. Recibes tu ficha de rol. Lees <b>tu subtema y tus pruebas</b> y subrayas lo importante.</p><div class="listo">Listo al final: tu ficha leída y tus pruebas ubicadas.</div></div></div>
+      <div class="periodo"><div class="pn">2</div><div><h3>Preparación</h3><p>Cada abogado se reúne con sus testigos. Cada jurado prepara su pregunta y su argumento, y J1 los revisa. La secretaria prepara el papelógrafo.</p><div class="listo">Listo al final: el borrador de tu producto (lo terminas en casa).</div></div></div>
+      <div class="periodo"><div class="pn">3</div><div><h3>Juicio, primera parte</h3><p>Apertura del juez, alegatos de apertura y declaración de los cinco testigos expertos.</p><div class="listo">Listo al final: acta parte 1, foto del papelógrafo y hoja de notas del jurado al día.</div></div></div>
+      <div class="periodo"><div class="pn">4</div><div><h3>Juicio, segunda parte</h3><p>Testigos de la defensa, preguntas del jurado, alegatos finales, deliberación y votación cargo por cargo, veredicto y sentencia.</p><div class="listo">Listo al final: hojas de veredicto, hoja de votación y acta final.</div></div></div>
+    </div>
+    <div class="aviso a-coral">
+      <h3>Tarea obligatoria</h3>
+      <p>Entre el periodo 2 y el 3 <b>terminas tu producto escrito en casa</b>. Sin informe, el testigo no tiene qué declarar; sin preguntas, el abogado no tiene qué preguntar; sin argumento, el jurado no tiene con qué votar.</p>
+    </div>
+    <div class="aviso a-lila">
+      <h3>Sin reloj, pero con orden</h3>
+      <p>No hay minutos fijos: lo que importa es el orden y que <b>todos hablen</b>. Si el juicio no termina en el periodo 4, el veredicto se lee al inicio de la clase siguiente.</p>
+    </div>
+    <h2 class="sec">Quién es quién</h2>
+    <div class="equipos" id="equipos"></div>
+    <p class="muted" style="margin-top:14px">Caso, empresa, comunidad, personas y datos del expediente son ficticios, creados con fines educativos.</p>
+  </section>
+
+  <!-- ================= MI ROL ================= -->
+  <section class="vista" id="v-rol" aria-label="Mi rol">
+    <div id="rol-contenido"></div>
+  </section>
+
+  <!-- ================= EXPEDIENTE ================= -->
+  <section class="vista" id="v-expediente" aria-label="Expediente">
+    <h2 class="sec">Expediente N.° 08-2026</h2>
+    <p class="muted"><b>El Pueblo de Q'umir Pampa contra AgroMax S.A.</b> · Tribunal Ambiental de Q'umir Pampa</p>
+    <div class="card">
+      <h3>Los hechos</h3>
+      <p>La comunidad de Q'umir Pampa vive en un valle interandino, junto a la laguna Wiñay Quta. Hasta 2017 las familias sembraban papa, haba y maíz, rotando sus parcelas y dejando terrenos en descanso.</p>
+      <p>En 2017 llegó AgroMax S.A. Alquiló 120 hectáreas y sembró solo papa, año tras año. Perforó dos pozos profundos y riega por inundación. Construyó un campamento para 60 trabajadores, cuyas aguas servidas bajan por un canal a la quebrada que llega a la laguna.</p>
+      <p>En 2025 la comunidad presentó su denuncia. El pozo comunal se secó en julio por primera vez. La laguna se volvió verde y aparecieron peces muertos. Hay más niños con diarrea. Las abejas y las mariquitas casi desaparecieron.</p>
+      <p>AgroMax responde que produce alimento para La Paz y El Alto, que da trabajo a 85 personas de la comunidad, que tiene licencia ambiental vigente, que todos sus pesticidas están registrados legalmente y que ya empezó a cambiar sus prácticas.</p>
+    </div>
+    <h2 class="sec">Los cinco cargos</h2>
+    <div class="card" id="cargos"></div>
+    <h2 class="sec">Pruebas presentadas</h2>
+    <p><b>Cualquier parte puede usar cualquier prueba.</b> Algunas sirven a las dos: léanlas con cuidado. Y atención: el tribunal puede admitir <b>pruebas nuevas</b> durante el juicio.</p>
+    <div class="filtros" id="filtros" role="group" aria-label="Filtrar pruebas por cargo"></div>
+    <div id="pruebas"></div>
+  </section>
+
+  <!-- ================= SENTENCIA ================= -->
+  <section class="vista" id="v-sentencia" aria-label="Sentencia">
+    <h2 class="sec">La sentencia sustentable</h2>
+    <p>El jurado vota cada cargo por separado: <b>culpable</b> o <b>no culpable</b>. Por cada cargo culpable dicta una <b>sentencia sustentable</b>: la medida que AgroMax debe aplicar para reparar el daño.</p>
+    <div class="aviso a-ambar">
+      <h3>La regla del presupuesto</h3>
+      <p>AgroMax puede invertir como máximo <b>Bs 1.500.000</b> en tres años sin cerrar la empresa. Si todas las medidas cuestan más, <b>el jurado tiene que priorizar</b>: ¿qué daño se repara primero?</p>
+    </div>
+    <h2 class="sec">Prueba tu sentencia</h2>
+    <p class="muted">Toca las medidas para armar una sentencia y mira si cabe en el presupuesto. Los costos son ficticios, con fines educativos.</p>
+    <div class="medidor" id="medidor" aria-live="polite"></div>
+    <div id="medidas"></div>
+    <button class="btn btn-sec" id="limpiar">Quitar todas las medidas</button>
+    <div class="card" style="margin-top:14px">
+      <ul class="lista">
+        <li>Una medida que sirve para más de un cargo vale más: repara dos daños con un solo gasto.</li>
+        <li>Se puede proponer otra medida del Tema 8 (por ejemplo, labranza mínima o Sukakollos). En ese caso, el juez le asigna un costo.</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- ================= JUICIO ================= -->
+  <section class="vista" id="v-juicio" aria-label="El juicio">
+    <h2 class="sec">Reglas de sala</h2>
+    <div class="card"><ol class="lista" id="reglas"></ol></div>
+    <h2 class="sec">El juicio paso a paso</h2>
+    <p class="muted" id="pasos-ayuda">Elige tu rol en «Mi rol» y tus turnos aparecerán resaltados.</p>
+    <div id="pasos"></div>
+    <div class="aviso a-lila">
+      <h3>Cómo se vota</h3>
+      <p><b>Culpable:</b> 7 votos o más de 12. Si faltan jurados, decide la mayoría simple de los presentes. <b>Empate:</b> no culpable, porque en caso de duda se favorece al acusado.</p>
+    </div>
+    <h2 class="sec">Cómo se acomoda el aula</h2>
+    <div class="aula" aria-label="Mapa del aula">
+      <div class="pizarra">PIZARRA</div>
+      <div class="b" style="--c:var(--rosa);--cc:var(--rosa-c);--ct:var(--rosa-t)"><strong>Secretaría</strong>S y papelógrafo</div>
+      <div class="b" style="--c:var(--noche);--cc:var(--lila);--ct:var(--noche)"><strong>Mesa del juez</strong>el profesor</div>
+      <div class="b" style="--c:var(--verde);--cc:var(--verde-c);--ct:var(--verde-t)"><strong>Estrado</strong>silla del testigo</div>
+      <div class="b" style="--c:var(--violeta);--cc:var(--lila);--ct:var(--violeta)"><strong>Fiscalía</strong>F1 · F2 · F3 · F4</div>
+      <div class="pasillo">pasillo central: aquí hablan los abogados</div>
+      <div class="b" style="--c:var(--coral);--cc:var(--coral-c);--ct:var(--coral-t)"><strong>Defensa</strong>D1 · D2 · D3 · D4</div>
+      <div class="b" style="--c:var(--verde);--cc:var(--verde-c);--ct:var(--verde-t)"><strong>Testigos expertos</strong>T1 a T5</div>
+      <div></div>
+      <div class="b" style="--c:var(--ambar);--cc:var(--ambar-c);--ct:var(--ambar-t)"><strong>Testigos defensa</strong>TD1 a TD3</div>
+      <div class="b ancho" style="--c:var(--noche);--cc:var(--lila);--ct:var(--noche)"><strong>Jurado</strong>J1 adelante al centro · Fila 1: J2 a J7 · Fila 2: J8 a J12</div>
+    </div>
+    <p class="muted" style="margin-top:8px">Cada mesa lleva un cartel con el código y el rol de quien se sienta ahí: hay compañeros con el mismo nombre y el cartel evita confusiones.</p>
+    <div class="aviso a-lila">
+      <h3>Para preparar el aula (lo traemos el día del juicio)</h3>
+      <ul class="lista">
+        <li><b>Tu cartel de mesa:</b> una hoja doblada en tres, con tu código en grande y tu rol debajo.</li>
+        <li><b>Tarjetas de objeción:</b> la fiscalía hace 2 y la defensa hace 2, en cartulina, con la palabra «OBJECIÓN».</li>
+        <li><b>Secretaria:</b> papelógrafo con las 5 columnas y plumones de dos colores.</li>
+        <li><b>Jurado:</b> tus hojas de notas y de veredicto, y un lapicero.</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- ================= MÁS ================= -->
+  <section class="vista" id="v-mas" aria-label="Frases, calificación y más">
+    <h2 class="sec">Frases del tribunal</h2>
+    <p>¿No sabes cómo empezar? Estas frases no te dan el contenido, pero te dan la forma.</p>
+    <div class="frases-g" id="frases"></div>
+    <div class="aviso a-verde" style="margin-top:12px">
+      <h3>Consejos para hablar en público</h3>
+      <ul class="lista">
+        <li><b>Antes de hablar, respira</b> hondo una vez y mira al jurado, no al piso.</li>
+        <li><b>Habla más lento</b> de lo que crees necesario: los nervios aceleran la voz.</li>
+        <li><b>Ten tus datos a mano</b> (números de las pruebas) para no depender de la memoria.</li>
+        <li><b>Si te equivocas, sigue.</b> Di «corrijo» y continúa: en un tribunal real también pasa.</li>
+        <li><b>Si no sabes una respuesta</b>, usa: «No tengo ese dato; lo que sí sé es que…»</li>
+      </ul>
+    </div>
+    <h2 class="sec">Cómo te califican</h2>
+    <p>Todos se califican sobre <b>20 puntos</b> con los mismos cuatro criterios, de 5 puntos cada uno. Ganar o perder el juicio no da ni quita puntos.</p>
+    <div class="seg filtros" id="seg-rub" role="group" aria-label="Elegir rol para ver la rúbrica"></div>
+    <div class="card" id="rubrica"></div>
+    <p class="muted"><b>5</b> lo cumple por completo · <b>4</b> le falta un detalle menor · <b>3</b> lo cumple a medias · <b>2</b> lo intenta con errores importantes · <b>1</b> casi no lo cumple · <b>0</b> no lo presenta.</p>
+    <h2 class="sec">Después del juicio: de Q'umir Pampa a la bahía de Cohana</h2>
+    <div class="card">
+      <p>AgroMax es inventada, pero lo que pasa en Q'umir Pampa sí ocurre cerca de nosotros. El río Katari nace en el nevado Huayna Potosí, atraviesa El Alto y recibe aguas servidas de la ciudad, de Viacha y de otras poblaciones, además de residuos industriales y mineros. Todo eso llega a la <b>bahía de Cohana</b>, en el Lago Menor del Titicaca, que hoy es uno de los lugares más contaminados del lago.</p>
+    </div>
+    <div class="aviso a-verde">
+      <h3>Reflexión final (media página, la entregas a tu profesor)</h3>
+      <ol class="lista">
+        <li>¿Qué cargo del juicio se parece más a lo que pasa en Cohana? ¿Por qué?</li>
+        <li>En nuestro caso, ¿quién sería «AgroMax»? ¿Es una sola empresa o somos muchos?</li>
+        <li>Propón una sentencia sustentable del Tema 8 para Cohana y explica por qué funcionaría.</li>
+      </ol>
+    </div>
+    <h2 class="sec">Versión para imprimir</h2>
+    <p>La misma guía en PDF, por si prefieres leerla en papel.</p>
+    <a class="btn btn-pri" href="juicio-agromax-guia-5sec.pdf" download>&#8681; Descargar la guía en PDF</a>
+  </section>
+</main>
+
+<nav class="tabs" aria-label="Secciones">
+  <div class="in">
+    <button data-tab="inicio"><span class="ic" aria-hidden="true">🏛️</span>Inicio</button>
+    <button data-tab="rol"><span class="ic" aria-hidden="true">🎭</span>Mi rol</button>
+    <button data-tab="expediente"><span class="ic" aria-hidden="true">📁</span>Pruebas</button>
+    <button data-tab="sentencia"><span class="ic" aria-hidden="true">⚖️</span>Sentencia</button>
+    <button data-tab="juicio"><span class="ic" aria-hidden="true">🔨</span>Juicio</button>
+    <button data-tab="mas"><span class="ic" aria-hidden="true">💬</span>Más</button>
+  </div>
+</nav>
+
+<script>
+const D = {"cargos": [{"n": 1, "nombre": "Suelo", "acus": "Degradación del suelo por monocultivo y labranza intensiva", "subt": "1. Gestión sostenible de suelos", "testigo": "T1", "interroga": "F1", "contra": "D1", "jurados": ["J2", "J3"], "pruebas": "A y B"}, {"n": 2, "nombre": "Pesticidas", "acus": "Uso abusivo de pesticidas y daño a los insectos benéficos", "subt": "2. Sistemas agrícolas y MIP", "testigo": "T2", "interroga": "F2", "contra": "D2", "jurados": ["J4", "J5"], "pruebas": "C, D e I"}, {"n": 3, "nombre": "Acuífero y laguna", "acus": "Contaminación del acuífero y de la laguna", "subt": "3. Protección de fuentes de agua", "testigo": "T3", "interroga": "F2", "contra": "D2", "jurados": ["J6", "J7"], "pruebas": "C, E, F y J"}, {"n": 4, "nombre": "Uso del agua", "acus": "Desperdicio de agua y sobreexplotación del acuífero", "subt": "4. Uso eficiente del agua", "testigo": "T4", "interroga": "F3", "contra": "D3", "jurados": ["J8", "J9"], "pruebas": "G, I y K"}, {"n": 5, "nombre": "Saneamiento", "acus": "Riesgo sanitario por verter aguas servidas sin tratamiento", "subt": "5. Tecnologías de saneamiento básico", "testigo": "T5", "interroga": "F3", "contra": "D3", "jurados": ["J10", "J11", "J12"], "pruebas": "H y J"}], "pruebas": [{"l": "A", "n": "Análisis de suelo", "d": "Materia orgánica en parcelas de AgroMax: 4,1 % en 2017 y 1,2 % en 2025. Parcela comunal con rotación de cultivos: 3,8 % en 2025."}, {"l": "B", "n": "Rendimiento de papa de AgroMax", "d": "22 toneladas por hectárea en 2019; 14 toneladas por hectárea en 2025."}, {"l": "C", "n": "Registro de compras de agroquímicos de AgroMax", "d": "Pesticidas: 400 litros en 2018, 900 en 2021 y 1.800 en 2025. Urea (fertilizante nitrogenado): 150 sacos en 2018 y 420 en 2025. Pérdida de cosecha por plagas: 8 % en 2018 y 22 % en 2025."}, {"l": "D", "n": "Conteo de insectos benéficos (trampas del colegio de la comunidad)", "d": "Mariquitas por trampa: 31 en 2019; 4 en 2025."}, {"l": "E", "n": "Análisis del agua del pozo comunal (2025)", "d": "Nitratos: 68 mg/L (la norma boliviana NB-512 permite hasta 45 mg/L). Restos de pesticida: detectados. pH: 7,1."}, {"l": "F", "n": "Inspección de la laguna Wiñay Quta (2025)", "d": "Fotos de agua verde y peces muertos. Oxígeno disuelto: 2 mg/L (los peces necesitan más de 5 mg/L)."}, {"l": "G", "n": "Nivel del agua del pozo comunal", "d": "Profundidad del agua: 12 m en 2019, 20 m en 2022 y 31 m en 2025. Pozo seco en julio de 2025. AgroMax riega sus 120 hectáreas por inundación con agua de sus dos pozos profundos."}, {"l": "H", "n": "Informe del centro de salud", "d": "Diarrea aguda en menores de 5 años: 14 casos en 2019 y 47 en 2025. Nota del médico: el 30 % de las viviendas de la comunidad tiene letrinas en mal estado. Desde que el pozo se secó (julio de 2025), una de cada tres familias toma agua de la quebrada para beber y cocinar."}, {"l": "I", "n": "Documentos de AgroMax", "d": "Licencia ambiental vigente desde 2017. 85 empleados de la comunidad. Producción de 1.680 toneladas de papa al año. Cotización de riego por goteo para 120 hectáreas: Bs 1.200.000. Desde 2025, plan piloto de MIP en 10 hectáreas (trampas y control biológico): ahí la pérdida por plagas fue de 9 %."}, {"l": "J", "n": "Plano de la zona", "d": "El canal del campamento desemboca en la quebrada a 400 m de la laguna. Las casas de la parte baja de la comunidad también vierten a la misma quebrada el agua del lavado de ropa, con detergente."}, {"l": "K", "n": "Registro de lluvias (estación meteorológica de la zona)", "d": "Promedio 2015–2019: 520 mm por año. 2022: 505 mm. 2024: 410 mm. 2025: 360 mm (año seco)."}], "medidas": [{"m": "Rotación de cultivos y descanso de parcelas (papa, haba, cebada)", "q": "Recupera la materia orgánica y corta el ciclo de las plagas", "c": "1 y 2", "costo": 250000, "nota": "(lo que deja de ganar)"}, {"m": "Abono orgánico y cobertura vegetal en 120 ha", "q": "Devuelve vida y nutrientes al suelo y evita la erosión", "c": "1", "costo": 180000, "nota": ""}, {"m": "Manejo Integrado de Plagas (MIP) en 120 ha", "q": "Trampas, control biológico y capacitación: menos pesticida", "c": "2", "costo": 120000, "nota": ""}, {"m": "Franja de protección de riberas (30 m de vegetación nativa)", "q": "Filtra lo que llega a la quebrada y a la laguna", "c": "3", "costo": 60000, "nota": ""}, {"m": "Humedal artificial con totora para el campamento", "q": "Limpia las aguas servidas antes de que lleguen a la quebrada", "c": "3 y 5", "costo": 200000, "nota": ""}, {"m": "Baños secos ecológicos para el campamento", "q": "Elimina las aguas servidas de los 60 trabajadores", "c": "5", "costo": 90000, "nota": ""}, {"m": "Riego por goteo en las 120 ha", "q": "Ahorra hasta 60 % del agua de riego", "c": "4", "costo": 1200000, "nota": ""}, {"m": "Riego por goteo en 60 ha (la mitad)", "q": "Ahorra agua en la mitad del terreno", "c": "4", "costo": 600000, "nota": ""}, {"m": "Cosecha de agua de lluvia (atajados)", "q": "Riega con agua de lluvia en vez de agua del acuífero", "c": "4", "costo": 250000, "nota": ""}, {"m": "Apoyo para mejorar las letrinas de la comunidad", "q": "Reduce la contaminación fecal que no viene de AgroMax", "c": "5", "costo": 150000, "nota": ""}], "frases": {"abogados": ["«Con la venia de su señoría…» (para empezar a hablar)", "«La fiscalía / la defensa demostrará que…»", "«Testigo, ¿puede explicar al tribunal qué es…?»", "«Según la prueba __, ¿es cierto que…?»", "«Objeción, su señoría: la pregunta no tiene relación con el caso.»", "«No más preguntas, su señoría.»", "«Señores del jurado, las pruebas muestran que…»"], "testigos": ["«Soy __ y trabajo como __.» (te presentas con tu rol)", "«Según la ciencia, …»", "«La prueba __ muestra que…»", "«Eso es cierto en parte, pero…»", "«No tengo ese dato; lo que sí sé es que…»", "«Mi recomendación para el tribunal es…»"], "jurado": ["«Mi pregunta para el testigo es: …»", "«En el cargo __, la prueba __ muestra que…»", "«Según el Tema 8, esto se explica por…»", "«Por eso voto culpable / no culpable.»", "J1: «Señor juez, el jurado ha llegado a un veredicto.»", "J1: «En el cargo __, con __ votos contra __, el jurado declara a AgroMax culpable / no culpable.»"], "secretaria": ["«Señor juez, el acta registra que…»", "«En el cargo __, la fiscalía usó la prueba __ y la defensa la prueba __.»"], "juez": ["«Se abre la sesión.» · «Tiene la palabra…»", "«Ha lugar» (se acepta la objeción) · «No ha lugar» (se rechaza)", "«Se suspende la sesión.» · «Se reanuda la sesión.»"]}, "roles": {"F1": {"equipo": "fiscalia", "mision": ["Abres el juicio con el <b>alegato de apertura de la fiscalía<\/b>: es lo primero que escucha el jurado.", "<b>Interrogas a T1<\/b> (edafólogo), tu testigo experto del cargo 1 (suelo)."], "estudia": "Introducción del Tema 8 y subtema 1 (gestión sostenible de suelos). Pruebas A y B.", "coordina": "En el periodo 2 reúnete con T1: pregúntale qué dirá en su informe, para que tus preguntas lo ayuden a explicar bien.", "producto_titulo": "Alegato de apertura (media página) y 3 preguntas para T1", "producto": ["<b>Quién es la víctima:<\/b> la comunidad de Q'umir Pampa, su tierra, su agua y su salud.", "<b>Qué hizo AgroMax<\/b> desde 2017: monocultivo, pozos, riego por inundación, campamento.", "<b>Qué vas a probar:<\/b> nombra los cinco cargos.", "<b>Preguntas para T1:<\/b> una que le pida explicar un concepto, una con datos de las pruebas A o B y una que le deje recomendar una solución."], "ejemplos": ["Para T1: «¿Por qué la materia orgánica bajó de 4,1 % a 1,2 %?»"], "preparate": "D1 intentará mostrar que el suelo se puede recuperar fácilmente. Que T1 explique cuánto tarda el suelo en formarse.", "frases": ["«Con la venia de su señoría, la fiscalía demostrará que…»", "«Testigo, ¿puede explicar al tribunal qué es…?»", "«No más preguntas, su señoría.»"], "checklist": ["Leí la introducción y el subtema 1", "Mi alegato tiene sus 3 partes", "Tengo mis 3 preguntas para T1", "Hablé con T1"], "titulo": "Fiscal 1 · apertura y testigo T1"}, "F2": {"equipo": "fiscalia", "mision": ["<b>Interrogas a T2<\/b> (agrónoma, cargo 2) y <b>a T3<\/b> (hidróloga, cargo 3), tus testigos expertos.", "<b>Contrainterrogas a TD1<\/b> (gerente de AgroMax), testigo de la defensa."], "estudia": "Subtemas 2 (sistemas agrícolas y MIP) y 3 (protección de fuentes de agua). Pruebas C, D, E, F, I y J. Vocabulario clave: lixiviación, eutrofización, control biológico.", "coordina": "En el periodo 2 reúnete con T2 y T3 para conocer lo que dirán en sus informes.", "producto_titulo": "3 preguntas para cada uno de tus tres testigos (9 en total)", "producto": ["<b>Para T2 y T3 (interrogatorio):<\/b> preguntas que les permitan explicar la ciencia y los datos.", "<b>Para TD1 (contrainterrogatorio):<\/b> preguntas que pongan a prueba su versión con datos del expediente.", "Cada pregunta nombra una prueba o un concepto del Tema 8."], "ejemplos": ["Para T2: «¿Cómo es posible que se compraran más pesticidas y aun así se perdiera más cosecha?»", "Para TD1: «Si el plan piloto de MIP funciona en 10 hectáreas, ¿por qué no lo aplican en las 120?»"], "preparate": "La defensa dirá que los detergentes de la comunidad también causan eutrofización (prueba J). Piensa qué datos de las pruebas C y E apuntan a AgroMax.", "frases": ["«Según la prueba C, ¿es cierto que…?»", "«Testigo, explique al jurado qué es la lixiviación.»", "«No más preguntas, su señoría.»"], "checklist": ["Leí los subtemas 2 y 3", "Sé explicar lixiviación, eutrofización y control biológico", "Tengo mis 9 preguntas", "Hablé con T2 y T3"], "titulo": "Fiscal 2 · testigos T2, T3 y TD1"}, "F3": {"equipo": "fiscalia", "mision": ["<b>Interrogas a T4<\/b> (técnica en riego, cargo 4) y <b>a T5<\/b> (ingeniero sanitario, cargo 5), tus testigos expertos.", "<b>Contrainterrogas a TD2<\/b> (trabajadora agrícola), testigo de la defensa."], "estudia": "Subtemas 1, 4 (uso eficiente del agua) y 5 (tecnologías de saneamiento básico). Pruebas G, H, I, J y K.", "coordina": "En el periodo 2 reúnete con T4 y T5 para conocer lo que dirán en sus informes.", "producto_titulo": "3 preguntas para cada uno de tus tres testigos (9 en total)", "producto": ["<b>Para T4 y T5 (interrogatorio):<\/b> preguntas que les permitan explicar la ciencia y los datos.", "<b>Para TD2 (contrainterrogatorio):<\/b> preguntas que pongan a prueba su versión con datos del expediente.", "Cada pregunta nombra una prueba o un concepto del Tema 8."], "ejemplos": ["Para T4: «¿Cuánta agua se habría ahorrado AgroMax con riego por goteo?»", "Para TD2: «¿Usted o su familia toma agua del pozo comunal?»"], "preparate": "La defensa usará la prueba K (2025 fue un año seco) y las letrinas de la prueba H. Mira en la prueba G cuánto había bajado el pozo antes de la sequía.", "frases": ["«Según la prueba G, ¿es cierto que…?»", "«Testigo, explique al jurado la diferencia entre riego por inundación y riego por goteo.»", "«No más preguntas, su señoría.»"], "checklist": ["Leí los subtemas 1, 4 y 5", "Comparé las pruebas G y K", "Tengo mis 9 preguntas", "Hablé con T4 y T5"], "titulo": "Fiscal 3 · testigos T4, T5 y TD2"}, "F4": {"equipo": "fiscalia", "mision": ["<b>Contrainterrogas a TD3<\/b> (comerciante), testigo de la defensa.", "Cierras con el <b>alegato final de la fiscalía<\/b>: lo último que escucha el jurado de tu equipo antes de votar."], "estudia": "Todo el tema, porque tu alegato resume los cinco cargos. Todo el expediente, con atención a las pruebas H, I, J y K.", "coordina": "Durante el juicio anota lo más fuerte que digan los cinco testigos expertos: lo usarás en tu alegato.", "producto_titulo": "3 preguntas para TD3 y alegato final (una página)", "producto": ["<b>Recuerda el caso<\/b> en una sola oración.", "<b>Cargo por cargo:<\/b> qué probó el testigo experto y con qué prueba.", "<b>Responde<\/b> al mejor argumento de la defensa.", "<b>Pide el veredicto<\/b> y propone una sentencia que quepa en el presupuesto (sección 5)."], "nota": "Escribe tu alegato en casa, pero corrígelo durante el juicio: un buen alegato final responde a lo que pasó en la sala, incluida cualquier prueba nueva.", "ejemplos": ["Para TD3: «¿Una comunidad de pocas familias contamina tanto como un campamento de 60 trabajadores?»"], "preparate": "D4 puede aceptar algún cargo y proponer soluciones. Si lo hace, muestra por qué tu sentencia repara más daño.", "frases": ["«Señores del jurado, las pruebas muestran que…»", "«La defensa dijo que…, pero la prueba __ demuestra que…»", "«Por eso, la fiscalía pide que AgroMax sea declarada culpable de…»"], "checklist": ["Repasé todo el tema y todo el expediente", "Tengo mis 3 preguntas para TD3", "Mi alegato tiene sus 4 partes", "Llevo hoja para anotar durante el juicio"], "titulo": "Fiscal 4 · testigo TD3 y alegato final"}, "D1": {"equipo": "defensa", "mision": ["Abres la defensa con el <b>alegato de apertura<\/b>: presentas a AgroMax ante el jurado.", "<b>Contrainterrogas a T1<\/b> (edafólogo), testigo experto de la fiscalía."], "estudia": "Introducción del Tema 8 y subtema 1 (gestión sostenible de suelos). Pruebas A, B e I.", "coordina": "Reúnete con tu equipo (D2, D3 y D4) para acordar qué cargos van a discutir y cuáles podrían aceptar proponiendo una solución.", "producto_titulo": "Alegato de apertura (media página) y 3 preguntas para T1", "producto": ["<b>Quién es AgroMax<\/b> y qué aporta: empleo, alimento, licencia ambiental.", "<b>Qué parte de la historia falta:<\/b> otras causas que también existen.", "<b>Qué vas a demostrar:<\/b> que hay causas compartidas y soluciones sin cerrar la empresa.", "<b>Preguntas para T1:<\/b> que reconozca otras causas o que el daño tiene solución."], "ejemplos": ["Para T1: «¿Un suelo con 1,2 % de materia orgánica puede recuperarse con abono orgánico y descanso?»"], "preparate": "La defensa no niega la ciencia. Si T1 da datos sólidos, no los discutas: lleva la conversación hacia la solución.", "frases": ["«Con la venia de su señoría, la defensa demostrará que…»", "«Testigo, ¿es posible que…?»", "«No más preguntas, su señoría.»"], "checklist": ["Leí la introducción y el subtema 1", "Mi alegato tiene sus 3 partes", "Tengo mis 3 preguntas para T1", "Me reuní con mi equipo"], "titulo": "Defensora 1 · apertura y testigo T1"}, "D2": {"equipo": "defensa", "mision": ["<b>Contrainterrogas a T2<\/b> (agrónoma) y <b>a T3<\/b> (hidróloga), testigos expertos de la fiscalía.", "<b>Interrogas a TD1<\/b> (gerente de AgroMax), tu testigo."], "estudia": "Subtemas 2 (sistemas agrícolas y MIP) y 3 (protección de fuentes de agua). Pruebas C, D, E, F, I y J.", "coordina": "En el periodo 2 reúnete con TD1 para preparar juntos su declaración.", "producto_titulo": "3 preguntas para cada uno de tus tres testigos (9 en total)", "producto": ["<b>Para T2 y T3 (contrainterrogatorio):<\/b> preguntas que muestren otras causas o soluciones posibles.", "<b>Para TD1 (interrogatorio):<\/b> preguntas que le permitan mostrar lo que AgroMax aporta y lo que ya está haciendo.", "Cada pregunta nombra una prueba o un concepto del Tema 8."], "ejemplos": ["Para T3: «¿Los detergentes de las casas de la comunidad también pueden causar eutrofización en la laguna?»", "Para TD1: «¿Qué está haciendo AgroMax para usar menos pesticidas?»"], "preparate": "La fiscalía preguntará a TD1 por qué compraron cada vez más pesticidas. Ayúdalo a responder con el plan piloto de MIP (prueba I).", "frases": ["«Según la prueba J, ¿es cierto que…?»", "«Testigo, ¿es posible que haya otra causa?»", "«No más preguntas, su señoría.»"], "checklist": ["Leí los subtemas 2 y 3", "Sé explicar qué es la eutrofización", "Tengo mis 9 preguntas", "Preparé a TD1"], "titulo": "Defensora 2 · testigos T2, T3 y TD1"}, "D3": {"equipo": "defensa", "mision": ["<b>Contrainterrogas a T4<\/b> (técnica en riego) y <b>a T5<\/b> (ingeniero sanitario), testigos expertos de la fiscalía.", "<b>Interrogas a TD2<\/b> (trabajadora agrícola), tu testigo."], "estudia": "Subtemas 1, 4 (uso eficiente del agua) y 5 (tecnologías de saneamiento básico). Pruebas G, H, I, J y K.", "coordina": "En el periodo 2 reúnete con TD2 para preparar juntos su declaración.", "producto_titulo": "3 preguntas para cada uno de tus tres testigos (9 en total)", "producto": ["<b>Para T4 y T5 (contrainterrogatorio):<\/b> preguntas que muestren otras causas o soluciones posibles.", "<b>Para TD2 (interrogatorio):<\/b> preguntas que le permitan contar cómo vive la comunidad del trabajo en AgroMax.", "Cada pregunta nombra una prueba o un concepto del Tema 8."], "ejemplos": ["Para T5: «¿El informe del centro de salud prueba que las diarreas vienen del campamento y no de las letrinas en mal estado?»", "Para T4: «¿Qué parte de la bajada del pozo se debe a la sequía de 2025?»"], "preparate": "La fiscalía mostrará que el pozo ya había bajado antes de la sequía (pruebas G y K). Ten pensada tu respuesta.", "frases": ["«Según la prueba K, ¿es cierto que…?»", "«Testigo, ¿es posible que haya otra causa?»", "«No más preguntas, su señoría.»"], "checklist": ["Leí los subtemas 1, 4 y 5", "Comparé las pruebas G, H y K", "Tengo mis 9 preguntas", "Preparé a TD2"], "titulo": "Defensora 3 · testigos T4, T5 y TD2"}, "D4": {"equipo": "defensa", "mision": ["<b>Interrogas a TD3<\/b> (comerciante), tu testigo.", "Cierras con el <b>alegato final de la defensa<\/b>: lo último que escucha el jurado antes de deliberar."], "estudia": "Todo el tema. Todo el expediente, con atención a las pruebas H, I, J y K.", "coordina": "En el periodo 2 reúnete con TD3. Durante el juicio anota lo que digan los testigos expertos: tu alegato debe responderles.", "producto_titulo": "3 preguntas para TD3 y alegato final (una página)", "producto": ["<b>Recuerda quién es AgroMax<\/b> en una sola oración.", "<b>Cargo por cargo:<\/b> qué dudas dejaron los testigos expertos o qué otras causas existen.", "<b>Acepta lo que no se puede negar<\/b> y propón tú una solución del Tema 8.", "<b>Pide una sentencia justa<\/b> que quepa en el presupuesto (sección 5)."], "nota": "Escribe tu alegato en casa, pero corrígelo durante el juicio: un buen alegato final responde a lo que pasó en la sala, incluida cualquier prueba nueva.", "ejemplos": ["Para TD3: «¿Cómo afectaría a la comunidad que AgroMax cerrara?»"], "preparate": "Consejo: una defensa que acepta algún cargo y propone una solución convence más al jurado que una que lo niega todo.", "frases": ["«Señores del jurado, AgroMax reconoce que…»", "«La fiscalía no demostró que…»", "«Por eso, la defensa propone que AgroMax aplique…»"], "checklist": ["Repasé todo el tema y todo el expediente", "Tengo mis 3 preguntas para TD3", "Mi alegato tiene sus 4 partes", "Llevo hoja para anotar durante el juicio"], "titulo": "Defensora 4 · testigo TD3 y alegato final"}, "T1": {"equipo": "expertos", "mision": ["Explicas al tribunal, como científico, lo que pasó en el <b>cargo 1 (suelo)<\/b>.", "Respondes al interrogatorio de <b>F1<\/b>, al contrainterrogatorio de <b>D1<\/b> y a las preguntas de los jurados <b>J2 y J3<\/b>.", "Puedes tener tu informe a mano para consultar datos, pero no lo leas de corrido."], "explica": "Que el suelo es un ecosistema vivo; los tres tipos de degradación (física, química y biológica); la rotación de cultivos, la labranza mínima y la cobertura vegetal.", "estudia": "Subtema 1 (gestión sostenible de suelos). Pruebas A y B. Analogía: el suelo como una cuenta de ahorros.", "coordina": "En el periodo 2 reúnete con F1, el fiscal que te interrogará.", "producto_titulo": "Informe pericial (una página) en tres partes", "producto": ["<b>Lo que dice la ciencia:<\/b> los conceptos de tu subtema, con tus palabras.", "<b>Lo que muestran las pruebas:<\/b> los datos, con sus números.", "<b>Lo que recomiendo:<\/b> una medida de la tabla de la sección 5, con su costo."], "preparate": "«¿El suelo se puede recuperar?» Recuerda que un centímetro de suelo tarda de 100 a 1.000 años en formarse.", "frases": ["«Soy __ y trabajo como __.»", "«La prueba __ muestra que…»", "«Eso es cierto en parte, pero…»"], "checklist": ["Leí el subtema 1", "Mi informe tiene sus 3 partes", "Puedo explicarlo sin leer", "Hablé con F1"], "titulo": "Edafólogo (experto en suelos)"}, "T2": {"equipo": "expertos", "mision": ["Explicas al tribunal, como científico, lo que pasó en el <b>cargo 2 (pesticidas)<\/b>.", "Respondes al interrogatorio de <b>F2<\/b>, al contrainterrogatorio de <b>D2<\/b> y a las preguntas de los jurados <b>J4 y J5<\/b>.", "Puedes tener tu informe a mano para consultar datos, pero no lo leas de corrido."], "explica": "Por qué el monocultivo es vulnerable a las plagas; qué es el MIP y sus cuatro controles: cultural, biológico, etológico y químico (como último recurso).", "estudia": "Subtema 2 (sistemas agrícolas y MIP). Pruebas C, D e I. Analogía: la bomba atómica contra el equipo de detectives.", "coordina": "En el periodo 2 reúnete con F2, el fiscal que te interrogará.", "producto_titulo": "Informe pericial (una página) en tres partes", "producto": ["<b>Lo que dice la ciencia:<\/b> los conceptos de tu subtema, con tus palabras.", "<b>Lo que muestran las pruebas:<\/b> los datos, con sus números.", "<b>Lo que recomiendo:<\/b> una medida de la tabla de la sección 5, con su costo."], "preparate": "«¿Los pesticidas registrados no son seguros?» y «¿El plan piloto de MIP de AgroMax no demuestra buena voluntad?»", "frases": ["«Soy __ y trabajo como __.»", "«La prueba __ muestra que…»", "«Eso es cierto en parte, pero…»"], "checklist": ["Leí el subtema 2", "Mi informe tiene sus 3 partes", "Puedo explicarlo sin leer", "Hablé con F2"], "titulo": "Ingeniera agrónoma (experta en plagas)"}, "T3": {"equipo": "expertos", "mision": ["Explicas al tribunal, como científico, lo que pasó en el <b>cargo 3 (acuífero y laguna)<\/b>.", "Respondes al interrogatorio de <b>F2<\/b>, al contrainterrogatorio de <b>D2<\/b> y a las preguntas de los jurados <b>J6 y J7<\/b>.", "Puedes tener tu informe a mano para consultar datos, pero no lo leas de corrido."], "explica": "Aguas superficiales y subterráneas; qué es un acuífero; la lixiviación y la eutrofización; por qué importan las cabeceras de cuenca.", "estudia": "Subtema 3 (protección de fuentes de agua). Pruebas C (urea), E, F y J.", "coordina": "En el periodo 2 reúnete con F2, el fiscal que te interrogará.", "producto_titulo": "Informe pericial (una página) en tres partes", "producto": ["<b>Lo que dice la ciencia:<\/b> los conceptos de tu subtema, con tus palabras.", "<b>Lo que muestran las pruebas:<\/b> los datos, con sus números.", "<b>Lo que recomiendo:<\/b> una medida de la tabla de la sección 5, con su costo."], "preparate": "«¿No pudo la comunidad contaminar la laguna con sus detergentes?» Un buen experto reconoce las distintas fuentes y explica cuál pesa más.", "frases": ["«Soy __ y trabajo como __.»", "«La prueba __ muestra que…»", "«Eso es cierto en parte, pero…»"], "checklist": ["Leí el subtema 3", "Mi informe tiene sus 3 partes", "Puedo explicarlo sin leer", "Hablé con F2"], "titulo": "Hidróloga (experta en fuentes de agua)"}, "T4": {"equipo": "expertos", "mision": ["Explicas al tribunal, como científico, lo que pasó en el <b>cargo 4 (uso del agua)<\/b>.", "Respondes al interrogatorio de <b>F3<\/b>, al contrainterrogatorio de <b>D3<\/b> y a las preguntas de los jurados <b>J8 y J9<\/b>.", "Puedes tener tu informe a mano para consultar datos, pero no lo leas de corrido."], "explica": "Que la agricultura consume el 70 % del agua dulce; la diferencia entre riego por inundación y riego tecnificado; el ahorro de hasta 60 % con goteo. Puedes mencionar los Sukakollos como tecnología andina.", "estudia": "Subtema 4 (uso eficiente del agua). Pruebas G, I y K.", "coordina": "En el periodo 2 reúnete con F3, el fiscal que te interrogará.", "producto_titulo": "Informe pericial (una página) en tres partes", "producto": ["<b>Lo que dice la ciencia:<\/b> los conceptos de tu subtema, con tus palabras.", "<b>Lo que muestran las pruebas:<\/b> los datos, con sus números.", "<b>Lo que recomiendo:<\/b> una medida de la tabla de la sección 5, con su costo."], "preparate": "«¿Bs 1.200.000 no es demasiado caro?» y «¿No fue la sequía de 2025 la que secó el pozo?» Compara las pruebas G y K: ¿cuánto había bajado el pozo en 2022, cuando llovió normal?", "frases": ["«Soy __ y trabajo como __.»", "«La prueba __ muestra que…»", "«Eso es cierto en parte, pero…»"], "checklist": ["Leí el subtema 4", "Mi informe tiene sus 3 partes", "Puedo explicarlo sin leer", "Hablé con F3"], "titulo": "Técnica en riego"}, "T5": {"equipo": "expertos", "mision": ["Explicas al tribunal, como científico, lo que pasó en el <b>cargo 5 (saneamiento)<\/b>.", "Respondes al interrogatorio de <b>F3<\/b>, al contrainterrogatorio de <b>D3<\/b> y a las preguntas de los jurados <b>J10, J11 y J12<\/b>.", "Puedes tener tu informe a mano para consultar datos, pero no lo leas de corrido."], "explica": "Que el saneamiento es la barrera contra las enfermedades gastrointestinales; el alcantarillado con planta de tratamiento (PTAR); las tecnologías ecológicas: baños secos y humedales artificiales con totora.", "estudia": "Subtema 5 (tecnologías de saneamiento básico). Pruebas H y J.", "coordina": "En el periodo 2 reúnete con F3, el fiscal que te interrogará.", "producto_titulo": "Informe pericial (una página) en tres partes", "producto": ["<b>Lo que dice la ciencia:<\/b> los conceptos de tu subtema, con tus palabras.", "<b>Lo que muestran las pruebas:<\/b> los datos, con sus números.", "<b>Lo que recomiendo:<\/b> una medida de la tabla de la sección 5, con su costo."], "preparate": "«¿Las diarreas no vienen de las letrinas de la comunidad?» Un buen experto reconoce las dos causas. Lee con mucha atención la última línea de la prueba H.", "frases": ["«Soy __ y trabajo como __.»", "«La prueba __ muestra que…»", "«Eso es cierto en parte, pero…»"], "checklist": ["Leí el subtema 5", "Mi informe tiene sus 3 partes", "Puedo explicarlo sin leer", "Hablé con F3"], "titulo": "Ingeniero sanitario"}, "TD1": {"equipo": "tdefensa", "mision": ["Declaras a favor de AgroMax. Eres un personaje: defiéndelo con seguridad, pero no niegues los datos del expediente.", "Te interroga <b>D2<\/b> (tu abogada) y te contrainterroga <b>F2<\/b> (fiscalía)."], "explica": "La licencia ambiental, los 85 empleos, las 1.680 toneladas de papa al año, que el control químico está permitido y que la empresa ya empezó un plan piloto de MIP.", "explica_titulo": "Defiendes", "estudia": "Subtema 2 (MIP). Prueba I y el costo del riego por goteo.", "coordina": "En el periodo 2 reúnete con D2 para preparar tu declaración.", "producto_titulo": "Declaración escrita (una página)", "producto": ["<b>Quién eres<\/b> y cuál es tu relación con AgroMax.", "<b>Tu versión<\/b> de los hechos.", "<b>Al menos un concepto del Tema 8<\/b> que uses a tu favor.", "<b>Qué solución<\/b> aceptarías para no perder lo que defiendes."], "preparate": "«¿Por qué compraron 1.800 litros de pesticida si las plagas seguían aumentando?»", "frases": ["«Soy __ y trabajo en / con AgroMax.»", "«Es cierto que…, pero también…»", "«No tengo ese dato; lo que sí sé es que…»"], "checklist": ["Leí lo que me toca", "Mi declaración tiene sus 4 partes", "Usé al menos un concepto del Tema 8", "Hablé con D2"], "titulo": "Gerente de AgroMax"}, "TD2": {"equipo": "tdefensa", "mision": ["Declaras a favor de AgroMax. Eres un personaje: defiéndelo con seguridad, pero no niegues los datos del expediente.", "Te interroga <b>D3<\/b> (tu abogada) y te contrainterroga <b>F3<\/b> (fiscalía)."], "explica": "Tu empleo y el de tus vecinos. Si AgroMax deja descansar la tierra o rota cultivos, produce menos al principio y podría despedir gente.", "explica_titulo": "Defiendes", "estudia": "Subtema 1 (rotación y descanso). Prueba I.", "coordina": "En el periodo 2 reúnete con D3 para preparar tu declaración.", "producto_titulo": "Declaración escrita (una página)", "producto": ["<b>Quién eres<\/b> y cuál es tu relación con AgroMax.", "<b>Tu versión<\/b> de los hechos.", "<b>Al menos un concepto del Tema 8<\/b> que uses a tu favor.", "<b>Qué solución<\/b> aceptarías para no perder lo que defiendes."], "preparate": "«¿Usted o su familia toma agua del pozo comunal?»", "frases": ["«Soy __ y trabajo en / con AgroMax.»", "«Es cierto que…, pero también…»", "«No tengo ese dato; lo que sí sé es que…»"], "checklist": ["Leí lo que me toca", "Mi declaración tiene sus 4 partes", "Usé al menos un concepto del Tema 8", "Hablé con D3"], "titulo": "Trabajadora agrícola"}, "TD3": {"equipo": "tdefensa", "mision": ["Declaras a favor de AgroMax. Eres un personaje: defiéndelo con seguridad, pero no niegues los datos del expediente.", "Te interroga <b>D4<\/b> (tu abogada) y te contrainterroga <b>F4<\/b> (fiscalía)."], "explica": "Que AgroMax mueve la economía local y abastece de papa a La Paz y El Alto, y que la comunidad también contamina (detergentes, letrinas en mal estado).", "explica_titulo": "Defiendes", "estudia": "Subtema 3 (eutrofización). Pruebas H, I y J.", "coordina": "En el periodo 2 reúnete con D4 para preparar tu declaración.", "producto_titulo": "Declaración escrita (una página)", "producto": ["<b>Quién eres<\/b> y cuál es tu relación con AgroMax.", "<b>Tu versión<\/b> de los hechos.", "<b>Al menos un concepto del Tema 8<\/b> que uses a tu favor.", "<b>Qué solución<\/b> aceptarías para no perder lo que defiendes."], "preparate": "«¿Una comunidad de pocas familias contamina tanto como un campamento de 60 trabajadores?»", "frases": ["«Soy __ y trabajo en / con AgroMax.»", "«Es cierto que…, pero también…»", "«No tengo ese dato; lo que sí sé es que…»"], "checklist": ["Leí lo que me toca", "Mi declaración tiene sus 4 partes", "Usé al menos un concepto del Tema 8", "Hablé con D4"], "titulo": "Comerciante de la comunidad"}, "S": {"equipo": "secretaria", "mision": ["<b>Periodo 2:<\/b> preparas un papelógrafo dividido en 5 columnas, una por cargo, con el nombre de cada cargo arriba.", "<b>Durante el juicio<\/b> anotas cada argumento clave en dos colores (uno para la fiscalía y otro para la defensa), con la letra de la prueba que se usó.", "<b>Al terminar el periodo 3<\/b> le sacas una foto al papelógrafo y lo guardas.", "<b>Al reabrir el periodo 4<\/b> lees al tribunal un resumen: una oración por cargo."], "estudia": "Los cinco cargos y las pruebas A a K del expediente.", "coordina": "El jurado usará tu papelógrafo para deliberar: escribe frases cortas y claras, no todo lo que se dice.", "producto_titulo": "Acta del juicio (plantilla en la hoja siguiente)", "producto": ["<b>Argumentos de cada parte<\/b>, cargo por cargo, con su prueba.", "<b>Pruebas nuevas<\/b>, si aparecen durante el juicio.", "<b>Veredicto<\/b> de cada cargo con sus votos, y la sentencia final con su costo."], "preparate": "Si se te acumulan los argumentos, anota solo la letra de la prueba y una palabra clave; completas el acta al terminar.", "frases": ["«Señor juez, el acta registra que…»", "«En el cargo __, la fiscalía usó la prueba __ y la defensa la prueba __.»"], "checklist": ["Papelógrafo con las 5 columnas", "Plumones de 2 colores", "Conozco los 5 cargos", "Foto del papelógrafo al final del periodo 3"], "titulo": "Secretaria de actas"}, "J1": {"equipo": "jurado", "mision": ["<b>Periodo 2:<\/b> revisas que cada jurado tenga lista su pregunta y su argumento (lista de control en tu hoja de notas).", "<b>Durante el juicio<\/b> das la palabra a los 11 jurados para sus preguntas, en orden de cargo.", "<b>En la deliberación<\/b> moderas cargo por cargo: primero hablan los jurados de ese cargo, luego votan los 12 a mano alzada y anotas los votos.", "<b>Sentencia:<\/b> guías al jurado para elegir medidas sin pasar el presupuesto de Bs 1.500.000.", "Lees el <b>veredicto y la sentencia<\/b> ante el tribunal."], "estudia": "Todo el tema y todo el expediente: no tienes cargo propio, así que debes conocer los cinco.", "coordina": "Tú no haces pregunta ni argumento de cargo: tu trabajo es que todos los jurados hablen y que la votación sea ordenada.", "producto_titulo": "Hoja de notas, hoja de veredicto y hoja de votación del jurado", "producto": ["<b>Culpable:<\/b> 7 votos o más de 12. Si faltan jurados, decide la mayoría simple.", "<b>Empate:<\/b> no culpable (en caso de duda, se favorece al acusado).", "<b>Sentencia:<\/b> una o más medidas por cada cargo culpable; el total no puede pasar Bs 1.500.000."], "producto_label": "Reglas de votación que haces cumplir", "preparate": "Si el tiempo se acorta, pide a cada jurado que diga su argumento en dos oraciones: todos deben hablar.", "frases": ["J1: «Señor juez, el jurado ha llegado a un veredicto.»", "J1: «En el cargo __, con __ votos contra __, el jurado declara a AgroMax culpable / no culpable.»", "«Tiene la palabra el jurado del cargo __.»"], "checklist": ["Repasé todo el tema y el expediente", "Revisé a los 11 jurados", "Conozco las reglas de votación", "Tengo mis tres hojas"], "titulo": "Presidente del jurado"}, "J2": {"equipo": "jurado", "cargo": 1, "mision": ["<b>Durante los testimonios<\/b> llenas tu hoja de notas: el mejor argumento de cada parte en cada cargo.", "Haces <b>una pregunta<\/b> (una sola oración) a <b>T1<\/b> cuando J1 te dé la palabra.", "En la deliberación das <b>tu argumento<\/b> sobre tu cargo: una prueba, un concepto y tu conclusión.", "<b>Votas los cinco cargos<\/b> y propones una medida de sentencia."], "estudia": "Todo el tema, con más detalle el subtema 1 (gestión sostenible de suelos). Pruebas de tu cargo: A y B. Un jurado que no conoce la ciencia no puede juzgar.", "coordina": "Tu compañero de cargo: J3. Pónganse de acuerdo para no hacer la misma pregunta.", "producto_titulo": "Pregunta y argumento (en tu hoja de notas) y hoja de veredicto", "producto": ["<b>Pregunta:<\/b> una oración dirigida a T1, que use un dato o un concepto.", "<b>Argumento<\/b> (3 o 4 oraciones): «En el cargo __, la prueba __ muestra que… Según el Tema 8, esto se explica por… Por eso voto…»", "<b>Hoja de veredicto:<\/b> tu voto y tu razón en cada cargo, y una medida de sentencia con su costo."], "preparate": "No decidas tu voto antes del juicio: escucha a las dos partes. Una prueba nueva puede cambiarlo todo.", "frases": ["«Mi pregunta para el testigo es: …»", "«En el cargo __, la prueba __ muestra que…»", "«Según el Tema 8, esto se explica por…»", "«Por eso voto culpable / no culpable.»"], "checklist": ["Leí todo el tema", "Tengo mi pregunta para T1", "Tengo mi argumento", "J1 revisó mi pregunta y mi argumento"], "titulo": "Jurado del cargo 1 · suelo"}, "J3": {"equipo": "jurado", "cargo": 1, "mision": ["<b>Durante los testimonios<\/b> llenas tu hoja de notas: el mejor argumento de cada parte en cada cargo.", "Haces <b>una pregunta<\/b> (una sola oración) a <b>T1<\/b> cuando J1 te dé la palabra.", "En la deliberación das <b>tu argumento<\/b> sobre tu cargo: una prueba, un concepto y tu conclusión.", "<b>Votas los cinco cargos<\/b> y propones una medida de sentencia."], "estudia": "Todo el tema, con más detalle el subtema 1 (gestión sostenible de suelos). Pruebas de tu cargo: A y B. Un jurado que no conoce la ciencia no puede juzgar.", "coordina": "Tu compañero de cargo: J2. Pónganse de acuerdo para no hacer la misma pregunta.", "producto_titulo": "Pregunta y argumento (en tu hoja de notas) y hoja de veredicto", "producto": ["<b>Pregunta:<\/b> una oración dirigida a T1, que use un dato o un concepto.", "<b>Argumento<\/b> (3 o 4 oraciones): «En el cargo __, la prueba __ muestra que… Según el Tema 8, esto se explica por… Por eso voto…»", "<b>Hoja de veredicto:<\/b> tu voto y tu razón en cada cargo, y una medida de sentencia con su costo."], "preparate": "No decidas tu voto antes del juicio: escucha a las dos partes. Una prueba nueva puede cambiarlo todo.", "frases": ["«Mi pregunta para el testigo es: …»", "«En el cargo __, la prueba __ muestra que…»", "«Según el Tema 8, esto se explica por…»", "«Por eso voto culpable / no culpable.»"], "checklist": ["Leí todo el tema", "Tengo mi pregunta para T1", "Tengo mi argumento", "J1 revisó mi pregunta y mi argumento"], "titulo": "Jurado del cargo 1 · suelo"}, "J4": {"equipo": "jurado", "cargo": 2, "mision": ["<b>Durante los testimonios<\/b> llenas tu hoja de notas: el mejor argumento de cada parte en cada cargo.", "Haces <b>una pregunta<\/b> (una sola oración) a <b>T2<\/b> cuando J1 te dé la palabra.", "En la deliberación das <b>tu argumento<\/b> sobre tu cargo: una prueba, un concepto y tu conclusión.", "<b>Votas los cinco cargos<\/b> y propones una medida de sentencia."], "estudia": "Todo el tema, con más detalle el subtema 2 (sistemas agrícolas y MIP). Pruebas de tu cargo: C, D e I. Un jurado que no conoce la ciencia no puede juzgar.", "coordina": "Tu compañero de cargo: J5. Pónganse de acuerdo para no hacer la misma pregunta.", "producto_titulo": "Pregunta y argumento (en tu hoja de notas) y hoja de veredicto", "producto": ["<b>Pregunta:<\/b> una oración dirigida a T2, que use un dato o un concepto.", "<b>Argumento<\/b> (3 o 4 oraciones): «En el cargo __, la prueba __ muestra que… Según el Tema 8, esto se explica por… Por eso voto…»", "<b>Hoja de veredicto:<\/b> tu voto y tu razón en cada cargo, y una medida de sentencia con su costo."], "preparate": "No decidas tu voto antes del juicio: escucha a las dos partes. Una prueba nueva puede cambiarlo todo.", "frases": ["«Mi pregunta para el testigo es: …»", "«En el cargo __, la prueba __ muestra que…»", "«Según el Tema 8, esto se explica por…»", "«Por eso voto culpable / no culpable.»"], "checklist": ["Leí todo el tema", "Tengo mi pregunta para T2", "Tengo mi argumento", "J1 revisó mi pregunta y mi argumento"], "titulo": "Jurado del cargo 2 · pesticidas"}, "J5": {"equipo": "jurado", "cargo": 2, "mision": ["<b>Durante los testimonios<\/b> llenas tu hoja de notas: el mejor argumento de cada parte en cada cargo.", "Haces <b>una pregunta<\/b> (una sola oración) a <b>T2<\/b> cuando J1 te dé la palabra.", "En la deliberación das <b>tu argumento<\/b> sobre tu cargo: una prueba, un concepto y tu conclusión.", "<b>Votas los cinco cargos<\/b> y propones una medida de sentencia."], "estudia": "Todo el tema, con más detalle el subtema 2 (sistemas agrícolas y MIP). Pruebas de tu cargo: C, D e I. Un jurado que no conoce la ciencia no puede juzgar.", "coordina": "Tu compañero de cargo: J4. Pónganse de acuerdo para no hacer la misma pregunta.", "producto_titulo": "Pregunta y argumento (en tu hoja de notas) y hoja de veredicto", "producto": ["<b>Pregunta:<\/b> una oración dirigida a T2, que use un dato o un concepto.", "<b>Argumento<\/b> (3 o 4 oraciones): «En el cargo __, la prueba __ muestra que… Según el Tema 8, esto se explica por… Por eso voto…»", "<b>Hoja de veredicto:<\/b> tu voto y tu razón en cada cargo, y una medida de sentencia con su costo."], "preparate": "No decidas tu voto antes del juicio: escucha a las dos partes. Una prueba nueva puede cambiarlo todo.", "frases": ["«Mi pregunta para el testigo es: …»", "«En el cargo __, la prueba __ muestra que…»", "«Según el Tema 8, esto se explica por…»", "«Por eso voto culpable / no culpable.»"], "checklist": ["Leí todo el tema", "Tengo mi pregunta para T2", "Tengo mi argumento", "J1 revisó mi pregunta y mi argumento"], "titulo": "Jurado del cargo 2 · pesticidas"}, "J6": {"equipo": "jurado", "cargo": 3, "mision": ["<b>Durante los testimonios<\/b> llenas tu hoja de notas: el mejor argumento de cada parte en cada cargo.", "Haces <b>una pregunta<\/b> (una sola oración) a <b>T3<\/b> cuando J1 te dé la palabra.", "En la deliberación das <b>tu argumento<\/b> sobre tu cargo: una prueba, un concepto y tu conclusión.", "<b>Votas los cinco cargos<\/b> y propones una medida de sentencia."], "estudia": "Todo el tema, con más detalle el subtema 3 (protección de fuentes de agua). Pruebas de tu cargo: C, E, F y J. Un jurado que no conoce la ciencia no puede juzgar.", "coordina": "Tu compañero de cargo: J7. Pónganse de acuerdo para no hacer la misma pregunta.", "producto_titulo": "Pregunta y argumento (en tu hoja de notas) y hoja de veredicto", "producto": ["<b>Pregunta:<\/b> una oración dirigida a T3, que use un dato o un concepto.", "<b>Argumento<\/b> (3 o 4 oraciones): «En el cargo __, la prueba __ muestra que… Según el Tema 8, esto se explica por… Por eso voto…»", "<b>Hoja de veredicto:<\/b> tu voto y tu razón en cada cargo, y una medida de sentencia con su costo."], "preparate": "No decidas tu voto antes del juicio: escucha a las dos partes. Una prueba nueva puede cambiarlo todo.", "frases": ["«Mi pregunta para el testigo es: …»", "«En el cargo __, la prueba __ muestra que…»", "«Según el Tema 8, esto se explica por…»", "«Por eso voto culpable / no culpable.»"], "checklist": ["Leí todo el tema", "Tengo mi pregunta para T3", "Tengo mi argumento", "J1 revisó mi pregunta y mi argumento"], "titulo": "Jurado del cargo 3 · acuífero y laguna"}, "J7": {"equipo": "jurado", "cargo": 3, "mision": ["<b>Durante los testimonios<\/b> llenas tu hoja de notas: el mejor argumento de cada parte en cada cargo.", "Haces <b>una pregunta<\/b> (una sola oración) a <b>T3<\/b> cuando J1 te dé la palabra.", "En la deliberación das <b>tu argumento<\/b> sobre tu cargo: una prueba, un concepto y tu conclusión.", "<b>Votas los cinco cargos<\/b> y propones una medida de sentencia."], "estudia": "Todo el tema, con más detalle el subtema 3 (protección de fuentes de agua). Pruebas de tu cargo: C, E, F y J. Un jurado que no conoce la ciencia no puede juzgar.", "coordina": "Tu compañero de cargo: J6. Pónganse de acuerdo para no hacer la misma pregunta.", "producto_titulo": "Pregunta y argumento (en tu hoja de notas) y hoja de veredicto", "producto": ["<b>Pregunta:<\/b> una oración dirigida a T3, que use un dato o un concepto.", "<b>Argumento<\/b> (3 o 4 oraciones): «En el cargo __, la prueba __ muestra que… Según el Tema 8, esto se explica por… Por eso voto…»", "<b>Hoja de veredicto:<\/b> tu voto y tu razón en cada cargo, y una medida de sentencia con su costo."], "preparate": "No decidas tu voto antes del juicio: escucha a las dos partes. Una prueba nueva puede cambiarlo todo.", "frases": ["«Mi pregunta para el testigo es: …»", "«En el cargo __, la prueba __ muestra que…»", "«Según el Tema 8, esto se explica por…»", "«Por eso voto culpable / no culpable.»"], "checklist": ["Leí todo el tema", "Tengo mi pregunta para T3", "Tengo mi argumento", "J1 revisó mi pregunta y mi argumento"], "titulo": "Jurado del cargo 3 · acuífero y laguna"}, "J8": {"equipo": "jurado", "cargo": 4, "mision": ["<b>Durante los testimonios<\/b> llenas tu hoja de notas: el mejor argumento de cada parte en cada cargo.", "Haces <b>una pregunta<\/b> (una sola oración) a <b>T4<\/b> cuando J1 te dé la palabra.", "En la deliberación das <b>tu argumento<\/b> sobre tu cargo: una prueba, un concepto y tu conclusión.", "<b>Votas los cinco cargos<\/b> y propones una medida de sentencia."], "estudia": "Todo el tema, con más detalle el subtema 4 (uso eficiente del agua). Pruebas de tu cargo: G, I y K. Un jurado que no conoce la ciencia no puede juzgar.", "coordina": "Tu compañero de cargo: J9. Pónganse de acuerdo para no hacer la misma pregunta.", "producto_titulo": "Pregunta y argumento (en tu hoja de notas) y hoja de veredicto", "producto": ["<b>Pregunta:<\/b> una oración dirigida a T4, que use un dato o un concepto.", "<b>Argumento<\/b> (3 o 4 oraciones): «En el cargo __, la prueba __ muestra que… Según el Tema 8, esto se explica por… Por eso voto…»", "<b>Hoja de veredicto:<\/b> tu voto y tu razón en cada cargo, y una medida de sentencia con su costo."], "preparate": "No decidas tu voto antes del juicio: escucha a las dos partes. Una prueba nueva puede cambiarlo todo.", "frases": ["«Mi pregunta para el testigo es: …»", "«En el cargo __, la prueba __ muestra que…»", "«Según el Tema 8, esto se explica por…»", "«Por eso voto culpable / no culpable.»"], "checklist": ["Leí todo el tema", "Tengo mi pregunta para T4", "Tengo mi argumento", "J1 revisó mi pregunta y mi argumento"], "titulo": "Jurado del cargo 4 · uso del agua"}, "J9": {"equipo": "jurado", "cargo": 4, "mision": ["<b>Durante los testimonios<\/b> llenas tu hoja de notas: el mejor argumento de cada parte en cada cargo.", "Haces <b>una pregunta<\/b> (una sola oración) a <b>T4<\/b> cuando J1 te dé la palabra.", "En la deliberación das <b>tu argumento<\/b> sobre tu cargo: una prueba, un concepto y tu conclusión.", "<b>Votas los cinco cargos<\/b> y propones una medida de sentencia."], "estudia": "Todo el tema, con más detalle el subtema 4 (uso eficiente del agua). Pruebas de tu cargo: G, I y K. Un jurado que no conoce la ciencia no puede juzgar.", "coordina": "Tu compañero de cargo: J8. Pónganse de acuerdo para no hacer la misma pregunta.", "producto_titulo": "Pregunta y argumento (en tu hoja de notas) y hoja de veredicto", "producto": ["<b>Pregunta:<\/b> una oración dirigida a T4, que use un dato o un concepto.", "<b>Argumento<\/b> (3 o 4 oraciones): «En el cargo __, la prueba __ muestra que… Según el Tema 8, esto se explica por… Por eso voto…»", "<b>Hoja de veredicto:<\/b> tu voto y tu razón en cada cargo, y una medida de sentencia con su costo."], "preparate": "No decidas tu voto antes del juicio: escucha a las dos partes. Una prueba nueva puede cambiarlo todo.", "frases": ["«Mi pregunta para el testigo es: …»", "«En el cargo __, la prueba __ muestra que…»", "«Según el Tema 8, esto se explica por…»", "«Por eso voto culpable / no culpable.»"], "checklist": ["Leí todo el tema", "Tengo mi pregunta para T4", "Tengo mi argumento", "J1 revisó mi pregunta y mi argumento"], "titulo": "Jurado del cargo 4 · uso del agua"}, "J10": {"equipo": "jurado", "cargo": 5, "mision": ["<b>Durante los testimonios<\/b> llenas tu hoja de notas: el mejor argumento de cada parte en cada cargo.", "Haces <b>una pregunta<\/b> (una sola oración) a <b>T5<\/b> cuando J1 te dé la palabra.", "En la deliberación das <b>tu argumento<\/b> sobre tu cargo: una prueba, un concepto y tu conclusión.", "<b>Votas los cinco cargos<\/b> y propones una medida de sentencia."], "estudia": "Todo el tema, con más detalle el subtema 5 (tecnologías de saneamiento básico). Pruebas de tu cargo: H y J. Un jurado que no conoce la ciencia no puede juzgar.", "coordina": "Tu compañeros de cargo: J11 y J12. Pónganse de acuerdo para no hacer la misma pregunta.", "producto_titulo": "Pregunta y argumento (en tu hoja de notas) y hoja de veredicto", "producto": ["<b>Pregunta:<\/b> una oración dirigida a T5, que use un dato o un concepto.", "<b>Argumento<\/b> (3 o 4 oraciones): «En el cargo __, la prueba __ muestra que… Según el Tema 8, esto se explica por… Por eso voto…»", "<b>Hoja de veredicto:<\/b> tu voto y tu razón en cada cargo, y una medida de sentencia con su costo."], "preparate": "No decidas tu voto antes del juicio: escucha a las dos partes. Una prueba nueva puede cambiarlo todo.", "frases": ["«Mi pregunta para el testigo es: …»", "«En el cargo __, la prueba __ muestra que…»", "«Según el Tema 8, esto se explica por…»", "«Por eso voto culpable / no culpable.»"], "checklist": ["Leí todo el tema", "Tengo mi pregunta para T5", "Tengo mi argumento", "J1 revisó mi pregunta y mi argumento"], "titulo": "Jurado del cargo 5 · saneamiento"}, "J11": {"equipo": "jurado", "cargo": 5, "mision": ["<b>Durante los testimonios<\/b> llenas tu hoja de notas: el mejor argumento de cada parte en cada cargo.", "Haces <b>una pregunta<\/b> (una sola oración) a <b>T5<\/b> cuando J1 te dé la palabra.", "En la deliberación das <b>tu argumento<\/b> sobre tu cargo: una prueba, un concepto y tu conclusión.", "<b>Votas los cinco cargos<\/b> y propones una medida de sentencia."], "estudia": "Todo el tema, con más detalle el subtema 5 (tecnologías de saneamiento básico). Pruebas de tu cargo: H y J. Un jurado que no conoce la ciencia no puede juzgar.", "coordina": "Tu compañeros de cargo: J10 y J12. Pónganse de acuerdo para no hacer la misma pregunta.", "producto_titulo": "Pregunta y argumento (en tu hoja de notas) y hoja de veredicto", "producto": ["<b>Pregunta:<\/b> una oración dirigida a T5, que use un dato o un concepto.", "<b>Argumento<\/b> (3 o 4 oraciones): «En el cargo __, la prueba __ muestra que… Según el Tema 8, esto se explica por… Por eso voto…»", "<b>Hoja de veredicto:<\/b> tu voto y tu razón en cada cargo, y una medida de sentencia con su costo."], "preparate": "No decidas tu voto antes del juicio: escucha a las dos partes. Una prueba nueva puede cambiarlo todo.", "frases": ["«Mi pregunta para el testigo es: …»", "«En el cargo __, la prueba __ muestra que…»", "«Según el Tema 8, esto se explica por…»", "«Por eso voto culpable / no culpable.»"], "checklist": ["Leí todo el tema", "Tengo mi pregunta para T5", "Tengo mi argumento", "J1 revisó mi pregunta y mi argumento"], "titulo": "Jurado del cargo 5 · saneamiento"}, "J12": {"equipo": "jurado", "cargo": 5, "mision": ["<b>Durante los testimonios<\/b> llenas tu hoja de notas: el mejor argumento de cada parte en cada cargo.", "Haces <b>una pregunta<\/b> (una sola oración) a <b>T5<\/b> cuando J1 te dé la palabra.", "En la deliberación das <b>tu argumento<\/b> sobre tu cargo: una prueba, un concepto y tu conclusión.", "<b>Votas los cinco cargos<\/b> y propones una medida de sentencia."], "estudia": "Todo el tema, con más detalle el subtema 5 (tecnologías de saneamiento básico). Pruebas de tu cargo: H y J. Un jurado que no conoce la ciencia no puede juzgar.", "coordina": "Tu compañeros de cargo: J10 y J11. Pónganse de acuerdo para no hacer la misma pregunta.", "producto_titulo": "Pregunta y argumento (en tu hoja de notas) y hoja de veredicto", "producto": ["<b>Pregunta:<\/b> una oración dirigida a T5, que use un dato o un concepto.", "<b>Argumento<\/b> (3 o 4 oraciones): «En el cargo __, la prueba __ muestra que… Según el Tema 8, esto se explica por… Por eso voto…»", "<b>Hoja de veredicto:<\/b> tu voto y tu razón en cada cargo, y una medida de sentencia con su costo."], "preparate": "No decidas tu voto antes del juicio: escucha a las dos partes. Una prueba nueva puede cambiarlo todo.", "frases": ["«Mi pregunta para el testigo es: …»", "«En el cargo __, la prueba __ muestra que…»", "«Según el Tema 8, esto se explica por…»", "«Por eso voto culpable / no culpable.»"], "checklist": ["Leí todo el tema", "Tengo mi pregunta para T5", "Tengo mi argumento", "J1 revisó mi pregunta y mi argumento"], "titulo": "Jurado del cargo 5 · saneamiento"}}, "equipos": {"fiscalia": ["Fiscalía", "Representa a la comunidad de Q'umir Pampa y prueba los cargos con ciencia."], "defensa": ["Defensa", "Representa a AgroMax: no niega la ciencia, busca causas compartidas o soluciones sin cerrar la empresa."], "expertos": ["Testigo experto de la fiscalía", "Científico que explica al tribunal lo que muestran las pruebas."], "tdefensa": ["Testigo de la defensa", "Persona de la empresa o de la comunidad que declara a favor de AgroMax."], "secretaria": ["Secretaría del tribunal", "Registra los argumentos del juicio para que el jurado pueda deliberar."], "jurado": ["Jurado", "Escucha a las dos partes, delibera y vota los cinco cargos."]}, "pasos": {"p3": [["Juez", "Abre la sesión y lee las reglas de sala.", []], ["F1", "Alegato de apertura de la fiscalía.", ["F1"]], ["D1", "Alegato de apertura de la defensa.", ["D1"]], ["T1", "Cargo 1 · suelo. Interroga F1, contrainterroga D1.", ["T1", "F1", "D1"]], ["T2", "Cargo 2 · pesticidas. Interroga F2, contrainterroga D2.", ["T2", "F2", "D2"]], ["T3", "Cargo 3 · acuífero y laguna. Interroga F2, contrainterroga D2.", ["T3", "F2", "D2"]], ["T4", "Cargo 4 · uso del agua. Interroga F3, contrainterroga D3.", ["T4", "F3", "D3"]], ["T5", "Cargo 5 · saneamiento. Interroga F3, contrainterroga D3.", ["T5", "F3", "D3"]], ["Juez", "Suspende la sesión. La secretaria fotografía el papelógrafo.", ["S"]]], "p4": [["Juez · S", "Reanuda la sesión. La secretaria lee el resumen: una oración por cargo.", ["S"]], ["TD1", "Gerente. Interroga D2, contrainterroga F2.", ["TD1", "D2", "F2"]], ["TD2", "Trabajadora. Interroga D3, contrainterroga F3.", ["TD2", "D3", "F3"]], ["TD3", "Comerciante. Interroga D4, contrainterroga F4.", ["TD3", "D4", "F4"]], ["Jurado", "Preguntas del jurado. J1 da la palabra en orden de cargo; cada jurado pregunta al testigo experto de su cargo.", ["J1", "J2", "J3", "J4", "J5", "J6", "J7", "J8", "J9", "J10", "J11", "J12", "T1", "T2", "T3", "T4", "T5"]], ["F4", "Alegato final de la fiscalía.", ["F4"]], ["D4", "Alegato final de la defensa.", ["D4"]], ["Jurado", "Deliberación cargo por cargo: hablan los jurados del cargo, votan los 12 a mano alzada y J1 anota.", ["J1", "J2", "J3", "J4", "J5", "J6", "J7", "J8", "J9", "J10", "J11", "J12"]], ["Jurado", "Sentencia: eligen las medidas para los cargos culpables sin pasar Bs 1.500.000.", ["J1", "J2", "J3", "J4", "J5", "J6", "J7", "J8", "J9", "J10", "J11", "J12"]], ["J1", "Lee el veredicto y la sentencia.", ["J1"]], ["Juez", "Cierra la sesión. Se entregan las hojas de veredicto.", []]]}, "reglas": ["<b>Solo habla quien tiene la palabra del juez.<\/b>", "<b>Todo argumento se apoya en una prueba (A a K) o en un concepto del Tema 8.<\/b> Sin prueba ni concepto, no es argumento: es opinión.", "<b>Tarjetas de objeción.<\/b> La fiscalía tiene 2 y la defensa tiene 2. Se usan solo si una pregunta es ofensiva, no tiene relación con el caso o inventa datos que no están en el expediente. Levantas la tarjeta y dices «Objeción, su señoría» y la razón. El juez decide: «ha lugar» (la pregunta se retira) o «no ha lugar» (se responde). Tarjeta usada, tarjeta perdida.", "<b>El jurado no habla hasta su turno<\/b>, pero llena su hoja de notas todo el tiempo.", "<b>Se critican argumentos, no personas.<\/b> Nadie se burla de nadie: todos están interpretando un papel.", "<b>Habla claro y ve al punto.<\/b> Si el juez te pide cerrar, terminas tu frase y cedes la palabra.", "<b>Puedes tener tus papeles<\/b> para consultar datos, pero no leas todo de corrido.", "<b>El tribunal puede admitir pruebas nuevas<\/b> durante el juicio. Si aparece una, cualquiera puede usarla."], "rubrica": {"Fiscalía y defensa": ["Sus preguntas y alegatos usan conceptos correctos.", "Cita pruebas para sostener cada idea.", "Alegato y preguntas completos, a tiempo.", "Habla claro, respeta las reglas y responde a lo que dice la otra parte."], "Testigos expertos": ["Explica su subtema sin leer y sin errores.", "Interpreta las pruebas de su cargo con datos.", "Informe pericial de una página con sus tres partes.", "Responde el contrainterrogatorio con calma y argumentos."], "Testigos de la defensa": ["Usa al menos un concepto del tema.", "Usa la prueba I u otras para defender a la empresa.", "Declaración de una página con sus cuatro partes.", "Sostiene su postura ante el contrainterrogatorio."], "Secretaria": ["Anota los argumentos con los conceptos correctos.", "Registra qué prueba se usó en cada argumento.", "Acta completa de los cinco cargos con el veredicto.", "Mantiene el papelógrafo al día y lee el resumen."], "Jurado": ["Su razón en cada cargo usa un concepto correcto.", "Cita una prueba (A a K) en cada cargo.", "Hoja de notas, pregunta, argumento y hoja de veredicto con sentencia.", "Hace su pregunta y defiende su cargo con una prueba y un concepto."]}, "pruebaCargo": {"1": "AB", "2": "CDI", "3": "CEFJ", "4": "GIK", "5": "HJ"}};
+
+/* ---------- almacenamiento seguro ---------- */
+const guardar = (k, v) => { try { localStorage.setItem(k, JSON.stringify(v)); } catch (e) {} };
+const leer = (k, def) => { try { const v = localStorage.getItem(k); return v === null ? def : JSON.parse(v); } catch (e) { return def; } };
+
+const COLOR = {
+  fiscalia: ['var(--violeta)', 'var(--lila)', 'var(--violeta)'],
+  defensa: ['var(--coral)', 'var(--coral-c)', 'var(--coral-t)'],
+  expertos: ['var(--verde)', 'var(--verde-c)', 'var(--verde-t)'],
+  tdefensa: ['var(--ambar)', 'var(--ambar-c)', 'var(--ambar-t)'],
+  secretaria: ['var(--rosa)', 'var(--rosa-c)', 'var(--rosa-t)'],
+  jurado: ['var(--noche)', 'var(--lila)', 'var(--noche)']
+};
+const vars = eq => `--c:${COLOR[eq][0]};--cc:${COLOR[eq][1]};--ct:${COLOR[eq][2]}`;
+const GRUPOS = [
+  ['fiscalia', 'Fiscalía', ['F1', 'F2', 'F3', 'F4']],
+  ['defensa', 'Defensa', ['D1', 'D2', 'D3', 'D4']],
+  ['expertos', 'Testigos expertos', ['T1', 'T2', 'T3', 'T4', 'T5']],
+  ['tdefensa', 'Testigos de la defensa', ['TD1', 'TD2', 'TD3']],
+  ['secretaria', 'Secretaría', ['S']],
+  ['jurado', 'Jurado', ['J1', 'J2', 'J3', 'J4', 'J5', 'J6', 'J7', 'J8', 'J9', 'J10', 'J11', 'J12']]
+];
+const RUB_DE = { fiscalia: 'Fiscalía y defensa', defensa: 'Fiscalía y defensa', expertos: 'Testigos expertos', tdefensa: 'Testigos de la defensa', secretaria: 'Secretaria', jurado: 'Jurado' };
+const bs = n => 'Bs ' + String(n).replace(/\B(?=(\d{3})+(?!\d))/g, '.');
+
+let rol = leer('agromax-rol', null);
+if (rol && !D.roles[rol]) rol = null;
+
+/* ---------- pestañas ---------- */
+const TABS = ['inicio', 'rol', 'expediente', 'sentencia', 'juicio', 'mas'];
+function irA(tab, scroll = true) {
+  if (!TABS.includes(tab)) tab = 'inicio';
+  document.querySelectorAll('.vista').forEach(v => v.classList.toggle('activa', v.id === 'v-' + tab));
+  document.querySelectorAll('nav.tabs button').forEach(b => { if (b.dataset.tab === tab) b.setAttribute('aria-current', 'page'); else b.removeAttribute('aria-current'); });
+  guardar('agromax-tab', tab);
+  if (scroll) window.scrollTo({ top: 0 });
+}
+document.querySelectorAll('nav.tabs button').forEach(b => b.addEventListener('click', () => irA(b.dataset.tab)));
+document.querySelectorAll('[data-ir]').forEach(b => b.addEventListener('click', () => irA(b.dataset.ir)));
+
+/* ---------- inicio: equipos ---------- */
+document.getElementById('equipos').innerHTML = [
+  ['jurado', 'Profesor', 'Juez', 'Conduce el juicio, da la palabra y hace cumplir las reglas.'],
+  ['fiscalia', 'F1 a F4', 'Fiscalía', D.equipos.fiscalia[1]],
+  ['defensa', 'D1 a D4', 'Defensa', D.equipos.defensa[1]],
+  ['expertos', 'T1 a T5', 'Testigos expertos', 'Científicos llamados por la fiscalía, uno por cargo. Escriben un informe pericial y declaran.'],
+  ['tdefensa', 'TD1 a TD3', 'Testigos de la defensa', D.equipos.tdefensa[1]],
+  ['secretaria', 'S', 'Secretaria', 'Anota los argumentos en el papelógrafo y escribe el acta del juicio.'],
+  ['jurado', 'J1 a J12', 'Jurado', 'J1 preside. J2 a J12 se reparten los cargos. Todos preguntan, argumentan y votan los cinco cargos.']
+].map(([eq, cod, n, t]) => `<div class="eq" style="${vars(eq)}"><div class="cod">${cod}</div><div><b>${n}</b><span>${t}</span></div></div>`).join('');
+
+/* ---------- badge ---------- */
+function pintarBadge() {
+  const el = document.getElementById('badge');
+  el.innerHTML = rol ? `<div class="mi-badge">Tu rol: <b>${rol}</b> ${D.roles[rol].titulo}</div>` : '';
+}
+
+/* ---------- mi rol ---------- */
+function turnosDe(code) {
+  const out = [];
+  [['p3', 'Periodo 3'], ['p4', 'Periodo 4']].forEach(([k, n]) => D.pasos[k].forEach((p, i) => { if (p[2].includes(code)) out.push([n, i + 1, p[1]]); }));
+  return out;
+}
+function selectorHTML(compacto) {
+  return GRUPOS.map(([eq, nom, cods]) => `<div class="grupo-rol" style="${vars(eq)}"><h3>${nom}</h3><div class="chips">` +
+    cods.map(c => `<button class="chip-rol" data-rol="${c}" aria-pressed="${c === rol}">${c}</button>`).join('') + `</div></div>`).join('');
+}
+function pintarRol() {
+  const box = document.getElementById('rol-contenido');
+  if (!rol) {
+    box.innerHTML = `<h2 class="sec">Elige tu rol</h2>
+      <p>Busca tu código en la ficha que te entregó el profesor o en el resultado del sorteo pegado en el aula. Aquí verás solo lo que te toca.</p>
+      <div class="card">${selectorHTML()}</div>`;
+  } else {
+    const f = D.roles[rol], eq = f.equipo, nomEq = D.equipos[eq][0], descEq = D.equipos[eq][1];
+    const ck = leer('agromax-ck-' + rol, []);
+    const listos = f.checklist.filter((_, i) => ck.includes(i)).length;
+    const turnos = turnosDe(rol);
+    const prodLista = f.producto_label
+      ? `<p class="muted" style="margin:0 0 4px"><i>${f.producto_label}:</i></p><ul>${f.producto.map(x => `<li>${x}</li>`).join('')}</ul>`
+      : `<ol>${f.producto.map(x => `<li>${x}</li>`).join('')}</ol>`;
+    box.innerHTML = `
+      <button class="cambiar" id="cambiar">&larr; Cambiar de rol</button>
+      <article class="ficha" style="${vars(eq)}">
+        <div class="ficha-cab"><div class="codigo">${rol}</div><div class="info"><div class="equipo">${nomEq}</div><h3>${f.titulo}</h3><p>${descEq}</p></div></div>
+        <div class="ficha-cuerpo">
+          <h4>Tu misión</h4><ul>${f.mision.map(x => `<li>${x}</li>`).join('')}</ul>
+          ${f.explica ? `<h4>${f.explica_titulo || 'Explicas'}</h4><p>${f.explica}</p>` : ''}
+          <h4>Estudia</h4><p>${f.estudia}</p>
+          <h4>Trabaja con</h4><p>${f.coordina}</p>
+          <div class="producto"><h4>Tu producto</h4><div class="pt">${f.producto_titulo}</div>${prodLista}${f.nota ? `<p class="muted" style="margin:8px 0 0"><i>${f.nota}</i></p>` : ''}</div>
+          ${f.ejemplos ? `<h4>Preguntas de ejemplo</h4><ul>${f.ejemplos.map(x => `<li>${x}</li>`).join('')}</ul>` : ''}
+          <h4>Prepárate para</h4><p>${f.preparate}</p>
+          <h4>Frases para ti</h4>${f.frases.map(x => `<div class="frase">${x}</div>`).join('')}
+          <h4>Antes del juicio</h4>
+          <div class="progreso"><span>${listos} de ${f.checklist.length} listos</span><div class="barra"><i style="width:${100 * listos / f.checklist.length}%"></i></div></div>
+          ${f.checklist.map((x, i) => `<div class="check"><input type="checkbox" id="ck${i}" data-i="${i}" ${ck.includes(i) ? 'checked' : ''}><label for="ck${i}">${x}</label></div>`).join('')}
+          ${turnos.length ? `<h4>Tus turnos en el juicio</h4>${turnos.map(t => `<div class="turno"><span class="tag">${t[0]} · paso ${t[1]}</span><span>${t[2]}</span></div>`).join('')}` : ''}
+        </div>
+      </article>
+      <p class="muted">Lo que marques en «Antes del juicio» se guarda solo en este celular.</p>`;
+    document.getElementById('cambiar').addEventListener('click', () => { rol = null; guardar('agromax-rol', null); refrescarRol(); window.scrollTo({ top: 0 }); });
+    box.querySelectorAll('.check input').forEach(inp => inp.addEventListener('change', () => {
+      const i = +inp.dataset.i; let l = leer('agromax-ck-' + rol, []);
+      l = inp.checked ? Array.from(new Set([...l, i])) : l.filter(x => x !== i);
+      guardar('agromax-ck-' + rol, l); pintarRol();
+    }));
+  }
+  box.querySelectorAll('[data-rol]').forEach(b => b.addEventListener('click', () => {
+    rol = b.dataset.rol; guardar('agromax-rol', rol); refrescarRol(); window.scrollTo({ top: 0 });
+  }));
+}
+function refrescarRol() { pintarRol(); pintarBadge(); pintarPasos(); pintarRubrica(rol ? RUB_DE[D.roles[rol].equipo] : null); }
+
+/* ---------- expediente ---------- */
+document.getElementById('cargos').innerHTML = D.cargos.map(c =>
+  `<div class="cargo-card"><div class="n">${c.n}</div><div><b>${c.acus}</b><small>Subtema ${c.subt} · Testigo experto: ${c.testigo} · Pruebas clave: ${c.pruebas}</small></div></div>`).join('');
+let filtro = 'todas';
+function pintarPruebas() {
+  const fx = document.getElementById('filtros');
+  fx.innerHTML = [['todas', 'Todas']].concat(D.cargos.map(c => [String(c.n), `Cargo ${c.n} · ${c.nombre}`]))
+    .map(([k, t]) => `<button class="filtro" data-f="${k}" aria-pressed="${filtro === k}">${t}</button>`).join('');
+  fx.querySelectorAll('button').forEach(b => b.addEventListener('click', () => { filtro = b.dataset.f; pintarPruebas(); }));
+  const lista = filtro === 'todas' ? D.pruebas : D.pruebas.filter(p => D.pruebaCargo[filtro].includes(p.l));
+  document.getElementById('pruebas').innerHTML = lista.map(p =>
+    `<div class="prueba"><div class="letra">${p.l}</div><div><h3>${p.n}</h3><p>${p.d}</p></div></div>`).join('');
+}
+
+/* ---------- sentencia ---------- */
+const TOPE = 1500000;
+let sel = leer('agromax-medidas', []).filter(i => i >= 0 && i < D.medidas.length);
+const GOTEO = D.medidas.map((m, i) => m.m.startsWith('Riego por goteo') ? i : -1).filter(i => i >= 0);
+function pintarSentencia() {
+  const total = sel.reduce((a, i) => a + D.medidas[i].costo, 0);
+  const cubiertos = new Set(); sel.forEach(i => D.medidas[i].c.split(' y ').forEach(c => cubiertos.add(c.trim())));
+  const pasado = total > TOPE, pct = Math.min(100, 100 * total / TOPE);
+  const m = document.getElementById('medidor');
+  m.classList.toggle('pasado', pasado);
+  m.innerHTML = `<div class="tot"><span class="monto">${bs(total)}</span><span class="tope">de ${bs(TOPE)}</span></div>
+    <div class="barra"><i style="width:${pct}%"></i></div>
+    <div class="estado" style="color:${pasado ? 'var(--coral-t)' : 'var(--verde-t)'}">${sel.length === 0 ? 'Aún no elegiste medidas.' : pasado ? `Te pasaste por ${bs(total - TOPE)}: quita alguna medida.` : `Te quedan ${bs(TOPE - total)}.`}</div>
+    <div class="cubre">Cargos con medida: ${[1, 2, 3, 4, 5].map(n => `<span class="c ${cubiertos.has(String(n)) ? 'si' : ''}" title="Cargo ${n}">${n}</span>`).join('')}</div>`;
+  document.getElementById('medidas').innerHTML = D.medidas.map((x, i) =>
+    `<button class="medida" data-m="${i}" aria-pressed="${sel.includes(i)}"><span class="caja" aria-hidden="true">${sel.includes(i) ? '✓' : ''}</span>
+      <span class="cuerpo"><b>${x.m}</b><small>${x.q}</small></span>
+      <span class="der"><span class="costo">${bs(x.costo)}</span><br><span class="cg">Cargo ${x.c}</span>${x.nota ? `<small>${x.nota}</small>` : ''}</span></button>`).join('');
+  document.querySelectorAll('[data-m]').forEach(b => b.addEventListener('click', () => {
+    const i = +b.dataset.m;
+    if (sel.includes(i)) sel = sel.filter(x => x !== i);
+    else { if (GOTEO.includes(i)) sel = sel.filter(x => !GOTEO.includes(x)); sel.push(i); }
+    guardar('agromax-medidas', sel); pintarSentencia();
+  }));
+}
+document.getElementById('limpiar').addEventListener('click', () => { sel = []; guardar('agromax-medidas', sel); pintarSentencia(); });
+
+/* ---------- juicio ---------- */
+document.getElementById('reglas').innerHTML = D.reglas.map(r => `<li>${r}</li>`).join('');
+function pintarPasos() {
+  document.getElementById('pasos-ayuda').textContent = rol ? `Tus turnos como ${rol} están resaltados en verde.` : 'Elige tu rol en «Mi rol» y tus turnos aparecerán resaltados.';
+  document.getElementById('pasos').innerHTML = [['p3', 'Periodo 3 · Fiscalía y sus testigos'], ['p4', 'Periodo 4 · Defensa, jurado y veredicto']].map(([k, t]) =>
+    `<div class="pasos ${k}"><h3 class="per">${t}</h3>` + D.pasos[k].map(p => {
+      const mio = rol && p[2].includes(rol);
+      return `<div class="paso ${mio ? 'mio' : ''}"><span class="q">${p[0]}</span><span>${p[1]}${mio ? '<span class="yo">TÚ</span>' : ''}</span></div>`;
+    }).join('') + `</div>`).join('');
+}
+
+/* ---------- más ---------- */
+document.getElementById('frases').innerHTML = [
+  ['abogados', 'Fiscalía y defensa', 'fiscalia'], ['testigos', 'Testigos', 'expertos'], ['jurado', 'Jurado', 'jurado'],
+  ['secretaria', 'Secretaria', 'secretaria'], ['juez', 'Lo que dirá el juez', 'tdefensa']
+].map(([k, t, eq]) => `<div class="card" style="${vars(eq)}"><h3>${t}</h3>${D.frases[k].map(x => `<div class="frase">${x}</div>`).join('')}</div>`).join('');
+const CRIT = ['Dominio del Tema 8', 'Uso de pruebas', 'Producto escrito', 'Desempeño en el juicio'];
+let rubSel = null;
+function pintarRubrica(pref) {
+  if (pref) rubSel = pref;
+  if (!rubSel) rubSel = 'Fiscalía y defensa';
+  const seg = document.getElementById('seg-rub');
+  seg.innerHTML = Object.keys(D.rubrica).map(k => `<button class="filtro" data-r="${k}" aria-pressed="${k === rubSel}">${k}</button>`).join('');
+  seg.querySelectorAll('button').forEach(b => b.addEventListener('click', () => { rubSel = b.dataset.r; pintarRubrica(); }));
+  const act = seg.querySelector('[aria-pressed="true"]'); if (act) seg.scrollLeft = Math.max(0, act.offsetLeft - seg.offsetLeft - 16);
+  document.getElementById('rubrica').innerHTML = D.rubrica[rubSel].map((d, i) =>
+    `<div class="crit"><div class="pts">5<br>pts</div><div><b>${CRIT[i]}</b><span>${d}</span></div></div>`).join('');
+}
+
+/* ---------- arranque ---------- */
+pintarBadge(); pintarRol(); pintarPruebas(); pintarSentencia(); pintarPasos();
+pintarRubrica(rol ? RUB_DE[D.roles[rol].equipo] : null);
+irA(leer('agromax-tab', 'inicio'), false);
+</script>
+</body>
+</html>
