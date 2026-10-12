@@ -141,6 +141,16 @@
             "fecha": "2026-09-28",
             "estado": "nuevo",
             "link": "/simulacro-tema7-5sec.html"
+        },
+        {
+            "id": "juicio-agromax-tema8-5to",
+            "categoria": "app",
+            "titulo": "Juicio a AgroMax S.A.",
+            "tema": "Tema 8 — Uso sustentable de los recursos de la Madre Tierra",
+            "descripcion": "Guía del juicio simulado: elige tu rol, revisa el expediente y las pruebas, y arma una sentencia sustentable dentro del presupuesto.",
+            "fecha": "2026-10-12",
+            "estado": "nuevo",
+            "link": "/juicio-agromax-5sec.html"
         }
       ]
     },
